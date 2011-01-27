@@ -67,13 +67,13 @@ NS
 			{
 				case 0 :
 					cell addSubview: callWaitingSwitch ];
-					cell.textLabel.text = @"Call Waiting";
+					cell.textLabel.text = @"All";
+			}
+				
+				
 					break;
 				case 1 : 
-					threeWayCallSwitch = [[UISwitch alloc] initWithFrame: CGRectMake(200	,10,0,0)];
-					// TODO callwaiting refresh setting
-					[ cell addSubview: threeWayCallSwitch ];
-					
+	
 					cell.textLabel.text = @"Three-Way Call";
 					break;
 				case 2 : 
