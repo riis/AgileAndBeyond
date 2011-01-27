@@ -6,10 +6,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "sessionsViewController.h"
+#import "mainFilterSelectionMenu.h"
 
 
-@implementation sessionsViewController 
+@implementation mainFilterSelectionMenu 
 
 // functions for "building" the table view
 
