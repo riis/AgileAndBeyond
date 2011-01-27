@@ -16,6 +16,18 @@
 		5D2B4B9812F0D14400EBE32C /* agile_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */; };
 		5D2B4B9912F0D14400EBE32C /* riis_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */; };
 		5D2B4BA812F1F6DE00EBE32C /* sessionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2B4BA712F1F6DE00EBE32C /* sessionsViewController.m */; };
+		5D2B4BC012F20CDD00EBE32C /* about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BB412F20CDD00EBE32C /* about.png */; };
+		5D2B4BC112F20CDD00EBE32C /* about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BB512F20CDD00EBE32C /* about@2x.png */; };
+		5D2B4BC212F20CDD00EBE32C /* agileApp_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BB612F20CDD00EBE32C /* agileApp_Icon.png */; };
+		5D2B4BC312F20CDD00EBE32C /* agileApp_Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BB712F20CDD00EBE32C /* agileApp_Icon@2x.png */; };
+		5D2B4BC412F20CDD00EBE32C /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BB812F20CDD00EBE32C /* default.png */; };
+		5D2B4BC512F20CDD00EBE32C /* default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BB912F20CDD00EBE32C /* default@2x.png */; };
+		5D2B4BC612F20CDD00EBE32C /* mySessions.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BBA12F20CDD00EBE32C /* mySessions.png */; };
+		5D2B4BC712F20CDD00EBE32C /* mySessions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BBB12F20CDD00EBE32C /* mySessions@2x.png */; };
+		5D2B4BC812F20CDD00EBE32C /* news.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BBC12F20CDD00EBE32C /* news.png */; };
+		5D2B4BC912F20CDD00EBE32C /* news@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BBD12F20CDD00EBE32C /* news@2x.png */; };
+		5D2B4BCA12F20CDD00EBE32C /* sessions.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BBE12F20CDD00EBE32C /* sessions.png */; };
+		5D2B4BCB12F20CDD00EBE32C /* sessions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BBF12F20CDD00EBE32C /* sessions@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +44,18 @@
 		5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = riis_logo_about.png; sourceTree = "<group>"; };
 		5D2B4BA612F1F6DE00EBE32C /* sessionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sessionsViewController.h; sourceTree = "<group>"; };
 		5D2B4BA712F1F6DE00EBE32C /* sessionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sessionsViewController.m; sourceTree = "<group>"; };
+		5D2B4BB412F20CDD00EBE32C /* about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about.png; sourceTree = "<group>"; };
+		5D2B4BB512F20CDD00EBE32C /* about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "about@2x.png"; sourceTree = "<group>"; };
+		5D2B4BB612F20CDD00EBE32C /* agileApp_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agileApp_Icon.png; sourceTree = "<group>"; };
+		5D2B4BB712F20CDD00EBE32C /* agileApp_Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agileApp_Icon@2x.png"; sourceTree = "<group>"; };
+		5D2B4BB812F20CDD00EBE32C /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default.png; sourceTree = "<group>"; };
+		5D2B4BB912F20CDD00EBE32C /* default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default@2x.png"; sourceTree = "<group>"; };
+		5D2B4BBA12F20CDD00EBE32C /* mySessions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mySessions.png; sourceTree = "<group>"; };
+		5D2B4BBB12F20CDD00EBE32C /* mySessions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mySessions@2x.png"; sourceTree = "<group>"; };
+		5D2B4BBC12F20CDD00EBE32C /* news.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = news.png; sourceTree = "<group>"; };
+		5D2B4BBD12F20CDD00EBE32C /* news@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news@2x.png"; sourceTree = "<group>"; };
+		5D2B4BBE12F20CDD00EBE32C /* sessions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sessions.png; sourceTree = "<group>"; };
+		5D2B4BBF12F20CDD00EBE32C /* sessions@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sessions@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AgileAndBeyond-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AgileAndBeyond-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +116,18 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5D2B4BB412F20CDD00EBE32C /* about.png */,
+				5D2B4BB512F20CDD00EBE32C /* about@2x.png */,
+				5D2B4BB612F20CDD00EBE32C /* agileApp_Icon.png */,
+				5D2B4BB712F20CDD00EBE32C /* agileApp_Icon@2x.png */,
+				5D2B4BB812F20CDD00EBE32C /* default.png */,
+				5D2B4BB912F20CDD00EBE32C /* default@2x.png */,
+				5D2B4BBA12F20CDD00EBE32C /* mySessions.png */,
+				5D2B4BBB12F20CDD00EBE32C /* mySessions@2x.png */,
+				5D2B4BBC12F20CDD00EBE32C /* news.png */,
+				5D2B4BBD12F20CDD00EBE32C /* news@2x.png */,
+				5D2B4BBE12F20CDD00EBE32C /* sessions.png */,
+				5D2B4BBF12F20CDD00EBE32C /* sessions@2x.png */,
 				5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */,
 				5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
@@ -162,6 +198,18 @@
 				28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */,
 				5D2B4B9812F0D14400EBE32C /* agile_logo_about.png in Resources */,
 				5D2B4B9912F0D14400EBE32C /* riis_logo_about.png in Resources */,
+				5D2B4BC012F20CDD00EBE32C /* about.png in Resources */,
+				5D2B4BC112F20CDD00EBE32C /* about@2x.png in Resources */,
+				5D2B4BC212F20CDD00EBE32C /* agileApp_Icon.png in Resources */,
+				5D2B4BC312F20CDD00EBE32C /* agileApp_Icon@2x.png in Resources */,
+				5D2B4BC412F20CDD00EBE32C /* default.png in Resources */,
+				5D2B4BC512F20CDD00EBE32C /* default@2x.png in Resources */,
+				5D2B4BC612F20CDD00EBE32C /* mySessions.png in Resources */,
+				5D2B4BC712F20CDD00EBE32C /* mySessions@2x.png in Resources */,
+				5D2B4BC812F20CDD00EBE32C /* news.png in Resources */,
+				5D2B4BC912F20CDD00EBE32C /* news@2x.png in Resources */,
+				5D2B4BCA12F20CDD00EBE32C /* sessions.png in Resources */,
+				5D2B4BCB12F20CDD00EBE32C /* sessions@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
