@@ -15,6 +15,7 @@
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		5D2B4B9812F0D14400EBE32C /* agile_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */; };
 		5D2B4B9912F0D14400EBE32C /* riis_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */; };
+		5D2B4BA812F1F6DE00EBE32C /* sessionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2B4BA712F1F6DE00EBE32C /* sessionsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agile_logo_about.png; sourceTree = "<group>"; };
 		5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = riis_logo_about.png; sourceTree = "<group>"; };
+		5D2B4BA612F1F6DE00EBE32C /* sessionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sessionsViewController.h; sourceTree = "<group>"; };
+		5D2B4BA712F1F6DE00EBE32C /* sessionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sessionsViewController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AgileAndBeyond-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AgileAndBeyond-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,6 +54,8 @@
 			children = (
 				1D3623240D0F684500981E51 /* AgileAndBeyondAppDelegate.h */,
 				1D3623250D0F684500981E51 /* AgileAndBeyondAppDelegate.m */,
+				5D2B4BA612F1F6DE00EBE32C /* sessionsViewController.h */,
+				5D2B4BA712F1F6DE00EBE32C /* sessionsViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -169,6 +174,7 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AgileAndBeyondAppDelegate.m in Sources */,
+				5D2B4BA812F1F6DE00EBE32C /* sessionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
