@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface sessionsViewController : NSObject {
-
+@interface sessionsViewController : UITableViewController {
 }
 
 @end
