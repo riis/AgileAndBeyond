@@ -64,7 +64,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 3;
+	switch (section) {
+		case 0 : return 2 ; // 10:15 sessions
+		case 1 : return 1 ; // 12:30 sessions 
+			default: return 0 ; 
+			// TODO error/assert andor do something consistant for "code should not be reached
+	}	
 }
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -90,58 +95,33 @@
 		
 		switch  ([indexPath indexAtPosition:0]) 	// section ALL 
 		{
-		case 0 :  
-			switch ([indexPath indexAtPosition:1]) { // switch by position within section 0 ("All")
-				case 0 :
-					cell.textLabel.text = @"All"; 
-					break;
-				case 1 : 
-					cell.textLabel.text = @"All"; 
-					break;
-				case 2 : 
-					cell.textLabel.text = @"Other"; 
-					break;	
-			}
-			break;
-			
-			
-			// section By Difficulty
-		case 1 : 
-			switch ([indexPath indexAtPosition:1]) {
-				case 0 : 
-					cell.textLabel.text = @"Beginner"; 
-					break;
-				case 1 : 
-					cell.textLabel.text = @"Intermediate"; 
-					break;
-				case 2 : 
-					cell.textLabel.text = @"Advanced"; 
-					break;
-					
-					
-			}
-			break;
-			
-			// section By Technology
-		case 2 :  
-			switch ([indexPath indexAtPosition:1]) {
-				case 0 : 
-					cell.textLabel.text = @"Java"; 
-					break;
-				case 1 : 
-					cell.textLabel.text = @"All"; 
-					break;
-				case 2 : 
-					cell.textLabel.text = @"Other"; 
-					break;
-			}
-			break;
+			case 0 :  
+				switch ([indexPath indexAtPosition:1]) { // switch by position within section 0 ("All")
+					case 0 :
+						cell.textLabel.text = @"Writing Excellent Requirements!"; 
+						break;
+					case 1 : 
+						cell.textLabel.text = @"Entrepreneurs at the Forefront of the 'Agile' Movement in our Region"; 
+						break;
+					}
+				break;
+				
+				
+				// section By Difficulty
+			case 1 : 
+				switch ([indexPath indexAtPosition:1]) {
+					case 0 : 
+						cell.textLabel.text = @"The How and Why of Kanban"; 
+						break;
+						
+				}
+				break;
 		}
 		
 		cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 	}
 	
-
+	
 	
 	// we could reuse existing cells, changing their contents, but putting some code here...
 	
@@ -226,4 +206,3 @@
 
 
 @end
-
