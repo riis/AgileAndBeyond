@@ -30,6 +30,7 @@
 		5D2B4BCB12F20CDD00EBE32C /* sessions@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4BBF12F20CDD00EBE32C /* sessions@2x.png */; };
 		5D40583712F236D800780517 /* sessionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D40583512F236D800780517 /* sessionListViewController.m */; };
 		5D40583812F236D800780517 /* sessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D40583612F236D800780517 /* sessionListViewController.xib */; };
+		5D40589B12F34D8000780517 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D40589A12F34D8000780517 /* session.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,8 @@
 		5D40583412F236D800780517 /* sessionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sessionListViewController.h; sourceTree = "<group>"; };
 		5D40583512F236D800780517 /* sessionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sessionListViewController.m; sourceTree = "<group>"; };
 		5D40583612F236D800780517 /* sessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = sessionListViewController.xib; sourceTree = "<group>"; };
+		5D40589912F34D8000780517 /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = session.h; sourceTree = "<group>"; };
+		5D40589A12F34D8000780517 /* session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = session.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AgileAndBeyond-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AgileAndBeyond-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +91,8 @@
 				5D40583412F236D800780517 /* sessionListViewController.h */,
 				5D40583512F236D800780517 /* sessionListViewController.m */,
 				5D40583612F236D800780517 /* sessionListViewController.xib */,
+				5D40589912F34D8000780517 /* session.h */,
+				5D40589A12F34D8000780517 /* session.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 				1D3623260D0F684500981E51 /* AgileAndBeyondAppDelegate.m in Sources */,
 				5D2B4BA812F1F6DE00EBE32C /* mainFilterSelectionMenu.m in Sources */,
 				5D40583712F236D800780517 /* sessionListViewController.m in Sources */,
+				5D40589B12F34D8000780517 /* session.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
