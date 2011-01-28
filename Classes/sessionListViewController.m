@@ -91,8 +91,16 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-		
-		
+
+		// found the following snipit online :
+		cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
+		cell.textLabel.numberOfLines=0;
+		cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+		// thank you stackoverflow contributer Tim Rupe!
+		// ohter useful info at link 
+		//http://stackoverflow.com/questions/129502/how-do-i-wrap-text-in-a-uitableviewcell-without-a-custom-cell
+		// (and in documentation for UITextField)
+				
 		switch  ([indexPath indexAtPosition:0]) 	// section ALL 
 		{
 			case 0 :  
