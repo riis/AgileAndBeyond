@@ -7,7 +7,7 @@
 //
 
 #import "AgileAndBeyondAppDelegate.h"
-
+#import "session.h"  // may not need to be included in the end.
 
 @implementation AgileAndBeyondAppDelegate
 
@@ -25,6 +25,8 @@
     // Add the tab bar controller's view to the window and display.
     [window addSubview:tabBarController.view];
     [window makeKeyAndVisible];
+
+    populateInitialData();
 
     return YES;
 }

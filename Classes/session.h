@@ -16,8 +16,15 @@
  * since the entire rest of the graph can be rebuilt as a whole, unless more features 
  * come up.
  * 
+ * To start the data will be stored in a sort of nested dictionary tree with 
+ * "expected" patterns, and addressed in the code with dot syntax.
+ * Think of each "table" dictionary as a table in a DB, the key being the primary key,
+ * and the value being the columns by name of column
  */
 
 
+NSDictionary *AABSessions;
+NSDictionary *AABPeople;
+NSDictionary *AABOrg;
 
-@end
+void populateInitialData();

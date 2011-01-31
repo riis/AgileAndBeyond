@@ -31,6 +31,7 @@
 		5D40583712F236D800780517 /* sessionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D40583512F236D800780517 /* sessionListViewController.m */; };
 		5D40583812F236D800780517 /* sessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D40583612F236D800780517 /* sessionListViewController.xib */; };
 		5D40589B12F34D8000780517 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D40589A12F34D8000780517 /* session.m */; };
+		5DE58CB712F72B2800794353 /* AAB2011-initial.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DE58CB612F72B2800794353 /* AAB2011-initial.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		5D40583612F236D800780517 /* sessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = sessionListViewController.xib; sourceTree = "<group>"; };
 		5D40589912F34D8000780517 /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = session.h; sourceTree = "<group>"; };
 		5D40589A12F34D8000780517 /* session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = session.m; sourceTree = "<group>"; };
+		5DE58CB612F72B2800794353 /* AAB2011-initial.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AAB2011-initial.plist"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AgileAndBeyond-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AgileAndBeyond-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,6 +131,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5DE58CB612F72B2800794353 /* AAB2011-initial.plist */,
 				5D2B4BB412F20CDD00EBE32C /* about.png */,
 				5D2B4BB512F20CDD00EBE32C /* about@2x.png */,
 				5D2B4BB612F20CDD00EBE32C /* agileApp_Icon.png */,
@@ -224,6 +227,7 @@
 				5D2B4BCA12F20CDD00EBE32C /* sessions.png in Resources */,
 				5D2B4BCB12F20CDD00EBE32C /* sessions@2x.png in Resources */,
 				5D40583812F236D800780517 /* sessionListViewController.xib in Resources */,
+				5DE58CB712F72B2800794353 /* AAB2011-initial.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
