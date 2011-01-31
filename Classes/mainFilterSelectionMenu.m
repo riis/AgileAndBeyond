@@ -7,6 +7,7 @@
 //
 
 #import "mainFilterSelectionMenu.h"
+#import "sessionListViewController.h"
 
 
 @implementation mainFilterSelectionMenu 
@@ -115,4 +116,53 @@
 	return cell;
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+
+  sessionListViewController* filteredListView = nil;
+	
+  switch ([indexPath indexAtPosition:0]) // switch for which section
+    {
+      // section ALL 
+    case 0 :  
+      switch ([indexPath indexAtPosition:1]) { // switch by position within section 0 ("All")
+      case 0 :
+	filteredListView = [[sessionListViewController alloc] initWithNibName:@"sessionListViewController" bundle:nil];
+	[self.navigationController pushViewController:filteredListView animated:YES];
+	[filteredListView release];
+	break;
+					
+      }
+      break;
+			
+			
+      // section By Difficulty
+    case 1 : 
+      switch ([indexPath indexAtPosition:1]) {
+      case 0 : 
+	break;
+      case 1 : 
+	break;
+      case 2 : 
+	break;
+					
+					
+      }
+      break;
+			
+      // section By Technology
+    case 2 :  
+      switch ([indexPath indexAtPosition:1]) {
+      case 0 : 
+     	break;
+      case 1 : 
+	break;
+      case 2 : 
+	break;
+      }
+      break;
+    }
+	
+}	
 @end
