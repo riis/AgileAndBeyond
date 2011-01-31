@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>default</key>
+	<dict>
+		<key>title</key>
+		<string>this slot left blank - work in progress</string>
+		<key>timeStart</key>
+		<date>2011-03-15T14:15:00Z</date>
+		<key>type</key>
+		<string>Breakout Presentation</string>
+		<key>subtype</key>
+		<string>Presentation</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>06</key>
+	<dict>
+		<key>title</key>
+		<string>Integrating UX and Agile at Atomic Object</string>
+		<key>timeStart</key>
+		<date>2011-03-15T14:15:00Z</date>
+		<key>timeEnd</key>
+		<date>2011-03-15T15:30:00Z</date>
+		<key>type</key>
+		<string>Breakout Presentation</string>
+		<key>subtype</key>
+		<string>Presentation</string>
+		<key>description</key>
+		<string>Over the past two years Shawn has been integrating design practices into iterative development cycles. Using data from multiple projects that have integrated design and development, this experience report will provide insight into an approach of upfront design, product and project management, and product development. Attendees should already posses an understanding of agile estimation, planning and project management techniques. Transitioning a culture focused on technical excellence to one focused on product excellence will be a sub-theme of this session.
+Michael explores fundamental misunderstandings and comfortable yet mis-applied metaphors that result in a plethora of poor business decisions while answering the following:
+
+    * What is technical debt?
+    * What is not technical debt?
+    * Why should we care?
+    * What is the cost of misunderstanding?
+    * What do we do about it?</string>
+		<key>isIntermediate</key>
+		<true/>
+		<key>track</key>
+		<string>Usability Experience</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>Shawn Crowley</string>
+				<key>role</key>
+				<string>Presenter</string>
+			</dict>
+		</array>
+	</dict>
+	<key>05</key>
+	<dict>
+		<key>title</key>
+		<string>How to foster a whole-team approach by thinking in activities rather than roles.</string>
+		<key>timeStart</key>
+		<date>2011-03-15T14:15:00Z</date>
+		<key>timeEnd</key>
+		<date>2011-03-15T15:30:00Z</date>
+		<key>type</key>
+		<string>Breakout Presentation</string>
+		<key>subtype</key>
+		<string>Presentation</string>
+		<key>description</key>
+		<string>In soccer (a.k.a. international football), players play individual positions but share core skills, like dribbling, passing and shooting. Their assignments on the field overlap and they interact with everyone on the team. American football is different: players are highly specialized and step onto the field for specific plays. To achieve a whole-team approach in software development Matthew will challenge us to emulate a soccer model. That is, approach work as activities to be accomplished together rather than in separate specialized roles. We’ll also discuss smells and remedies, how Kanban affects teams’ tendencies, and how a whole-team approach addresses the seven wastes in software development.</string>
+		<key>isIntermediate</key>
+		<true/>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>Matthew Phillip</string>
+				<key>role</key>
+				<string>Presenter</string>
+			</dict>
+		</array>
+	</dict>
+	<key>04</key>
+	<dict>
+		<key>title</key>
+		<string>Writing Excellent Executable Requirements!</string>
+		<key>timeStart</key>
+		<date>2011-03-15T14:15:00Z</date>
+		<key>timeEnd</key>
+		<date>2011-03-15T15:30:00Z</date>
+		<key>type</key>
+		<string>Breakout Presentation</string>
+		<key>subtype</key>
+		<string>Presentation</string>
+		<key>description</key>
+		<string>Many teams build software that does not behave as expected by stakeholders; add the Agile engineering practice of “Executable Requirements” to your specifications arsenal! Eric and Dan share compelling principles for building excellent executable requirements (or acceptance criteria) that consistently deliver value for your customer.
+
+You will learn collaboration techniques that ensure business and developers have a shared understanding. You will experience creating these &quot;excellent&quot; requirements in difficult situations, including working across time zones, refining &apos;vagueness&apos;, and helping product owners speak with &apos;one voice&apos;. And you’ll take back new approaches suitable for developers, business analysts, project managers and testers to ultimately &apos;wow&apos; your customer!</string>
+		<key>level</key>
+		<string>intermediate</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>Eric Landes</string>
+				<key>role</key>
+				<string>Presenter</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Dan Neumann</string>
+				<key>role</key>
+				<string>Presenter</string>
+			</dict>
+		</array>
+	</dict>
+	<key>03</key>
+	<dict>
+		<key>title</key>
+		<string>The Technical Debt Trap</string>
+		<key>timeStart</key>
+		<date>2011-03-15T14:15:00Z</date>
+		<key>timeEnd</key>
+		<date>2011-03-15T15:30:00Z</date>
+		<key>type</key>
+		<string>Breakout Presentation</string>
+		<key>subtype</key>
+		<string>Experience Report</string>
+		<key>description</key>
+		<string>In early 2010, Ford Motor Company officially launched their agile journey. How well will it scale across four continents? Can the anticipated benefits accrue? Which practices are compatible with the eco-system of this Successful Large Enterprise? The answers to these questions are not foregone conclusions!
+
+Join with Vijay as he speaks with candor and transparency about his personal encounter with &apos;Agile&apos;, and how he promotes a shared vision at one of the world&apos;s largest corporations.</string>
+		<key>isIntermediate</key>
+		<true/>
+		<key>isBeginner</key>
+		<true/>
+		<key>isAdvanced</key>
+		<true/>
+		<key>track</key>
+		<string>Leadership</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>Vijay Sankaran</string>
+				<key>role</key>
+				<string>Presenter</string>
+			</dict>
+		</array>
+	</dict>
+	<key>02</key>
+	<dict>
+		<key>title</key>
+		<string>Panel Discussion: Entrepreneurs at the Forefront of the &apos;Agile&apos; Movement in our Region</string>
+		<key>timeStart</key>
+		<date>2011-03-15T14:15:00Z</date>
+		<key>timeEnd</key>
+		<date>2011-03-15T15:30:00Z</date>
+		<key>type</key>
+		<string>Breakout Presentation</string>
+		<key>subtype</key>
+		<string>Panel Discussion</string>
+		<key>description</key>
+		<string>Given the personalities this conversation could go anywhere... it sure did last year! This is your chance to ask the tough questions about what really works. And, in particular, Dianne will focus on what has changed in the past year, what new challenges companies are experiencing, and how we can continue to improve our process.  The Panel has requested your help shaping the discussion content by submitting questions or topics of interest to panel@agileandbeyond.org prior to the Conference. No topic is off limits! They will assemble the responses and tackle the most popular and/or intriguing questions during the session.
+Michael explores fundamental misunderstandings and comfortable yet mis-applied metaphors that result in a plethora of poor business decisions while answering the following:
+
+    * What is technical debt?
+    * What is not technical debt?
+    * Why should we care?
+    * What is the cost of misunderstanding?
+    * What do we do about it?</string>
+		<key>isAdvanced</key>
+		<true/>
+		<key>isIntermediate</key>
+		<true/>
+		<key>isBeginner</key>
+		<true/>
+		<key>track</key>
+		<string>Leadership</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>Dianne Marsh</string>
+				<key>role</key>
+				<string>Moderator</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Gary Gentry</string>
+				<key>role</key>
+				<string>Panel Member</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Rich Sheridan</string>
+				<key>role</key>
+				<string>Panel Member</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Carl Erickson</string>
+				<key>role</key>
+				<string>Panel Member</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Jon Stahl</string>
+				<key>role</key>
+				<string>Panel Member</string>
+			</dict>
+		</array>
+	</dict>
+	<key>01</key>
+	<dict>
+		<key>title</key>
+		<string>The Technical Debt Trap</string>
+		<key>timeStart</key>
+		<date>2011-03-15T14:15:00Z</date>
+		<key>timeEnd</key>
+		<date>2011-03-15T15:30:00Z</date>
+		<key>type</key>
+		<string>Breakout Presentation</string>
+		<key>subtype</key>
+		<string>Presentation</string>
+		<key>description</key>
+		<string>Technical Debt has become a catch-all phrase for any code that needs to be re-worked; much like Refactoring has become a catch-all phrase for any activity that involves changing code.
+
+Michael explores fundamental misunderstandings and comfortable yet mis-applied metaphors that result in a plethora of poor business decisions while answering the following:
+
+    * What is technical debt?
+    * What is not technical debt?
+    * Why should we care?
+    * What is the cost of misunderstanding?
+    * What do we do about it?</string>
+		<key>isBeginner</key>
+		<true/>
+		<key>isIntermediate</key>
+		<true/>
+		<key>isAdvanced</key>
+		<true/>
+		<key>track</key>
+		<string>Leadership</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>Michael &quot;Doc&quot; Norton</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>
