@@ -129,6 +129,7 @@
       switch ([indexPath indexAtPosition:1]) { // switch by position within section 0 ("All")
       case 0 :
 	filteredListView = [[sessionListViewController alloc] initWithNibName:@"sessionListViewController" bundle:nil];
+	[filteredListView setTitle:@"All Sessions"];
 	[self.navigationController pushViewController:filteredListView animated:YES];
 	[filteredListView release];
 	break;

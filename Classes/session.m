@@ -51,11 +51,13 @@ void populateInitialData()
   NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
 
   AABSessions = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+  // TODO memory
+  [AABSessions retain];
 
   if(AABSessions)
     {
       NSLog(@"I loaded in a plist as AABSessions from %@", plistPath);
-      dumpNestedDictToLog(AABSessions);
+      //dumpNestedDictToLog(AABSessions);
     }
   else 
     {

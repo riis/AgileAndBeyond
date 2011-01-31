@@ -7,10 +7,10 @@
 //
 
 #import "sessionListViewController.h"
-
+#import "session.h"
 
 @implementation sessionListViewController
-
+@synthesize filteredSessionList;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -24,11 +24,26 @@
 }
 */
 
-/*
+
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+
+  // populate an array with refrences to the sessions we will display, in the order we want
+
+  // for now, just always pull in all the sessions
+  // later, add filtering
+
+  // if(!filteredSessionList)
+  
+  NSLog(@"hello from %s", __func__);
+
+  filteredSessionList =  [[NSArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted
+
+  // TODO : memory management : we want an array of refrences
+  NSLog(@"in %s: filteredSessionList has count %d", __func__, [filteredSessionList count]);
+  NSLog(@"in %s: AABSessions has count %d", __func__, [AABSessions count]);
+  [super viewWillAppear:animated];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -62,14 +77,17 @@
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-	switch (section) {
-		case 0 : return 2 ; // 10:15 sessions
-		case 1 : return 1 ; // 12:30 sessions 
-			default: return 0 ; 
-			// TODO error/assert andor do something consistant for "code should not be reached
-	}	
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+{
+  
+  // Return the number of rows in the section.
+  switch (section) 
+    {
+    case 0 : return [filteredSessionList count] ; // 10:15 sessions
+    case 1 : return 0 ; // 12:30 sessions 
+    default: return 0 ; 
+      // TODO error/assert andor do something consistant for "code should not be reached
+    }	
 }
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -89,44 +107,34 @@
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 
-		// found the following snipit online :
-		cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
-		cell.textLabel.numberOfLines=0;
-		cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
-		// thank you stackoverflow contributer Tim Rupe!
-		// ohter useful info at link 
-		//http://stackoverflow.com/questions/129502/how-do-i-wrap-text-in-a-uitableviewcell-without-a-custom-cell
-		// (and in documentation for UITextField)
-				
-		switch  ([indexPath indexAtPosition:0]) 	// section ALL 
-		{
-			case 0 :  
-				switch ([indexPath indexAtPosition:1]) { // switch by position within section 0 ("All")
-					case 0 :
-						cell.textLabel.text = @"Writing Excellent Requirements!"; 
-						break;
-					case 1 : 
-						cell.textLabel.text = @"Entrepreneurs at the Forefront of the 'Agile' Movement in our Region"; 
-						break;
-					}
-				break;
-				
-				
-				// section By Difficulty
-			case 1 : 
-				switch ([indexPath indexAtPosition:1]) {
-					case 0 : 
-						cell.textLabel.text = @"The How and Why of Kanban"; 
-						break;
-						
-				}
-				break;
-		}
-		
-		cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    //    if (filteredSessionList == nil)
+    // filteredSessionList = [[NSArray alloc] init];//  [[NSArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted
+
+    if (cell == nil) {
+      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+      switch ( [indexPath indexAtPosition:0] )
+	{
+	case 0 : 
+
+
+	  // found the following snipit online :
+	  cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
+	  cell.textLabel.numberOfLines=0;
+	  cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+	  // thank you stackoverflow contributer Tim Rupe!
+	  // ohter useful info at link 
+	  //http://stackoverflow.com/questions/129502/how-do-i-wrap-text-in-a-uitableviewcell-without-a-custom-cell
+	  // (and in documentation for UITextField)
+	  cell.textLabel.text = [[filteredSessionList objectAtIndex:[indexPath indexAtPosition:1]] objectForKey:@"title"];
+				  
+	  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+
+
+	  break;
+	default : 
+	  // TODO a better default. 
+	  break; 
 	}
 	
 	
@@ -134,6 +142,7 @@
 	// we could reuse existing cells, changing their contents, but putting some code here...
 	
     return cell;
+    }
 }
 
 
