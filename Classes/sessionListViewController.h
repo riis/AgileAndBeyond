@@ -19,9 +19,9 @@
 @end
 
 @interface sessionListViewController : UITableViewController {
-  NSArray* filteredSessionLists;
+  NSMutableArray* filteredSessionLists;
 }
 
-@property (nonatomic, retain) NSArray* filteredSessionList;
+@property (nonatomic, retain) NSMutableArray* filteredSessionLists;
 
 @end

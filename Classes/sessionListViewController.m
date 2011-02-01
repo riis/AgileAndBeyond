@@ -9,14 +9,12 @@
 #import "sessionListViewController.h"
 #import "session.h"
 
-NSArray* foo;
-
 @implementation sessionTableGroup
 @synthesize items, title;
 @end
 
 @implementation sessionListViewController
-@synthesize filteredSessionList;
+@synthesize filteredSessionLists;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -35,33 +33,43 @@ NSArray* foo;
 
   // populate an array with refrences to the sessions we will display, in the order we want
 
-  // for now, just always pull in all the sessions
-  // later, add filtering
-
-  // if(!filteredSessionList)
   NSDate* firstSlotDate =  [NSDate dateWithString:@"2011-03-12 10:15:00 -0500"];
   NSDate* secondSlotDate =  [NSDate dateWithString:@"2011-03-12 12:30:00 -0500"];
-  NSLog(@"hello from %s", __func__);
+  
+  sessionTableGroup* slotGroup;
 
+  //NSLog(@"hello from %s", __func__);
   NSMutableArray* allSessions  =  [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted 
 
-  NSLog(@"here's an entry : %@", [allSessions objectAtIndex:0] );
+  //NSLog(@"here's an entry : %@", [allSessions objectAtIndex:0] );
   NSPredicate* sessionFirstSlotPredicate = [NSPredicate 
+					     predicateWithFormat:@"timeStart == %@", firstSlotDate];
+  NSPredicate* sessionSecondSlotPredicate = [NSPredicate 
 					     predicateWithFormat:@"timeStart == %@", secondSlotDate];
-					     
-  //sessionTableGroup* firstSlot = [[sessionTableGroup alloc] init];
-  //firstSlot.items = [allSessions filterUsingPredicate:sessionFirstSlotPredicate];
-  foo=[allSessions filteredArrayUsingPredicate:sessionFirstSlotPredicate];
-  [foo retain];
-
-  //  [filteredSessionLists addObject:firstSlot];
-			   
   
-    
+  //if(!filteredSessionLists) NSLog(@"filteredSessionLists is null");
+  filteredSessionLists = [[NSMutableArray alloc] init];
 
+  slotGroup = [[sessionTableGroup alloc] init];
+  slotGroup.items = [allSessions filteredArrayUsingPredicate:sessionFirstSlotPredicate];
+  [slotGroup.items retain];
+  slotGroup.title = [firstSlotDate descriptionWithCalendarFormat:nil timeZone:nil 
+				   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+  [filteredSessionLists addObject:slotGroup];
+  slotGroup = [[sessionTableGroup alloc] init];
+  slotGroup.items = [allSessions filteredArrayUsingPredicate:sessionSecondSlotPredicate];
+  [slotGroup.items retain];
+  slotGroup.title = [firstSlotDate descriptionWithCalendarFormat:nil timeZone:nil 
+				   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+  
+  [filteredSessionLists addObject:slotGroup];
+  
+
+  NSLog(@"filteredSessionLists is : %d", [filteredSessionLists count] );
+
+  // TODO : sort filtered arrays
   // TODO : memory management : we want arrays of refrences
-  //NSLog(@"in %s: filteredSessionList has count %d", __func__, [filteredSessionList count]);
-  //NSLog(@"in %s: AABSessions has count %d", __func__, [AABSessions count]);
+
   [super viewWillAppear:animated];
 }
 
@@ -94,7 +102,7 @@ NSArray* foo;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 2;
+    return [filteredSessionLists count];
 }
 
 
@@ -102,22 +110,27 @@ NSArray* foo;
 {
   
   // Return the number of rows in the section.
-  switch (section) 
-    {
-    case 0 : return [foo count] ; // 10:15 sessions
-    case 1 : return 0 ; // 12:30 sessions 
-    default: return 0 ; 
+  //switch (section) 
+  // {
+    return [[[filteredSessionLists objectAtIndex:section] items] count] ; // 10:15 sessions
+    //case 1 : return [[[filteredSessionLists objectAtIndex:1] items] count]; // 12:30 sessions 
+    // default: return 0 ; 
       // TODO error/assert andor do something consistant for "code should not be reached
-    }	
+    //}	
 }
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	switch (section) {
-		case 0 : return @"Saturday, March 12 at 10:15"; 
-		case 1 : return @"Saturday, March 12 at 12:30"; 
-		default: return @"";	
-			// TODO error/assert andor do something consistant for "code should not be reached
-	}
+  /*
+  switch (section) 
+    {
+    case 0 : return @"Saturday, March 12 at 10:15"; 
+    case 1 : return @"Saturday, March 12 at 12:30"; 
+    default: return @"";	
+      // TODO error/assert andor do something consistant for "code should not be reached
+    }
+  */
+
+  return [[filteredSessionLists objectAtIndex:section] title];
 }
 
 
@@ -134,10 +147,11 @@ NSArray* foo;
 
     if (cell == nil) {
       cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-      switch ( [indexPath indexAtPosition:0] )
-	{
-	case 0 : 
+      //switch ( [indexPath indexAtPosition:0] )
+      //	{
+      //	case 0 : 
 
+      
 
 	  // found the following snipit online :
 	  cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
@@ -153,22 +167,25 @@ NSArray* foo;
 								   
 				  objectForKey:@"title"];
 	  */
-	  cell.textLabel.text = [[foo objectAtIndex:[indexPath indexAtPosition:1]] objectForKey:@"title"];
+	  cell.textLabel.text = @"placeholder";
+	  /*[[[[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items]
+				   objectAtIndex:[indexPath indexAtPosition:1]]
+				   objectForKey:@"title"]; */
 	  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 
 
-	  break;
-	default : 
+	  //	  break;
+	  //default : 
 	  // TODO a better default. 
-	  break; 
-	}
+	  // break; 
+    
 	
-	
+    }	
 	
 	// we could reuse existing cells, changing their contents, but putting some code here...
 	
     return cell;
-    }
+
 }
 
 
