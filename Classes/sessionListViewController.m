@@ -9,6 +9,12 @@
 #import "sessionListViewController.h"
 #import "session.h"
 
+NSArray* foo;
+
+@implementation sessionTableGroup
+@synthesize items, title;
+@end
+
 @implementation sessionListViewController
 @synthesize filteredSessionList;
 
@@ -36,11 +42,24 @@
   
   NSLog(@"hello from %s", __func__);
 
-  filteredSessionList =  [[NSArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted
+  NSMutableArray* allSessions  =  [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted 
 
-  // TODO : memory management : we want an array of refrences
-  NSLog(@"in %s: filteredSessionList has count %d", __func__, [filteredSessionList count]);
-  NSLog(@"in %s: AABSessions has count %d", __func__, [AABSessions count]);
+  NSPredicate* sessionFirstSlotPredicate = [NSPredicate 
+					     //  predicateWithFormat:@"timeStart < '2011-03-12 12:00:00 +0500'"];
+					     predicateWithFormat:@"subtype==%@",@"Usability"];
+  //sessionTableGroup* firstSlot = [[sessionTableGroup alloc] init];
+  //firstSlot.items = [allSessions filterUsingPredicate:sessionFirstSlotPredicate];
+  foo =[allSessions filteredArrayUsingPredicate:sessionFirstSlotPredicate];
+  [foo retain];
+
+  //  [filteredSessionLists addObject:firstSlot];
+			   
+  
+    
+
+  // TODO : memory management : we want arrays of refrences
+  //NSLog(@"in %s: filteredSessionList has count %d", __func__, [filteredSessionList count]);
+  //NSLog(@"in %s: AABSessions has count %d", __func__, [AABSessions count]);
   [super viewWillAppear:animated];
 }
 
@@ -83,7 +102,7 @@
   // Return the number of rows in the section.
   switch (section) 
     {
-    case 0 : return [filteredSessionList count] ; // 10:15 sessions
+    case 0 : return [foo count] ; // 10:15 sessions
     case 1 : return 0 ; // 12:30 sessions 
     default: return 0 ; 
       // TODO error/assert andor do something consistant for "code should not be reached
@@ -126,8 +145,13 @@
 	  // ohter useful info at link 
 	  //http://stackoverflow.com/questions/129502/how-do-i-wrap-text-in-a-uitableviewcell-without-a-custom-cell
 	  // (and in documentation for UITextField)
-	  cell.textLabel.text = [[filteredSessionList objectAtIndex:[indexPath indexAtPosition:1]] objectForKey:@"title"];
-				  
+	  /* cell.textLabel.text = [[
+				  [[filteredSessionLists objectAtIndex:0] items]
+				   objectAtIndex:[indexPath indexAtPosition:1]]
+								   
+				  objectForKey:@"title"];
+	  */
+	  cell.textLabel.text = [[foo objectAtIndex:[indexPath indexAtPosition:1]] objectForKey:@"title"];
 	  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 
 

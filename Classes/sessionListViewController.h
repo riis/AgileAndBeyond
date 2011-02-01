@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@interface sessionTableGroup : NSObject {
+  NSArray* items;
+  NSString* sectionTitle;
+}
+
+@property (nonatomic, retain) NSArray* items;
+@property (nonatomic, retain) NSString* title;
+
+@end
 
 @interface sessionListViewController : UITableViewController {
-  NSArray* filteredSessionList;
+  NSArray* filteredSessionLists;
 }
 
 @property (nonatomic, retain) NSArray* filteredSessionList;
