@@ -167,10 +167,10 @@
 								   
 				  objectForKey:@"title"];
 	  */
-	  cell.textLabel.text = @"placeholder";
-	  /*[[[[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items]
-				   objectAtIndex:[indexPath indexAtPosition:1]]
-				   objectForKey:@"title"]; */
+
+	  NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
+	  cell.textLabel.text = [[myFilteredList objectAtIndex:[indexPath indexAtPosition:1]]
+				   objectForKey:@"title"]; 
 	  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
 
 
