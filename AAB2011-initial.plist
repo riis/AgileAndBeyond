@@ -2,16 +2,282 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>default</key>
+	<key>open-lunch</key>
 	<dict>
 		<key>title</key>
-		<string>this slot left blank - work in progress</string>
+		<string>Open Space &amp; Lunch</string>
+		<key>track</key>
+		<string>Open Space</string>
+		<key>timeStart</key>
+		<date>2011-03-15T15:30:00Z</date>
+		<key>type</key>
+		<string>Open Space</string>
+		<key>subtype</key>
+		<string>Open Space &amp; Lunch</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>open-pm</key>
+	<dict>
+		<key>title</key>
+		<string>Open Space</string>
+		<key>track</key>
+		<string>Open Space</string>
+		<key>timeStart</key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Usability</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>open-am</key>
+	<dict>
+		<key>title</key>
+		<string>Open Space</string>
+		<key>track</key>
+		<string>Open Space</string>
 		<key>timeStart</key>
 		<date>2011-03-15T14:15:00Z</date>
 		<key>type</key>
-		<string>Breakout Presentation</string>
+		<string>Open Space</string>
 		<key>subtype</key>
-		<string>Presentation</string>
+		<string>Open Space</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>15</key>
+	<dict>
+		<key>title</key>
+		<string>Building Powerful Personas Who Work Hard For You</string>
+		<key>track</key>
+		<string>Usability</string>
+		<key>timeStart</key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Usability</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>14</key>
+	<dict>
+		<key>title</key>
+		<string>It&apos;s All in the Cards</string>
+		<key>track</key>
+		<string>Interactive Process</string>
+		<key>timeStart</key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Practitioner</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>13</key>
+	<dict>
+		<key>title</key>
+		<string>Better Planning via Tasking as a Team</string>
+		<key>track</key>
+		<string>Interactive Process</string>
+		<key>timeStart</key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Practitioner</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>12</key>
+	<dict>
+		<key>title</key>
+		<string>Hands-on Introduction to the Agile Process</string>
+		<key>track</key>
+		<string>Interactive Process</string>
+		<key>timeStart</key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Practitioner</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>11</key>
+	<dict>
+		<key>title</key>
+		<string>Providing &apos;Lean&apos; Leadership</string>
+		<key>track</key>
+		<string>Leadership</string>
+		<key>timeStart</key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Executive</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>10</key>
+	<dict>
+		<key>title</key>
+		<string>The How and Why of Kanban</string>
+		<key>track</key>
+		<string>Interactive Process</string>
+		<key>timeStart</key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Practitioner</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>9</key>
+	<dict>
+		<key>title</key>
+		<string>Experience the Speed of Clean</string>
+		<key>track</key>
+		<string>Hands-On Technology Track</string>
+		<key>timeStart</key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Developer</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>08</key>
+	<dict>
+		<key>title</key>
+		<string>What&apos;s NXT? Unit Testing Hardware</string>
+		<key>track</key>
+		<string>Hands-On Technology</string>
+		<key>timeStart </key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Deveolper</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>John F Kennedy</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>07</key>
+	<dict>
+		<key>title</key>
+		<string>Test Driven Development (TDD)</string>
+		<key>track</key>
+		<string>Hands-On Technology</string>
+		<key>timeStart</key>
+		<date>2011-03-15T16:30:00Z</date>
+		<key>type</key>
+		<string>Workshop</string>
+		<key>subtype</key>
+		<string>Developer</string>
 		<key>description</key>
 		<string>something something, something, something else.</string>
 		<key>people</key>
@@ -122,7 +388,7 @@ You will learn collaboration techniques that ensure business and developers have
 	<key>03</key>
 	<dict>
 		<key>title</key>
-		<string>The Technical Debt Trap</string>
+		<string>The &quot;Agile AD&quot; Initiative at Ford</string>
 		<key>timeStart</key>
 		<date>2011-03-15T14:15:00Z</date>
 		<key>timeEnd</key>
@@ -156,7 +422,7 @@ Join with Vijay as he speaks with candor and transparency about his personal enc
 	<key>02</key>
 	<dict>
 		<key>title</key>
-		<string>Panel Discussion: Entrepreneurs at the Forefront of the &apos;Agile&apos; Movement in our Region</string>
+		<string>Entrepreneurs at the Forefront of the &apos;Agile&apos; Movement in our Region</string>
 		<key>timeStart</key>
 		<date>2011-03-15T14:15:00Z</date>
 		<key>timeEnd</key>
