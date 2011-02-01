@@ -35,7 +35,7 @@
 
   NSDate* firstSlotDate =  [NSDate dateWithString:@"2011-03-12 10:15:00 -0500"];
   NSDate* secondSlotDate =  [NSDate dateWithString:@"2011-03-12 12:30:00 -0500"];
-  
+  NSString* oldStyleDateFormatString = @"%A, %B %e %Y %I:%M";
   sessionTableGroup* slotGroup;
 
   //NSLog(@"hello from %s", __func__);
@@ -52,14 +52,14 @@
 
   slotGroup = [[sessionTableGroup alloc] init];
   slotGroup.items = [allSessions filteredArrayUsingPredicate:sessionFirstSlotPredicate];
-  [slotGroup.items retain];
-  slotGroup.title = [firstSlotDate descriptionWithCalendarFormat:nil timeZone:nil 
+  [slotGroup.items retain];  //TODO
+  slotGroup.title = [firstSlotDate descriptionWithCalendarFormat:oldStyleDateFormatString timeZone:nil 
 				   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
   [filteredSessionLists addObject:slotGroup];
   slotGroup = [[sessionTableGroup alloc] init];
   slotGroup.items = [allSessions filteredArrayUsingPredicate:sessionSecondSlotPredicate];
-  [slotGroup.items retain];
-  slotGroup.title = [firstSlotDate descriptionWithCalendarFormat:nil timeZone:nil 
+  [slotGroup.items retain];  //TODO
+  slotGroup.title = [firstSlotDate descriptionWithCalendarFormat:oldStyleDateFormatString timeZone:nil 
 				   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
   
   [filteredSessionLists addObject:slotGroup];
