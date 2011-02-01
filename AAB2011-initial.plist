@@ -9,7 +9,7 @@
 		<key>track</key>
 		<string>Open Space</string>
 		<key>timeStart</key>
-		<date>2011-03-15T15:30:00Z</date>
+		<date>2011-03-12T16:30:00Z</date>
 		<key>type</key>
 		<string>Open Space</string>
 		<key>subtype</key>
@@ -30,16 +30,16 @@
 	<dict>
 		<key>title</key>
 		<string>Open Space</string>
+		<key>description</key>
+		<string>something something, something, something else.</string>
 		<key>track</key>
 		<string>Open Space</string>
 		<key>timeStart</key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
 		<string>Usability</string>
-		<key>description</key>
-		<string>something something, something, something else.</string>
 		<key>people</key>
 		<array>
 			<dict>
@@ -57,7 +57,7 @@
 		<key>track</key>
 		<string>Open Space</string>
 		<key>timeStart</key>
-		<date>2011-03-15T14:15:00Z</date>
+		<date>2011-03-12T15:15:00Z</date>
 		<key>type</key>
 		<string>Open Space</string>
 		<key>subtype</key>
@@ -81,7 +81,7 @@
 		<key>track</key>
 		<string>Usability</string>
 		<key>timeStart</key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
@@ -105,7 +105,7 @@
 		<key>track</key>
 		<string>Interactive Process</string>
 		<key>timeStart</key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
@@ -129,7 +129,7 @@
 		<key>track</key>
 		<string>Interactive Process</string>
 		<key>timeStart</key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
@@ -153,7 +153,7 @@
 		<key>track</key>
 		<string>Interactive Process</string>
 		<key>timeStart</key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
@@ -177,7 +177,7 @@
 		<key>track</key>
 		<string>Leadership</string>
 		<key>timeStart</key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
@@ -201,7 +201,7 @@
 		<key>track</key>
 		<string>Interactive Process</string>
 		<key>timeStart</key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
@@ -225,7 +225,7 @@
 		<key>track</key>
 		<string>Hands-On Technology Track</string>
 		<key>timeStart</key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
@@ -249,7 +249,7 @@
 		<key>track</key>
 		<string>Hands-On Technology</string>
 		<key>timeStart </key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
@@ -273,7 +273,7 @@
 		<key>track</key>
 		<string>Hands-On Technology</string>
 		<key>timeStart</key>
-		<date>2011-03-15T16:30:00Z</date>
+		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
@@ -295,9 +295,9 @@
 		<key>title</key>
 		<string>Integrating UX and Agile at Atomic Object</string>
 		<key>timeStart</key>
-		<date>2011-03-15T14:15:00Z</date>
+		<date>2011-03-12T15:15:00Z</date>
 		<key>timeEnd</key>
-		<date>2011-03-15T15:30:00Z</date>
+		<date>2011-03-12T16:30:00Z</date>
 		<key>type</key>
 		<string>Breakout Presentation</string>
 		<key>subtype</key>
@@ -330,9 +330,9 @@ Michael explores fundamental misunderstandings and comfortable yet mis-applied m
 		<key>title</key>
 		<string>How to foster a whole-team approach by thinking in activities rather than roles.</string>
 		<key>timeStart</key>
-		<date>2011-03-15T14:15:00Z</date>
+		<date>2011-03-12T15:15:00Z</date>
 		<key>timeEnd</key>
-		<date>2011-03-15T15:30:00Z</date>
+		<date>2011-03-12T16:30:00Z</date>
 		<key>type</key>
 		<string>Breakout Presentation</string>
 		<key>subtype</key>
@@ -356,9 +356,9 @@ Michael explores fundamental misunderstandings and comfortable yet mis-applied m
 		<key>title</key>
 		<string>Writing Excellent Executable Requirements!</string>
 		<key>timeStart</key>
-		<date>2011-03-15T14:15:00Z</date>
+		<date>2011-03-12T15:15:00Z</date>
 		<key>timeEnd</key>
-		<date>2011-03-15T15:30:00Z</date>
+		<date>2011-03-12T16:30:00Z</date>
 		<key>type</key>
 		<string>Breakout Presentation</string>
 		<key>subtype</key>
@@ -390,9 +390,9 @@ You will learn collaboration techniques that ensure business and developers have
 		<key>title</key>
 		<string>The &quot;Agile AD&quot; Initiative at Ford</string>
 		<key>timeStart</key>
-		<date>2011-03-15T14:15:00Z</date>
+		<date>2011-03-12T15:15:00Z</date>
 		<key>timeEnd</key>
-		<date>2011-03-15T15:30:00Z</date>
+		<date>2011-03-12T16:30:00Z</date>
 		<key>type</key>
 		<string>Breakout Presentation</string>
 		<key>subtype</key>
@@ -424,9 +424,9 @@ Join with Vijay as he speaks with candor and transparency about his personal enc
 		<key>title</key>
 		<string>Entrepreneurs at the Forefront of the &apos;Agile&apos; Movement in our Region</string>
 		<key>timeStart</key>
-		<date>2011-03-15T14:15:00Z</date>
+		<date>2011-03-12T15:15:00Z</date>
 		<key>timeEnd</key>
-		<date>2011-03-15T15:30:00Z</date>
+		<date>2011-03-12T16:30:00Z</date>
 		<key>type</key>
 		<string>Breakout Presentation</string>
 		<key>subtype</key>
@@ -487,9 +487,9 @@ Michael explores fundamental misunderstandings and comfortable yet mis-applied m
 		<key>title</key>
 		<string>The Technical Debt Trap</string>
 		<key>timeStart</key>
-		<date>2011-03-15T14:15:00Z</date>
+		<date>2011-03-12T15:15:00Z</date>
 		<key>timeEnd</key>
-		<date>2011-03-15T15:30:00Z</date>
+		<date>2011-03-12T16:30:00Z</date>
 		<key>type</key>
 		<string>Breakout Presentation</string>
 		<key>subtype</key>

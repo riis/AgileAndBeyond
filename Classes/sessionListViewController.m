@@ -39,17 +39,19 @@ NSArray* foo;
   // later, add filtering
 
   // if(!filteredSessionList)
-  
+  NSDate* firstSlotDate =  [NSDate dateWithString:@"2011-03-12 10:15:00 -0500"];
+  NSDate* secondSlotDate =  [NSDate dateWithString:@"2011-03-12 12:30:00 -0500"];
   NSLog(@"hello from %s", __func__);
 
   NSMutableArray* allSessions  =  [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted 
 
+  NSLog(@"here's an entry : %@", [allSessions objectAtIndex:0] );
   NSPredicate* sessionFirstSlotPredicate = [NSPredicate 
-					     //  predicateWithFormat:@"timeStart < '2011-03-12 12:00:00 +0500'"];
-					     predicateWithFormat:@"subtype==%@",@"Usability"];
+					     predicateWithFormat:@"timeStart == %@", secondSlotDate];
+					     
   //sessionTableGroup* firstSlot = [[sessionTableGroup alloc] init];
   //firstSlot.items = [allSessions filterUsingPredicate:sessionFirstSlotPredicate];
-  foo =[allSessions filteredArrayUsingPredicate:sessionFirstSlotPredicate];
+  foo=[allSessions filteredArrayUsingPredicate:sessionFirstSlotPredicate];
   [foo retain];
 
   //  [filteredSessionLists addObject:firstSlot];
