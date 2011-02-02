@@ -64,6 +64,7 @@
 		5D40583612F236D800780517 /* sessionListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = sessionListViewController.xib; sourceTree = "<group>"; };
 		5D40589912F34D8000780517 /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = session.h; sourceTree = "<group>"; };
 		5D40589A12F34D8000780517 /* session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = session.m; sourceTree = "<group>"; };
+		5D8C9B8112FA02F40064459D /* AgileAndBeyondAppGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgileAndBeyondAppGlobals.h; sourceTree = "<group>"; };
 		5DE58CB612F72B2800794353 /* AAB2011-initial.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AAB2011-initial.plist"; sourceTree = "<group>"; };
 		5DE58F9A12F89B9100794353 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = ../iBroadSoft/iphoneos3.1.3/System/Library/Frameworks/UIKit.framework; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* AgileAndBeyond-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AgileAndBeyond-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 				5D40583612F236D800780517 /* sessionListViewController.xib */,
 				5D40589912F34D8000780517 /* session.h */,
 				5D40589A12F34D8000780517 /* session.m */,
+				5D8C9B8112FA02F40064459D /* AgileAndBeyondAppGlobals.h */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -187,6 +189,9 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "RIIS LLC";
+			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "AgileAndBeyond" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;

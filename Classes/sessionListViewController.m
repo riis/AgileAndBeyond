@@ -9,12 +9,52 @@
 #import "sessionListViewController.h"
 #import "session.h"
 
+// Class static variables
+
+
+@implementation tableViewSection
+@synthesize title, predicate;
+@end
+
 @implementation sessionTableGroup
-@synthesize items, title;
+@synthesize items, title, predicate;
 @end
 
 @implementation sessionListViewController
-@synthesize filteredSessionLists;
+@synthesize filteredSessionLists,allSessions,filter;
+
++(sessionListViewController*)createUsingArray:(NSArray*)bigListRef
+				    groupList:(NSArray*)groups
+				    filterBy:(NSPredicate*)filterPredicate
+{
+  sessionListViewController* me = [[[self alloc] initWithNibName:@"sessionListViewController" bundle:nil] autorelease];
+
+
+  // we don't want to exlusivly own allSessions, we want a refrence to an external array
+  // that might be shared.
+  // we'll use it to group & sort & filter for display
+  [me setAllSessions:bigListRef]; 
+  
+  // create filterSessionList
+  // we won't fill in items yet, lets let that happen in viewWillAppear for now
+  if( groups != nil)  
+    {
+      if ( [me filteredSessionLists] == nil ) 
+	[me setFilteredSessionLists:[[NSMutableArray alloc] init]]; 
+      for( tableViewSection* section in groups ) 
+	{
+	  sessionTableGroup* newGroup = [[sessionTableGroup alloc] init];
+	  newGroup.predicate = section.predicate;
+	  newGroup.title = section.title;
+	  
+	  [[me filteredSessionLists] addObject:newGroup];
+	}
+    }
+
+  [me setFilter:filterPredicate];
+    
+  return me;
+}
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -29,27 +69,18 @@
 */
 
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated 
+{
 
   // populate an array with refrences to the sessions we will display, in the order we want
 
-  NSDate* firstSlotDate =  [NSDate dateWithString:@"2011-03-12 10:15:00 -0500"];
-  NSDate* secondSlotDate =  [NSDate dateWithString:@"2011-03-12 12:30:00 -0500"];
-  NSString* oldStyleDateFormatString = @"%A, %B %e %Y %I:%M";
-  sessionTableGroup* slotGroup;
-
   //NSLog(@"hello from %s", __func__);
-  NSMutableArray* allSessions  =  [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted 
-
+  //NSMutableArray* allSessions  =  [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted 
   //NSLog(@"here's an entry : %@", [allSessions objectAtIndex:0] );
-  NSPredicate* sessionFirstSlotPredicate = [NSPredicate 
-					     predicateWithFormat:@"timeStart == %@", firstSlotDate];
-  NSPredicate* sessionSecondSlotPredicate = [NSPredicate 
-					     predicateWithFormat:@"timeStart == %@", secondSlotDate];
-  
   //if(!filteredSessionLists) NSLog(@"filteredSessionLists is null");
+  /*
   filteredSessionLists = [[NSMutableArray alloc] init];
-
+    
   slotGroup = [[sessionTableGroup alloc] init];
   slotGroup.items = [allSessions filteredArrayUsingPredicate:sessionFirstSlotPredicate];
   [slotGroup.items retain];  //TODO
@@ -63,13 +94,19 @@
 				   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
   
   [filteredSessionLists addObject:slotGroup];
+  */
   
+  NSLog(@"in %s filteredSessionLists is : %d", __func__, [filteredSessionLists count] );
+  
+  for( sessionTableGroup* section in filteredSessionLists )
+    {
+      section.items = [allSessions filteredArrayUsingPredicate:section.predicate];
+    }
 
-  NSLog(@"filteredSessionLists is : %d", [filteredSessionLists count] );
 
   // TODO : sort filtered arrays
   // TODO : memory management : we want arrays of refrences
-
+  
   [super viewWillAppear:animated];
 }
 
@@ -261,7 +298,13 @@
 
 
 - (void)dealloc {
-    [super dealloc];
+
+  if( filteredSessionLists ) 
+    [filteredSessionLists release]; // will release on each of contents if dealloced
+  if( allSessions ) [ allSessions release ];
+  if( filter ) [ filter release ];
+
+  [super dealloc];
 }
 
 
