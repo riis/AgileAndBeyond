@@ -8,7 +8,8 @@
 
 #import "mainFilterSelectionMenu.h"
 #import "sessionListViewController.h"
-
+#import "AgileAndBeyondAppGlobals.h"
+#import "session.h"
 
 @implementation mainFilterSelectionMenu 
 
@@ -121,17 +122,50 @@
 {
 
   sessionListViewController* filteredListView = nil;
-	
+ 
+  // TODO move this
+  static NSMutableArray* allSessions = nil;
+  if( allSessions == nil) 
+    allSessions = [[NSArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted
+  
+  
+  // TODO don't do this each time, move this code
+  tableViewSection* newSection;
+  NSMutableArray* viewSections = [[NSMutableArray alloc] init];  
+
+  newSection = [[sessionTableGroup alloc] init];
+  newSection.title = [AAB_FIRST_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
+				   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+  newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
+  [viewSections addObject:newSection];
+  newSection = [[sessionTableGroup alloc] init];
+  newSection.title = [AAB_SECOND_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
+				   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+  newSection.predicate =  [NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
+  [viewSections addObject:newSection];
+
+  NSPredicate* myPredicate;
+
   switch ([indexPath indexAtPosition:0]) // switch for which section
     {
       // section ALL 
     case 0 :  
       switch ([indexPath indexAtPosition:1]) { // switch by position within section 0 ("All")
       case 0 :
-	filteredListView = [[sessionListViewController alloc] initWithNibName:@"sessionListViewController" bundle:nil];
+	// TODO : don't create a new listview each time
+	//filteredListView = [[sessionListViewController alloc] initWithNibName:@"sessionListViewController" bundle:nil];
+	
+	myPredicate= [NSPredicate predicateWithValue:TRUE];  
+	
+	filteredListView = [sessionListViewController 
+			     createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
+			     groupList:viewSections
+			     filterBy:myPredicate];
 	[filteredListView setTitle:@"All Sessions"];
+	[filteredListView retain]; // TODO , correct? 
 	[self.navigationController pushViewController:filteredListView animated:YES];
-	[filteredListView release];
+	//[filteredListView release]; // TODO , correct? 
+	
 	break;
 					
       }
@@ -146,9 +180,7 @@
       case 1 : 
 	break;
       case 2 : 
-	break;
-					
-					
+	break;					
       }
       break;
 			
