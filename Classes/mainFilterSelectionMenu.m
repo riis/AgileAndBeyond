@@ -176,6 +176,18 @@
     case 1 : 
       switch ([indexPath indexAtPosition:1]) {
       case 0 : 
+		
+	myPredicate=[NSPredicate predicateWithFormat:@"track == 'Leadership'"];  
+	
+	filteredListView = [sessionListViewController 
+			     createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
+			     groupList:viewSections
+			     filterBy:myPredicate];
+	[filteredListView setTitle:@"Beginner Sessions"];
+	[filteredListView retain]; // TODO , correct? 
+	[self.navigationController pushViewController:filteredListView animated:YES];
+	//[filteredListView release]; // TODO , correct? 
+	
 	break;
       case 1 : 
 	break;

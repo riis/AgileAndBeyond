@@ -29,11 +29,10 @@
 {
   sessionListViewController* me = [[[self alloc] initWithNibName:@"sessionListViewController" bundle:nil] autorelease];
 
-
-  // we don't want to exlusivly own allSessions, we want a refrence to an external array
-  // that might be shared.
-  // we'll use it to group & sort & filter for display
-  [me setAllSessions:bigListRef]; 
+  // for future consideration, retaining the bigListRef if needed to update our sessions list
+  // TODO : rename allSessions if it is actually "our filtered list of sections"
+  //   - or - do the filtering somewhere else, like in viewWillAppear
+  [me setAllSessions:[bigListRef filteredArrayUsingPredicate:filterPredicate]]; 
   
   // create filterSessionList
   // we won't fill in items yet, lets let that happen in viewWillAppear for now
@@ -97,10 +96,12 @@
   */
   
   NSLog(@"in %s filteredSessionLists is : %d", __func__, [filteredSessionLists count] );
-  
+
   for( sessionTableGroup* section in filteredSessionLists )
     {
       section.items = [allSessions filteredArrayUsingPredicate:section.predicate];
+      //  int i =0; 
+      // NSLog(@"in %s, section %d has has %d after filtering", __func__, i++, [section.items count] );
     }
 
 
