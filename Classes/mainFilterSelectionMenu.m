@@ -20,15 +20,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
-  return 3;      
+  return 4;      
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
   switch (section) {
   case 0 : return 1 ; // All 
-  case 1 : return 3 ; // By Difficulty 
-  case 2 : return 5 ; // by Track
+  case 1 : return 2 ; // by type
+  case 2 : return 3 ; // By Difficulty 
+  case 3 : return 5 ; // by Track
   default: return 0 ; 
     // TODO error/assert andor do something consistant for "code should not be reached
   }
@@ -38,8 +39,9 @@
 {
   switch (section) {
   case 0 : return @"All"; 
-  case 1 : return @"By Difficulty"; 
-  case 2 : return @"By Track";
+  case 1 : return @"By Type";
+  case 2 : return @"By Difficulty"; 
+  case 3 : return @"By Track";
   default: return @"";	
     // TODO error/assert andor do something consistant for "code should not be reached
   }
@@ -63,7 +65,6 @@
   cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
 	
 	
-	
   switch ([indexPath indexAtPosition:0]) // switch for which section
     {
       // section ALL 
@@ -77,9 +78,22 @@
 	}
       break;
 			
-			
-      // section By Difficulty
+      // section By Type
     case 1 : 
+      switch ([indexPath indexAtPosition:1]) 
+	{
+	case 0 : 
+	  cell.textLabel.text = @"Breakout Presentations"; 
+	  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;	
+	  break;
+	case 1 : 
+	  cell.textLabel.text = @"Workshops"; 
+	  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;	
+	  break;
+	}
+      break;			
+      // section By Difficulty
+    case 2 : 
       switch ([indexPath indexAtPosition:1]) 
 	{
 	case 0 : 
@@ -98,7 +112,7 @@
       break;
 			
       // section By Track
-    case 2 :  
+    case 3 :  
       switch ([indexPath indexAtPosition:1]) 
 	{
 	case 0 : 
@@ -181,13 +195,39 @@
       }
       break;
 			
-			
-      // section By Difficulty
-    case 1 : 
+      // section By Type
+    case 1: 
       switch ([indexPath indexAtPosition:1]) 
 	{
-	case 0 : // ----==== BEGGINER DIFFICULTY SESSIONS ===---
-		
+	case 0 : // ----==== Breakout Presenentations SESSIONS ===---
+	  myPredicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
+	  filteredListView = [sessionListViewController 
+			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
+			       groupList:viewSections
+			       filterBy:myPredicate];
+	  [filteredListView setTitle:@"Breakout Presentations"];
+	  [filteredListView retain]; // TODO , correct? 
+	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  //[filteredListView release]; // TODO , correct? 
+	  break;
+	case 1 : // ----==== Breakout Presenentations SESSIONS ===---
+	  myPredicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
+	  filteredListView = [sessionListViewController 
+			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
+			       groupList:viewSections
+			       filterBy:myPredicate];
+	  [filteredListView setTitle:@"Workshops"];
+	  [filteredListView retain]; // TODO , correct? 
+	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  //[filteredListView release]; // TODO , correct? 
+	  break;
+	}
+      break;
+      // section By Difficulty
+    case 2 : 
+      switch ([indexPath indexAtPosition:1]) 
+	{
+	case 0 : // ----==== BEGINER DIFFICULTY SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"isBeginner == YES"];  
 	
 	  filteredListView = [sessionListViewController 
@@ -227,8 +267,8 @@
 	}
       break;
 			
-      // section By Technology
-    case 2 :  
+      // section By Track
+    case 3 :  
       switch ([indexPath indexAtPosition:1]) 
 	{
 	case 0 :  // ----==== HANDS-ON TECHNOLOGY TRACK SESSIONS ===---
