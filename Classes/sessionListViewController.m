@@ -77,10 +77,19 @@
 
   // populate an array with refrences to the sessions we will display, in the order we want
   // TODO move this stuff into init functions properly
-  // right now, its setting defaults
+  // right now, its setting defaults 
+
   if(allSessions == nil)
-      [self setAllSessions:[[NSMutableArray alloc] initWithArray:[AABSessions allValues]]];
-     
+    {
+      // what we're doing here is a bit strange
+      // since usually filter is applied to an array of sessions, not a dictionary
+      // essentially this is exposing an imperfection of this architecture.
+      //      [self setFilter [NSPredicate predicateWithFormat:@" == %@", userSessionFirstSlot]]
+      [self setAllSessions:[NSMutableArray arrayWithObject:[AABSessions objectForKey:userSessionFirstSlot]]];
+      
+    }
+
+
   if(filteredSessionLists == nil)
     {
 
@@ -99,6 +108,8 @@
       [filteredSessionLists addObject:newSection];
     }
     
+ 
+
   //NSLog(@"hello from %s", __func__);
   //NSMutableArray* allSessions  =  [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted 
   //NSLog(@"here's an entry : %@", [allSessions objectAtIndex:0] );
@@ -215,8 +226,6 @@
       //	{
       //	case 0 : 
 
-      
-
 	  // found the following snipit online :
 	  cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
 	  cell.textLabel.numberOfLines=0;
@@ -305,7 +314,7 @@
   NSDictionary* whichSession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
   sessionDetailsViewController *detailViewController = 
     [sessionDetailsViewController createWithSession:whichSession];
-	
+  
   // ...
   // Pass the selected object to the new view controller.
   [self.navigationController pushViewController:detailViewController animated:YES];
