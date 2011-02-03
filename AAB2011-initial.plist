@@ -4,6 +4,10 @@
 <dict>
 	<key>open-lunch</key>
 	<dict>
+		<key>isIntermediate</key>
+		<true/>
+		<key>isAdvanced</key>
+		<true/>
 		<key>isBeginner</key>
 		<true/>
 		<key>title</key>
@@ -17,25 +21,37 @@
 		<key>subtype</key>
 		<string>Open Space &amp; Lunch</string>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Have you ever noticed that some of the best conversations at a conference emerge during the coffee breaks? What if you could encapsulate those moments and share them throughout the day? That’s one of the founding principles of Open Space Technology; it’s a free form meeting where attendees control the agenda, timeframe, and discussion.
+
+All the ingredients are present for a highly dynamic, energy-filled, passionate environment where topics run close to the core of human experience. Age, skill-level, background --- it doesn&apos;t matter --- what matters is true, open communication and a chance to hear and be heard!
+
+Tom recommends OpenSpaceWorld for learning more about Open Space Technology.</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Tom Kubit</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Facilitated by</string>
 			</dict>
 		</array>
 	</dict>
 	<key>open-pm</key>
 	<dict>
-		<key>isBeginner</key>
-		<true/>
 		<key>title</key>
 		<string>Open Space</string>
+		<key>isBeginner</key>
+		<true/>
+		<key>isIntermediate</key>
+		<true/>
+		<key>isAdvanced</key>
+		<false/>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Have you ever noticed that some of the best conversations at a conference emerge during the coffee breaks? What if you could encapsulate those moments and share them throughout the day? That’s one of the founding principles of Open Space Technology; it’s a free form meeting where attendees control the agenda, timeframe, and discussion.
+
+All the ingredients are present for a highly dynamic, energy-filled, passionate environment where topics run close to the core of human experience. Age, skill-level, background --- it doesn&apos;t matter --- what matters is true, open communication and a chance to hear and be heard!
+
+Tom recommends OpenSpaceWorld for learning more about Open Space Technology.</string>
 		<key>track</key>
 		<string>Open Space</string>
 		<key>timeStart</key>
@@ -48,16 +64,14 @@
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Tom Kubit</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Facilitated by</string>
 			</dict>
 		</array>
 	</dict>
 	<key>open-am</key>
 	<dict>
-		<key>isBeginner</key>
-		<true/>
 		<key>title</key>
 		<string>Open Space</string>
 		<key>track</key>
@@ -68,15 +82,29 @@
 		<string>Open Space</string>
 		<key>subtype</key>
 		<string>Open Space</string>
+		<key>isBeginner</key>
+		<true/>
+		<key>isIntermediate</key>
+		<true/>
+		<key>isAdvanced</key>
+		<true/>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Technical Debt has become a catch-all phrase for any code that needs to be re-worked; much like Refactoring has become a catch-all phrase for any activity that involves changing code.
+
+Michael explores fundamental misunderstandings and comfortable yet mis-applied metaphors that result in a plethora of poor business decisions while answering the following:
+
+    * What is technical debt?
+    * What is not technical debt?
+    * Why should we care?
+    * What is the cost of misunderstanding?
+    * What do we do about it?</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Tom Kubit</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Facilitated by</string>
 			</dict>
 		</array>
 	</dict>
@@ -93,14 +121,20 @@
 		<key>subtype</key>
 		<string>Usability</string>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Developing personas --- fictional characters that represent specific user groups and stakeholders --- has become accepted practice in many software projects. However, building is just the start. In this hands-on experiential workshop Carol and Michelle demonstrate how to jumpstart the persona creation process; then put those little fictional folks to work to keep your project on task, focus stakeholders, mediate feature discussions and meet both business and user goals. All this with just a few index cards, a sheet of poster board and your creativity!</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Carol Treat Morton</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Presenter</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Michelle Pomorski</string>
+				<key>role</key>
+				<string>Presenter</string>
 			</dict>
 		</array>
 	</dict>
@@ -116,15 +150,19 @@
 		<string>Workshop</string>
 		<key>subtype</key>
 		<string>Practitioner</string>
+		<key>isIntermediate</key>
+		<true/>
+		<key>isAdvanced</key>
+		<true/>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>The hallmarks of a “good” story card are that it describes business value, can be estimated by those who will do the work, and can be tested. When Lisamarie is asked how to write good story cards, she responds, “You start by writing a couple hundred bad ones.” Like all things, it takes practice to improve. There are, however, ways to write better story cards from the start. This session will explore the good, the bad, and the ugly of story card writing using examples from real projects and will give participants an opportunity to exercise their story writing skills.</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Lisamarie Babik</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Presenter</string>
 			</dict>
 		</array>
 	</dict>
@@ -140,15 +178,17 @@
 		<string>Workshop</string>
 		<key>subtype</key>
 		<string>Practitioner</string>
+		<key>isIntermediate</key>
+		<true/>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Do you find story estimation sessions taking too much time? Do stories that significantly exceed estimates turn into multiple stories? Then this session is for you; we will look at various methods to improve tasking by leveraging the whole team to realize clearly-articulated fine-grained stories. Chris will lead us in addressing common pitfalls as well as identifying good stories that clarify the meaning of the term &quot;done&quot;.</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Chris O&apos;Connor</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Presenter</string>
 			</dict>
 		</array>
 	</dict>
@@ -164,15 +204,21 @@
 		<string>Workshop</string>
 		<key>subtype</key>
 		<string>Practitioner</string>
+		<key>isBeginner</key>
+		<true/>
+		<key>isIntermediate</key>
+		<true/>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Reading about Agile, talking to people about Agile, and being part of a team that is “going Agile” are all good ways to learn about Agile. But, the best way to truly internalize how a successful Agile project works is by being part of a successful Agile project. The purpose of this workshop is to impart the essence of how a successful Agile project works and the benefits of Agile through a series of hands-on activities. The workshop covers the nuts and bolts of a typical Agile process, from entering new requests as User Stories all the way to “shipping” a product.
+
+Damon will guide the creation of a made-up software project (of the participants’ choosing) to illustrate the Agile Process. Participants will break up into small cross functional teams and work together to write user stories, create a story point scale, use Planning Poker to estimate stories, create a backlog, and “ship” two versions of their software project. Shipping the project will involve iteration planning, backlog grooming, and release planning. There will also be exercises that illustrate the benefits of collocation.</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Damon Poole</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Presenter</string>
 			</dict>
 		</array>
 	</dict>
@@ -189,14 +235,70 @@
 		<key>subtype</key>
 		<string>Executive</string>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>This workshop is designed for those providing leadership in our region. We will hit the tough-issues head-on with both short formal presentations and far-ranging discussion. What does it mean to be an effective contemporary &apos;Lean&apos; leader? Join in for a powerful time of face-to-face interaction as we seek collaborative answers.</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Gary Baker</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Moderator</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Paul Czarnik</string>
+				<key>role</key>
+				<string>Presenter</string>
+				<key>presenting</key>
+				<string>Experience Report: Test driving &apos;Lean&apos; at DTE</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>David Hussman</string>
+				<key>role</key>
+				<string>Presenter</string>
+				<key>presenting</key>
+				<string>Experience Report: Test driving &apos;Lean&apos; at DTE</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Joe Thomas</string>
+				<key>role</key>
+				<string>Presenter</string>
+				<key>presenting</key>
+				<string>Experience Report: Test driving &apos;Lean&apos; at DTE</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>TBD</string>
+				<key>role</key>
+				<string>Presenter</string>
+				<key>presenting</key>
+				<string>Is our regional application development strategy sustainable?</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Mary Poppendieck </string>
+				<key>role</key>
+				<string>Panel Member</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Tom Poppendieck </string>
+				<key>role</key>
+				<string>Panel Member</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Vijay Sankaran</string>
+				<key>role</key>
+				<string>Panel Member</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>TBD</string>
+				<key>role</key>
+				<string>Panel Member</string>
 			</dict>
 		</array>
 	</dict>
@@ -212,15 +314,21 @@
 		<string>Workshop</string>
 		<key>subtype</key>
 		<string>Practitioner</string>
+		<key>isBeginner</key>
+		<true/>
+		<key>isIntermediate</key>
+		<true/>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Lean offers an opportunity to step back and look at how an organization operates. Once you see it as it really is, you can start to optimize to work faster and better. The Kanban method may be used to build a model contextualized to the needs of an organization, enabling work to flow through to completion in an even, predictable way.
+
+This experiential session allows you to &apos;try out&apos; using Kanban within a team. Janice includes worksheets identifying organization needs, pain points, and how a Kanban system could help. The workshop will focus on change management practices in knowledge work fields such as software development.</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Janice Linden-Reed</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Presenter</string>
 			</dict>
 		</array>
 	</dict>
@@ -236,15 +344,32 @@
 		<string>Workshop</string>
 		<key>subtype</key>
 		<string>Developer</string>
+		<key>isIntermediate</key>
+		<true/>
+		<key>isAdvanced</key>
+		<true/>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Prerequisites:
+
+    * Basic Knowledge of Java TDD, Refactoring, and Design Patterns
+    * Computer with Eclipse v.3.5 or Higher, JUnit v.3 or Higher
+
+Two of the (many) principles promoted by Test-Driven Development include “once-and-only-once” and “communicate well.” Those are great principles, but they’re often applied just far enough to create decent, but not super-clean, code.
+
+This workshop focuses on techniques that scrub code really clean. These techniques take a little extra effort to apply but more than pay for themselves by preparing an application for what comes next. You’ll work with Bill and Tom on standard and clean versions of three different systems. You’ll feel the difference extra polish makes for evolving and adding features. And you&apos;ll walk away with improved use of refactoring tools having enjoyed an intense TDD/refactoring workout!</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Bill Wake</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Presenter</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Tom Kubit</string>
+				<key>role</key>
+				<string>Presenter</string>
 			</dict>
 		</array>
 	</dict>
@@ -260,20 +385,37 @@
 		<string>Workshop</string>
 		<key>subtype</key>
 		<string>Deveolper</string>
+		<key>isIntermediate</key>
+		<true/>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Prerequisites:
+
+    * Computer with Programming Environment Configured
+    * At Least One Testing Framework (JUnit, NUnit, RSpec, etc.)
+
+Come and practice your Test Driven Development skill. If you&apos;ve never experienced TDD before, Nayan will guide you through the steps with exercises to try. If you have some experience, you&apos;ll sharpen your skills. If you&apos;re a pro, take it to the next level or pair with someone just getting started!</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Kealy Opelt</string>
 				<key>role</key>
-				<string>Presented by</string>
+				<string>Presenter</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Ted Layher</string>
+				<key>role</key>
+				<string>Presenter</string>
 			</dict>
 		</array>
 	</dict>
 	<key>07</key>
 	<dict>
+		<key>isBeginner</key>
+		<true/>
+		<key>isIntermediate</key>
+		<true/>
 		<key>title</key>
 		<string>Test Driven Development (TDD)</string>
 		<key>track</key>
@@ -285,12 +427,17 @@
 		<key>subtype</key>
 		<string>Developer</string>
 		<key>description</key>
-		<string>something something, something, something else.</string>
+		<string>Prerequisites:
+
+    * Computer with Programming Environment Configured
+    * At Least One Testing Framework (JUnit, NUnit, RSpec, etc.)
+
+Come and practice your Test Driven Development skill. If you&apos;ve never experienced TDD before, Nayan will guide you through the steps with exercises to try. If you have some experience, you&apos;ll sharpen your skills. If you&apos;re a pro, take it to the next level or pair with someone just getting started!</string>
 		<key>people</key>
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>John F Kennedy</string>
+				<string>Nayan Hajratwala</string>
 				<key>role</key>
 				<string>Presented by</string>
 			</dict>
@@ -318,6 +465,8 @@ Michael explores fundamental misunderstandings and comfortable yet mis-applied m
     * What is the cost of misunderstanding?
     * What do we do about it?</string>
 		<key>isIntermediate</key>
+		<true/>
+		<key>isAdvanced</key>
 		<true/>
 		<key>track</key>
 		<string>Usability Experience</string>
