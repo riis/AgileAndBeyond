@@ -8,6 +8,7 @@
 
 #import "sessionListViewController.h"
 #import "AgileAndBeyondAppGlobals.h"
+#import "sessionDetailsViewController.h"
 #import "session.h"
 
 // Class static variables
@@ -295,15 +296,21 @@
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
     // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+
+
+  NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];  
+  NSDictionary* whichSession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
+  sessionDetailsViewController *detailViewController = 
+    [sessionDetailsViewController createWithSession:whichSession];
+	
+  // ...
+  // Pass the selected object to the new view controller.
+  [self.navigationController pushViewController:detailViewController animated:YES];
+  [detailViewController release];
+  
 }
 
 

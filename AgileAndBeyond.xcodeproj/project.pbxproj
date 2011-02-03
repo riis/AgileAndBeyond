@@ -30,6 +30,8 @@
 		5D40583712F236D800780517 /* sessionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D40583512F236D800780517 /* sessionListViewController.m */; };
 		5D40583812F236D800780517 /* sessionListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D40583612F236D800780517 /* sessionListViewController.xib */; };
 		5D40589B12F34D8000780517 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D40589A12F34D8000780517 /* session.m */; };
+		5D8C9CF112FB05C70064459D /* sessionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C9CEF12FB05C70064459D /* sessionDetailsViewController.m */; };
+		5D8C9CF212FB05C70064459D /* sessionDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C9CF012FB05C70064459D /* sessionDetailsViewController.xib */; };
 		5DE58CB712F72B2800794353 /* AAB2011-initial.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DE58CB612F72B2800794353 /* AAB2011-initial.plist */; };
 		5DE58F9B12F89B9100794353 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE58F9A12F89B9100794353 /* UIKit.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +67,9 @@
 		5D40589912F34D8000780517 /* session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = session.h; sourceTree = "<group>"; };
 		5D40589A12F34D8000780517 /* session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = session.m; sourceTree = "<group>"; };
 		5D8C9B8112FA02F40064459D /* AgileAndBeyondAppGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgileAndBeyondAppGlobals.h; sourceTree = "<group>"; };
+		5D8C9CEE12FB05C70064459D /* sessionDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sessionDetailsViewController.h; sourceTree = "<group>"; };
+		5D8C9CEF12FB05C70064459D /* sessionDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sessionDetailsViewController.m; sourceTree = "<group>"; };
+		5D8C9CF012FB05C70064459D /* sessionDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = sessionDetailsViewController.xib; sourceTree = "<group>"; };
 		5DE58CB612F72B2800794353 /* AAB2011-initial.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AAB2011-initial.plist"; sourceTree = "<group>"; };
 		5DE58F9A12F89B9100794353 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = ../iBroadSoft/iphoneos3.1.3/System/Library/Frameworks/UIKit.framework; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* AgileAndBeyond-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AgileAndBeyond-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -97,6 +102,9 @@
 				5D40589912F34D8000780517 /* session.h */,
 				5D40589A12F34D8000780517 /* session.m */,
 				5D8C9B8112FA02F40064459D /* AgileAndBeyondAppGlobals.h */,
+				5D8C9CEE12FB05C70064459D /* sessionDetailsViewController.h */,
+				5D8C9CEF12FB05C70064459D /* sessionDetailsViewController.m */,
+				5D8C9CF012FB05C70064459D /* sessionDetailsViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -233,6 +241,7 @@
 				5D2B4BCB12F20CDD00EBE32C /* sessions@2x.png in Resources */,
 				5D40583812F236D800780517 /* sessionListViewController.xib in Resources */,
 				5DE58CB712F72B2800794353 /* AAB2011-initial.plist in Resources */,
+				5D8C9CF212FB05C70064459D /* sessionDetailsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +257,7 @@
 				5D2B4BA812F1F6DE00EBE32C /* mainFilterSelectionMenu.m in Sources */,
 				5D40583712F236D800780517 /* sessionListViewController.m in Sources */,
 				5D40589B12F34D8000780517 /* session.m in Sources */,
+				5D8C9CF112FB05C70064459D /* sessionDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
