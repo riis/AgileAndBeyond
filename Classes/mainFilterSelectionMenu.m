@@ -207,7 +207,7 @@
 			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
 			       groupList:viewSections
 			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Beginner Sessions"];
+	  [filteredListView setTitle:@"Intermediate Sessions"];
 	  [filteredListView retain]; // TODO , correct? 
 	  [self.navigationController pushViewController:filteredListView animated:YES];
 	  //[filteredListView release]; // TODO , correct? 
@@ -219,7 +219,7 @@
 			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
 			       groupList:viewSections
 			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Beginner Sessions"];
+	  [filteredListView setTitle:@"Advanced Sessions"];
 	  [filteredListView retain]; // TODO , correct? 
 	  [self.navigationController pushViewController:filteredListView animated:YES];
 	  //[filteredListView release]; // TODO , correct? 
