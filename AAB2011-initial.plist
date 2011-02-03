@@ -4,6 +4,8 @@
 <dict>
 	<key>open-lunch</key>
 	<dict>
+		<key>isBeginner</key>
+		<true/>
 		<key>title</key>
 		<string>Open Space &amp; Lunch</string>
 		<key>track</key>
@@ -28,6 +30,8 @@
 	</dict>
 	<key>open-pm</key>
 	<dict>
+		<key>isBeginner</key>
+		<true/>
 		<key>title</key>
 		<string>Open Space</string>
 		<key>description</key>
@@ -52,6 +56,8 @@
 	</dict>
 	<key>open-am</key>
 	<dict>
+		<key>isBeginner</key>
+		<true/>
 		<key>title</key>
 		<string>Open Space</string>
 		<key>track</key>
@@ -367,8 +373,8 @@ Michael explores fundamental misunderstandings and comfortable yet mis-applied m
 		<string>Many teams build software that does not behave as expected by stakeholders; add the Agile engineering practice of “Executable Requirements” to your specifications arsenal! Eric and Dan share compelling principles for building excellent executable requirements (or acceptance criteria) that consistently deliver value for your customer.
 
 You will learn collaboration techniques that ensure business and developers have a shared understanding. You will experience creating these &quot;excellent&quot; requirements in difficult situations, including working across time zones, refining &apos;vagueness&apos;, and helping product owners speak with &apos;one voice&apos;. And you’ll take back new approaches suitable for developers, business analysts, project managers and testers to ultimately &apos;wow&apos; your customer!</string>
-		<key>level</key>
-		<string>intermediate</string>
+		<key>isIntermediate</key>
+		<true/>
 		<key>people</key>
 		<array>
 			<dict>
