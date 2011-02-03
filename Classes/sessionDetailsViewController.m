@@ -7,6 +7,7 @@
 //
 
 #import  "sessionDetailsViewController.h"
+#import "session.h"
 #import "AgileAndBeyondAppGlobals.h"
 
 #define SDVCHEADCOUNT [[mySession objectForKey:@"people"]count]
@@ -18,14 +19,44 @@ static const int rowsAfterPeople = 2;
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
-- (void)viewDidLoad {
+- (void)addToUserSelections 
+{
+ 
+  NSString* id = getIdOfSession(mySession);
+  if( [id isEqualToString:userSessionFirstSlot] )
+    {
+      [userSessionFirstSlot release];
+      userSessionFirstSlot=nil;
+      self.navigationItem.rightBarButtonItem.title = @"Add";
+    }
+  else 
+    {
+      if ( userSessionFirstSlot != nil ) [userSessionFirstSlot release];
+      userSessionFirstSlot = id;
+      [userSessionFirstSlot retain];
+      self.navigationItem.rightBarButtonItem.title = @"Remove";
+    }
+}
+
+- (void)viewDidLoad 
+{
     [super viewDidLoad];
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // build the right add/remove button
+    // TODO flip to "remove" if added
+
+    UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
+					 initWithTitle:[getIdOfSession(mySession) isEqualToString:userSessionFirstSlot]?@"Remove":@"Add"
+					 style:UIBarButtonItemStylePlain
+					 target:self
+					 action:@selector(addToUserSelections)];
+    self.navigationItem.rightBarButtonItem = addRemoveButton;
+    // [anotherButton release]; // ? 
 }
-*/
+
 
 /*
 - (void)viewWillAppear:(BOOL)animated {
@@ -176,6 +207,7 @@ static const int rowsAfterPeople = 2;
   CGFloat height = 45;
 
   // TODO dynamic heights!
+  // NSString* text = [mySession objectForKey:@"description"];
   // TODO not hardcoding reletive position of description field , etc 
   if([indexPath indexAtPosition:1]+1 == SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople)
     height = 225;

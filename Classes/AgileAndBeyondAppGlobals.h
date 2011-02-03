@@ -16,4 +16,3 @@
 // old style works with descriptionWithCalandarFormat:timezone:locale:dict...
 // maybe the new style does also, in which case it'd be more robust
 #define DATE_FORMAT_STRING @"%A, %B %e %Y %I:%M"
-

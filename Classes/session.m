@@ -9,6 +9,21 @@
 #import "session.h"
 
 
+NSString* getIdOfSession(NSDictionary*session)
+{
+  NSString* id = nil;
+  NSArray* all_ids =  [AABSessions allKeysForObject:session];
+  NSLog(@"Hello from %s", __func__);
+  NSLog(@"Number of ids found is : %d", [all_ids count]);
+  if([all_ids count] == 1)
+    {
+      id = [all_ids objectAtIndex:0];
+      NSLog(@"Session id found is %@",id);
+      if(id) [id retain];
+    }
+		
+  return id;
+}
 
 //this one dumps a nested dictionary structure to log
 void dumpNestedDictToLog(NSDictionary* dict)
