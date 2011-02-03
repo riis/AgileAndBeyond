@@ -255,14 +255,14 @@
 	  [self.navigationController pushViewController:filteredListView animated:YES];
 	  //[filteredListView release]; // TODO , correct? 
 	  break;
-	case 2 : // ----==== USABILTY TRACK SESSIONS ===---
-	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Usabilty'"];  
+	case 2 : // ----==== USABILITY EXPERIENCE TRACK SESSIONS ===---
+	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Usability Experience'"];  
 	
 	  filteredListView = [sessionListViewController 
 			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
 			       groupList:viewSections
 			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Usability Experience Track"];
+	  [filteredListView setTitle:@"Usability Experience Track"]; 
 	  [filteredListView retain]; // TODO , correct? 
 	  [self.navigationController pushViewController:filteredListView animated:YES];
 	  //[filteredListView release]; // TODO , correct? 

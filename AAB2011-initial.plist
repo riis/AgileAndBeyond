@@ -113,13 +113,13 @@ Michael explores fundamental misunderstandings and comfortable yet mis-applied m
 		<key>title</key>
 		<string>Building Powerful Personas Who Work Hard For You</string>
 		<key>track</key>
-		<string>Usability</string>
+		<string>Usability Experience</string>
 		<key>timeStart</key>
 		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
 		<key>subtype</key>
-		<string>Usability</string>
+		<string>Usability Experience</string>
 		<key>description</key>
 		<string>Developing personas --- fictional characters that represent specific user groups and stakeholders --- has become accepted practice in many software projects. However, building is just the start. In this hands-on experiential workshop Carol and Michelle demonstrate how to jumpstart the persona creation process; then put those little fictional folks to work to keep your project on task, focus stakeholders, mediate feature discussions and meet both business and user goals. All this with just a few index cards, a sheet of poster board and your creativity!</string>
 		<key>people</key>
@@ -337,7 +337,7 @@ This experiential session allows you to &apos;try out&apos; using Kanban within 
 		<key>title</key>
 		<string>Experience the Speed of Clean</string>
 		<key>track</key>
-		<string>Hands-On Technology Track</string>
+		<string>Hands-On Technology</string>
 		<key>timeStart</key>
 		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
@@ -379,7 +379,7 @@ This workshop focuses on techniques that scrub code really clean. These techniqu
 		<string>What&apos;s NXT? Unit Testing Hardware</string>
 		<key>track</key>
 		<string>Hands-On Technology</string>
-		<key>timeStart </key>
+		<key>timeStart</key>
 		<date>2011-03-12T17:30:00Z</date>
 		<key>type</key>
 		<string>Workshop</string>
