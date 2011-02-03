@@ -231,11 +231,65 @@
     case 2 :  
       switch ([indexPath indexAtPosition:1]) 
 	{
-	case 0 :  // ----==== INTERMEDIATE DIFFICULTY SESSIONS ===---
+	case 0 :  // ----==== HANDS-ON TECHNOLOGY TRACK SESSIONS ===---
+	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Hands-On Technology'"];  
+	
+	  filteredListView = [sessionListViewController 
+			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
+			       groupList:viewSections
+			       filterBy:myPredicate];
+	  [filteredListView setTitle:@"Hands-On Technology Track"];
+	  [filteredListView retain]; // TODO , correct? 
+	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  //[filteredListView release]; // TODO , correct? 
 	  break;
-	case 1 : 
+	case 1 : // ----==== INTERACTIVE PROCESS TRACK SESSIONS ===---
+	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Interactive Process'"];  
+	
+	  filteredListView = [sessionListViewController 
+			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
+			       groupList:viewSections
+			       filterBy:myPredicate];
+	  [filteredListView setTitle:@"Interactive Process Track"];
+	  [filteredListView retain]; // TODO , correct? 
+	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  //[filteredListView release]; // TODO , correct? 
 	  break;
-	case 2 : 
+	case 2 : // ----==== USABILTY TRACK SESSIONS ===---
+	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Usabilty'"];  
+	
+	  filteredListView = [sessionListViewController 
+			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
+			       groupList:viewSections
+			       filterBy:myPredicate];
+	  [filteredListView setTitle:@"Usability Experience Track"];
+	  [filteredListView retain]; // TODO , correct? 
+	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  //[filteredListView release]; // TODO , correct? 
+	  break;
+	case 3 :  // ----==== LEADERSHIP TRACK SESSIONS ===---
+	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Leadership'"];  
+	
+	  filteredListView = [sessionListViewController 
+			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
+			       groupList:viewSections
+			       filterBy:myPredicate];
+	  [filteredListView setTitle:@"Leadership Track"];
+	  [filteredListView retain]; // TODO , correct? 
+	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  //[filteredListView release]; // TODO , correct? 
+	  break;
+	case 4 :  // ----==== OPEN SPACE TRACK SESSIONS ===---
+	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Open Space'"];  
+	
+	  filteredListView = [sessionListViewController 
+			       createUsingArray: [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]
+			       groupList:viewSections
+			       filterBy:myPredicate];
+	  [filteredListView setTitle:@"Open Space Track"];
+	  [filteredListView retain]; // TODO , correct? 
+	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  //[filteredListView release]; // TODO , correct? 
 	  break;
 	}
       break;
