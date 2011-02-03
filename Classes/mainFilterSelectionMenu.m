@@ -145,12 +145,12 @@
   tableViewSection* newSection;
   NSMutableArray* viewSections = [[NSMutableArray alloc] init];  
 
-  newSection = [[sessionTableGroup alloc] init];
+  newSection = [[tableViewSection alloc] init];
   newSection.title = [AAB_FIRST_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
 					  locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
   newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
   [viewSections addObject:newSection];
-  newSection = [[sessionTableGroup alloc] init];
+  newSection = [[tableViewSection alloc] init];
   newSection.title = [AAB_SECOND_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
 					   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
   newSection.predicate =  [NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
