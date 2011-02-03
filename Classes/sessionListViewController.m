@@ -7,6 +7,7 @@
 //
 
 #import "sessionListViewController.h"
+#import "AgileAndBeyondAppGlobals.h"
 #import "session.h"
 
 // Class static variables
@@ -32,8 +33,11 @@
   // for future consideration, retaining the bigListRef if needed to update our sessions list
   // TODO : rename allSessions if it is actually "our filtered list of sections"
   //   - or - do the filtering somewhere else, like in viewWillAppear
-  [me setAllSessions:[bigListRef filteredArrayUsingPredicate:filterPredicate]]; 
-  
+  if(filterPredicate!=nil)
+    [me setAllSessions:[bigListRef filteredArrayUsingPredicate:filterPredicate]];
+  else
+    [me setAllSessions:bigListRef];
+
   // create filterSessionList
   // we won't fill in items yet, lets let that happen in viewWillAppear for now
   if( groups != nil)  
@@ -44,8 +48,7 @@
 	{
 	  sessionTableGroup* newGroup = [[sessionTableGroup alloc] init];
 	  newGroup.predicate = section.predicate;
-	  newGroup.title = section.title;
-	  
+	  newGroup.title = section.title;	  
 	  [[me filteredSessionLists] addObject:newGroup];
 	}
     }
@@ -72,7 +75,29 @@
 {
 
   // populate an array with refrences to the sessions we will display, in the order we want
+  // TODO move this stuff into init functions properly
+  // right now, its setting defaults
+  if(allSessions == nil)
+      [self setAllSessions:[[NSMutableArray alloc] initWithArray:[AABSessions allValues]]];
+     
+  if(filteredSessionLists == nil)
+    {
 
+      [self setFilteredSessionLists:[[NSMutableArray alloc] init]]; 
+      
+      sessionTableGroup* newSection;
+      newSection = [[sessionTableGroup alloc] init];
+      newSection.title = [AAB_FIRST_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
+					      locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+      newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
+      [filteredSessionLists addObject:newSection];
+      newSection = [[sessionTableGroup alloc] init];
+      newSection.title = [AAB_SECOND_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
+					       locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+      newSection.predicate =  [NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
+      [filteredSessionLists addObject:newSection];
+    }
+    
   //NSLog(@"hello from %s", __func__);
   //NSMutableArray* allSessions  =  [[NSMutableArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted 
   //NSLog(@"here's an entry : %@", [allSessions objectAtIndex:0] );
