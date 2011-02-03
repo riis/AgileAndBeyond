@@ -9,6 +9,7 @@
 #import  "sessionDetailsViewController.h"
 #import "AgileAndBeyondAppGlobals.h"
 
+#define SDVCHEADCOUNT [[mySession objectForKey:@"people"]count]
 static const int rowsBeforePeople = 1;
 static const int rowsAfterPeople = 2;
 @implementation sessionDetailsViewController
@@ -84,7 +85,7 @@ static const int rowsAfterPeople = 2;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
   // Return the number of rows in the section.  
-   return  [[mySession objectForKey:@"people"]count] + rowsBeforePeople + rowsAfterPeople;
+   return SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople;
 }
 
 
@@ -95,16 +96,16 @@ static const int rowsAfterPeople = 2;
     const int headcount = [people count];
     const int i = [indexPath indexAtPosition:1];  // index pos 1, not zero, only 
     static NSString *CellIdentifier = @"Cell";
- 
+    UILabel* descriptionLabel=nil;
+
     // TODO : fix cell recycling
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
       cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
     }
 
-    
-
     // Configure the cell...
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
     cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
     cell.detailTextLabel.numberOfLines=0;
     cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
@@ -127,6 +128,16 @@ static const int rowsAfterPeople = 2;
 	    break;
 	  case 1 : 
 	    cell.textLabel.text = @"Description";
+
+	    /*
+	    descriptionLabel = [[UILabel alloc] initWithFrame:cell.frame];
+	    descriptionLabel.lineBreakMode=UILineBreakModeWordWrap;
+	    descriptionLabel.numberOfLines=100;
+	    descriptionLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+	    descriptionLabel.text = [mySession objectForKey:@"description"];
+      	    [descriptionLabel sizeToFit];
+	    [cell addSubview:descriptionLabel];
+	    */
 	    cell.detailTextLabel.text = [mySession objectForKey:@"description"];
 	    break;
 	  default : 
@@ -156,10 +167,22 @@ static const int rowsAfterPeople = 2;
 	
 	  } 
     */
-      
     return cell;
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  CGFloat height = 45;
+
+  // TODO dynamic heights!
+  // TODO not hardcoding reletive position of description field , etc 
+  if([indexPath indexAtPosition:1]+1 == SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople)
+    height = 225;
+
+  return height;
+
+}
 
 /*
 // Override to support conditional editing of the table view.
