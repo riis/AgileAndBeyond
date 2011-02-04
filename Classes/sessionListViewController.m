@@ -269,14 +269,35 @@
     
     // we could reuse existing cells, changing their contents, but putting some code here...
     NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
-    cell.textLabel.text = [[myFilteredList objectAtIndex:[indexPath indexAtPosition:1]]
-			    objectForKey:@"title"]; 
+    NSDictionary* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
+    NSString* mySessionID = getIdOfSession(mySession);
+    cell.textLabel.text = [mySession objectForKey:@"title"]; 
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+
+    // can use the setSelected:animated: instead to cause an animated change to selected
+    /*    cell.selected=
+      [mySessionID isEqualToString:userSessionFirstSlot] ||
+      [mySessionID isEqualToString:userSessionSecondSlot];
+      cell.selectionStyle=UITableViewCellSelectionStyleBlue;*/
     
     return cell;
 
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
+  NSDictionary* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
+  NSString* mySessionID = getIdOfSession(mySession);
+  // cell.textLabel.text = [mySession objectForKey:@"title"]; 
+  //cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+  
+  // can use the setSelected:animated: instead to cause an animated change to selected
+  cell.selected=
+    [mySessionID isEqualToString:userSessionFirstSlot] ||
+    [mySessionID isEqualToString:userSessionSecondSlot];
+  cell.selectionStyle=UITableViewCellSelectionStyleBlue;
+}
 
 /*
 // Override to support conditional editing of the table view.
