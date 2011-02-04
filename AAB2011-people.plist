@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Lisamarie Babik</key>
+	<dict>
+		<key>Bio</key>
+		<string>is an enthusiastic Agile Evangelist at Menlo Innovations. Moreover, her interest and passion includes the Ann Arbor Civic Theatre!</string>
+	</dict>
+	<key>Gary Baker</key>
+	<dict>
+		<key>Bio</key>
+		<string>is a &apos;C-level&apos; executive well-known for contributing to Agile maturation in our region. Gary specializes in IT governance and operations, application development, vendor management, outsourcing/insourcing, strategic planning, IT organizational change management, and business process alignment.</string>
+	</dict>
+	<key>Paul Czarnik</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the Senior Vice President and Chief Technology Officer of Compuware. He enjoys collaborating with smart people who want their technology contributions to matter. Paul&apos;s specialties include Programming, Agile Development and Software Architecture.</string>
+	</dict>
+	<key>Shawn Crowley</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the Vice President of Atomic Object. Shawn enjoys being engaged in the coordination of design and agile development teams, product management, project management, estimation, budgeting, release planning and generally helping clients understand the power and value of an agile process.</string>
+	</dict>
+	<key>Carl Erickson</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the co-founder and President of Atomic Object -- a software product development company helping customers create web, mobile, desktop and embedded products utilizing Agile practices. In 2003 Atomic Object founded SoftwareGR, a trade association dedicated to software excellence. Carl&apos;s company blog is at Atomic Spin.</string>
+	</dict>
+	<key>Gary Gentry</key>
+	<dict>
+		<key>Bio</key>
+		<string>s the founder and CEO of Pillar Technology. He is enthusiastic in the pursuit of excellence in agile software development. Pillar leverages a blended Agile approach called &quot;Speed to Value&quot; (S2V). Gary also actively pursues strategies to improve the plight of the poor in Africa and Central America. He specializes as an Agile Coach/Mentor, Consultant and Lecturer.</string>
+	</dict>
+	<key>Nayan Hajratwala</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the President of Chikli Consulting. Although he has been a software developer, architect, analyst and manager; the one constant has been the role of coach and mentor. Nayan has participated in Agile development for about seven years and has honed his skills by enlisting in the Software Craftsmanship movement. His blog is at Agile Shrugged; follow him on Twitter at nhajratw.</string>
+	</dict>
+	<key>Rick Harris</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the Chief Technology Officer at at DTE Energy. He leads a progressive IT organization of approximately 400 people involved with software engineering, enterprise architecture, advanced technology and IT governance. His recent initiatives include business analytics, quantitative process improvement, service orientation, and user experience.</string>
+	</dict>
+	<key>David Hussman</key>
+	<dict>
+		<key>Bio</key>
+		<string>is a teacher and coach for the growth of agility in project communities worldwide. He is co-author of Produce It and contributor to several books including Managing Agile Projects and Agile in the Large. David leads DevJam.</string>
+	</dict>
+	<key>Tom Kubit</key>
+	<dict>
+		<key>Bio</key>
+		<string>is a Senior Software Engineer / Engineering Manager at Gene Codes Forensics. He specializes in Extreme Programming, Object Oriented Design and Development, Refactoring, Test Driven Development, Smalltalk, C#, Java and C++. Tom is a past president of the Michigan Agile Enthusiasts.</string>
+	</dict>
+	<key>Eric Landes</key>
+	<dict>
+		<key>Bio</key>
+		<string>is a Lead Project Manager at Press Ganey Associates. Eric is a Certified Scrum Master (CSM) and specializes in Agile Project Management (XP/Scrum variant), Lean Software Development, Kanban, and Enterprise Project Management. (See EricLandes.com )</string>
+	</dict>
+	<key>Ted Layher</key>
+	<dict>
+		<key>Bio</key>
+		<string>is a programmer and represents himself as a &quot;Fanatical Unit Tester&quot;. Ted specializes in Java, Extreme Programming, Test Driven Design, Linux and Agile software development.</string>
+	</dict>
+	<key>Janice Linden-Reed</key>
+	<dict>
+		<key>Bio</key>
+		<string>is Program Manager at Net Objectives. Her expertise is evident at Kanban 101.</string>
+	</dict>
+	<key>Dianne Marsh</key>
+	<dict>
+		<key>Bio</key>
+		<string>is an active presence in our region on behalf of working software. Dianne is the co-founder of SRT Solutions headquartered in Ann Arbor, Michigan.</string>
+	</dict>
+	<key>Carol Treat Morton</key>
+	<dict>
+		<key>Bio</key>
+		<string>is a user-centered analyst and designer currently practicing in a Senior capacity for Menlo Innovations. In other words, Carol takes the user experience really seriously!</string>
+	</dict>
+	<key>Dan Neumann</key>
+	<dict>
+		<key>Bio</key>
+		<string>is an Agile coach with expertise using SCRUM and applying XP practices. He has a record of seeking performance improvement for teams and organizations. Dan, a Certified Scrum Master, maintains an ongoing &apos;inspect and adapt&apos; culture to achieve continual improvement. His blog site is at NeuManagement.</string>
+	</dict>
+	<key>Michael &quot;Doc&quot; Norton</key>
+	<dict>
+		<key>Bio</key>
+		<string>is an Agile Activist and Coach at LeanDog. Michael is adept at working with teams to improve their processes from inception to delivery, with a special focus on engineering practices. A passion for software craftsmanship, quality, and happy customers is viewable at his blog site Doc On Dev.</string>
+	</dict>
+	<key>Chris O&apos;Connor</key>
+	<dict>
+		<key>Bio</key>
+		<string>attributes his appreciation for &apos;Agile&apos; from his career start as a video game developer. (Hey, it could happen!) In the last ten years Chris has played the role of Agile Consultant, Developer and Coach. He currently works on a project at the University of Michigan for the Institute for Social Research as a Solution Architect, Lead Developer, and Analyst.</string>
+	</dict>
+	<key>Kealy Opelt</key>
+	<dict>
+		<key>Bio</key>
+		<string>is a Computer Engineer by education and a Software Developer by trade. Currently focused on Extreme Programming practices, test-first design and teamwork; Kealy anticipates a future of leadership roles and sharing knowledge of Extreme Programming.</string>
+	</dict>
+	<key>Matthew Philip</key>
+	<dict>
+		<key>Bio</key>
+		<string>is an Agile Coach, Agile QA Lead, and a Retrospective Facilitator. (Mathew also has experience with CMMI - but let&apos;s not talk about that here!) His blog leads one to believe he has a diverse interest.</string>
+	</dict>
+	<key>Michelle Pomorski</key>
+	<dict>
+		<key>Bio</key>
+		<string>is a usability and analyst professional. She practices user-centered design at Menlo Innovations. Michelle believes there aren’t any “stupid users,” but rather “stupid designs”.</string>
+	</dict>
+	<key>Damon Poole</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the founder and CTO of AccuRev, a leading provider of Agile tools. He has 20 years of methodology and process improvement experience running the gamut from small teams all the way up to 10,000-person global development shops. Damon is President of the Agile Bazaar and is a Certified Scrum Master. He writes frequently on the topic of Agile development with an emphasis on Multi-stage Continuous Integration. Damon has spoken at SD Best Practices, Software Test &amp; Performance, Q-Con, Deep Lean, Agile 2008, Agile Development Practices, and at numerous companies such as American Student Assistance, InterCall, ITA Software, The MathWorks, Texas Instruments, and Verizon Wireless. His “Do It Yourself Agile” blog is at damonpoole.blogspot.com; follow him on Twitter at Damonpoole.</string>
+	</dict>
+	<key>Mary Poppendieck</key>
+	<dict>
+		<key>Bio</key>
+		<string>has thirty years in the IT industry managing software development, supply chain management, manufacturing operations and new product development. Mary is co-author of Lean Software Development: An Agile Toolkit, which was awarded the Software Development Productivity Award, Implementing Lean Software Development: From Concept to Cash, and Leading Lean Software Development: Results are Not the Point.</string>
+	</dict>
+	<key>Tom Poppendieck</key>
+	<dict>
+		<key>Bio</key>
+		<string>a former physics professor, is an enterprise analyst, architect and agile process mentor. He focuses on enabling teams to identify and realize real business value. Tom is co-author of Lean Software Development: An Agile Toolkit, which was awarded the Software Development Productivity Award, Implementing Lean Software Development: From Concept to Cash, and Leading Lean Software Development: Results are Not the Point.</string>
+	</dict>
+	<key>Vijay Sankaran</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the Director of Application Development at Ford Motor Company. His current responsibilities extend to four continents. Vijay&apos;s previous role included multi-national operational support and running Ford&apos;s largest data centers in North America. He specializes in technology strategy and architecture, management of global teams, data warehousing (analytics) and new technology introduction.</string>
+	</dict>
+	<key>Rich Sheridan</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the co-founder and President/CEO of Menlo Innovations. Menlo applies High-Tech Anthropology® to help clients understand business problems and opportunities. Rich&apos;s company both develops application software or trains organizations to use proven software development methodologies. His blog is at A Deep Dive Into Agile; follow him on Twitter at menloprez.</string>
+	</dict>
+	<key>Jon Stahl</key>
+	<dict>
+		<key>Bio</key>
+		<string>is an Agile Coach and President of LeanDog. Jon&apos;s passion is practicing Agile software development techniques and forming high performing teams that frequently deliver high quality software.</string>
+	</dict>
+	<key>Joe Thomas</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the Program Manager for the Smart Grid project at DTE Energy. The project is being implemented per &apos;Lean&apos; and &apos;Kanban&apos; principles. Never one to sit idle, Joe continues to challenge himself in the Program Management space. </string>
+	</dict>
+	<key>Marvin Toll</key>
+	<dict>
+		<key>Bio</key>
+		<string>is President of GTC and a &apos;hands-on&apos; Agile application development practitioner typically working with Successful Large Enterprises. Marvin is the principal author of four open source projects with experience in the automotive, education, financial, government, human resources, legal, and utility sectors. (See MarvinToll.com )</string>
+	</dict>
+	<key>Bill Wake</key>
+	<dict>
+		<key>Bio</key>
+		<string>has been a long-standing national voice for Agile as well as a regional talent. His giftedness is evident as an author, programmer, coach and instructor. Explore with Bill at XP123- Exploring Extreme Programming.</string>
+	</dict>
+	<key>Mark Besh</key>
+	<dict>
+		<key>Bio</key>
+		<string>is a principal of Visual IMPACT!, a full-service visual communications firm with over 20 years of expertise in print collateral, graphic design, video production, web site development, advertising promotions, marketing programs, and trade show exhibitry. He is responsible for the conference graphics and day-of media presentation. You can find out more about his company at: http://www.4VIS.com</string>
+	</dict>
+</dict>
+</plist>
