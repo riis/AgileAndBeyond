@@ -64,14 +64,29 @@ void populateInitialData()
 {
   AABSessions = nil;
   NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
-
   AABSessions = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+
+  plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-people" ofType:@"plist"];
+  AABPeople = [NSDictionary dictionaryWithContentsOfFile:plistPath];
   // TODO memory
   [AABSessions retain];
 
   if(AABSessions)
     {
-      NSLog(@"I loaded in a plist as AABSessions from %@", plistPath);
+      NSLog(@"I loaded in a plist as AABSessions from %@, and its got %d elements",  
+	    plistPath,
+	    [AABPeople count]);
+      //dumpNestedDictToLog(AABSessions);
+    }
+  else 
+    {
+      NSLog(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
+    }
+  if(AABPeople)
+    {
+      NSLog(@"I loaded in a plist as AABSessions from %@, and its got %d elements", 
+	    plistPath,
+	    [AABPeople count]);
       //dumpNestedDictToLog(AABSessions);
     }
   else 
