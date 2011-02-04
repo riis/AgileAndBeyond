@@ -177,7 +177,6 @@
     // For example: self.myOutlet = nil;
 }
 
-
 - (void)dealloc {
     [super dealloc];
 }

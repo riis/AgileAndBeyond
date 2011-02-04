@@ -25,18 +25,26 @@ static const int rowsAfterPeople = 2;
  
   NSString* id = getIdOfSession(mySession);
   NSDate* sessionTime = [mySession objectForKey:@"timeStart"];
+  NSString* whichPref;
   NSString** whichSlot;
   
   if ( [sessionTime isEqualToDate:AAB_FIRST_SLOT_DATE] )
-    whichSlot = &userSessionFirstSlot;
+    {
+      whichSlot = &userSessionFirstSlot;
+      whichPref = @"userSessionFirstSlot";
+    }
   else if ( [sessionTime isEqualToDate:AAB_SECOND_SLOT_DATE] )
-    whichSlot = &userSessionSecondSlot;
+    {
+      whichSlot = &userSessionSecondSlot;
+      whichPref = @"userSessionSecondSlot";
+    }
   else return; 
 
   if( [id isEqualToString:*whichSlot] )
     {
       [*whichSlot release];
       *whichSlot=nil;
+      [[NSUserDefaults standardUserDefaults] removeObjectForKey:whichPref];
       self.navigationItem.rightBarButtonItem.title = @"Add";
     }
   else 
@@ -44,8 +52,10 @@ static const int rowsAfterPeople = 2;
       if ( *whichSlot != nil ) [*whichSlot release];
       *whichSlot = id;
       [*whichSlot retain];
+      [[NSUserDefaults standardUserDefaults] setObject:id forKey:whichPref];
       self.navigationItem.rightBarButtonItem.title = @"Remove";
     }
+  
 }
 
 - (void)viewDidLoad 

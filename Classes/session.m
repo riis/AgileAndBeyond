@@ -95,4 +95,12 @@ void populateInitialData()
       NSLog(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
     }
 
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  
+
+  // Next, check and see if we have the user's selected sessions saved, and if so, load
+  //  NSString* fromPrefs = nil;
+  userSessionFirstSlot = [defaults objectForKey:@"userSessionFirstSlot"];
+  userSessionSecondSlot = [defaults objectForKey:@"userSessionSecondSlot"];
+
 }

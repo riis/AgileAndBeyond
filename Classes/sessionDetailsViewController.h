@@ -11,9 +11,7 @@
 
 @interface sessionDetailsViewController : UITableViewController {
   NSDictionary* mySession;
-  BOOL isUserSession;
 }
 
 @property (nonatomic,retain) NSDictionary* mySession;
-@property (nonatomic) BOOL isUserSession;
 @end
