@@ -79,11 +79,10 @@
   // if we were not created using createWithArray, then function as the "My Sessions" list
   // TODO possibly move this stuff into init functions properly
  
-
-  if(allSessions == nil)
+  if(allSessions == nil || isUserSession == true)
     {
-     
-        [self setAllSessions:[[NSMutableArray alloc] init]];
+      isUserSession = true;
+      [self setAllSessions:[[NSMutableArray alloc] init]];
       if ( userSessionFirstSlot != nil ) 
 	[allSessions addObject:[AABSessions objectForKey:userSessionFirstSlot]];
       if ( userSessionSecondSlot != nil )

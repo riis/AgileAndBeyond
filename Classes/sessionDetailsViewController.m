@@ -23,17 +23,26 @@ static const int rowsAfterPeople = 2;
 {
  
   NSString* id = getIdOfSession(mySession);
-  if( [id isEqualToString:userSessionFirstSlot] )
+  NSDate* sessionTime = [mySession objectForKey:@"timeStart"];
+  NSString** whichSlot;
+  
+  if ( [sessionTime isEqualToDate:AAB_FIRST_SLOT_DATE] )
+    whichSlot = &userSessionFirstSlot;
+  else if ( [sessionTime isEqualToDate:AAB_SECOND_SLOT_DATE] )
+    whichSlot = &userSessionSecondSlot;
+  else return; 
+
+  if( [id isEqualToString:*whichSlot] )
     {
-      [userSessionFirstSlot release];
-      userSessionFirstSlot=nil;
+      [*whichSlot release];
+      *whichSlot=nil;
       self.navigationItem.rightBarButtonItem.title = @"Add";
     }
   else 
     {
-      if ( userSessionFirstSlot != nil ) [userSessionFirstSlot release];
-      userSessionFirstSlot = id;
-      [userSessionFirstSlot retain];
+      if ( *whichSlot != nil ) [*whichSlot release];
+      *whichSlot = id;
+      [*whichSlot retain];
       self.navigationItem.rightBarButtonItem.title = @"Remove";
     }
 }

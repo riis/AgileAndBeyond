@@ -33,11 +33,13 @@
   NSArray* allSessions;
   NSMutableArray* filteredSessionLists;
   NSPredicate* filter;
+  BOOL isUserSession;
 }
 
 @property (nonatomic, retain) NSArray* allSessions;
 @property (nonatomic, retain) NSMutableArray* filteredSessionLists;
 @property (nonatomic, retain) NSPredicate* filter;
+@property (nonatomic) BOOL isUserSession;
 
 //+ (void)initialize; 
 
