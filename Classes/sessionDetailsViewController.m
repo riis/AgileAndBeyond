@@ -223,7 +223,6 @@ static const int rowsAfterPeople = 2;
     height = 225;
 
   return height;
-
 }
 
 /*
@@ -271,13 +270,15 @@ static const int rowsAfterPeople = 2;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if ( true ) 
+  int i = [indexPath indexAtPosition:1];
+  if ( i >= rowsBeforePeople  && i < (SDVCHEADCOUNT + rowsBeforePeople)) 
     {
-
+      
       personDetailsViewController *detailViewController = [[personDetailsViewController alloc] initWithNibName:@"personDetailsViewController" bundle:nil];
-      detailViewController.myPerson = @"Mark Besh";
-	// Pass the selected object to the new view controller.
-	[self.navigationController pushViewController:detailViewController animated:YES];
+      detailViewController.myPerson = 
+	[[[mySession objectForKey:@"people"] objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
+      // Pass the selected object to the new view controller.
+      [self.navigationController pushViewController:detailViewController animated:YES];
       [detailViewController release];
     }	 
 }
