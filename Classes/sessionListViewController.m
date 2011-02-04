@@ -78,20 +78,21 @@
   // populate an array with refrences to the sessions we will display, in the order we want
   // if we were not created using createWithArray, then function as the "My Sessions" list
   // TODO possibly move this stuff into init functions properly
- 
+  //  NSLog(@"hello from %s", __func__);
+
   if(allSessions == nil || isUserSession == true)
     {
+      NSLog(@"hello from %s : in block to set up ussersessions", __func__);
       isUserSession = true;
+
+      /*
       [self setAllSessions:[[NSMutableArray alloc] init]];
       if ( userSessionFirstSlot != nil ) 
 	[allSessions addObject:[AABSessions objectForKey:userSessionFirstSlot]];
       if ( userSessionSecondSlot != nil )
 	[allSessions addObject:[AABSessions objectForKey:userSessionSecondSlot]];
-    }
-
-  if(filteredSessionLists == nil)
-    {
-
+      NSLog(@"allSessions is %d", [allSessions count]);
+      */
       [self setFilteredSessionLists:[[NSMutableArray alloc] init]]; 
       
       sessionTableGroup* newSection;
@@ -99,12 +100,22 @@
       newSection.title = [AAB_FIRST_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
 					      locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
       newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
+      newSection.items = [[NSMutableArray alloc] init];
+      if ( userSessionFirstSlot != nil ) 
+	{
+	  NSLog(@"adding %@ for first slot",userSessionFirstSlot );
+	  [newSection.items addObject:[AABSessions objectForKey:userSessionFirstSlot]];
+	}
       [filteredSessionLists addObject:newSection];
       newSection = [[sessionTableGroup alloc] init];
       newSection.title = [AAB_SECOND_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
 					       locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
       newSection.predicate =  [NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
+      newSection.items = [[NSMutableArray alloc] init];
+      if ( userSessionSecondSlot != nil )
+		[newSection.items addObject:[AABSessions objectForKey:userSessionSecondSlot]];
       [filteredSessionLists addObject:newSection];
+      [self.tableView reloadData]; 
     }
     
  
@@ -130,16 +141,17 @@
   
   [filteredSessionLists addObject:slotGroup];
   */
-  
-  NSLog(@"in %s filteredSessionLists is : %d", __func__, [filteredSessionLists count] );
-
-  for( sessionTableGroup* section in filteredSessionLists )
+  else 
     {
-      section.items = [allSessions filteredArrayUsingPredicate:section.predicate];
-      //  int i =0; 
-      // NSLog(@"in %s, section %d has has %d after filtering", __func__, i++, [section.items count] );
+      NSLog(@"in %s filteredSessionLists is : %d", __func__, [filteredSessionLists count] );
+      
+      for( sessionTableGroup* section in filteredSessionLists )
+	{
+	  section.items = [allSessions filteredArrayUsingPredicate:section.predicate];
+	  //  int i =0; 
+	  // NSLog(@"in %s, section %d has has %d after filtering", __func__, i++, [section.items count] );
+	}
     }
-
 
   // TODO : sort filtered arrays
   // TODO : memory management : we want arrays of refrences
@@ -174,7 +186,8 @@
 #pragma mark -
 #pragma mark Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
+{
     // Return the number of sections.
     return [filteredSessionLists count];
 }
@@ -182,7 +195,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-  
+   NSLog(@"hello from %s", __func__);  
   // Return the number of rows in the section.
   //switch (section) 
   // {
@@ -212,50 +225,54 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  NSLog(@"hello from %s", __func__);
+  static NSString *CellIdentifier = @"Cell";
+  
+    UITableViewCell *cell;// = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
     //    if (filteredSessionList == nil)
     // filteredSessionList = [[NSArray alloc] init];//  [[NSArray alloc] initWithArray:[AABSessions allValues]]; // will be unsorted
 
-    if (cell == nil) {
+    //    if (cell == nil) {
       cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-      //switch ( [indexPath indexAtPosition:0] )
+      cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
+      cell.textLabel.numberOfLines=0;
+      cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+      //} 
+     //switch ( [indexPath indexAtPosition:0] )
       //	{
       //	case 0 : 
-
-	  // found the following snipit online :
-	  cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
-	  cell.textLabel.numberOfLines=0;
-	  cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
-	  // thank you stackoverflow contributer Tim Rupe!
-	  // ohter useful info at link 
-	  //http://stackoverflow.com/questions/129502/how-do-i-wrap-text-in-a-uitableviewcell-without-a-custom-cell
-	  // (and in documentation for UITextField)
-	  /* cell.textLabel.text = [[
-				  [[filteredSessionLists objectAtIndex:0] items]
-				   objectAtIndex:[indexPath indexAtPosition:1]]
-								   
-				  objectForKey:@"title"];
-	  */
-
-	  NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
-	  cell.textLabel.text = [[myFilteredList objectAtIndex:[indexPath indexAtPosition:1]]
-				   objectForKey:@"title"]; 
-	  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-
-
-	  //	  break;
-	  //default : 
-	  // TODO a better default. 
-	  // break; 
     
-	
-    }	
-	
-	// we could reuse existing cells, changing their contents, but putting some code here...
-	
+    // found the following snipit online :
+    
+    // thank you stackoverflow contributer Tim Rupe!
+    // ohter useful info at link 
+    //http://stackoverflow.com/questions/129502/how-do-i-wrap-text-in-a-uitableviewcell-without-a-custom-cell
+    // (and in documentation for UITextField)
+    /* cell.textLabel.text = [[
+       [[filteredSessionLists objectAtIndex:0] items]
+       objectAtIndex:[indexPath indexAtPosition:1]]
+       
+       objectForKey:@"title"];
+    */
+    
+    
+    
+    //	  break;
+    //default : 
+    // TODO a better default. 
+    // break; 
+    
+    
+    //}	
+    
+    // we could reuse existing cells, changing their contents, but putting some code here...
+    NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
+    cell.textLabel.text = [[myFilteredList objectAtIndex:[indexPath indexAtPosition:1]]
+			    objectForKey:@"title"]; 
+    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
 
 }
