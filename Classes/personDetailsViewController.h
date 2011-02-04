@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface personDetailsViewController : UITableViewController {
+@interface personDetailsViewController : UITableViewController 
+{
   NSString* myPerson;
 }
 

@@ -60,57 +60,49 @@ static const int rowsAfterPeople = 2;
 
 - (void)viewDidLoad 
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    // build the right add/remove button
-    // TODO flip to "remove" if added
-
-    UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
-					 initWithTitle:[getIdOfSession(mySession) isEqualToString:userSessionFirstSlot]?@"Remove":@"Add"
-					 style:UIBarButtonItemStylePlain
-					 target:self
-					 action:@selector(addToUserSelections)];
-    self.navigationItem.rightBarButtonItem = addRemoveButton;
-    // [anotherButton release]; // ? 
+  // build the right add/remove button
+  // TODO flip to "remove" if added
+  UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
+				       initWithTitle:[getIdOfSession(mySession) isEqualToString:userSessionFirstSlot]?@"Remove":@"Add"
+				       style:UIBarButtonItemStylePlain
+				       target:self
+				       action:@selector(addToUserSelections)];
+  self.navigationItem.rightBarButtonItem = addRemoveButton;
+  // TODO release addRemoveButton? an example online did a release on it in this function.
 }
-
-
 /*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
+  - (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  }
 */
 /*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
+  - (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  }
 */
 /*
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
+  - (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  }
 */
 /*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
+  - (void)viewDidDisappear:(BOOL)animated {
+  [super viewDidDisappear:animated];
+  }
 */
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+// Return YES for supported orientations
+return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
 
 
 #pragma mark -
 #pragma mark Table view data source
-
-
 
 + (sessionDetailsViewController*) createWithSession:(NSDictionary*)session
 {
@@ -128,38 +120,37 @@ static const int rowsAfterPeople = 2;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
-    // Return the number of sections.
-    return 1;
+  // Return the number of sections.
+  return 1;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
   // Return the number of rows in the section.  
-   return SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople;
+  return SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople;
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    NSArray* people = [mySession objectForKey:@"people"];
-    const int headcount = [people count];
-    const int i = [indexPath indexAtPosition:1];  // index pos 1, not zero, only 
-    static NSString *CellIdentifier = @"Cell";
-    UILabel* descriptionLabel=nil;
+  NSArray* people = [mySession objectForKey:@"people"];
+  const int headcount = [people count];
+  const int i = [indexPath indexAtPosition:1];  // index pos 1, not zero, only 
+  static NSString *CellIdentifier = @"Cell";
 
-    // TODO : fix cell recycling
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-    }
+  // TODO : fix cell recycling
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+  }
 
-    // Configure the cell...
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
-    cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
-    cell.detailTextLabel.numberOfLines=0;
-    cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+  // Configure the cell...
+  cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+  cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
+  cell.detailTextLabel.numberOfLines=0;
+  cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
     
     if( i < rowsBeforePeople )
       {
@@ -179,45 +170,26 @@ static const int rowsAfterPeople = 2;
 	    break;
 	  case 1 : 
 	    cell.textLabel.text = @"Description";
-
-	    /*
-	    descriptionLabel = [[UILabel alloc] initWithFrame:cell.frame];
-	    descriptionLabel.lineBreakMode=UILineBreakModeWordWrap;
-	    descriptionLabel.numberOfLines=100;
-	    descriptionLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
-	    descriptionLabel.text = [mySession objectForKey:@"description"];
-      	    [descriptionLabel sizeToFit];
-	    [cell addSubview:descriptionLabel];
-	    */
 	    cell.detailTextLabel.text = [mySession objectForKey:@"description"];
 	    break;
 	  default : 
-	    // error? 
+	    // TODO replace this log output with a macro 
+	    NSLog(@"Warning in %s 'unreachable' code reached",__func__);
 	    cell.textLabel.text = @"x";
 	    cell.detailTextLabel.text = @"x";
 	  }
       }
     else if ( i >= rowsBeforePeople  && i < (headcount + rowsBeforePeople))
       {
-	    cell.textLabel.text =
-	      [[[mySession objectForKey:@"people"] objectAtIndex:i-rowsBeforePeople] objectForKey:@"role"];
-	    cell.detailTextLabel.text = 
-	      [[[mySession objectForKey:@"people"] objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
-	    // TODO: conditional disclosure indicator if bio exists..
-	    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;    
-	    //	    break;cell.textLabel.text = @"Placeholder";
-	    //cell.detailTextLabel.text = [mySession objectForKey:@"placeholder"];
+	cell.textLabel.text =
+	  [[[mySession objectForKey:@"people"] objectAtIndex:i-rowsBeforePeople] objectForKey:@"role"];
+	cell.detailTextLabel.text = 
+	  [[[mySession objectForKey:@"people"] objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
+	// TODO: conditional disclosure indicator if bio exists..
+	cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;    
       }
-    else NSLog(@"in %s : warning, unreachable code reached.", __func__);
-
-    /*
-      }
-      case 1 : 
-	if( people && [people count] > 0)
-	  {
-	
-	  } 
-    */
+    else NSLog(@"in %s : warning, 'unreachable' code reached.", __func__);
+    
     return cell;
 }
 
@@ -234,46 +206,6 @@ static const int rowsAfterPeople = 2;
 
   return height;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 #pragma mark -
 #pragma mark Table view delegate
@@ -297,21 +229,27 @@ static const int rowsAfterPeople = 2;
 #pragma mark -
 #pragma mark Memory management
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+- (void)didReceiveMemoryWarning 
+{
+  // TODO memory
+  // Releases the view if it doesn't have a superview.
+  [super didReceiveMemoryWarning];
     
-    // Relinquish ownership any cached data, images, etc that aren't in use.
+  // Relinquish ownership any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+- (void)viewDidUnload 
+{
+  // TODO memory
+  // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+  // For example: self.myOutlet = nil;
 }
 
 
-- (void)dealloc {
-    [super dealloc];
+- (void)dealloc 
+{
+  // TODO memory
+  [super dealloc];
 }
 
 

@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface sessionDetailsViewController : UITableViewController {
+@interface sessionDetailsViewController : UITableViewController 
+{
   NSDictionary* mySession;
 }
 
