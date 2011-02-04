@@ -76,19 +76,19 @@
 {
 
   // populate an array with refrences to the sessions we will display, in the order we want
-  // TODO move this stuff into init functions properly
-  // right now, its setting defaults 
+  // if we were not created using createWithArray, then function as the "My Sessions" list
+  // TODO possibly move this stuff into init functions properly
+ 
 
   if(allSessions == nil)
     {
-      // what we're doing here is a bit strange
-      // since usually filter is applied to an array of sessions, not a dictionary
-      // essentially this is exposing an imperfection of this architecture.
-      //      [self setFilter [NSPredicate predicateWithFormat:@" == %@", userSessionFirstSlot]]
-      [self setAllSessions:[NSMutableArray arrayWithObject:[AABSessions objectForKey:userSessionFirstSlot]]];
-      
+     
+        [self setAllSessions:[[NSMutableArray alloc] init]];
+      if ( userSessionFirstSlot != nil ) 
+	[allSessions addObject:[AABSessions objectForKey:userSessionFirstSlot]];
+      if ( userSessionSecondSlot != nil )
+	[allSessions addObject:[AABSessions objectForKey:userSessionSecondSlot]];
     }
-
 
   if(filteredSessionLists == nil)
     {
