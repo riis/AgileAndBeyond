@@ -9,6 +9,7 @@
 #import  "sessionDetailsViewController.h"
 #import "session.h"
 #import "AgileAndBeyondAppGlobals.h"
+#import "personDetailsViewController.h"
 
 #define SDVCHEADCOUNT [[mySession objectForKey:@"people"]count]
 static const int rowsBeforePeople = 1;
@@ -268,15 +269,17 @@ static const int rowsAfterPeople = 2;
 #pragma mark -
 #pragma mark Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if ( true ) 
+    {
+
+      personDetailsViewController *detailViewController = [[personDetailsViewController alloc] initWithNibName:@"personDetailsViewController" bundle:nil];
+      detailViewController.myPerson = @"Mark Besh";
+	// Pass the selected object to the new view controller.
+	[self.navigationController pushViewController:detailViewController animated:YES];
+      [detailViewController release];
+    }	 
 }
 
 

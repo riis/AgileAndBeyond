@@ -70,6 +70,7 @@ void populateInitialData()
   AABPeople = [NSDictionary dictionaryWithContentsOfFile:plistPath];
   // TODO memory
   [AABSessions retain];
+  [AABPeople retain];
 
   if(AABSessions)
     {
