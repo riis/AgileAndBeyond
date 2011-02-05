@@ -92,18 +92,22 @@ void populateInitialData()
       NSLog(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
     }
 
-  plistPath = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"plist"];
-  AABNews = [NSArray arrayWithContentsOfFile:plistPath];
+  /*  plistPath = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"plist"];
+      AABNews = [NSArray arrayWithContentsOfFile:plistPath]; */
+
+  NSURL* newsURL = [NSURL URLWithString:@"http://10.5.1.239/news.plist"];
+  AABNews = [[NSArray alloc]  initWithContentsOfURL:[NSURL URLWithString:@"http://10.5.1.239/news.plist"]];
 
   if(AABNews)
     {
       NSLog(@"I loaded in a plist as AABNews from %@, and its got %d elements", 
-	    plistPath,
+	    // plistPath,
+	    newsURL,
 	    [AABPeople count]);
     }
   else 
     {
-      NSLog(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
+      NSLog(@"Tried to load dictionary but ended up with nil, using path %@",newsURL);
     }
 
   // TODO memory
