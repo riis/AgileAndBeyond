@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Posted</key>
+		<date>2011-02-06T00:30:40Z</date>
+		<key>HeadLine</key>
+		<string>Great Things are Happening Now!</string>
+		<key>Detail</key>
+		<string>Things are really starting to shape up.  Pat yourself on the back!</string>
+	</dict>
+	<dict>
+		<key>Posted</key>
+		<date>2011-02-05T18:41:06Z</date>
+		<key>HeadLine</key>
+		<string>Whats next? </string>
+		<key>Detail</key>
+		<string>The Mayor of Townsville announces, he likes pickles.</string>
+	</dict>
+</array>
+</plist>

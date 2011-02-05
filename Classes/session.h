@@ -5,6 +5,8 @@
 //  Created by Derek VerLee on 1/28/11.
 //  Copyright 2011 RIIS LLC. All rights reserved.
 //
+// This file has to do with more than just sessions.
+
 
 #import <Foundation/Foundation.h>
 
@@ -22,10 +24,19 @@
  * and the value being the columns by name of column
  */
 
+/* Note to self: 
+ *    what you are doing wrong is passing around NSDictionary* as sessions, instead of 
+ * the NSString that identifies the session.
+ * The clean way out is an actualy session class, with getter functions or valueForKey 
+ * key/value compliance 
+*/ 
 
-NSDictionary *AABSessions;
-NSDictionary *AABPeople;
-NSDictionary *AABOrg;
+
+
+NSDictionary* AABSessions;
+NSDictionary* AABPeople;
+NSDictionary* AABOrg;
+NSArray* AABNews;
 
 void populateInitialData();
 
@@ -37,3 +48,5 @@ NSString* userSessionSecondSlot;
 // how I refer to sessions from the main list, and having a function like this might
 // make that easier
 NSString* getIdOfSession(NSDictionary*);
+
+

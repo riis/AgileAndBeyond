@@ -63,37 +63,55 @@ void dumpNestedDictToLog(NSDictionary* dict)
 void populateInitialData()
 {
   AABSessions = nil;
-  NSString* plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
+  NSString* plistPath;
+
+  plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
   AABSessions = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-
-  plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-people" ofType:@"plist"];
-  AABPeople = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-  // TODO memory
-  [AABSessions retain];
-  [AABPeople retain];
-
   if(AABSessions)
     {
       NSLog(@"I loaded in a plist as AABSessions from %@, and its got %d elements",  
 	    plistPath,
 	    [AABPeople count]);
-      //dumpNestedDictToLog(AABSessions);
     }
   else 
     {
       NSLog(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
     }
+
+  plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-people" ofType:@"plist"];
+  AABPeople = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+
   if(AABPeople)
     {
-      NSLog(@"I loaded in a plist as AABSessions from %@, and its got %d elements", 
+      NSLog(@"I loaded in a plist as AABPeople from %@, and its got %d elements", 
 	    plistPath,
 	    [AABPeople count]);
-      //dumpNestedDictToLog(AABSessions);
     }
   else 
     {
       NSLog(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
     }
+
+  plistPath = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"plist"];
+  AABNews = [NSArray arrayWithContentsOfFile:plistPath];
+
+  if(AABNews)
+    {
+      NSLog(@"I loaded in a plist as AABNews from %@, and its got %d elements", 
+	    plistPath,
+	    [AABPeople count]);
+    }
+  else 
+    {
+      NSLog(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
+    }
+
+  // TODO memory
+  [AABSessions retain];
+  [AABPeople retain];
+  [AABNews retain];
+
+  
 
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   
