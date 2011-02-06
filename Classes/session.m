@@ -96,7 +96,7 @@ void populateInitialData()
 
   NSURL* newsURL = [NSURL URLWithString:@"http://10.5.1.239/news.plist"];
   /*
-  AABNews = [[NSArray alloc]  initWithContentsOfURL:[NSURL URLWithString:@"http://10.5.1.239/news.plist"]];
+  AABNews = [[NSArray alloc]  init] WithContentsOfURL:[NSURL URLWithString:@"http://10.5.1.239/news.plist"]];
   
   if(AABNews)
     {
@@ -113,7 +113,7 @@ void populateInitialData()
   // TODO memory
   [AABSessions retain];
   [AABPeople retain];
-  [AABNews retain];
+  //[AABNews retain];
 
   
 
@@ -126,9 +126,7 @@ void populateInitialData()
   userSessionSecondSlot = [defaults objectForKey:@"userSessionSecondSlot"];
 
 
-  URLFetcher* fetcher = [[URLFetcher alloc] init];
-  fetcher.sourceURL=newsURL;
-  fetcher.destinationData=AABNews;
+  URLFetcher* fetcher = [[URLFetcher alloc] initForObject:&AABNews fromURL:newsURL];
   [fetcher refresh];
 
 }
@@ -147,10 +145,10 @@ void populateInitialData()
   return self;
 }
 
--(URLFetcher*) initForObject:(id)dataPoint fromURL:(NSURL*)url
+-(URLFetcher*) initForObject:(id*)dataPoint fromURL:(NSURL*)url
 {
   [self init];
-  [self setDestinationData:dataPoint];
+  destinationData = dataPoint;
   [self setSourceURL:url];
   return self;
 }
@@ -336,7 +334,9 @@ void populateInitialData()
       else
 	{
 	  dumpNestedDictToLog(dict);
-	  self.destinationData = dict;
+	  [dict retain]; // todo ... a little bit of odd memory management to look at
+	  // something like, if *destinationdata is an object, ..release? 
+	  (*(self.destinationData)) = dict;
 	}
 
       //}

@@ -64,6 +64,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
+  NSLog(@"in %s, AABNews is : ", __func__, AABNews);
     return [AABNews count];
 }
 
