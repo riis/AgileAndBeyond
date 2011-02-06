@@ -50,3 +50,25 @@ NSString* userSessionSecondSlot;
 NSString* getIdOfSession(NSDictionary*);
 
 
+@interface URLFetcher : NSObject 
+{
+  id destinationData; // should actually be NSData*? 
+  NSURL* sourceURL;
+@protected
+  NSMutableData *connectionData;
+  NSURLConnection *urlConnection;
+  NSURLResponse *connectionResponse;
+  SEL didUpdateAction;
+  id didUpdateTarget;
+  BOOL connectionInProgress; //TODO revisit this whole approach
+}
+
+@property (nonatomic, retain) NSMutableData *connectionData; 
+@property (nonatomic, retain) NSURLResponse *connectionResponse;
+@property () BOOL connectionInProgress;
+@property (nonatomic, retain) NSURLConnection *urlConnection;
+@property (nonatomic, retain) id didUpdateTarget;
+@property (nonatomic, retain) id destinationData;
+@property (nonatomic, retain) NSURL* sourceURL;
+
+@end

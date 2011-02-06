@@ -20,8 +20,7 @@ NSString* getIdOfSession(NSDictionary*session)
       id = [all_ids objectAtIndex:0];
       NSLog(@"Session id found is %@",id);
       if(id) [id retain];
-    }
-		
+    }		
   return id;
 }
 
@@ -96,8 +95,9 @@ void populateInitialData()
       AABNews = [NSArray arrayWithContentsOfFile:plistPath]; */
 
   NSURL* newsURL = [NSURL URLWithString:@"http://10.5.1.239/news.plist"];
+  /*
   AABNews = [[NSArray alloc]  initWithContentsOfURL:[NSURL URLWithString:@"http://10.5.1.239/news.plist"]];
-
+  
   if(AABNews)
     {
       NSLog(@"I loaded in a plist as AABNews from %@, and its got %d elements", 
@@ -109,7 +109,7 @@ void populateInitialData()
     {
       NSLog(@"Tried to load dictionary but ended up with nil, using path %@",newsURL);
     }
-
+  */
   // TODO memory
   [AABSessions retain];
   [AABPeople retain];
@@ -125,4 +125,252 @@ void populateInitialData()
   userSessionFirstSlot = [defaults objectForKey:@"userSessionFirstSlot"];
   userSessionSecondSlot = [defaults objectForKey:@"userSessionSecondSlot"];
 
+
+  URLFetcher* fetcher = [[URLFetcher alloc] init];
+  fetcher.sourceURL=newsURL;
+  fetcher.destinationData=AABNews;
+  [fetcher refresh];
+
 }
+
+
+@implementation URLFetcher 
+@synthesize connectionData,connectionResponse,urlConnection,connectionInProgress;
+@synthesize didUpdateTarget;//,didUpdateAction;
+@synthesize destinationData;
+@synthesize sourceURL;
+
+-(id) init {
+  [super init];
+  connectionData = nil;
+  connectionInProgress=false;
+  return self;
+}
+
+-(URLFetcher*) initForObject:(id)dataPoint fromURL:(NSURL*)url
+{
+  [self init];
+  [self setDestinationData:dataPoint];
+  [self setSourceURL:url];
+  return self;
+}
+
+
+
+-(void) refresh   
+{	
+  NSMutableURLRequest *request;
+  NSError *error;
+	
+  NSLog(@"Hello from %s", __func__);
+	
+  // TODO 
+  //some way of ensuring things such as there is only one request per resource happening at a time
+  // and properly memory manage connectionData
+  connectionData=[NSMutableData new];
+	
+  if(connectionInProgress!=false) {
+    NSLog(@"%s: I think there is already a connection in progress?",__func__);
+    return;
+  }
+  connectionInProgress=true;
+	
+  if( sourceURL == nil ) 
+    NSLog(@"Warning : URLFetch refresh called but no URL.");
+	
+  request = [NSMutableURLRequest requestWithURL:sourceURL];
+  [request setHTTPMethod:@"GET"];
+  error = [[NSError alloc] init];
+       
+  NSLog(@"%s about to start asynchronous connection",__func__);
+  urlConnection = [[NSURLConnection connectionWithRequest:request delegate:self] retain];
+}
+
+
+//////////////////////////////////////// URL Connection Delegate message implementations //
+
+- (void)clearUrlConnection
+{
+  NSLog(@"%s", __func__);
+	
+  if (urlConnection != nil)
+    {
+      //[urlConnection release];
+      urlConnection=nil;
+    }
+  if (connectionData != nil)
+    {
+      //[connectionData release];
+      connectionData=nil;
+    }
+  connectionInProgress=false;
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)newData;
+{
+  NSLog(@"%s", __func__);
+  if(connectionData==nil || connectionData == NULL ) 
+    connectionData=[NSMutableData  dataWithData: newData]; 
+  [connectionData appendData:newData];
+}
+
+- (void)willSendRequest:(NSURLRequest *)request
+{
+  NSLog(@"%s", __func__);
+  //	[activityIndicator startAnimating];
+}
+
+- (void)didReceiveResponse:(NSURLResponse *)response
+{
+  // WHAT IS THIS? 
+  NSLog(@"%s", __func__);
+}
+
+- (void)finishedReceivingData:(NSData *)data
+{
+  NSLog(@"%s", __func__);
+	
+}
+
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)aRequest redirectResponse:(NSURLResponse *)aResponse;
+{
+  NSLog(@"%s", __func__);
+  NSLog(@"In connection: willSendRequest: %@ redirectResponse: %@", aRequest, aResponse);
+  return aRequest;
+}
+/*
+  - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+  {
+  const int maxFailureRetries = 5; // TODO move this
+  NSURLCredential *cred;
+	
+  NSLog(@"%s: recieved challange %@", __func__, challenge);
+	
+  if ( [challenge previousFailureCount] > maxFailureRetries ) {
+  [[challenge sender] cancelAuthenticationChallenge:challenge];  
+  }
+  else {
+  if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])  {
+  // some techniques garnered from stackoverflow user Gordon Henriksen whether original to him or not
+  // this allow a connection despite certificate errors
+  // should eventually be taken out or at leasst restricted in protectionspace
+  NSLog(@"%s: servertrust authentication processing", __func__);
+  cred=[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]; 
+  }
+  else {
+  NSLog(@"%s: user authentication processing", __func__);
+			
+  cred = [NSURLCredential credentialWithUser:repo.userName
+  password:repo.userPW 
+  persistence:NSURLCredentialPersistenceForSession];
+  }
+		
+  [[challenge sender] useCredential:cred forAuthenticationChallenge:challenge];
+  }
+  }
+
+  - (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+  {
+  NSLog(@"%s", __func__);
+  NSLog(@"In connection: didCancelAuthenticationChallenge: %@", challenge);
+  [self clearUrlConnection];
+  }
+*/
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)aResponse;
+{
+  NSLog(@"%s", __func__);
+  NSLog(@"%s: Reponse URL/length [%@ / %lld]", __func__, [aResponse URL], [aResponse expectedContentLength]);
+	
+  connectionResponse = [aResponse retain];
+	
+  //from apple : This message can be sent due to server redirects, or in rare cases multi-part MIME documents. 
+  //Each time the delegate receives the connection:didReceiveResponse: message, it should reset any progress 
+  //indication and discard all previously received data.
+  // Yet with the following code uncommented, I get excbadaccess so...
+	
+  //if (connectionData != nil)
+  //{
+  //[connectionData release];
+  //		connectionData=nil;
+  //	}
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection;
+{
+  id dict;// hack
+  NSLog(@"Hello from %s", __func__);
+  NSError* plistError;
+  NSStringEncoding nsEncoding = NSUTF8StringEncoding;
+  NSString* encoding = [connectionResponse textEncodingName];
+	
+  //TODO return string validation
+  if (connectionData!=nil) 
+    {
+      if (encoding) 
+	{
+	  CFStringEncoding cfEncoding = CFStringConvertIANACharSetNameToEncoding((CFStringRef)encoding);
+	  if (cfEncoding != kCFStringEncodingInvalidId) 
+	    {
+	      nsEncoding = CFStringConvertEncodingToNSStringEncoding(cfEncoding);
+	    }
+	}
+    }
+  else 
+    {
+      NSLog(@"%s: empty connectionData in get request",__func__);
+    }		
+  
+  // if( connectionInProgress == true ) 
+  //  {
+      // this was originally a block to check if this was a get or a put, 
+      // in this contect we are only doing gets
+      // so i'm not sure this conditional block is nessisary.
+      
+      //    dict = [NSDictionary dictionaryWithJSONString:[[NSString alloc] initWithData:connectionData encoding:nsEncoding]];
+      dict = [NSPropertyListSerialization propertyListWithData:connectionData 
+				   options:NSPropertyListImmutable
+				   format:NULL error:&plistError];
+      if(plistError)
+	NSLog(@"plistError .. %@",plistError); 
+      else
+	{
+	  dumpNestedDictToLog(dict);
+	  self.destinationData = dict;
+	}
+
+      //}
+      //  else 
+      // {
+      //NSLog(@"%s: PUT request completed",__func__);
+      // }
+  
+  NSLog(@"%s: request completed, returned data is %@",__func__,[[NSString alloc] initWithData:connectionData encoding:nsEncoding]);
+  
+  connectionInProgress=false;
+  [self clearUrlConnection];		// nessisary?
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+{
+  NSLog(@"%s", __func__);
+  NSLog(@"%s: Error [%@]", __func__, error);
+  [self clearUrlConnection];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse;
+{
+  NSLog(@"%s", __func__);
+  return nil; 
+}
+/*
+// allow a connection despite certificate errors
+// ideally, we won't need to do this and eventually this can be removed
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+return YES;
+//return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+*/
+
+
+@end 
