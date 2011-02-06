@@ -200,10 +200,20 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
   // TODO dynamic heights!
   // NSString* text = [mySession objectForKey:@"description"];
-  // TODO not hardcoding reletive position of description field , etc 
-  if([indexPath indexAtPosition:1]+1 == SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople)
-    height = 225;
+  // TODO not hardcoding reletive position of description field , etc
+  // TOOD not hardcoding font, or anything really, except from a central position
 
+  if([indexPath indexAtPosition:1]+1 == SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople)
+    {
+      NSString* cellText = [mySession objectForKey:@"description"];
+      UIFont* cellFont = [UIFont fontWithName:@"Helvetica" size:10.0];
+      CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
+      CGSize labelSize = [cellText sizeWithFont:cellFont
+				   constrainedToSize:constraintSize 
+				   lineBreakMode:UILineBreakModeWordWrap];
+      height = labelSize.height + 20;
+    }
+  
   return height;
 }
 
@@ -214,8 +224,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 {
   int i = [indexPath indexAtPosition:1];
   if ( i >= rowsBeforePeople  && i < (SDVCHEADCOUNT + rowsBeforePeople)) 
-    {
-      
+    {      
       personDetailsViewController *detailViewController = [[personDetailsViewController alloc] initWithNibName:@"personDetailsViewController" bundle:nil];
       detailViewController.myPerson = 
 	[[[mySession objectForKey:@"people"] objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];

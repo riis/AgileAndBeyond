@@ -10,15 +10,17 @@
 ** TODO opening/closing summary, lunch
 ** TODO fix visual display of session details
 *** TODO accessory disclosure icon only on appropriate cells
-*** TODO description cell size should be dynamic
+*** DONE description cell size should be dynamic
 ** TODO testing
 ** TODO proofread&check all navigation paths
 ** TODO centralize cell font settings
 ** TODO refresh button for news
 ** TODO test on iphone
 ** TODO audit against apple's interface guidelines
+** TODO production webserver for news
+** TODO method for updating news? 
 
-* TODO Advanced 
+* Todo Advanced 
 ** TODO markup in session details/bios
 ** TODO Persist most recently updated "news"
 ** TODO Ability to update
@@ -40,3 +42,12 @@
    Click "lean leadership session"
    Bug: Button says "add"
    Expected: should say "remove"
+*** TODO selected sessions not always highlighted
+    Go to advanced sessions
+    Select "its all in the cards".  Click add.
+    Click the back button that says "advanced sessions"
+    Bug: "all in the cards" cell is not highlighted
+    Expected: user selected sessions should always highlighted in sessionlists
+    Note: scrolling advanced sessions sesssionlist so the "all in the cards" cell bounces off screen, it is highlighted when it reappears.
+
+
