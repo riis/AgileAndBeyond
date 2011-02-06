@@ -1,0 +1,28 @@
+
+
+
+* TODO Basic Functionaliy Finished :
+** TODO Pull URL asynchronously
+** DONE Parse news URL and display news items
+** TODO News detail view
+** TODO audit for memory handling
+** TODO session lists can have more than two hardcoded sessions
+** TODO opening/closing summary, lunch
+** TODO fix visual display of session details
+** TODO testing
+** TODO proofread&check all navigation paths
+** TODO centralize cell font settings
+
+* TODO Advanced 
+** TODO markup in session details/bios
+** TODO Persist most recently updated "news"
+** TODO Ability to update
+** TODO Twitter feed
+** TODO News list visual tweaks
+** TODO internal refactoring / better tableviewcell handling
+** TODO memory profiling
+** TODO code cleanup
+*** TODO =nil is unnessisary
+
+
+* BUGS 
