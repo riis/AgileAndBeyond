@@ -2,22 +2,26 @@
 
 
 * TODO Basic Functionaliy Finished :
-** TODO Pull URL asynchronously
+** DONE Pull URL asynchronously
 ** DONE Parse news URL and display news items
 ** TODO News detail view
 ** TODO audit for memory handling
 ** TODO session lists can have more than two hardcoded sessions
 ** TODO opening/closing summary, lunch
 ** TODO fix visual display of session details
+*** TODO accessory disclosure icon only on appropriate cells
+*** TODO description cell size should be dynamic
 ** TODO testing
 ** TODO proofread&check all navigation paths
 ** TODO centralize cell font settings
+** TODO refresh button for news
+** TODO test on iphone
+** TODO audit against apple's interface guidelines
 
 * TODO Advanced 
 ** TODO markup in session details/bios
 ** TODO Persist most recently updated "news"
 ** TODO Ability to update
-** TODO Twitter feed
 ** TODO News list visual tweaks
 ** TODO internal refactoring / better tableviewcell handling
 ** TODO memory profiling
@@ -26,3 +30,13 @@
 
 
 * BUGS 
+** data, or navigation of
+*** TODO TOM POPPENENDIECK no bio in details view
+** interface
+*** TODO addremove button says add when should say remove
+**** to reproduce
+   Go to "Lean Leadership" session details, click Add.
+   Click My sessions.
+   Click "lean leadership session"
+   Bug: Button says "add"
+   Expected: should say "remove"
