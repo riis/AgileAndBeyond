@@ -142,9 +142,10 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
   // TODO : fix cell recycling
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
+  if (cell == nil)
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-  }
+  else 
+    cell.accessoryType=UITableViewCellAccessoryNone;    // reset default
 
   // Configure the cell...
   cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
@@ -152,6 +153,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   cell.detailTextLabel.numberOfLines=0;
   cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
     
+
+
     if( i < rowsBeforePeople )
       {
 	cell.textLabel.text = @"Title";

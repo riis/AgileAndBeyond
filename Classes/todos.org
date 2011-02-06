@@ -8,8 +8,8 @@
 ** TODO audit for memory handling
 ** TODO session lists can have more than two hardcoded sessions
 ** TODO opening/closing summary, lunch
-** TODO fix visual display of session details
-*** TODO accessory disclosure icon only on appropriate cells
+** DONE fix visual display of session details
+*** DONE accessory disclosure icon only on appropriate cells
 *** DONE description cell size should be dynamic
 ** TODO testing
 ** TODO proofread&check all navigation paths
@@ -43,11 +43,17 @@
    Bug: Button says "add"
    Expected: should say "remove"
 *** TODO selected sessions not always highlighted
+**** to reproduce:
     Go to advanced sessions
     Select "its all in the cards".  Click add.
     Click the back button that says "advanced sessions"
     Bug: "all in the cards" cell is not highlighted
     Expected: user selected sessions should always highlighted in sessionlists
-    Note: scrolling advanced sessions sesssionlist so the "all in the cards" cell bounces off screen, it is highlighted when it reappears.
-
-
+**** notes 
+     scrolling advanced sessions sesssionlist so the "all in the cards" cell bounces off screen, it is highlighted when it reappears.
+*** DONE cell disclosure accessory disclosure indicator (>) appears on cells in session detail view where not expect
+**** to reproduce
+     Go to session detail view for "providing lean leadership".
+     Scoll the table up and down, "bouncing" it at the top and bottom.
+     Bug: Cells such as title, description and/or schedule have accessory disclosure indicator (the '>' on the right of the cell)
+     Expected: Only intended cells should have indicator.     
