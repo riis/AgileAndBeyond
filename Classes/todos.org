@@ -5,7 +5,7 @@
 ** DONE Pull URL asynchronously
 ** DONE Parse news URL and display news items
 ** TODO News detail view
-** TODO audit for memory handling
+** DONE check for memory leaks from instruments
 ** TODO session lists can have more than two hardcoded sessions
 ** TODO opening/closing summary, lunch
 ** DONE fix visual display of session details
@@ -27,6 +27,7 @@
 ** TODO News list visual tweaks
 ** TODO internal refactoring / better tableviewcell handling
 ** TODO memory profiling
+** TODO audit for memory handling
 ** TODO code cleanup
 *** TODO =nil is unnessisary
 

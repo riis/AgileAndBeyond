@@ -4,19 +4,27 @@
 <array>
 	<dict>
 		<key>Posted</key>
-		<date>2011-02-06T00:30:40Z</date>
+		<date>2011-02-07T17:30:40Z</date>
 		<key>HeadLine</key>
-		<string>Great Things are Happening Now!</string>
+		<string>riisllc</string>
 		<key>Detail</key>
-		<string>Things are really starting to shape up.  Pat yourself on the back!</string>
+		<string>Last day to win iPad in comp to design mobile app for Agile &amp; Beyond conf in Dearborn, MI see our iRise sim http://ow.ly/3RCED #agile #irise</string>
 	</dict>
 	<dict>
 		<key>Posted</key>
 		<date>2011-02-05T18:41:06Z</date>
 		<key>HeadLine</key>
-		<string>Whats next? </string>
+		<string>AgileAndBeyond</string>
 		<key>Detail</key>
-		<string>The Mayor of Townsville announces, he likes pickles.</string>
+		<string>Detailed and constructive feedback on the #AgileAndBeyond mobile app will only be accepted until midnite. http://tinyurl.com/45qcfkm</string>
+	</dict>
+	<dict>
+		<key>Posted</key>
+		<date>2011-02-07T17:30:40Z</date>
+		<key>HeadLine</key>
+		<string>billwagner</string>
+		<key>Detail</key>
+		<string>RT @dmarsh: Working on panel discussion planning for &quot;Agile and Beyond&quot; 1 day conference, March 12. http://agileandbeyond.org/</string>
 	</dict>
 </array>
 </plist>
