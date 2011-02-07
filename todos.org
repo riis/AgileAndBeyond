@@ -35,7 +35,7 @@
 
 * ideas/maybes
 ** TODO News detail view
-
+   
 * BUGS 
 ** data, or navigation of
 *** DONE TOM POPPENENDIECK no bio in details view
@@ -56,7 +56,7 @@
     Expected: user selected sessions should always highlighted in sessionlists
 **** notes 
      scrolling advanced sessions sesssionlist so the "all in the cards" cell bounces off screen, it is highlighted when it reappears.
-*** TODO mySessions view does not update consistently
+*** DONE mySessions view does not update consistently
 **** to reproduce
 ***** 1
       Go to "my sessions" view, when any session is added
@@ -71,3 +71,4 @@
      Scoll the table up and down, "bouncing" it at the top and bottom.
      Bug: Cells such as title, description and/or schedule have accessory disclosure indicator (the '>' on the right of the cell)
      Expected: Only intended cells should have indicator.     
+     
