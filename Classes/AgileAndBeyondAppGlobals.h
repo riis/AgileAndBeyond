@@ -13,6 +13,7 @@
 #define AAB_SECOND_SLOT_DATE [NSDate dateWithString:@"2011-03-12 12:30:00 -0500"]
 #define AAB_WELCOMEINTRO_DATE [NSDate dateWithString:@"2011-03-12 8:30:00 -0500"]
 #define AAB_OPENINGKEYNOTE_DATE [NSDate dateWithString:@"2011-03-12 8:45:00 -0500"]
+#define AAB_LUNCH_DATE [NSDate dateWithString:@"2011-03-12 11:30:00 -0500"]
 #define AAB_CLOSINGKEYNOTE_DATE [NSDate dateWithString:@"2011-03-12 3:15:00 -0500"]
 #define AAB_CLOSINGSUMMARY_DATE [NSDate dateWithString:@"2011-03-12 4:15:00 -0500"]
 

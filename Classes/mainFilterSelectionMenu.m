@@ -144,16 +144,10 @@
   
   // TODO don't do this each time, move this code
   tableViewSection* newSection;
+  NSMutableArray* sectionDates = [[NSMutableArray alloc] init];
   NSMutableArray* viewSections = [[NSMutableArray alloc] init];  
 
-  newSection = [[tableViewSection alloc] init];
-  newSection.title = [AAB_FIRST_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
-					  locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-  newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
-  [viewSections addObject:newSection];
-  [newSection release];
-
-  switch ([indexPath indexAtPosition:0]) // switch for which section
+   switch ([indexPath indexAtPosition:0]) // switch for which section
     {
     case 0 :  //                                         __==  section ALL
       switch ([indexPath indexAtPosition:1]) { // switch by position within section 0 ("All")
@@ -161,10 +155,17 @@
 	// TODO : don't create a new listview each time
 	myPredicate= [NSPredicate predicateWithValue:TRUE];  
 	newViewTitle = @"All Sessions";
+	[sectionDates addObjectsFromArray:
+			[NSArray arrayWithObjects:
+				   AAB_WELCOMEINTRO_DATE, AAB_OPENINGKEYNOTE_DATE, 
+				 AAB_FIRST_SLOT_DATE, AAB_LUNCH_DATE, AAB_SECOND_SLOT_DATE,
+				 AAB_CLOSINGKEYNOTE_DATE,AAB_CLOSINGSUMMARY_DATE,nil]];
 	break;				
       }
       break;			 
     case 1: //                                         __==  section By Type
+	[sectionDates addObjectsFromArray:
+			[NSArray arrayWithObjects:AAB_FIRST_SLOT_DATE,AAB_SECOND_SLOT_DATE,nil]];
       switch ([indexPath indexAtPosition:1]) 
 	{
 	case 0 : // ----==== Breakout Presenentations SESSIONS ===---
@@ -178,6 +179,8 @@
 	}
       break;
     case 2 : //                                         __==  section By Difficulty
+      [sectionDates addObjectsFromArray:
+		      [NSArray arrayWithObjects:AAB_FIRST_SLOT_DATE,AAB_SECOND_SLOT_DATE,nil]];
       switch ([indexPath indexAtPosition:1]) 
 	{
 	case 0 : // ----==== BEGINER DIFFICULTY SESSIONS ===---
@@ -200,42 +203,56 @@
 	case 0 :  // ----==== HANDS-ON TECHNOLOGY TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Hands-On Technology'"];  
 	  newViewTitle = @"Hands-On Technology Track";
+	  [sectionDates addObjectsFromArray:
+			  [NSArray arrayWithObjects:AAB_FIRST_SLOT_DATE,AAB_SECOND_SLOT_DATE,nil]];
 	  break;
 	case 1 : // ----==== INTERACTIVE PROCESS TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Interactive Process'"];  
 	  newViewTitle = @"Interactive Process Track";
+	  [sectionDates addObjectsFromArray:
+			[NSArray arrayWithObjects:AAB_FIRST_SLOT_DATE,AAB_SECOND_SLOT_DATE,nil]];
 	  break;
 	case 2 : // ----==== USABILITY EXPERIENCE TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Usability Experience'"];  
 	  newViewTitle = @"Usability Experience Track"; 
+	  [sectionDates addObjectsFromArray:
+			[NSArray arrayWithObjects:AAB_FIRST_SLOT_DATE,AAB_SECOND_SLOT_DATE,nil]];
 	  break;
 	case 3 :  // ----==== LEADERSHIP TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Leadership'"];  
 	  newViewTitle = @"Leadership Track";
+	  [sectionDates addObjectsFromArray:
+			[NSArray arrayWithObjects:AAB_FIRST_SLOT_DATE,AAB_SECOND_SLOT_DATE,nil]];
 	  break;
 	case 4 :  // ----==== OPEN SPACE TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Open Space'"];  
 	  newViewTitle = @"Open Space Track";
+	  [sectionDates addObjectsFromArray:
+			  [NSArray arrayWithObjects:
+				     AAB_FIRST_SLOT_DATE, AAB_LUNCH_DATE, AAB_SECOND_SLOT_DATE,nil]];
 	  break;
 	}
       break;
     }
 
-  newSection = [[tableViewSection alloc] init];
-  newSection.title = [AAB_SECOND_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
-					   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-  newSection.predicate =  [NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
-  [viewSections addObject:newSection];
-  [newSection release];
-
-  filteredListView = [sessionListViewController 
-		       createUsingArray: [AABSessions allValues]
-		       groupList:viewSections
-		       filterBy:myPredicate];
-  filteredListView.title = newViewTitle;
-
-  [self.navigationController pushViewController:filteredListView animated:YES];
-
-  [viewSections release];
+   for ( NSDate* thisTime in sectionDates )
+     {
+        newSection = [[tableViewSection alloc] init];
+	newSection.title = [thisTime descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
+						locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+	newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", thisTime];
+	[viewSections addObject:newSection];
+	[newSection release];
+     }
+   
+   filteredListView = [sessionListViewController 
+			createUsingArray: [AABSessions allValues]
+			groupList:viewSections
+			filterBy:myPredicate];
+   filteredListView.title = newViewTitle;
+   
+   [self.navigationController pushViewController:filteredListView animated:YES];
+   
+   [sectionDates release];  [viewSections release];
 }	
 @end
