@@ -10,7 +10,8 @@
 ** DONE fix visual display of session details
 *** DONE accessory disclosure icon only on appropriate cells
 *** DONE description cell size should be dynamic
-** TODO integrate updated about page images ala mark
+** DONE integrate updated about page images ala mark
+** TODO my sessions view show keynotes/lunch
 ** TODO testing
 ** TODO proofread&check all navigation paths
 ** TODO refresh button for news
