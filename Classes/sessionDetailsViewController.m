@@ -61,11 +61,17 @@ static const int rowsAfterPeople = 2;
 - (void)viewDidLoad 
 {
   [super viewDidLoad];
+  NSString * mySessionID = getIdOfSession(mySession);
+  NSString * buttonTitle = 
+    [mySessionID isEqualToString:userSessionFirstSlot] 
+    || [mySessionID isEqualToString:userSessionSecondSlot] 
+    ?@"Remove":@"Add";
 
   // build the right add/remove button
   // TODO flip to "remove" if added
   UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
-				       initWithTitle:[getIdOfSession(mySession) isEqualToString:userSessionFirstSlot]?@"Remove":@"Add"
+				       initWithTitle:buttonTitle
+
 				       style:UIBarButtonItemStylePlain
 				       target:self
 				       action:@selector(addToUserSelections)];

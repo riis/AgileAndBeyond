@@ -40,7 +40,7 @@
 ** data, or navigation of
 *** DONE TOM POPPENENDIECK no bio in details view
 ** Interface
-*** TODO addremove button says add when should say remove
+*** DONE addremove button says add when should say remove
 **** to reproduce
    Go to "Lean Leadership" session details, click Add.
    Click My sessions.
@@ -56,6 +56,15 @@
     Expected: user selected sessions should always highlighted in sessionlists
 **** notes 
      scrolling advanced sessions sesssionlist so the "all in the cards" cell bounces off screen, it is highlighted when it reappears.
+*** TODO mySessions view does not update consistently
+**** to reproduce
+***** 1
+      Go to "my sessions" view, when any session is added
+      Click either added session.
+      Click "remove".
+      Click back arror "my sessions"
+      Bug: Session just removed still appears in list.
+      Expected: Session just removed does not appear in list.
 *** DONE cell disclosure accessory disclosure indicator (>) appears on cells in session detail view where not expect
 **** to reproduce
      Go to session detail view for "providing lean leadership".
