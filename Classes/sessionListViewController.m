@@ -130,7 +130,7 @@
 	    }
 	  [filteredSessionLists addObject:newSection];
 	  [newSection release];
-	  [self.tableView reloadData]; 
+	  //  [self.tableView reloadData]; 
 	}
     }
   else if( self == mySessionsViewController )
@@ -156,7 +156,7 @@
 	  [thisSection.items addObject:[AABSessions objectForKey:userSessionSecondSlot]];
 	}
 
-      [self.tableView reloadData]; 
+      //      [self.tableView reloadData]; 
     }
   else 
     for( sessionTableGroup* section in filteredSessionLists )
@@ -165,6 +165,9 @@
   // TODO : sort filtered arrays
   // TODO : memory management : we want arrays of refrences
   
+  // TODO : don't do a reload data each time it displays, only when userSEssions has been updated
+  [self.tableView reloadData];
+
   NSLog(@"in %s, fisteredSessionLists is %d long,",__func__ ,[filteredSessionLists count] );
 
   [super viewWillAppear:animated];

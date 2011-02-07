@@ -20,6 +20,7 @@
 ** TODO centralize cell font settings
 
 
+** TODO images / appearance of about pages
 
 * TODO Advanced 
 ** TODO markup in session details/bios
@@ -32,9 +33,11 @@
 ** TODO code cleanup
 *** TODO =nil is unnessisary
 
+** TODO click on images in about to bring up page in safari
 
 * ideas/maybes
 ** TODO News detail view
+** TODO find URL in news detail (or as attached atribute) and click table cell to load URL in safari
    
 * BUGS 
 ** data, or navigation of
@@ -47,7 +50,7 @@
    Click "lean leadership session"
    Bug: Button says "add"
    Expected: should say "remove"
-*** TODO selected sessions not always highlighted
+*** DONE selected sessions not always highlighted
 **** to reproduce:
     Go to advanced sessions
     Select "its all in the cards".  Click add.
@@ -57,7 +60,7 @@
 **** notes 
      scrolling advanced sessions sesssionlist so the "all in the cards" cell bounces off screen, it is highlighted when it reappears.
 *** DONE mySessions view does not update consistently
-**** to reproduce
+**** To reproduce
 ***** 1
       Go to "my sessions" view, when any session is added
       Click either added session.
