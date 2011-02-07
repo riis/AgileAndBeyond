@@ -5,11 +5,12 @@
 ** DONE Pull URL asynchronously
 ** DONE Parse news URL and display news items
 ** DONE check for memory leaks from instruments
-** TODO session lists can have more than two hardcoded sessions
-** TODO opening/closing summary, lunch
+** DONE session lists can have more than two hardcoded sessions
+** DONE opening/closing summary, lunch
 ** DONE fix visual display of session details
 *** DONE accessory disclosure icon only on appropriate cells
 *** DONE description cell size should be dynamic
+** TODO integrate updated about page images ala mark
 ** TODO testing
 ** TODO proofread&check all navigation paths
 ** TODO refresh button for news
@@ -17,10 +18,8 @@
 ** TODO audit against apple's interface guidelines
 ** TODO production webserver for news
 ** TODO method for updating news? 
-** TODO centralize cell font settings
 
 
-** TODO images / appearance of about pages
 
 * TODO Advanced 
 ** TODO markup in session details/bios
@@ -32,7 +31,7 @@
 ** TODO audit for memory handling
 ** TODO code cleanup
 *** TODO =nil is unnessisary
-
+*** TODO centralize cell font settings
 ** TODO click on images in about to bring up page in safari
 
 * ideas/maybes
