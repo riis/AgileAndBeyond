@@ -2,6 +2,94 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>closing-roundtable</key>
+	<dict>
+		<key>title</key>
+		<string>Closing Summary Roundtable</string>
+		<key>timeStart</key>
+		<date>2011-03-12T21:15:00Z</date>
+		<key>description</key>
+		<string>Henry Ford did it. Do we need an &apos;order of magnitude&apos; improvement to sustain Application Development in our region?
+
+This reflective conversation will seek to summarize the themes of the day:
+
+    * New learning
+    * New challenges
+    * A renewed commitment to regional collaboration</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>Mary Poppendieck</string>
+				<key>role</key>
+				<string>Member</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>Tom Poppendieck</string>
+				<key>role</key>
+				<string>Member</string>
+			</dict>
+			<dict>
+				<key>individual</key>
+				<string>David Hussman</string>
+				<key>role</key>
+				<string>Member</string>
+			</dict>
+		</array>
+	</dict>
+	<key>closing-keynote</key>
+	<dict>
+		<key>title</key>
+		<string>Big Agility Requires Little-a agile Closing Keynote</string>
+		<key>timeStart</key>
+		<date>2011-03-12T20:15:00Z</date>
+		<key>description</key>
+		<string>The hardest part of big projects is that they are BIG. Of course &quot;big&quot; means different things to different people. What some measure in cash, others measure in technology. Little value flows when we focus on the number of people &quot;doing agile&quot;. Big value is more likely to flourish when agility is a tool for overcoming complexity. David speaks to agility as a tool instead of a mandate. Come ready to toss out the book and start taking ownership of a way of working that helps you learn and helps you scale agility to focus on outcome instead of inputs.</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>David Hussman</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>opening-keynote</key>
+	<dict>
+		<key>title</key>
+		<string>Agile - What&apos;s next?  Opening Keynote</string>
+		<key>timeStart</key>
+		<date>2011-03-12T13:45:00Z</date>
+		<key>description</key>
+		<string>We will have just celebrated the ten-year anniversary of the &apos;Agile Manifesto&apos; and some may find agile to be a bit boring these days --- that there is not much left to discover. Others are just beginning their personal &apos;Agile&apos; journey. Either way, if you look around, there are a host of software development problems just waiting for a solution. Join Mary as she explores these seemingly intractable challenges and offers ideas for innovative solutions that may be coming down the road!</string>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>Mary Poppendieck</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
+	<key>welcome</key>
+	<dict>
+		<key>title</key>
+		<string>Welcome/Keynote Introduction</string>
+		<key>timeStart</key>
+		<date>2011-03-12T13:30:00Z</date>
+		<key>people</key>
+		<array>
+			<dict>
+				<key>individual</key>
+				<string>Marvin Toll</string>
+				<key>role</key>
+				<string>Presented by</string>
+			</dict>
+		</array>
+	</dict>
 	<key>open-lunch</key>
 	<dict>
 		<key>isIntermediate</key>
