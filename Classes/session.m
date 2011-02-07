@@ -181,7 +181,7 @@ void populateInitialData()
   error = [[NSError alloc] init];
        
   NSLog(@"%s about to start asynchronous connection",__func__);
-  urlConnection = [[NSURLConnection connectionWithRequest:request delegate:self] retain];
+  self.urlConnection = [NSURLConnection connectionWithRequest:request delegate:self];
 }
 
 
