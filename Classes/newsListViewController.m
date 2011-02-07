@@ -91,10 +91,39 @@
     cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
     cell.detailTextLabel.text = [myItem objectForKey:@"Detail"];
 
-
     return cell;
 }
 
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  CGFloat height;
+
+  // TOOD not hardcoding font, or anything really, except from a central position
+
+  NSDictionary *myItem =  [AABNews objectAtIndex:[indexPath indexAtPosition:1]];
+ 
+  NSString* cellText = [myItem objectForKey:@"HeadLine"];
+  UIFont* cellFont = [UIFont fontWithName:@"Helvetica" size:10.0];
+  CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
+  CGSize labelSize = [cellText sizeWithFont:cellFont
+			       constrainedToSize:constraintSize 
+			       lineBreakMode:UILineBreakModeWordWrap];
+  height = labelSize.height;
+  [cellFont release];
+
+  cellText = [myItem objectForKey:@"Detail"];
+  cellFont = [UIFont fontWithName:@"Helvetica" size:10.0];
+  constraintSize = CGSizeMake(280.0f, MAXFLOAT);
+  labelSize = [cellText sizeWithFont:cellFont
+			constrainedToSize:constraintSize 
+			lineBreakMode:UILineBreakModeWordWrap];  
+  height += labelSize.height;
+  [cellFont release];
+
+  height += 20; // for padding
+  return height;
+}
 
 /*
 // Override to support conditional editing of the table view.
