@@ -6,6 +6,7 @@
 //  Copyright 2011 RIIS LLC. All rights reserved.
 //
 
+#import "sessionListViewController.h"
 #import  "sessionDetailsViewController.h"
 #import "session.h"
 #import "AgileAndBeyondAppGlobals.h"
@@ -55,7 +56,12 @@ static const int rowsAfterPeople = 2;
       [[NSUserDefaults standardUserDefaults] setObject:id forKey:whichPref];
       self.navigationItem.rightBarButtonItem.title = @"Remove";
     }
-  
+
+  // user selected slots has updated, reload mySessionsViewController
+  if( mySessionsViewController ) 
+    {
+      [mySessionsViewController.tableView reloadData];
+    }
 }
 
 - (void)viewDidLoad 
@@ -68,7 +74,6 @@ static const int rowsAfterPeople = 2;
     ?@"Remove":@"Add";
 
   // build the right add/remove button
-  // TODO flip to "remove" if added
   UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
 				       initWithTitle:buttonTitle
 
