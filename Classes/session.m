@@ -193,12 +193,12 @@ void populateInitialData()
 	
   if (urlConnection != nil)
     {
-      //[urlConnection release];
+      [urlConnection release];
       urlConnection=nil;
     }
   if (connectionData != nil)
     {
-      //[connectionData release];
+      [connectionData release];
       connectionData=nil;
     }
   connectionInProgress=false;
@@ -345,7 +345,8 @@ void populateInitialData()
       //NSLog(@"%s: PUT request completed",__func__);
       // }
   
-  NSLog(@"%s: request completed, returned data is %@",__func__,[[NSString alloc] initWithData:connectionData encoding:nsEncoding]);
+      // the following log statement is useful for debugging but the string appears to leak 
+      // NSLog(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
   
   connectionInProgress=false;
   [self clearUrlConnection];		// nessisary?
