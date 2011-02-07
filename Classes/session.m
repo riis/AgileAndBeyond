@@ -94,7 +94,9 @@ void populateInitialData()
   /*  plistPath = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"plist"];
       AABNews = [NSArray arrayWithContentsOfFile:plistPath]; */
 
-  NSURL* newsURL = [NSURL URLWithString:@"http://10.5.1.239/news.plist"];
+  NSString* urlString=[[NSString alloc] initWithString:@"http://10.5.1.239/news.plist"];
+  NSURL* newsURL = [NSURL URLWithString:urlString];
+  [urlString release];
   /*
   AABNews = [[NSArray alloc]  init] WithContentsOfURL:[NSURL URLWithString:@"http://10.5.1.239/news.plist"]];
   
@@ -128,20 +130,22 @@ void populateInitialData()
 
   URLFetcher* fetcher = [[URLFetcher alloc] initForObject:&AABNews fromURL:newsURL];
   [fetcher refresh];
+  [newsURL release];
+  [fetcher release];
 
 }
 
 
 @implementation URLFetcher 
 @synthesize connectionData,connectionResponse,urlConnection,connectionInProgress;
-@synthesize didUpdateTarget;//,didUpdateAction;
+//@synthesize didUpdateTarget;//,didUpdateAction;
 @synthesize destinationData;
 @synthesize sourceURL;
 
 -(id) init {
   [super init];
-  connectionData = nil;
   connectionInProgress=false;
+  connectionData=[[NSMutableData alloc] init];
   return self;
 }
 
@@ -158,15 +162,13 @@ void populateInitialData()
 -(void) refresh   
 {	
   NSMutableURLRequest *request;
-  NSError *error;
+  //  NSError *error;
 	
   NSLog(@"Hello from %s", __func__);
 	
   // TODO 
   //some way of ensuring things such as there is only one request per resource happening at a time
-  // and properly memory manage connectionData
-  connectionData=[NSMutableData new];
-	
+  	
   if(connectionInProgress!=false) {
     NSLog(@"%s: I think there is already a connection in progress?",__func__);
     return;
@@ -177,11 +179,15 @@ void populateInitialData()
     NSLog(@"Warning : URLFetch refresh called but no URL.");
 	
   request = [NSMutableURLRequest requestWithURL:sourceURL];
-  [request setHTTPMethod:@"GET"];
-  error = [[NSError alloc] init];
+  NSString* get = [[NSString alloc] initWithString:@"GET"];
+  [request setHTTPMethod:get];
+  [get release];
+  //  error = [[NSError alloc] init];
        
   NSLog(@"%s about to start asynchronous connection",__func__);
   self.urlConnection = [NSURLConnection connectionWithRequest:request delegate:self];
+  
+  // [error release];
 }
 
 
@@ -190,7 +196,7 @@ void populateInitialData()
 - (void)clearUrlConnection
 {
   NSLog(@"%s", __func__);
-	
+  /*
   if (urlConnection != nil)
     {
       [urlConnection release];
@@ -201,6 +207,10 @@ void populateInitialData()
       [connectionData release];
       connectionData=nil;
     }
+  */
+  self.urlConnection = nil;
+  self.connectionData = nil;
+  //self.connectionResponse = nil; // correct? 
   connectionInProgress=false;
 }
 
@@ -211,7 +221,7 @@ void populateInitialData()
     connectionData=[NSMutableData  dataWithData: newData]; 
   [connectionData appendData:newData];
 }
-
+/*
 - (void)willSendRequest:(NSURLRequest *)request
 {
   NSLog(@"%s", __func__);
@@ -221,6 +231,7 @@ void populateInitialData()
 - (void)didReceiveResponse:(NSURLResponse *)response
 {
   // WHAT IS THIS? 
+  self.connectionResponse = response; // correct? 
   NSLog(@"%s", __func__);
 }
 
@@ -236,6 +247,7 @@ void populateInitialData()
   NSLog(@"In connection: willSendRequest: %@ redirectResponse: %@", aRequest, aResponse);
   return aRequest;
 }
+*/
 /*
   - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
   {
@@ -274,13 +286,13 @@ void populateInitialData()
   [self clearUrlConnection];
   }
 */
-
+/*
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)aResponse;
 {
   NSLog(@"%s", __func__);
   NSLog(@"%s: Reponse URL/length [%@ / %lld]", __func__, [aResponse URL], [aResponse expectedContentLength]);
 	
-  connectionResponse = [aResponse retain];
+  self.connectionResponse = aResponse;
 	
   //from apple : This message can be sent due to server redirects, or in rare cases multi-part MIME documents. 
   //Each time the delegate receives the connection:didReceiveResponse: message, it should reset any progress 
@@ -293,7 +305,7 @@ void populateInitialData()
   //		connectionData=nil;
   //	}
 }
-
+*/
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 {
   id dict;// hack
@@ -349,7 +361,8 @@ void populateInitialData()
       // NSLog(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
   
   connectionInProgress=false;
-  [self clearUrlConnection];		// nessisary?
+  //  [self clearUrlConnection];		// nessisary?
+  //  [encoding release];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
@@ -358,12 +371,13 @@ void populateInitialData()
   NSLog(@"%s: Error [%@]", __func__, error);
   [self clearUrlConnection];
 }
-
+/*
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse;
 {
   NSLog(@"%s", __func__);
   return nil; 
 }
+*/
 /*
 // allow a connection despite certificate errors
 // ideally, we won't need to do this and eventually this can be removed
@@ -373,5 +387,16 @@ return YES;
 }
 */
 
-
+- (void)dealloc 
+{
+  
+  if(connectionData) [connectionData release];
+  // I feel that the next line belongs, but it releases on a already released object
+  // if(connectionResponse) [connectionResponse release];
+  if(urlConnection) [urlConnection release];
+  //  if(didUpdateTarget) [didUpdateTarget release];
+  //if(sourceURL) [sourceURL release];
+  
+  [super dealloc];
+}
 @end 
