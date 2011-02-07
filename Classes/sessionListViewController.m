@@ -20,13 +20,14 @@
 @end
 
 @implementation sessionListViewController
-@synthesize filteredSessionLists,allSessions,filter;
+@synthesize filteredSessionLists,allSessions,filter, isUserSession;
+
 
 +(sessionListViewController*)createUsingArray:(NSArray*)bigListRef
 				    groupList:(NSArray*)groups
 				     filterBy:(NSPredicate*)filterPredicate
 {
-  sessionListViewController* me = [[[self alloc] initWithNibName:@"sessionListViewController" bundle:nil] autorelease];
+  sessionListViewController* me = [[sessionListViewController alloc] init ];
 
   // for future consideration, retaining the bigListRef if needed to update our sessions list
   // TODO : rename allSessions if it is actually "our filtered list of sections"
@@ -40,20 +41,37 @@
   // we won't fill in items yet, lets let that happen in viewWillAppear for now
   if( groups != nil)  
     {
-      if ( [me filteredSessionLists] == nil ) 
-	[me setFilteredSessionLists:[[NSMutableArray alloc] init]]; 
       for( tableViewSection* section in groups ) 
 	{
 	  sessionTableGroup* newGroup = [[sessionTableGroup alloc] init];
 	  newGroup.predicate = section.predicate;
 	  newGroup.title = section.title;	  
 	  [[me filteredSessionLists] addObject:newGroup];
+	  [newGroup release];
 	}
     }
 
   [me setFilter:filterPredicate];
-    
   return me;
+}
+
+- (id)init
+{
+  NSLog(@"!!!!!!hello from %s",__func__);
+  filteredSessionLists=[[NSMutableArray alloc] init]; 
+  return [super initWithNibName:@"sessionListViewController" bundle:nil];
+}
+
+- (id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle
+{
+  //  just igore nibname and bundle, since there is only one we'd want 
+  // to use, and we put it in via -(id)init
+  return [self init];
+}
+- (id)initWithCoder:(NSCoder *)decoder
+{
+  [self init];
+  return [super initWithCoder:decoder];
 }
 
 #pragma mark -
@@ -75,44 +93,49 @@
   // TODO possibly move this stuff into init functions properly
   //  NSLog(@"hello from %s", __func__);
 
-  if(allSessions == nil || isUserSession == true)
+  // TODO : cleanup, the logic here is a bit less simple than probably nessisary
+  //  if(allSessions == nil || isUserSession == true)
+  if(![filteredSessionLists count] )
     {
       NSLog(@"hello from %s : in block to set up ussersessions", __func__);
       isUserSession = true;
-
-      [self setFilteredSessionLists:[[NSMutableArray alloc] init]]; 
       
       sessionTableGroup* newSection;
+
       newSection = [[sessionTableGroup alloc] init];
       newSection.title = [AAB_FIRST_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
 					      locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
       newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
-      newSection.items = [[NSMutableArray alloc] init];
+      [(newSection.items = [[NSMutableArray alloc] init]) release];
       if ( userSessionFirstSlot != nil ) 
 	{
 	  NSLog(@"adding %@ for first slot",userSessionFirstSlot );
 	  [newSection.items addObject:[AABSessions objectForKey:userSessionFirstSlot]];
 	}
       [filteredSessionLists addObject:newSection];
-      newSection = [[sessionTableGroup alloc] init];
+      [newSection release];  newSection = [[sessionTableGroup alloc] init];
       newSection.title = [AAB_SECOND_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
 					       locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
       newSection.predicate =  [NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
-      newSection.items = [[NSMutableArray alloc] init];
+      [(newSection.items = [[NSMutableArray alloc] init]) release];
       if ( userSessionSecondSlot != nil )
-	[newSection.items addObject:[AABSessions objectForKey:userSessionSecondSlot]];
+	{
+	  NSLog(@"adding %@ for second slot",userSessionSecondSlot );
+	  [newSection.items addObject:[AABSessions objectForKey:userSessionSecondSlot]];
+	}
       [filteredSessionLists addObject:newSection];
+      [newSection release];
       [self.tableView reloadData]; 
     }
-    
-  else 
+  else if( !isUserSession )
     for( sessionTableGroup* section in filteredSessionLists )
       section.items = [allSessions filteredArrayUsingPredicate:section.predicate];
    
-
   // TODO : sort filtered arrays
   // TODO : memory management : we want arrays of refrences
   
+  NSLog(@"in %s, fisteredSessionLists is %d long,",__func__ ,[filteredSessionLists count] );
+
   [super viewWillAppear:animated];
 }
 
@@ -205,13 +228,13 @@
   // Navigation logic, Create and push another view controller.
   NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];  
   NSDictionary* whichSession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
+  //  NSLog(@"in %s : mySession is titled %@", __func__, [whichSession objectForKey:@"title"]); 
   sessionDetailsViewController *detailViewController = 
     [sessionDetailsViewController createWithSession:whichSession];
   
   // Pass the selected object to the new view controller.
   [self.navigationController pushViewController:detailViewController animated:YES];
   [detailViewController release];
-  
 }
 
 #pragma mark -
