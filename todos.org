@@ -4,7 +4,6 @@
 * TODO Basic Functionaliy Finished :
 ** DONE Pull URL asynchronously
 ** DONE Parse news URL and display news items
-** TODO News detail view
 ** DONE check for memory leaks from instruments
 ** TODO session lists can have more than two hardcoded sessions
 ** TODO opening/closing summary, lunch
@@ -13,14 +12,16 @@
 *** DONE description cell size should be dynamic
 ** TODO testing
 ** TODO proofread&check all navigation paths
-** TODO centralize cell font settings
 ** TODO refresh button for news
 ** TODO test on iphone
 ** TODO audit against apple's interface guidelines
 ** TODO production webserver for news
 ** TODO method for updating news? 
+** TODO centralize cell font settings
 
-* Todo Advanced 
+
+
+* TODO Advanced 
 ** TODO markup in session details/bios
 ** TODO Persist most recently updated "news"
 ** TODO Ability to update
@@ -32,10 +33,13 @@
 *** TODO =nil is unnessisary
 
 
+* ideas/maybes
+** TODO News detail view
+
 * BUGS 
 ** data, or navigation of
-*** TODO TOM POPPENENDIECK no bio in details view
-** interface
+*** DONE TOM POPPENENDIECK no bio in details view
+** Interface
 *** TODO addremove button says add when should say remove
 **** to reproduce
    Go to "Lean Leadership" session details, click Add.
