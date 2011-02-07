@@ -138,9 +138,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
   sessionListViewController* filteredListView;
+  NSString* newViewTitle;
   // TODO (cleanup) less repeated code
   NSPredicate* myPredicate;
-
+  
   // TODO don't do this each time, move this code
   tableViewSection* newSection;
   NSMutableArray* viewSections = [[NSMutableArray alloc] init];  
@@ -151,12 +152,6 @@
   newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
   [viewSections addObject:newSection];
   [newSection release];
-  newSection = [[tableViewSection alloc] init];
-  newSection.title = [AAB_SECOND_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
-					   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-  newSection.predicate =  [NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
-  [viewSections addObject:newSection];
-  [newSection release];
 
   switch ([indexPath indexAtPosition:0]) // switch for which section
     {
@@ -165,13 +160,7 @@
       case 0 :  // ----====   ALL  SESSIONS   ===---
 	// TODO : don't create a new listview each time
 	myPredicate= [NSPredicate predicateWithValue:TRUE];  
-	
-	filteredListView = [sessionListViewController 
-			     createUsingArray: [AABSessions allValues]
-			     groupList:viewSections
-			     filterBy:myPredicate];
-	[filteredListView setTitle:@"All Sessions"];
-	[self.navigationController pushViewController:filteredListView animated:YES];
+	newViewTitle = @"All Sessions";
 	break;				
       }
       break;			 
@@ -180,21 +169,11 @@
 	{
 	case 0 : // ----==== Breakout Presenentations SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Breakout Presentations"];
-	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  newViewTitle = @"Breakout Presentations";
 	  break;
 	case 1 : // ----==== Breakout Presenentations SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Workshops"];
-	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  newViewTitle = @"Workshops";
 	  break;
 	}
       break;
@@ -203,34 +182,15 @@
 	{
 	case 0 : // ----==== BEGINER DIFFICULTY SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"isBeginner == YES"];  
-	
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Beginner Sessions"];
-	  [self.navigationController pushViewController:filteredListView animated:YES];
-	
+	  newViewTitle = @"Beginner Sessions";
 	  break;
 	case 1 :  // ----==== INTERMEDIATE DIFFICULTY SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"isIntermediate == YES"];  
-	
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Intermediate Sessions"];
-	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  newViewTitle = @"Intermediate Sessions";
 	  break;
 	case 2 :  // ----==== ADVANCED DIFFICULTY SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"isAdvanced == YES"];  
-	
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Advanced Sessions"];
-	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  newViewTitle = @"Advanced Sessions";
 	  break;					
 	}
       break;      // section By Trac
@@ -239,59 +199,43 @@
 	{
 	case 0 :  // ----==== HANDS-ON TECHNOLOGY TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Hands-On Technology'"];  
-	
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Hands-On Technology Track"];
-	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  newViewTitle = @"Hands-On Technology Track";
 	  break;
 	case 1 : // ----==== INTERACTIVE PROCESS TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Interactive Process'"];  
-	
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Interactive Process Track"];
-	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  newViewTitle = @"Interactive Process Track";
 	  break;
 	case 2 : // ----==== USABILITY EXPERIENCE TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Usability Experience'"];  
-	
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Usability Experience Track"]; 
-	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  newViewTitle = @"Usability Experience Track"; 
 	  break;
 	case 3 :  // ----==== LEADERSHIP TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Leadership'"];  
-	
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Leadership Track"];
-	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  newViewTitle = @"Leadership Track";
 	  break;
 	case 4 :  // ----==== OPEN SPACE TRACK SESSIONS ===---
 	  myPredicate=[NSPredicate predicateWithFormat:@"track like 'Open Space'"];  
-	
-	  filteredListView = [sessionListViewController 
-			       createUsingArray: [AABSessions allValues]
-			       groupList:viewSections
-			       filterBy:myPredicate];
-	  [filteredListView setTitle:@"Open Space Track"];
-	  [self.navigationController pushViewController:filteredListView animated:YES];
+	  newViewTitle = @"Open Space Track";
 	  break;
 	}
       break;
     }
 
+  newSection = [[tableViewSection alloc] init];
+  newSection.title = [AAB_SECOND_SLOT_DATE descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
+					   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+  newSection.predicate =  [NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
+  [viewSections addObject:newSection];
+  [newSection release];
+
+  filteredListView = [sessionListViewController 
+		       createUsingArray: [AABSessions allValues]
+		       groupList:viewSections
+		       filterBy:myPredicate];
+  filteredListView.title = newViewTitle;
+
+  [self.navigationController pushViewController:filteredListView animated:YES];
+
   [viewSections release];
-  
 }	
 @end
