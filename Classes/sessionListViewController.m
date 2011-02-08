@@ -156,7 +156,8 @@
     {
       // reload the data
       // TODO this belongs somewhere else, like in a refreshme function
-      sessionTableGroup* thisSection = [filteredSessionLists objectAtIndex:0];
+      // TODO a less fragile implementation
+      sessionTableGroup* thisSection = [filteredSessionLists objectAtIndex:1];
 	
       // TODO reuse old array if nothing changed(?)
       [(thisSection.items = [[NSMutableArray alloc] init]) release];
@@ -167,7 +168,7 @@
 	  [thisSection.items addObject:[AABSessions objectForKey:userSessionFirstSlot]];
 	}
 
-      thisSection = [filteredSessionLists objectAtIndex:1];
+      thisSection = [filteredSessionLists objectAtIndex:3];
       [(thisSection.items = [[NSMutableArray alloc] init]) release];
       if ( userSessionSecondSlot != nil )
 	{
