@@ -12,6 +12,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
+		5D0C6F6C1301DDC800E9029C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0C6F6B1301DDC800E9029C /* UIKit.framework */; };
 		5D2B4B9812F0D14400EBE32C /* agile_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */; };
 		5D2B4B9912F0D14400EBE32C /* riis_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */; };
 		5D2B4BA812F1F6DE00EBE32C /* mainFilterSelectionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2B4BA712F1F6DE00EBE32C /* mainFilterSelectionMenu.m */; };
@@ -43,7 +44,6 @@
 		5DCF56FF1300A92A004C5CC9 /* aboutRIISLogo_@2x640x122.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DCF56FB1300A926004C5CC9 /* aboutRIISLogo_@2x640x122.png */; };
 		5DCF57001300A92A004C5CC9 /* aboutRIISLogo_320x61.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DCF56FC1300A92A004C5CC9 /* aboutRIISLogo_320x61.png */; };
 		5DE58CB712F72B2800794353 /* AAB2011-initial.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5DE58CB612F72B2800794353 /* AAB2011-initial.plist */; };
-		5DE58F9B12F89B9100794353 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DE58F9A12F89B9100794353 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +55,7 @@
 		28A0AB4B0D9B1048005BE974 /* AgileAndBeyond_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgileAndBeyond_Prefix.pch; sourceTree = "<group>"; };
 		28AD73870D9D96C1002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5D0C6F6B1301DDC800E9029C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agile_logo_about.png; sourceTree = "<group>"; };
 		5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = riis_logo_about.png; sourceTree = "<group>"; };
 		5D2B4BA612F1F6DE00EBE32C /* mainFilterSelectionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainFilterSelectionMenu.h; sourceTree = "<group>"; };
@@ -93,7 +94,6 @@
 		5DCF56FB1300A926004C5CC9 /* aboutRIISLogo_@2x640x122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutRIISLogo_@2x640x122.png"; sourceTree = "<group>"; };
 		5DCF56FC1300A92A004C5CC9 /* aboutRIISLogo_320x61.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutRIISLogo_320x61.png; sourceTree = "<group>"; };
 		5DE58CB612F72B2800794353 /* AAB2011-initial.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AAB2011-initial.plist"; sourceTree = "<group>"; };
-		5DE58F9A12F89B9100794353 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = ../iBroadSoft/iphoneos3.1.3/System/Library/Frameworks/UIKit.framework; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* AgileAndBeyond-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AgileAndBeyond-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,7 +104,7 @@
 			files = (
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
-				5DE58F9B12F89B9100794353 /* UIKit.framework in Frameworks */,
+				5D0C6F6C1301DDC800E9029C /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,9 +199,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5DE58F9A12F89B9100794353 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765070DF74369002DB57D /* CoreGraphics.framework */,
+				5D0C6F6B1301DDC800E9029C /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -314,10 +314,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../iBroadSoft/iphoneos3.1.3/System/Library/Frameworks\"",
-				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -332,10 +328,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../iBroadSoft/iphoneos3.1.3/System/Library/Frameworks\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AgileAndBeyond_Prefix.pch;
 				INFOPLIST_FILE = "AgileAndBeyond-Info.plist";

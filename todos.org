@@ -11,14 +11,14 @@
 *** DONE accessory disclosure icon only on appropriate cells
 *** DONE description cell size should be dynamic
 ** DONE integrate updated about page images ala mark
-** TODO my sessions view show keynotes/lunch
-** TODO testing
-** TODO proofread&check all navigation paths
+** DONE my sessions view show keynotes/lunch
+** DONE eliminate all compiler warnings
 ** TODO refresh button for news
+** TODO proofread&check all navigation paths
+** TODO method for updating news & publishing
+** TODO testing
 ** TODO test on iphone
 ** TODO audit against apple's interface guidelines
-** TODO production webserver for news
-** TODO method for updating news? 
 
 
 
