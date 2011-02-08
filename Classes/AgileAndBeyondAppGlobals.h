@@ -43,3 +43,10 @@ extern NSDateFormatter* AABDateSectionTitleFormmater;
 // maybe the new style does also, in which case it'd be more robust
 //  (superseeded by use of NSDateFormatter) 
 //#define DATE_FORMAT_STRING @"%A, %B %e %Y %I:%M"
+
+//#if defined CONFIGURATION_Debug
+#define BUGOUT(...) NSLog(__VA_ARGS__)
+//#else
+//#define BUGOUT(...)
+//#endif
+

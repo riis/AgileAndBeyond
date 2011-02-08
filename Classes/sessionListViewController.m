@@ -57,7 +57,7 @@
 
 - (id)init
 {
-  NSLog(@"!!!!!!hello from %s",__func__);
+  BUGOUT(@"!!!!!!hello from %s",__func__);
   filteredSessionLists=[[NSMutableArray alloc] init]; 
   return [super initWithNibName:@"sessionListViewController" bundle:nil];
 }
@@ -91,7 +91,7 @@
   // populate an array with refrences to the sessions we will display, in the order we want
   // if we were not created using createWithArray, then function as the "My Sessions" list
   // TODO possibly move some of this functionality into more apropriate (init?) methods
-  //  NSLog(@"hello from %s", __func__);
+  //  BUGOUT(@"hello from %s", __func__);
 
   // TODO : cleanup, the logic here is a bit less simple than probably nessisary
   //  if(allSessions == nil || isUserSession == true)
@@ -101,9 +101,9 @@
        * we were not created with createWithArray, assume we are intended to be the mySessionsView
        * ( later, move this to a different function )
        */
-      NSLog(@"hello from %s : in block where filteredSessionsList is found to be 0...", __func__);
+      BUGOUT(@"hello from %s : in block where filteredSessionsList is found to be 0...", __func__);
       if(mySessionsViewController)
-	NSLog(@"WARNING there is already a mySessionsListViewController created.");
+	BUGOUT(@"WARNING there is already a mySessionsListViewController created.");
       else
 	{
 	  mySessionsViewController = self;
@@ -123,7 +123,7 @@
 		{
 		  if ( userSessionFirstSlot != nil ) 
 		    {
-		      NSLog(@"adding %@ for first slot",userSessionFirstSlot );
+		      BUGOUT(@"adding %@ for first slot",userSessionFirstSlot );
 		      //		      [
 		      (newSection.items = [NSArray arrayWithObject:[AABSessions objectForKey:userSessionFirstSlot]]);
 			//	release];
@@ -133,7 +133,7 @@
 		{
 		  if ( userSessionSecondSlot != nil )
 		    {
-		      NSLog(@"adding %@ for second slot",userSessionSecondSlot );
+		      BUGOUT(@"adding %@ for second slot",userSessionSecondSlot );
 		      //		      [
 		      (newSection.items =  [NSArray arrayWithObject:[AABSessions objectForKey:userSessionSecondSlot]]);
 			 // release];
@@ -164,7 +164,7 @@
       
       if ( userSessionFirstSlot != nil ) 
 	{
-	  NSLog(@"adding %@ for first slot",userSessionFirstSlot );
+	  BUGOUT(@"adding %@ for first slot",userSessionFirstSlot );
 	  [thisSection.items addObject:[AABSessions objectForKey:userSessionFirstSlot]];
 	}
 
@@ -172,7 +172,7 @@
       [(thisSection.items = [[NSMutableArray alloc] init]) release];
       if ( userSessionSecondSlot != nil )
 	{
-	  NSLog(@"adding %@ for second slot",userSessionSecondSlot );
+	  BUGOUT(@"adding %@ for second slot",userSessionSecondSlot );
 	  [thisSection.items addObject:[AABSessions objectForKey:userSessionSecondSlot]];
 	}
 
@@ -190,7 +190,7 @@
   // TODO : don't do a reload data each time it displays, only when userSEssions has been updated
   [self.tableView reloadData];
 
-  NSLog(@"in %s, fisteredSessionLists is %d long,",__func__ ,[filteredSessionLists count] );
+  BUGOUT(@"in %s, fisteredSessionLists is %d long,",__func__ ,[filteredSessionLists count] );
 
   [super viewWillAppear:animated];
 }
@@ -284,7 +284,7 @@
   // Navigation logic, Create and push another view controller.
   NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];  
   NSDictionary* whichSession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
-  //  NSLog(@"in %s : mySession is titled %@", __func__, [whichSession objectForKey:@"title"]); 
+  //  BUGOUT(@"in %s : mySession is titled %@", __func__, [whichSession objectForKey:@"title"]); 
   sessionDetailsViewController *detailViewController = 
     [sessionDetailsViewController createWithSession:whichSession];
   
