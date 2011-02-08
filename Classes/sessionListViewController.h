@@ -42,6 +42,9 @@
 @property (nonatomic, retain) NSArray* allSessions;
 @property (nonatomic, retain) NSMutableArray* filteredSessionLists;
 @property (nonatomic, retain) NSPredicate* filter;
+
++(sessionListViewController*)createUsingArray:(NSArray*)bigListRef groupList:(NSArray*)groups filterBy:(NSPredicate*)filterPerdicate;
+
 @end
 
 sessionListViewController* mySessionsViewController;
