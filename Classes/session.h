@@ -63,6 +63,10 @@ NSString* getIdOfSession(NSDictionary*);
   BOOL connectionInProgress; //TODO revisit this whole approach
 }
 
+-(URLFetcher*) initForObject:(id*)dataPoint fromURL:(NSURL*)url;
+-(void) refresh;
+
+
 @property (nonatomic, retain) NSMutableData *connectionData; 
 @property (nonatomic, retain) NSURLResponse *connectionResponse;
 @property () BOOL connectionInProgress;

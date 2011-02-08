@@ -15,4 +15,6 @@
 }
 
 @property (nonatomic,retain) NSDictionary* mySession;
++ (sessionDetailsViewController*) createWithSession:(NSDictionary*)session;
+
 @end
