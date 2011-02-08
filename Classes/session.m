@@ -9,6 +9,15 @@
 #import "session.h"
 
 
+NSDate* AABDateOfFirstSlot;
+NSDate* AABDateOfSecondSlot;
+NSDate* AABDateOfWelcome;
+NSDate* AABDateOfOpeningKeynote;
+NSDate* AABDateOfLunch;
+NSDate* AABDateOfClosingKeynote;
+NSDate* AABDateOfClosingSummary;
+
+
 NSString* getIdOfSession(NSDictionary*session)
 {
   NSString* id = nil;
@@ -27,6 +36,7 @@ NSString* getIdOfSession(NSDictionary*session)
 //this one dumps a nested dictionary structure to log
 void dumpNestedDictToLog(NSDictionary* dict)
 {
+#ifdef DUMPDICT
   NSEnumerator *enumerator;
   id	key = nil,
     obj = nil;
@@ -57,12 +67,33 @@ void dumpNestedDictToLog(NSDictionary* dict)
   else {
     NSLog(@"Null or something unrecognized");
   }
+#endif
 }
 
 void populateInitialData()
 {
   AABSessions = nil;
   NSString* plistPath;
+
+  NSDateFormatter* AABDateFormatter = [[NSDateFormatter alloc] init];
+  [AABDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+  [(AABDateOfFirstSlot = [AABDateFormatter dateFromString:@"2011-03-12 10:15"])
+    retain];
+  [(AABDateOfSecondSlot = [AABDateFormatter dateFromString:@"2011-03-12 12:30"])
+    retain];
+  [(AABDateOfWelcome = [AABDateFormatter dateFromString:@"2011-03-12 8:30"])
+    retain];
+  [(AABDateOfOpeningKeynote = [AABDateFormatter dateFromString:@"2011-03-12 8:45"])
+    retain];
+  [(AABDateOfLunch = [AABDateFormatter dateFromString:@"2011-03-12 11:30"])
+    retain];
+  [(AABDateOfClosingKeynote = [AABDateFormatter dateFromString:@"2011-03-12 15:15"])
+    retain];
+  [(AABDateOfClosingSummary = [AABDateFormatter dateFromString:@"2011-03-12 16:15"])
+    retain];
+
+  
+  NSLog(@"AABDateOfFirstSlot is %@",  AABDateOfFirstSlot);
 
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
   AABSessions = [NSDictionary dictionaryWithContentsOfFile:plistPath];
