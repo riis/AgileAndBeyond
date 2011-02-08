@@ -44,9 +44,9 @@ extern NSDateFormatter* AABDateSectionTitleFormmater;
 //  (superseeded by use of NSDateFormatter) 
 //#define DATE_FORMAT_STRING @"%A, %B %e %Y %I:%M"
 
-//#if defined CONFIGURATION_Debug
+#ifdef CONFIGURATION_Debug
 #define BUGOUT(...) NSLog(__VA_ARGS__)
-//#else
-//#define BUGOUT(...)
-//#endif
+#else
+#define BUGOUT(...)
+#endif
 
