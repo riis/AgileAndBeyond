@@ -142,7 +142,9 @@
 	      else
 		{
 		  newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", thisDate];
-		  newSection.items = [[AABSessions allValues] filteredArrayUsingPredicate:newSection.predicate];
+		  newSection.items = [NSMutableArray 
+				       arrayWithArray:
+					 [[AABSessions allValues] filteredArrayUsingPredicate:newSection.predicate]];
 		}
 	  
 	      [filteredSessionLists addObject:newSection];
@@ -178,7 +180,9 @@
     }
   else 
     for( sessionTableGroup* section in filteredSessionLists )
-      section.items = [allSessions filteredArrayUsingPredicate:section.predicate];
+      section.items = [NSMutableArray 
+			arrayWithArray:
+			  [allSessions filteredArrayUsingPredicate:section.predicate]];
    
   // TODO : sort filtered arrays
   // TODO : memory management : we want arrays of refrences
