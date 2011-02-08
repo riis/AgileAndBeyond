@@ -377,15 +377,15 @@ void populateInitialData()
       dict = [NSPropertyListSerialization propertyListWithData:connectionData 
 				   options:NSPropertyListImmutable
 				   format:NULL error:&plistError];
-      if(plistError)
-	NSLog(@"plistError .. %@",plistError); 
-      else
-	{
-	  dumpNestedDictToLog(dict);
+      //  if(plistError)
+      //	NSLog(@"plistError .. %@",plistError); 
+      //else
+      //	{
+      //	  dumpNestedDictToLog(dict);
 	  [dict retain]; // todo ... a little bit of odd memory management to look at
 	  // something like, if *destinationdata is an object, ..release? 
 	  (*(self.destinationData)) = dict;
-	}
+	  //	}
 
       //}
       //  else 
@@ -430,7 +430,7 @@ return YES;
   // I feel that the next line belongs, but it releases on a already released object
   // if(connectionResponse) [connectionResponse release];
   if(urlConnection) [urlConnection release];
-  //  if(didUpdateTarget) [didUpdateTarget release];
+  //if(didUpdateTarget) [didUpdateTarget release];
   //if(sourceURL) [sourceURL release];
   
   [super dealloc];
