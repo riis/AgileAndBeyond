@@ -20,13 +20,13 @@
 
 @interface sessionTableGroup : NSObject 
 {
-  NSArray* items;
+  NSMutableArray* items;
   NSString* title;
   NSPredicate* predicate;
 }
 
 
-@property (nonatomic, retain) NSArray* items;
+@property (nonatomic, retain) NSMutableArray* items;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSPredicate* predicate;
 @end
