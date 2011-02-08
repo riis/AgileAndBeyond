@@ -256,7 +256,7 @@
    
   NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
   NSDictionary* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
-  NSString* mySessionID = getIdOfSession(mySession);
+
   cell.textLabel.text = [mySession objectForKey:@"title"]; 
   cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     
