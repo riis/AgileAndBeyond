@@ -117,9 +117,7 @@
 	  for(NSDate* thisDate in sectionDates )
 	    {
 	      newSection = [[sessionTableGroup alloc] init];
-	      newSection.title = [thisDate descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
-					   locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
-	  
+	      newSection.title = [AABDateSectionTitleFormmater stringFromDate:thisDate];
 	    
 	      if( [thisDate isEqualToDate:AAB_FIRST_SLOT_DATE] )
 		{

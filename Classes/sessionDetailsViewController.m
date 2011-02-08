@@ -177,10 +177,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	  {
 	  case 0 : 
 	    cell.textLabel.text = @"Schedule";
-	    cell.detailTextLabel.text = 
-	      [[mySession objectForKey:@"timeStart"]
-		descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
-		locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+	    cell.detailTextLabel.text =  [AABDateSectionTitleFormmater 
+					   stringFromDate:[mySession objectForKey:@"timeStart"]];
 	    break;
 	  case 1 : 
 	    cell.textLabel.text = @"Description";

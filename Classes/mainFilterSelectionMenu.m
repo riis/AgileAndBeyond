@@ -238,8 +238,7 @@
    for ( NSDate* thisTime in sectionDates )
      {
         newSection = [[tableViewSection alloc] init];
-	newSection.title = [thisTime descriptionWithCalendarFormat:DATE_FORMAT_STRING timeZone:nil 
-						locale:[[NSUserDefaults standardUserDefaults] dictionaryRepresentation]];
+	newSection.title = [AABDateSectionTitleFormmater stringFromDate:thisTime];
 	newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", thisTime];
 	[viewSections addObject:newSection];
 	[newSection release];

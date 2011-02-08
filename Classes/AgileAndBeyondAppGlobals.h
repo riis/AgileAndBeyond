@@ -17,6 +17,8 @@ extern NSDate* AABDateOfOpeningKeynote;
 extern NSDate* AABDateOfLunch;
 extern NSDate* AABDateOfClosingKeynote;
 extern NSDate* AABDateOfClosingSummary;
+extern NSDateFormatter* AABDateConstFormatter;
+extern NSDateFormatter* AABDateSectionTitleFormmater;
 
 /*#define AAB_FIRST_SLOT_DATE [NSDate dateWithString:@"2011-03-12 10:15:00 -0500"]
 #define AAB_SECOND_SLOT_DATE [NSDate dateWithString:@"2011-03-12 12:30:00 -0500"]
@@ -39,4 +41,5 @@ extern NSDate* AABDateOfClosingSummary;
 // there is a new style that is used with some (all?) functions
 // old style works with descriptionWithCalandarFormat:timezone:locale:dict...
 // maybe the new style does also, in which case it'd be more robust
-#define DATE_FORMAT_STRING @"%A, %B %e %Y %I:%M"
+//  (superseeded by use of NSDateFormatter) 
+//#define DATE_FORMAT_STRING @"%A, %B %e %Y %I:%M"

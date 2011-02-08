@@ -17,6 +17,8 @@ NSDate* AABDateOfLunch;
 NSDate* AABDateOfClosingKeynote;
 NSDate* AABDateOfClosingSummary;
 
+NSDateFormatter* AABDateConstFormatter;
+NSDateFormatter* AABDateSectionTitleFormmater;
 
 NSString* getIdOfSession(NSDictionary*session)
 {
@@ -75,24 +77,27 @@ void populateInitialData()
   AABSessions = nil;
   NSString* plistPath;
 
-  NSDateFormatter* AABDateFormatter = [[NSDateFormatter alloc] init];
-  [AABDateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-  [(AABDateOfFirstSlot = [AABDateFormatter dateFromString:@"2011-03-12 10:15"])
+  AABDateConstFormatter = [[NSDateFormatter alloc] init];
+  [AABDateConstFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+  [(AABDateOfFirstSlot = [AABDateConstFormatter dateFromString:@"2011-03-12 10:15"])
     retain];
-  [(AABDateOfSecondSlot = [AABDateFormatter dateFromString:@"2011-03-12 12:30"])
+  [(AABDateOfSecondSlot = [AABDateConstFormatter dateFromString:@"2011-03-12 12:30"])
     retain];
-  [(AABDateOfWelcome = [AABDateFormatter dateFromString:@"2011-03-12 8:30"])
+  [(AABDateOfWelcome = [AABDateConstFormatter dateFromString:@"2011-03-12 8:30"])
     retain];
-  [(AABDateOfOpeningKeynote = [AABDateFormatter dateFromString:@"2011-03-12 8:45"])
+  [(AABDateOfOpeningKeynote = [AABDateConstFormatter dateFromString:@"2011-03-12 8:45"])
     retain];
-  [(AABDateOfLunch = [AABDateFormatter dateFromString:@"2011-03-12 11:30"])
+  [(AABDateOfLunch = [AABDateConstFormatter dateFromString:@"2011-03-12 11:30"])
     retain];
-  [(AABDateOfClosingKeynote = [AABDateFormatter dateFromString:@"2011-03-12 15:15"])
+  [(AABDateOfClosingKeynote = [AABDateConstFormatter dateFromString:@"2011-03-12 15:15"])
     retain];
-  [(AABDateOfClosingSummary = [AABDateFormatter dateFromString:@"2011-03-12 16:15"])
+  [(AABDateOfClosingSummary = [AABDateConstFormatter dateFromString:@"2011-03-12 16:15"])
     retain];
 
   
+  AABDateSectionTitleFormmater = [[NSDateFormatter alloc] init];
+  [AABDateSectionTitleFormmater setDateFormat:@"EEE, MMMM d h:mm a"];
+
   NSLog(@"AABDateOfFirstSlot is %@",  AABDateOfFirstSlot);
 
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
