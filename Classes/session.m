@@ -7,7 +7,7 @@
 //
 
 #import "session.h"
-
+#import "AgileAndBeyondAppGlobals.h"
 
 NSDate* AABDateOfFirstSlot;
 NSDate* AABDateOfSecondSlot;
@@ -24,12 +24,12 @@ NSString* getIdOfSession(NSDictionary*session)
 {
   NSString* id = nil;
   NSArray* all_ids =  [AABSessions allKeysForObject:session];
-  NSLog(@"Hello from %s", __func__);
-  NSLog(@"Number of ids found is : %d", [all_ids count]);
+  BUGOUT(@"Hello from %s", __func__);
+  BUGOUT(@"Number of ids found is : %d", [all_ids count]);
   if([all_ids count] == 1)
     {
       id = [all_ids objectAtIndex:0];
-      NSLog(@"Session id found is %@",id);
+      BUGOUT(@"Session id found is %@",id);
       if(id) [id retain];
     }		
   return id;
@@ -46,28 +46,28 @@ void dumpNestedDictToLog(NSDictionary* dict)
   if([dict isKindOfClass:[NSDictionary class]])
     {
       enumerator = [dict keyEnumerator];
-      NSLog(@"size of dict is %d", [dict count]); 
+      BUGOUT(@"size of dict is %d", [dict count]); 
       while (key = [enumerator nextObject]) {
 	obj = [dict objectForKey:key];
-	NSLog(@"%@ : %@", key, obj);
+	BUGOUT(@"%@ : %@", key, obj);
 	dumpNestedDictToLog(obj); // then recurse
       }
     }
   else if([dict isKindOfClass:[NSArray class]])
     {
       enumerator = [dict objectEnumerator]; 
-      NSLog(@"size of array is %d", [dict count]); 
+      BUGOUT(@"size of array is %d", [dict count]); 
       while (obj = [enumerator nextObject]) {
-	NSLog(@"array element is %@", obj);
+	BUGOUT(@"array element is %@", obj);
 	dumpNestedDictToLog(obj);
       }
     }
   else if([dict isKindOfClass:[NSString class]]) {
-    NSLog(@"string is %@",dict);
+    BUGOUT(@"string is %@",dict);
     return;
   }
   else {
-    NSLog(@"Null or something unrecognized");
+    BUGOUT(@"Null or something unrecognized");
   }
 #endif
 }
@@ -98,19 +98,19 @@ void populateInitialData()
   AABDateSectionTitleFormmater = [[NSDateFormatter alloc] init];
   [AABDateSectionTitleFormmater setDateFormat:@"EEE, MMMM d h:mm a"];
 
-  NSLog(@"AABDateOfFirstSlot is %@",  AABDateOfFirstSlot);
+  BUGOUT(@"AABDateOfFirstSlot is %@",  AABDateOfFirstSlot);
 
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
   AABSessions = [NSDictionary dictionaryWithContentsOfFile:plistPath];
   if(AABSessions)
     {
-      NSLog(@"I loaded in a plist as AABSessions from %@, and its got %d elements",  
+      BUGOUT(@"I loaded in a plist as AABSessions from %@, and its got %d elements",  
 	    plistPath,
 	    [AABPeople count]);
     }
   else 
     {
-      NSLog(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
+      BUGOUT(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
     }
 
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-people" ofType:@"plist"];
@@ -118,13 +118,13 @@ void populateInitialData()
 
   if(AABPeople)
     {
-      NSLog(@"I loaded in a plist as AABPeople from %@, and its got %d elements", 
+      BUGOUT(@"I loaded in a plist as AABPeople from %@, and its got %d elements", 
 	    plistPath,
 	    [AABPeople count]);
     }
   else 
     {
-      NSLog(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
+      BUGOUT(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
     }
 
   /*  plistPath = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"plist"];
@@ -138,14 +138,14 @@ void populateInitialData()
   
   if(AABNews)
     {
-      NSLog(@"I loaded in a plist as AABNews from %@, and its got %d elements", 
+      BUGOUT(@"I loaded in a plist as AABNews from %@, and its got %d elements", 
 	    // plistPath,
 	    newsURL,
 	    [AABPeople count]);
     }
   else 
     {
-      NSLog(@"Tried to load dictionary but ended up with nil, using path %@",newsURL);
+      BUGOUT(@"Tried to load dictionary but ended up with nil, using path %@",newsURL);
     }
   */
   // TODO memory
@@ -200,19 +200,19 @@ void populateInitialData()
   NSMutableURLRequest *request;
   //  NSError *error;
 	
-  NSLog(@"Hello from %s", __func__);
+  BUGOUT(@"Hello from %s", __func__);
 	
   // TODO 
   //some way of ensuring things such as there is only one request per resource happening at a time
   	
   if(connectionInProgress!=false) {
-    NSLog(@"%s: I think there is already a connection in progress?",__func__);
+    BUGOUT(@"%s: I think there is already a connection in progress?",__func__);
     return;
   }
   connectionInProgress=true;
 	
   if( sourceURL == nil ) 
-    NSLog(@"Warning : URLFetch refresh called but no URL.");
+    BUGOUT(@"Warning : URLFetch refresh called but no URL.");
 	
   request = [NSMutableURLRequest requestWithURL:sourceURL];
   NSString* get = [[NSString alloc] initWithString:@"GET"];
@@ -220,7 +220,7 @@ void populateInitialData()
   [get release];
   //  error = [[NSError alloc] init];
        
-  NSLog(@"%s about to start asynchronous connection",__func__);
+  BUGOUT(@"%s about to start asynchronous connection",__func__);
   self.urlConnection = [NSURLConnection connectionWithRequest:request delegate:self];
   
   // [error release];
@@ -231,7 +231,7 @@ void populateInitialData()
 
 - (void)clearUrlConnection
 {
-  NSLog(@"%s", __func__);
+  BUGOUT(@"%s", __func__);
   /*
   if (urlConnection != nil)
     {
@@ -252,7 +252,7 @@ void populateInitialData()
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)newData;
 {
-  NSLog(@"%s", __func__);
+  BUGOUT(@"%s", __func__);
   if(connectionData==nil || connectionData == NULL ) 
     connectionData=[NSMutableData  dataWithData: newData]; 
   [connectionData appendData:newData];
@@ -260,7 +260,7 @@ void populateInitialData()
 /*
 - (void)willSendRequest:(NSURLRequest *)request
 {
-  NSLog(@"%s", __func__);
+  BUGOUT(@"%s", __func__);
   //	[activityIndicator startAnimating];
 }
 
@@ -268,19 +268,19 @@ void populateInitialData()
 {
   // WHAT IS THIS? 
   self.connectionResponse = response; // correct? 
-  NSLog(@"%s", __func__);
+  BUGOUT(@"%s", __func__);
 }
 
 - (void)finishedReceivingData:(NSData *)data
 {
-  NSLog(@"%s", __func__);
+  BUGOUT(@"%s", __func__);
 	
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)aRequest redirectResponse:(NSURLResponse *)aResponse;
 {
-  NSLog(@"%s", __func__);
-  NSLog(@"In connection: willSendRequest: %@ redirectResponse: %@", aRequest, aResponse);
+  BUGOUT(@"%s", __func__);
+  BUGOUT(@"In connection: willSendRequest: %@ redirectResponse: %@", aRequest, aResponse);
   return aRequest;
 }
 */
@@ -290,7 +290,7 @@ void populateInitialData()
   const int maxFailureRetries = 5; // TODO move this
   NSURLCredential *cred;
 	
-  NSLog(@"%s: recieved challange %@", __func__, challenge);
+  BUGOUT(@"%s: recieved challange %@", __func__, challenge);
 	
   if ( [challenge previousFailureCount] > maxFailureRetries ) {
   [[challenge sender] cancelAuthenticationChallenge:challenge];  
@@ -300,11 +300,11 @@ void populateInitialData()
   // some techniques garnered from stackoverflow user Gordon Henriksen whether original to him or not
   // this allow a connection despite certificate errors
   // should eventually be taken out or at leasst restricted in protectionspace
-  NSLog(@"%s: servertrust authentication processing", __func__);
+  BUGOUT(@"%s: servertrust authentication processing", __func__);
   cred=[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]; 
   }
   else {
-  NSLog(@"%s: user authentication processing", __func__);
+  BUGOUT(@"%s: user authentication processing", __func__);
 			
   cred = [NSURLCredential credentialWithUser:repo.userName
   password:repo.userPW 
@@ -317,16 +317,16 @@ void populateInitialData()
 
   - (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
   {
-  NSLog(@"%s", __func__);
-  NSLog(@"In connection: didCancelAuthenticationChallenge: %@", challenge);
+  BUGOUT(@"%s", __func__);
+  BUGOUT(@"In connection: didCancelAuthenticationChallenge: %@", challenge);
   [self clearUrlConnection];
   }
 */
 /*
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)aResponse;
 {
-  NSLog(@"%s", __func__);
-  NSLog(@"%s: Reponse URL/length [%@ / %lld]", __func__, [aResponse URL], [aResponse expectedContentLength]);
+  BUGOUT(@"%s", __func__);
+  BUGOUT(@"%s: Reponse URL/length [%@ / %lld]", __func__, [aResponse URL], [aResponse expectedContentLength]);
 	
   self.connectionResponse = aResponse;
 	
@@ -345,7 +345,7 @@ void populateInitialData()
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 {
   id dict;// hack
-  NSLog(@"Hello from %s", __func__);
+  BUGOUT(@"Hello from %s", __func__);
   NSError* plistError;
   NSStringEncoding nsEncoding = NSUTF8StringEncoding;
   NSString* encoding = [connectionResponse textEncodingName];
@@ -364,7 +364,7 @@ void populateInitialData()
     }
   else 
     {
-      NSLog(@"%s: empty connectionData in get request",__func__);
+      BUGOUT(@"%s: empty connectionData in get request",__func__);
     }		
   
   // if( connectionInProgress == true ) 
@@ -378,7 +378,7 @@ void populateInitialData()
 				   options:NSPropertyListImmutable
 				   format:NULL error:&plistError];
       //  if(plistError)
-      //	NSLog(@"plistError .. %@",plistError); 
+      //	BUGOUT(@"plistError .. %@",plistError); 
       //else
       //	{
       //	  dumpNestedDictToLog(dict);
@@ -390,11 +390,11 @@ void populateInitialData()
       //}
       //  else 
       // {
-      //NSLog(@"%s: PUT request completed",__func__);
+      //BUGOUT(@"%s: PUT request completed",__func__);
       // }
   
       // the following log statement is useful for debugging but the string appears to leak 
-      // NSLog(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
+      // BUGOUT(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
   
   connectionInProgress=false;
   //  [self clearUrlConnection];		// nessisary?
@@ -403,14 +403,14 @@ void populateInitialData()
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 {
-  NSLog(@"%s", __func__);
-  NSLog(@"%s: Error [%@]", __func__, error);
+  BUGOUT(@"%s", __func__);
+  BUGOUT(@"%s: Error [%@]", __func__, error);
   [self clearUrlConnection];
 }
 /*
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse;
 {
-  NSLog(@"%s", __func__);
+  BUGOUT(@"%s", __func__);
   return nil; 
 }
 */

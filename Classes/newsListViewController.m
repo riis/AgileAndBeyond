@@ -7,6 +7,7 @@
 //
 
 #import "newsListViewController.h"
+#import "AgileAndBeyondAppGlobals.h"
 #import "session.h"
 
 @implementation newsListViewController
@@ -64,8 +65,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-  NSLog(@"in %s, AABNews is : ", __func__, AABNews);
-    return [AABNews count];
+  BUGOUT(@"in %s, AABNews is : ", __func__, AABNews);
+  return [AABNews count];
 }
 
 

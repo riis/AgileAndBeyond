@@ -186,7 +186,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	    break;
 	  default : 
 	    // TODO replace this log output with a macro 
-	    NSLog(@"Warning in %s 'unreachable' code reached",__func__);
+	    BUGOUT(@"Warning in %s 'unreachable' code reached",__func__);
 	    cell.textLabel.text = @"x";
 	    cell.detailTextLabel.text = @"x";
 	  }
@@ -200,7 +200,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	// TODO: conditional disclosure indicator if bio exists..
 	cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;    
       }
-    else NSLog(@"in %s : warning, 'unreachable' code reached.", __func__);
+    else BUGOUT(@"in %s : warning, 'unreachable' code reached.", __func__);
     
     return cell;
 }
