@@ -58,8 +58,8 @@ NSString* getIdOfSession(NSDictionary*);
   NSMutableData *connectionData;
   NSURLConnection *urlConnection;
   NSURLResponse *connectionResponse;
-  SEL didUpdateAction;
-  id didUpdateTarget;
+  //  SEL didUpdateAction;
+  //  id didUpdateTarget;
   BOOL connectionInProgress; //TODO revisit this whole approach
 }
 
@@ -71,7 +71,7 @@ NSString* getIdOfSession(NSDictionary*);
 @property (nonatomic, retain) NSURLResponse *connectionResponse;
 @property () BOOL connectionInProgress;
 @property (nonatomic, retain) NSURLConnection *urlConnection;
-@property (nonatomic, retain) id didUpdateTarget;
+//@property (nonatomic, retain) id didUpdateTarget;
 @property (nonatomic) id* destinationData;
 @property (nonatomic, retain) NSURL* sourceURL;
 
