@@ -10,6 +10,10 @@
 #import "AgileAndBeyondAppGlobals.h"
 #import "session.h"
 
+
+newsListViewController* AABNewsView;
+UIBarButtonItem *refreshButton;
+
 @implementation newsListViewController
 
 
@@ -25,11 +29,29 @@
 }
 */
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+
+- (void)viewWillAppear:(BOOL)animated 
+{
+
+  if(!AABNewsView)
+    {
+
+      AABNewsView=self;
+      [AABNewsView retain];
+    }
+  if(!refreshButton) 
+    {
+      refreshButton = [[UIBarButtonItem alloc]
+			initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+			target:AABNewsFetcher
+			action:@selector(refresh)];
+      [refreshButton retain];
+    }
+
+  self.navigationItem.rightBarButtonItem = refreshButton;
+  [super viewWillAppear:animated];
 }
-*/
+
 /*
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -111,7 +133,7 @@
 			       constrainedToSize:constraintSize 
 			       lineBreakMode:UILineBreakModeWordWrap];
   height = labelSize.height;
-  [cellFont release];
+  //  [cellFont release];
 
   cellText = [myItem objectForKey:@"Detail"];
   cellFont = [UIFont fontWithName:@"Helvetica" size:10.0];
@@ -120,7 +142,7 @@
 			constrainedToSize:constraintSize 
 			lineBreakMode:UILineBreakModeWordWrap];  
   height += labelSize.height;
-  [cellFont release];
+  //  [cellFont release];
 
   height += 20; // for padding
   return height;
@@ -201,6 +223,10 @@
     [super dealloc];
 }
 
+- (void)didUpdate 
+{
+  [self.tableView reloadData];
+}
 
 @end
 

@@ -20,6 +20,8 @@ NSDate* AABDateOfClosingSummary;
 NSDateFormatter* AABDateConstFormatter;
 NSDateFormatter* AABDateSectionTitleFormmater;
 
+URLFetcher* AABNewsFetcher;
+
 NSString* getIdOfSession(NSDictionary*session)
 {
   NSString* id = nil;
@@ -38,7 +40,7 @@ NSString* getIdOfSession(NSDictionary*session)
 //this one dumps a nested dictionary structure to log
 void dumpNestedDictToLog(NSDictionary* dict)
 {
-#ifdef DUMPDICT
+#ifdef CONFIGURATION_Debug
   NSEnumerator *enumerator;
   id	key = nil,
     obj = nil;
@@ -106,7 +108,7 @@ void populateInitialData()
     {
       BUGOUT(@"I loaded in a plist as AABSessions from %@, and its got %d elements",  
 	    plistPath,
-	    [AABPeople count]);
+	     [AABPeople count]);
     }
   else 
     {
@@ -164,10 +166,10 @@ void populateInitialData()
   userSessionSecondSlot = [defaults objectForKey:@"userSessionSecondSlot"];
 
 
-  URLFetcher* fetcher = [[URLFetcher alloc] initForObject:&AABNews fromURL:newsURL];
-  [fetcher refresh];
+  AABNewsFetcher = [[[URLFetcher alloc] initForObject:&AABNews fromURL:newsURL] retain];
+  [AABNewsFetcher refresh];
   [newsURL release];
-  [fetcher release];
+  // [fetcher release];  
 
 }
 
@@ -181,8 +183,7 @@ void populateInitialData()
 -(id) init {
   [super init];
   connectionInProgress=false;
-  connectionData=[[NSMutableData alloc] init];
-  return self;
+    return self;
 }
 
 -(URLFetcher*) initForObject:(id*)dataPoint fromURL:(NSURL*)url
@@ -210,11 +211,14 @@ void populateInitialData()
     return;
   }
   connectionInProgress=true;
-	
+  connectionData=[[NSMutableData alloc] init];
+
   if( sourceURL == nil ) 
     BUGOUT(@"Warning : URLFetch refresh called but no URL.");
 	
-  request = [NSMutableURLRequest requestWithURL:sourceURL];
+  request = [[NSMutableURLRequest alloc] initWithURL:sourceURL
+				 cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+				 timeoutInterval:12.5];
   NSString* get = [[NSString alloc] initWithString:@"GET"];
   [request setHTTPMethod:get];
   [get release];
@@ -224,6 +228,15 @@ void populateInitialData()
   self.urlConnection = [NSURLConnection connectionWithRequest:request delegate:self];
   
   // [error release];
+  
+  // TODO : replace with a target/action system like in ibroadsoft
+  /*
+  if(AABNewsView)
+    {
+      BUGOUT(@" Trying to reload newsview here");
+      [AABNewsView didUpdate];
+    }
+  */
 }
 
 
@@ -381,10 +394,15 @@ void populateInitialData()
       //	BUGOUT(@"plistError .. %@",plistError); 
       //else
       //	{
-      //	  dumpNestedDictToLog(dict);
+      	  dumpNestedDictToLog(dict);
 	  [dict retain]; // todo ... a little bit of odd memory management to look at
 	  // something like, if *destinationdata is an object, ..release? 
 	  (*(self.destinationData)) = dict;
+	  if(AABNewsView)
+	    {
+	      BUGOUT(@" Trying to reload newsview here");
+	      [AABNewsView didUpdate];
+	    }
 	  //	}
 
       //}
@@ -397,7 +415,7 @@ void populateInitialData()
       // BUGOUT(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
   
   connectionInProgress=false;
-  //  [self clearUrlConnection];		// nessisary?
+     [self clearUrlConnection];		// nessisary?
   //  [encoding release];
 }
 
@@ -426,10 +444,10 @@ return YES;
 - (void)dealloc 
 {
   
-  if(connectionData) [connectionData release];
+  // if(connectionData) [connectionData release];
   // I feel that the next line belongs, but it releases on a already released object
   // if(connectionResponse) [connectionResponse release];
-  if(urlConnection) [urlConnection release];
+  //  if(urlConnection) [urlConnection release];
   //if(didUpdateTarget) [didUpdateTarget release];
   //if(sourceURL) [sourceURL release];
   

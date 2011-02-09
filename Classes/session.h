@@ -76,3 +76,7 @@ NSString* getIdOfSession(NSDictionary*);
 @property (nonatomic, retain) NSURL* sourceURL;
 
 @end
+
+extern URLFetcher* AABNewsFetcher;
+@class newsListViewController;
+extern newsListViewController* AABNewsView;
