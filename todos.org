@@ -16,8 +16,12 @@
 ** DONE refresh button for news
 ** DONE add remove button should only show on subscribable sessions
 ** DONE all sessions listen in mysessions should be highlighted whenever they appear
-** TODO proofread&check all navigation paths
-** TODO method for updating news & publishing
+** DONE check all navigation paths
+** TODO system reachability test?
+** TODO correct detail disclosure icons? (there are two)
+** TODO correct use of table cell selection 
+** TODO method fgor updating news & publishing
+** TODO proofread
 ** TODO testing
 ** TODO test on iphone
 ** TODO audit against apple's interface guidelines
@@ -28,7 +32,14 @@
   - news update URL in code
   - compile for deployment (not debug)
   - test news update while not connected to lan
-  - 
+  - no description for welcome session? 
+  - cache policy for news refresh
+  - default news, what is displayed on news view if news has never been pulled from server?
+  - when submitting to app store, have proof that this is an official 'agile and beyond' app
+    and all copywrited terms/logos are used with permission
+  - system configuration reachability API as per guidelines
+  - app version number >= 1.0
+  - correct d
     
 * TODO Advanced 
 ** TODO markup in session details/bios
