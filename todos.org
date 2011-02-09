@@ -13,7 +13,9 @@
 ** DONE integrate updated about page images ala mark
 ** DONE my sessions view show keynotes/lunch
 ** DONE eliminate all compiler warnings
-** TODO refresh button for news
+** DONE refresh button for news
+** DONE add remove button should only show on subscribable sessions
+** TODO all sessions listen in mysessions should be highlighted whenever they appear
 ** TODO proofread&check all navigation paths
 ** TODO method for updating news & publishing
 ** TODO testing
@@ -22,6 +24,12 @@
 
 
 
+* TODO small but important - don't forget
+  - news update URL in code
+  - compile for deployment (not debug)
+  - test news update while not connected to lan
+  - 
+    
 * TODO Advanced 
 ** TODO markup in session details/bios
 ** TODO Persist most recently updated "news"
