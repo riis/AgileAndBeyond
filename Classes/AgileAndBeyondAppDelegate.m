@@ -27,12 +27,12 @@
     [window makeKeyAndVisible];
 
     populateInitialData();
-
+    /*
     NSLog(@"going to pass a URL to safari" );
     [[UIApplication sharedApplication] 
       openURL:
 	[NSURL URLWithString:@"http://search.twitter.com/search?q=%23irise"]];
-
+    */
     return YES;
 }
 

@@ -15,7 +15,7 @@
 ** DONE eliminate all compiler warnings
 ** DONE refresh button for news
 ** DONE add remove button should only show on subscribable sessions
-** TODO all sessions listen in mysessions should be highlighted whenever they appear
+** DONE all sessions listen in mysessions should be highlighted whenever they appear
 ** TODO proofread&check all navigation paths
 ** TODO method for updating news & publishing
 ** TODO testing
