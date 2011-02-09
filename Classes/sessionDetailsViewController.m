@@ -68,19 +68,25 @@ static const int rowsAfterPeople = 2;
 {
   [super viewDidLoad];
   NSString * mySessionID = getIdOfSession(mySession);
-  NSString * buttonTitle = 
-    [mySessionID isEqualToString:userSessionFirstSlot] 
-    || [mySessionID isEqualToString:userSessionSecondSlot] 
-    ?@"Remove":@"Add";
+  NSString * buttonTitle;
+  NSDate* sessionTime = [mySession objectForKey:@"timeStart"];
 
-  // build the right add/remove button
-  UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
-				       initWithTitle:buttonTitle
+  if([sessionTime isEqualToDate:AAB_FIRST_SLOT_DATE] 
+     || [sessionTime isEqualToDate:AAB_SECOND_SLOT_DATE] )
+    {
+      buttonTitle = [mySessionID isEqualToString:userSessionFirstSlot] 
+	|| [mySessionID isEqualToString:userSessionSecondSlot] 
+	?@"Remove":@"Add";
+    
+      // build the right add/remove button
+      UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
+					   initWithTitle:buttonTitle
+					   style:UIBarButtonItemStylePlain
+					   target:self
+					   action:@selector(addToUserSelections)];
+      self.navigationItem.rightBarButtonItem = addRemoveButton;
+    }
 
-				       style:UIBarButtonItemStylePlain
-				       target:self
-				       action:@selector(addToUserSelections)];
-  self.navigationItem.rightBarButtonItem = addRemoveButton;
   // TODO release addRemoveButton? an example online did a release on it in this function.
 }
 /*
