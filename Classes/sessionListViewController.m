@@ -183,15 +183,19 @@
     
   // can use the setSelected:animated: instead to cause an animated change to selected
   // TODO : don't want this to be hardcoded ~ maybe pull filteredsessions lists from mySessionsView
-  cell.selected=
+  if(
     [mySessionID isEqualToString:userSessionFirstSlot] ||
     [mySessionID isEqualToString:userSessionSecondSlot] || 
     [mySessionID isEqualToString:@"welcome"] ||
     [mySessionID isEqualToString:@"opening-keynote"] ||
     [mySessionID isEqualToString:@"closing-keynote"] ||
     [mySessionID isEqualToString:@"closing-roundtable"] ||
-    [mySessionID isEqualToString:@"open-lunch"];
-  //cell.selectionStyle=UITableViewCellSelectionStyleBlue;
+    [mySessionID isEqualToString:@"open-lunch"]
+     )
+    {
+      cell.accessoryType=UITableViewCellAccessoryCheckmark;
+    }
+    
 }
 
 #pragma mark -
