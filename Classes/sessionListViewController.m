@@ -28,7 +28,6 @@
 				     filterBy:(NSPredicate*)filterPredicate
 {
   sessionListViewController* me = [[sessionListViewController alloc] init ];
-
   // for future consideration, retaining the bigListRef if needed to update our sessions list
   // TODO : rename allSessions if it is actually "our filtered list of sections"
   //   - or - do the filtering somewhere else, like in viewWillAppear
@@ -58,7 +57,7 @@
 - (id)init
 {
   BUGOUT(@"!!!!!!hello from %s",__func__);
-  filteredSessionLists=[[NSMutableArray alloc] init]; 
+ [self setFilteredSessionLists:[[NSMutableArray alloc] init]]; 
   return [super initWithNibName:@"sessionListViewController" bundle:nil];
 }
 
@@ -68,11 +67,14 @@
   // to use, and we put it in via -(id)init
   return [self init];
 }
+
+/*
 - (id)initWithCoder:(NSCoder *)decoder
 {
   [self init];
   return [super initWithCoder:decoder];
 }
+*/
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -95,13 +97,16 @@
 
   // TODO : cleanup, the logic here is a bit less simple than probably nessisary
   //  if(allSessions == nil || isUserSession == true)
-  if(![filteredSessionLists count])
-    {
+   if(![filteredSessionLists count])
+   {
       /* ** ** set up My Session view here 
        * we were not created with createWithArray, assume we are intended to be the mySessionsView
        * ( later, move this to a different function )
        */
-      BUGOUT(@"hello from %s : in block where filteredSessionsList is found to be 0...", __func__);
+     
+  BUGOUT(@"hello from %s : in block where filteredSessionsList is found to be 0...", __func__);
+  BUGOUT(@"WARNING :  we shouldn't be here now that this functionality has moved...", __func__);
+  /*
       if(mySessionsViewController)
 	BUGOUT(@"WARNING there is already a mySessionsListViewController created.");
       else
@@ -151,7 +156,7 @@
 	      [newSection release];  
 	    }
 	}
-    }
+	}
   else if( self == mySessionsViewController )
     {
       // reload the data
@@ -177,8 +182,11 @@
 	}
 
       //      [self.tableView reloadData]; 
+      */
     }
-  else 
+   /*
+     else 
+  */
     for( sessionTableGroup* section in filteredSessionLists )
       section.items = [NSMutableArray 
 			arrayWithArray:
@@ -278,7 +286,7 @@
     [mySessionID isEqualToString:@"opening-keynote"] ||
     [mySessionID isEqualToString:@"closing-keynote"] ||
     [mySessionID isEqualToString:@"closing-roundtable"] ||
-        [mySessionID isEqualToString:@"open-lunch"];
+    [mySessionID isEqualToString:@"open-lunch"];
   //cell.selectionStyle=UITableViewCellSelectionStyleBlue;
 }
 
@@ -329,3 +337,130 @@
 }
 
 @end
+
+
+
+subscribedSessionsListViewController* userSessionsView;
+
+sessionListViewController* getUserSessionsView()
+{
+  return userSessionsView;
+}
+
+@implementation subscribedSessionsListViewController : sessionListViewController 
+- (id)init
+{
+  BUGOUT(@"!!!!!!hello from %s",__func__);
+
+  [super init];
+  // populate an array with refrences to the sessions we will display, in the order we want
+  // if we were not created using createWithArray, then function as the "My Sessions" list
+  // TODO possibly move some of this functionality into more apropriate (init?) methods
+  //  BUGOUT(@"hello from %s", __func__);
+
+  // TODO : cleanup, the logic here is a bit less simple than probably nessisary
+
+  /* ** ** set up My Session view here 
+   * we were not created with createWithArray, assume we are intended to be the mySessionsView
+   */
+
+  // if(userSessionsView)
+  //  BUGOUT(@"WARNING there is already a mySessionsListViewController created.");
+  //else
+  //  {
+      userSessionsView = self;
+      [self retain];
+      
+      sessionTableGroup* newSection;
+      NSMutableArray* sectionDates = [[NSMutableArray alloc] 
+				       initWithObjects:
+					 AAB_OPENINGKEYNOTE_DATE, 
+				       AAB_FIRST_SLOT_DATE, AAB_LUNCH_DATE, AAB_SECOND_SLOT_DATE,
+				       AAB_CLOSINGKEYNOTE_DATE,AAB_CLOSINGSUMMARY_DATE,nil];
+      for(NSDate* thisDate in sectionDates )
+	{
+	  newSection = [[sessionTableGroup alloc] init];
+	  newSection.title = [AABDateSectionTitleFormmater stringFromDate:thisDate];
+	  
+	  if( [thisDate isEqualToDate:AAB_FIRST_SLOT_DATE] )
+	    {
+	      if ( userSessionFirstSlot != nil ) 
+		{
+		  BUGOUT(@"adding %@ for first slot",userSessionFirstSlot );
+		  //		      [
+		  (newSection.items = [NSArray arrayWithObject:[AABSessions objectForKey:userSessionFirstSlot]]);
+		  //	release];
+		}   
+	    }
+	  else if( [thisDate isEqualToDate:AAB_SECOND_SLOT_DATE] )
+	    {
+	      if ( userSessionSecondSlot != nil )
+		{
+		  BUGOUT(@"adding %@ for second slot",userSessionSecondSlot );
+		  //		      [
+		  (newSection.items =  [NSArray arrayWithObject:[AABSessions objectForKey:userSessionSecondSlot]]);
+		  // release];
+		}
+	    }
+	  else
+	    {
+	      newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", thisDate];
+	      newSection.items = [NSMutableArray 
+				   arrayWithArray:
+				     [[AABSessions allValues] filteredArrayUsingPredicate:newSection.predicate]];
+	    }
+	  BUGOUT(@"adding section %@", newSection.title );
+	  [filteredSessionLists addObject:newSection];
+
+	  [newSection release];  
+	}
+      //}
+
+  BUGOUT(@"in %s, fisteredSessionLists is %d long,",__func__ ,[filteredSessionLists count] );
+  BUGOUT(@"in %s, sectionDates is %d long,",__func__ ,[sectionDates count] );
+
+  return self;
+  //  return [super initWithNibName:@"sessionListViewController" bundle:nil];
+}
+
+- (id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle
+{
+  //  just igore nibname and bundle, since there is only one we'd want 
+  // to use, and we put it in via -(id)init
+  return [self init];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+  [self init];
+  return [super initWithCoder:decoder];
+}
+
+- (void)viewWillAppear:(BOOL)animated 
+{
+  // reload the data
+  // TODO this belongs somewhere else, like in a refreshme function
+  // TODO a less fragile implementation
+  sessionTableGroup* thisSection = [filteredSessionLists objectAtIndex:1];
+  
+  // TODO reuse old array if nothing changed(?)
+  [(thisSection.items = [[NSMutableArray alloc] init]) release];
+      
+  if ( userSessionFirstSlot != nil ) 
+    {
+      BUGOUT(@"adding %@ for first slot",userSessionFirstSlot );
+      [thisSection.items addObject:[AABSessions objectForKey:userSessionFirstSlot]];
+    }
+
+  thisSection = [filteredSessionLists objectAtIndex:3];
+  [(thisSection.items = [[NSMutableArray alloc] init]) release];
+  if ( userSessionSecondSlot != nil )
+    {
+      BUGOUT(@"adding %@ for second slot",userSessionSecondSlot );
+      [thisSection.items addObject:[AABSessions objectForKey:userSessionSecondSlot]];
+    }
+  
+  [self.tableView reloadData]; 
+}
+
+@end 

@@ -26,7 +26,7 @@
     [window addSubview:tabBarController.view];
     [window makeKeyAndVisible];
 
-    populateInitialData();
+    //    populateInitialData();
     /*
     NSLog(@"going to pass a URL to safari" );
     [[UIApplication sharedApplication] 

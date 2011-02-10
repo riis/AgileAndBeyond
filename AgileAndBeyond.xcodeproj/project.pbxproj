@@ -13,6 +13,7 @@
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		5D0C6F6C1301DDC800E9029C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0C6F6B1301DDC800E9029C /* UIKit.framework */; };
+		5D0C721413042FFB00E9029C /* AgileAndBeyondAppGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C721313042FFB00E9029C /* AgileAndBeyondAppGlobals.m */; };
 		5D2B4B9812F0D14400EBE32C /* agile_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */; };
 		5D2B4B9912F0D14400EBE32C /* riis_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */; };
 		5D2B4BA812F1F6DE00EBE32C /* mainFilterSelectionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2B4BA712F1F6DE00EBE32C /* mainFilterSelectionMenu.m */; };
@@ -56,6 +57,7 @@
 		28AD73870D9D96C1002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5D0C6F6B1301DDC800E9029C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5D0C721313042FFB00E9029C /* AgileAndBeyondAppGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgileAndBeyondAppGlobals.m; sourceTree = "<group>"; };
 		5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agile_logo_about.png; sourceTree = "<group>"; };
 		5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = riis_logo_about.png; sourceTree = "<group>"; };
 		5D2B4BA612F1F6DE00EBE32C /* mainFilterSelectionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainFilterSelectionMenu.h; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				5D40589912F34D8000780517 /* session.h */,
 				5D40589A12F34D8000780517 /* session.m */,
 				5D8C9B8112FA02F40064459D /* AgileAndBeyondAppGlobals.h */,
+				5D0C721313042FFB00E9029C /* AgileAndBeyondAppGlobals.m */,
 				5D8C9CEE12FB05C70064459D /* sessionDetailsViewController.h */,
 				5D8C9CEF12FB05C70064459D /* sessionDetailsViewController.m */,
 				5D8C9CF012FB05C70064459D /* sessionDetailsViewController.xib */,
@@ -303,6 +306,7 @@
 				5D8C9CF112FB05C70064459D /* sessionDetailsViewController.m in Sources */,
 				5D8C9EB512FC84210064459D /* personDetailsViewController.m in Sources */,
 				5D8C9F5912FDDED60064459D /* newsListViewController.m in Sources */,
+				5D0C721413042FFB00E9029C /* AgileAndBeyondAppGlobals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

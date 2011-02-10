@@ -47,4 +47,17 @@
 
 @end
 
-sessionListViewController* mySessionsViewController;
+@interface subscribedSessionsListViewController : sessionListViewController 
+{
+}
+
+-(id) init;
+-(id)initWithNibName:(NSString *)name bundle:(NSBundle *)bundle;
+- (id)initWithCoder:(NSCoder *)decoder;
+@end 
+
+// this might not even be needed: 
+sessionListViewController* getUserSessionsView();
+
+// ? 
+//sessionListViewController* mySessionsViewController;

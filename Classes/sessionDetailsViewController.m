@@ -58,9 +58,10 @@ static const int rowsAfterPeople = 2;
     }
 
   // user selected slots has updated, reload mySessionsViewController
-  if( mySessionsViewController ) 
+  
+  if( getUserSessionsView() ) 
     {
-      [mySessionsViewController.tableView reloadData];
+      [getUserSessionsView().tableView reloadData];
     }
 }
 

@@ -32,15 +32,13 @@
 */ 
 
 
-
 NSDictionary* AABSessions;
 NSDictionary* AABPeople;
-NSDictionary* AABOrg;
 NSArray* AABNews;
 
 void populateInitialData();
 
-
+// this should probably be an array 
 NSString* userSessionFirstSlot;
 NSString* userSessionSecondSlot;
 
@@ -48,7 +46,6 @@ NSString* userSessionSecondSlot;
 // how I refer to sessions from the main list, and having a function like this might
 // make that easier
 NSString* getIdOfSession(NSDictionary*);
-
 
 @interface URLFetcher : NSObject 
 {
@@ -65,7 +62,6 @@ NSString* getIdOfSession(NSDictionary*);
 
 -(URLFetcher*) initForObject:(id*)dataPoint fromURL:(NSURL*)url;
 -(void) refresh;
-
 
 @property (nonatomic, retain) NSMutableData *connectionData; 
 @property (nonatomic, retain) NSURLResponse *connectionResponse;

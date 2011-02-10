@@ -50,3 +50,30 @@ extern NSDateFormatter* AABDateSectionTitleFormmater;
 #define BUGOUT(...)
 #endif
 
+/*
+NSDate* AABDateOfFirstSlot();
+NSDate* AABDateOfSecondSlot();
+NSDate* AABDateOfWelcome();
+NSDate* AABDateOfOpeningKeynote();
+NSDate* AABDateOfLunch();
+NSDate* AABDateOfClosingKeynote();
+NSDate* AABDateOfClosingSummary();
+NSDateFormatter* AABDateConstFormatter();
+NSDateFormatter* AABDateSectionTitleFormmater();
+*/
+
+/*
+@class URLFetcher;
+@class newsListViewController;
+@class sessionListViewController;
+
+URLFetcher* getNewsFetcher();
+newsListViewController* getNewsView();
+
+NSDictionary* getSessions();
+NSDictionary* getPeople();
+NSArray*  getNews();
+
+sessionListViewController* getUserSessionsView();
+*/
+// like NSObject* const& getObject(); ? 
