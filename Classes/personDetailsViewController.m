@@ -7,6 +7,7 @@
 //
 
 #import "personDetailsViewController.h"
+#import "AgileAndBeyondAppGlobals.h"
 #import "session.h"
 
 @implementation personDetailsViewController
@@ -78,11 +79,11 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     
   NSDictionary* personDict = [AABPeople objectForKey:myPerson];
   // Configure the cell...
-  cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+  cell.textLabel.font = getFontDefault();
   cell.textLabel.text = myPerson;
   cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
   cell.detailTextLabel.numberOfLines=0;
-  cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+  cell.detailTextLabel.font = getFontDefault();
   cell.detailTextLabel.text = [personDict objectForKey:@"Bio"];
     
   return cell;

@@ -56,7 +56,7 @@
 - (id)initWithCoder:(NSCoder *)decoder;
 @end 
 
-// this might not even be needed: 
+// this function only gets used once in the implementation of sessionDetailViewController1
 sessionListViewController* getUserSessionsView();
 
 // ? 

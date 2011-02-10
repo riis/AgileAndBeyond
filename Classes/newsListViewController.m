@@ -107,11 +107,11 @@ UIBarButtonItem *refreshButton;
     NSDictionary *myItem =  [AABNews objectAtIndex:[indexPath indexAtPosition:1]];
 
     cell.textLabel.text = [myItem objectForKey:@"HeadLine"];
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+    cell.textLabel.font = getFontDefault();
     
     cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
     cell.detailTextLabel.numberOfLines=0;
-    cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+    cell.detailTextLabel.font = getFontDefault();
     cell.detailTextLabel.text = [myItem objectForKey:@"Detail"];
 
     return cell;
@@ -127,7 +127,7 @@ UIBarButtonItem *refreshButton;
   NSDictionary *myItem =  [AABNews objectAtIndex:[indexPath indexAtPosition:1]];
  
   NSString* cellText = [myItem objectForKey:@"HeadLine"];
-  UIFont* cellFont = [UIFont fontWithName:@"Helvetica" size:10.0];
+  UIFont* cellFont = getFontDefault();
   CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
   CGSize labelSize = [cellText sizeWithFont:cellFont
 			       constrainedToSize:constraintSize 
@@ -136,7 +136,7 @@ UIBarButtonItem *refreshButton;
   //  [cellFont release];
 
   cellText = [myItem objectForKey:@"Detail"];
-  cellFont = [UIFont fontWithName:@"Helvetica" size:10.0];
+  cellFont = getFontDefault();
   constraintSize = CGSizeMake(280.0f, MAXFLOAT);
   labelSize = [cellText sizeWithFont:cellFont
 			constrainedToSize:constraintSize 

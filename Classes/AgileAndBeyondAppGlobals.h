@@ -77,3 +77,13 @@ NSArray*  getNews();
 sessionListViewController* getUserSessionsView();
 */
 // like NSObject* const& getObject(); ? 
+
+
+UIFont* getFontDefault();
+UIFont* getFontSessionListCell();
+UIFont* getFontSessionListCellSubtitle();
+UIFont* getFontSessionDetailCell();
+UIFont* getFontSessionDetailCellSubtitle();
+UIFont* getFontPersonDetailCell();
+UIFont* getFontPersonDetailCellSubtitle();
+

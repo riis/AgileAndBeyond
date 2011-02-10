@@ -163,7 +163,7 @@
   cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
   cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
   cell.textLabel.numberOfLines=0;
-  cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+  cell.textLabel.font = getFontDefault();
   //} 
       
   NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];

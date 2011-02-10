@@ -166,10 +166,10 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     cell.accessoryType=UITableViewCellAccessoryNone;    // reset default
 
   // Configure the cell...
-  cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+  cell.textLabel.font = getFontDefault();
   cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
   cell.detailTextLabel.numberOfLines=0;
-  cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:10.0];
+  cell.detailTextLabel.font = getFontDefault();
     
 
 
@@ -225,7 +225,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   if([indexPath indexAtPosition:1]+1 == SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople)
     {
       NSString* cellText = [mySession objectForKey:@"description"];
-      UIFont* cellFont = [UIFont fontWithName:@"Helvetica" size:10.0];
+      UIFont* cellFont = getFontDefault();
       CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
       CGSize labelSize = [cellText sizeWithFont:cellFont
 				   constrainedToSize:constraintSize 
