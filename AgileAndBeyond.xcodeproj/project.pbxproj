@@ -16,6 +16,7 @@
 		5D0C721413042FFB00E9029C /* AgileAndBeyondAppGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C721313042FFB00E9029C /* AgileAndBeyondAppGlobals.m */; };
 		5D0C73291305A0A400E9029C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C73281305A0A400E9029C /* Reachability.m */; };
 		5D0C734B1305A43D00E9029C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0C734A1305A43D00E9029C /* SystemConfiguration.framework */; };
+		5D0C73FE1305D1FE00E9029C /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 5D0C73FD1305D1FE00E9029C /* iTunesArtwork */; };
 		5D2B4B9812F0D14400EBE32C /* agile_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */; };
 		5D2B4B9912F0D14400EBE32C /* riis_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */; };
 		5D2B4BA812F1F6DE00EBE32C /* mainFilterSelectionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2B4BA712F1F6DE00EBE32C /* mainFilterSelectionMenu.m */; };
@@ -63,6 +64,7 @@
 		5D0C73271305A0A400E9029C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		5D0C73281305A0A400E9029C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		5D0C734A1305A43D00E9029C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5D0C73FD1305D1FE00E9029C /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agile_logo_about.png; sourceTree = "<group>"; };
 		5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = riis_logo_about.png; sourceTree = "<group>"; };
 		5D2B4BA612F1F6DE00EBE32C /* mainFilterSelectionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainFilterSelectionMenu.h; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5D0C73FD1305D1FE00E9029C /* iTunesArtwork */,
 				5DCF56F91300A925004C5CC9 /* aboutAgileLogo_@2x640x440.png */,
 				5DCF56FA1300A926004C5CC9 /* aboutAgileLogo_320x220.png */,
 				5DCF56FB1300A926004C5CC9 /* aboutRIISLogo_@2x640x122.png */,
@@ -297,6 +300,7 @@
 				5DCF56FE1300A92A004C5CC9 /* aboutAgileLogo_320x220.png in Resources */,
 				5DCF56FF1300A92A004C5CC9 /* aboutRIISLogo_@2x640x122.png in Resources */,
 				5DCF57001300A92A004C5CC9 /* aboutRIISLogo_320x61.png in Resources */,
+				5D0C73FE1305D1FE00E9029C /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +379,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos4.2]" = "iPhone Distribution: RIIS LLC";
 				CURRENT_PROJECT_VERSION = 1.0;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
@@ -384,6 +388,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos4.2]" = "C71CF450-173B-430F-BBB9-880E2572C0C4";
 				SDKROOT = iphoneos4.2;
 			};
 			name = Release;
