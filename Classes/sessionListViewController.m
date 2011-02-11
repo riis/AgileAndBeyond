@@ -313,6 +313,8 @@ sessionListViewController* getUserSessionsView()
   BUGOUT(@"in %s, fisteredSessionLists is %d long,",__func__ ,[filteredSessionLists count] );
   BUGOUT(@"in %s, sectionDates is %d long,",__func__ ,[sectionDates count] );
 
+  [sectionDates release];
+
   return self;
   //  return [super initWithNibName:@"sessionListViewController" bundle:nil];
 }

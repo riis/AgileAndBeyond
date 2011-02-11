@@ -232,18 +232,17 @@ void populateInitialData()
 
   if( sourceURL == nil ) 
     BUGOUT(@"Warning : URLFetch refresh called but no URL.");
-	
+  
   request = [[NSMutableURLRequest alloc] initWithURL:sourceURL
-					 cachePolicy:NSURLRequestUseProtocolCachePolicy  // NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-				 timeoutInterval:12.5];
-  NSString* get = [[NSString alloc] initWithString:@"GET"];
-  [request setHTTPMethod:get];
-  [get release];
+					 cachePolicy:NSURLRequestUseProtocolCachePolicy 
+					 timeoutInterval:12.5];
+
+  [request setHTTPMethod:@"get"];
   //  error = [[NSError alloc] init];
        
   BUGOUT(@"%s about to start asynchronous connection",__func__);
   self.urlConnection = [NSURLConnection connectionWithRequest:request delegate:self];
-  
+  [request release];
   // [error release];
   
   // TODO : replace with a target/action system like in ibroadsoft
@@ -403,38 +402,38 @@ void populateInitialData()
       // in this contect we are only doing gets
       // so i'm not sure this conditional block is nessisary.
       
-      //    dict = [NSDictionary dictionaryWithJSONString:[[NSString alloc] initWithData:connectionData encoding:nsEncoding]];
-      dict = [NSPropertyListSerialization propertyListWithData:connectionData 
-				   options:NSPropertyListImmutable
-				   format:NULL error:&plistError];
-      //  if(plistError)
-      //	BUGOUT(@"plistError .. %@",plistError); 
-      //else
-      //	{
-	  [dict retain]; // todo ... a little bit of odd memory management to look at
-	  // something like, if *destinationdata is an object, ..release? 
-	  (*(self.destinationData)) = dict;
+  dict = [NSPropertyListSerialization propertyListWithData:connectionData 
+				      options:NSPropertyListImmutable
+				      format:NULL error:&plistError];
+  //  if(plistError)
+  //	BUGOUT(@"plistError .. %@",plistError); 
+  //else
+  //	{
 
-      	  dumpNestedDictToLog(dict);
-	  if(AABNewsView)
-	    {
-	      // TODO replace this (bad arch)
-	      BUGOUT(@" Trying to reload newsview here");
-	      [AABNewsView didUpdate];
-	    }
-	  //	}
+  if(*destinationData) [*destinationData release];
+  (*destinationData) = dict;
+  [(*destinationData) retain];
 
-      //}
-      //  else 
-      // {
-      //BUGOUT(@"%s: PUT request completed",__func__);
-      // }
+  dumpNestedDictToLog(dict);
+  if(AABNewsView)
+    {
+      // TODO replace this (bad arch)
+      BUGOUT(@" Trying to reload newsview here");
+      [AABNewsView didUpdate];
+    }
+  //	}
   
-      // the following log statement is useful for debugging but the string appears to leak 
-      // BUGOUT(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
+  //}
+  //  else 
+  // {
+  //BUGOUT(@"%s: PUT request completed",__func__);
+  // }
+  
+  // the following log statement is useful for debugging but the string appears to leak 
+  // BUGOUT(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
   
   connectionInProgress=false;
-     [self clearUrlConnection];		// nessisary?
+  [self clearUrlConnection];		// nessisary?
   //  [encoding release];
 }
 
