@@ -217,7 +217,7 @@ void populateInitialData()
     BUGOUT(@"Warning : URLFetch refresh called but no URL.");
 	
   request = [[NSMutableURLRequest alloc] initWithURL:sourceURL
-				 cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
+					 cachePolicy:NSURLRequestUseProtocolCachePolicy  // NSURLRequestReloadIgnoringLocalAndRemoteCacheData
 				 timeoutInterval:12.5];
   NSString* get = [[NSString alloc] initWithString:@"GET"];
   [request setHTTPMethod:get];
