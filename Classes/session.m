@@ -136,7 +136,7 @@ void populateInitialData()
   NSURL* newsURL = [NSURL URLWithString:urlString];
   [urlString release];
   /*
-  AABNews = [[NSArray alloc]  init] WithContentsOfURL:[NSURL URLWithString:@"http://10.5.1.239/news.plist"]];
+  AABNews = [[NSArray alloc]  init] WithContentsOfURL:[NSURL URLWithString:@"http://agile.riis.com/AgileAndBeyond2011/app/ios/news.plist"]];
   
   if(AABNews)
     {
