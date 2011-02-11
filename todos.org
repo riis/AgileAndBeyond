@@ -17,15 +17,20 @@
 ** DONE add remove button should only show on subscribable sessions
 ** DONE all sessions listen in mysessions should be highlighted whenever they appear
 ** DONE check all navigation paths
-** TODO system reachability test?
-** TODO correct detail disclosure icons? (there are two)
-** TODO correct use of table cell selection 
-** TODO method fgor updating news & publishing
-** TODO proofread
-** TODO testing
-** TODO test on iphone
+** TODO save latest news pull
+** TODO system reachability test - disclose to user if news has not been updated
+** DONE correct detail disclosure icons? (there are two)
+** DONE correct use of table cell selection 
+** DONE server for news.plist
+** DONE proofread
+** TODO fix errors in data from proofreading
+** DONE testing
+** DONE test on iphone
 ** TODO audit against apple's interface guidelines
-
+** TODO submission process
+** TODO app store graphic added
+** TODO screenshot added
+** 
 
 
 * TODO small but important - don't forget
@@ -42,6 +47,7 @@
   - correct d
     
 * TODO Advanced 
+** TODO method fgor updating news & publishing
 ** TODO markup in session details/bios
 ** TODO Persist most recently updated "news"
 ** TODO Ability to update
@@ -62,15 +68,21 @@
 ** data, or navigation of
 *** DONE TOM POPPENENDIECK no bio in details view
 ** Interface
+*** TODO welcome/intro timeslot not appearing in My Sessions
+**** to replicate
+     Go to My Sessions
+     Bug: 8:30 timeslot with Welcome/Intro not appearing
+     Expected: 8:30 timeslot appears
+     
 *** DONE addremove button says add when should say remove
-**** to reproduce
+**** to replicate
    Go to "Lean Leadership" session details, click Add.
    Click My sessions.
    Click "lean leadership session"
    Bug: Button says "add"
    Expected: should say "remove"
 *** DONE selected sessions not always highlighted
-**** to reproduce:
+**** to replicate:
     Go to advanced sessions
     Select "its all in the cards".  Click add.
     Click the back button that says "advanced sessions"
@@ -79,7 +91,7 @@
 **** notes 
      scrolling advanced sessions sesssionlist so the "all in the cards" cell bounces off screen, it is highlighted when it reappears.
 *** DONE mySessions view does not update consistently
-**** To reproduce
+**** To replicate
 ***** 1
       Go to "my sessions" view, when any session is added
       Click either added session.
@@ -88,9 +100,14 @@
       Bug: Session just removed still appears in list.
       Expected: Session just removed does not appear in list.
 *** DONE cell disclosure accessory disclosure indicator (>) appears on cells in session detail view where not expect
-**** to reproduce
+**** to replicate
      Go to session detail view for "providing lean leadership".
      Scoll the table up and down, "bouncing" it at the top and bottom.
      Bug: Cells such as title, description and/or schedule have accessory disclosure indicator (the '>' on the right of the cell)
      Expected: Only intended cells should have indicator.     
-     
+
+* notes 
+** <2011-02-11 Fri>
+   I just realize how I could have done this in a way that seems like it might have been much more elegant:
+   Sessions (and people, as well), would hold and manage views, eg have a UITableCell, a sessionDetailView, etc.
+   They could manage the cacheing of such objects and detroy them / regenerate them.
