@@ -183,18 +183,19 @@
     
   // can use the setSelected:animated: instead to cause an animated change to selected
   // TODO : don't want this to be hardcoded ~ maybe pull filteredsessions lists from mySessionsView
-  if(
+  //  if(
+  cell.selected = 
     [mySessionID isEqualToString:userSessionFirstSlot] ||
     [mySessionID isEqualToString:userSessionSecondSlot] || 
     [mySessionID isEqualToString:@"welcome"] ||
     [mySessionID isEqualToString:@"opening-keynote"] ||
     [mySessionID isEqualToString:@"closing-keynote"] ||
     [mySessionID isEqualToString:@"closing-roundtable"] ||
-    [mySessionID isEqualToString:@"open-lunch"]
-     )
-    {
-      cell.accessoryType=UITableViewCellAccessoryCheckmark;
-    }
+    [mySessionID isEqualToString:@"open-lunch"];
+    // )
+    // {
+      //cell.accessoryType=UITableViewCellAccessoryCheckmark;
+    //    }
     
 }
 
@@ -292,7 +293,7 @@ sessionListViewController* getUserSessionsView()
 	  if ( userSessionSecondSlot != nil )
 	    {
 	      BUGOUT(@"adding %@ for second slot",userSessionSecondSlot );
-	      //		      [
+	      //	 	      [
 	      (newSection.items =  [NSArray arrayWithObject:[AABSessions objectForKey:userSessionSecondSlot]]);
 	      // release];
 	    }
