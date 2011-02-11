@@ -132,7 +132,7 @@ void populateInitialData()
   /*  plistPath = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"plist"];
       AABNews = [NSArray arrayWithContentsOfFile:plistPath]; */
 
-  NSString* urlString=[[NSString alloc] initWithString:@"http://10.5.1.239/news.plist"];
+  NSString* urlString=[[NSString alloc] initWithString:@"http://agile.riis.com/news.plist"];
   NSURL* newsURL = [NSURL URLWithString:urlString];
   [urlString release];
   /*
@@ -158,7 +158,6 @@ void populateInitialData()
   
 
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  
 
   // Next, check and see if we have the user's selected sessions saved, and if so, load
   //  NSString* fromPrefs = nil;
@@ -179,9 +178,11 @@ void populateInitialData()
 //@synthesize didUpdateTarget;//,didUpdateAction;
 @synthesize destinationData;
 @synthesize sourceURL;
+@synthesize reachabilityNotifier;
 
 -(id) init {
   [super init];
+  reachabilityNotifier = [[Reachability reachabilityForInternetConnection] retain];
   connectionInProgress=false;
     return self;
 }
@@ -202,14 +203,30 @@ void populateInitialData()
   //  NSError *error;
 	
   BUGOUT(@"Hello from %s", __func__);
-	
-  // TODO 
-  //some way of ensuring things such as there is only one request per resource happening at a time
-  	
-  if(connectionInProgress!=false) {
-    BUGOUT(@"%s: I think there is already a connection in progress?",__func__);
-    return;
-  }
+
+  if(connectionInProgress!=false) 
+    {
+      BUGOUT(@"%s: I think there is already a connection in progress?",__func__);
+      return;
+    }	
+
+  if(![reachabilityNotifier currentReachabilityStatus])
+    {
+      BUGOUT(@"in %s, Reachability status negative.", __func__);
+
+      if  (*(self.destinationData)) 
+	[(*(self.destinationData)) release];
+      
+      // TODO this message can't say that there is a network error unless we actually know that it the problem
+      (*(self.destinationData)) = [NSArray arrayWithObject:
+					     [NSDictionary dictionaryWithObjectsAndKeys:
+							     @"Device Offline",@"HeadLine",
+							   @"The latest Agile and Beyond 2011 news will be downloaded when an internet connection is available.",@"Detail",
+							   nil]];
+      [(*(self.destinationData)) retain];
+      return;
+    }
+
   connectionInProgress=true;
   connectionData=[[NSMutableData alloc] init];
 
@@ -394,12 +411,14 @@ void populateInitialData()
       //	BUGOUT(@"plistError .. %@",plistError); 
       //else
       //	{
-      	  dumpNestedDictToLog(dict);
 	  [dict retain]; // todo ... a little bit of odd memory management to look at
 	  // something like, if *destinationdata is an object, ..release? 
 	  (*(self.destinationData)) = dict;
+
+      	  dumpNestedDictToLog(dict);
 	  if(AABNewsView)
 	    {
+	      // TODO replace this (bad arch)
 	      BUGOUT(@" Trying to reload newsview here");
 	      [AABNewsView didUpdate];
 	    }
@@ -423,6 +442,21 @@ void populateInitialData()
 {
   BUGOUT(@"%s", __func__);
   BUGOUT(@"%s: Error [%@]", __func__, error);
+
+  //	  if(![dict isKindOfClass:[NSArray class]] || ![dict count])
+  // {
+  
+  if  (*(self.destinationData)) 
+      [(*(self.destinationData)) release];
+
+  // TODO this message can't say that there is a network error unless we actually know that it the problem
+  (*(self.destinationData)) = [NSArray arrayWithObject:
+					 [NSDictionary dictionaryWithObjectsAndKeys:
+							 @"News Offline",@"HeadLine",
+						       @"We're sorry, Agile and Beyond 2011 News could not be updated.",@"Detail",
+						       nil]];
+  [(*(self.destinationData)) retain];
+
   [self clearUrlConnection];
 }
 /*
@@ -443,7 +477,6 @@ return YES;
 
 - (void)dealloc 
 {
-  
   // if(connectionData) [connectionData release];
   // I feel that the next line belongs, but it releases on a already released object
   // if(connectionResponse) [connectionResponse release];

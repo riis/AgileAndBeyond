@@ -14,6 +14,8 @@
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		5D0C6F6C1301DDC800E9029C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0C6F6B1301DDC800E9029C /* UIKit.framework */; };
 		5D0C721413042FFB00E9029C /* AgileAndBeyondAppGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C721313042FFB00E9029C /* AgileAndBeyondAppGlobals.m */; };
+		5D0C73291305A0A400E9029C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D0C73281305A0A400E9029C /* Reachability.m */; };
+		5D0C734B1305A43D00E9029C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0C734A1305A43D00E9029C /* SystemConfiguration.framework */; };
 		5D2B4B9812F0D14400EBE32C /* agile_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */; };
 		5D2B4B9912F0D14400EBE32C /* riis_logo_about.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */; };
 		5D2B4BA812F1F6DE00EBE32C /* mainFilterSelectionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2B4BA712F1F6DE00EBE32C /* mainFilterSelectionMenu.m */; };
@@ -58,6 +60,9 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5D0C6F6B1301DDC800E9029C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5D0C721313042FFB00E9029C /* AgileAndBeyondAppGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgileAndBeyondAppGlobals.m; sourceTree = "<group>"; };
+		5D0C73271305A0A400E9029C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		5D0C73281305A0A400E9029C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		5D0C734A1305A43D00E9029C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5D2B4B9612F0D14400EBE32C /* agile_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = agile_logo_about.png; sourceTree = "<group>"; };
 		5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = riis_logo_about.png; sourceTree = "<group>"; };
 		5D2B4BA612F1F6DE00EBE32C /* mainFilterSelectionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainFilterSelectionMenu.h; sourceTree = "<group>"; };
@@ -107,6 +112,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
 				5D0C6F6C1301DDC800E9029C /* UIKit.framework in Frameworks */,
+				5D0C734B1305A43D00E9029C /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +122,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5D0C73271305A0A400E9029C /* Reachability.h */,
+				5D0C73281305A0A400E9029C /* Reachability.m */,
 				1D3623240D0F684500981E51 /* AgileAndBeyondAppDelegate.h */,
 				1D3623250D0F684500981E51 /* AgileAndBeyondAppDelegate.m */,
 				5D2B4BA612F1F6DE00EBE32C /* mainFilterSelectionMenu.h */,
@@ -205,6 +213,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765070DF74369002DB57D /* CoreGraphics.framework */,
 				5D0C6F6B1301DDC800E9029C /* UIKit.framework */,
+				5D0C734A1305A43D00E9029C /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -307,6 +316,7 @@
 				5D8C9EB512FC84210064459D /* personDetailsViewController.m in Sources */,
 				5D8C9F5912FDDED60064459D /* newsListViewController.m in Sources */,
 				5D0C721413042FFB00E9029C /* AgileAndBeyondAppGlobals.m in Sources */,
+				5D0C73291305A0A400E9029C /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
