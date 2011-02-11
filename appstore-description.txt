@@ -1,0 +1,2 @@
+Official app of Agile and Beyond, a 2011 regional conference for Agile development.  This mobile scheduler will help you schedule which sessions you wish to attend, brings you information about each session and about the regional presenters behind them, and keeps you up to date with the latest news and buzz regarding this amazing event.
+Agile and Beyond - Our Journey Continues takes place March 12, 2011 in Dearborn, MI.

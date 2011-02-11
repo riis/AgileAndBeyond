@@ -358,7 +358,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: RIIS LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: RIIS LLC";
 				CURRENT_PROJECT_VERSION = 1.0;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -370,7 +371,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=*]" = "";
+				"PROVISIONING_PROFILE[sdk=*]" = "3836DC7B-0332-4773-9720-E0C852B47C76";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3836DC7B-0332-4773-9720-E0C852B47C76";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -379,7 +381,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos4.2]" = "iPhone Distribution: RIIS LLC";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: RIIS LLC";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: RIIS LLC";
 				CURRENT_PROJECT_VERSION = 1.0;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
@@ -388,7 +391,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos4.2]" = "C71CF450-173B-430F-BBB9-880E2572C0C4";
+				"PROVISIONING_PROFILE[sdk=*]" = "3836DC7B-0332-4773-9720-E0C852B47C76";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3836DC7B-0332-4773-9720-E0C852B47C76";
 				SDKROOT = iphoneos4.2;
 			};
 			name = Release;
