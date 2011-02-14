@@ -209,7 +209,6 @@ void populateInitialData()
       // TODO refactor sessionDetailsViewController as well
       detailViewController = [sessionDetailsViewController createWithSession:info];
     }
-  
 }
 
 -(UITableViewCell*) getSessionListViewCell
@@ -217,12 +216,47 @@ void populateInitialData()
   if(sessionListViewCell)
     return sessionListViewCell;
   else
-    return nil; // TODO create cell
+    {
+     
+      static NSString *CellIdentifier = @"Cell";
+        
+      //thank you stackoverflow contributer Tim Rupe! other useful info at link 
+      //http://stackoverflow.com/questions/129502/how-do-i-wrap-text-in-a-uitableviewcell-without-a-custom-cell
+      // (and in documentation for UITextField)
+      
+      sessionListViewCell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+      sessionListViewCell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
+      sessionListViewCell.textLabel.numberOfLines=0;
+      sessionListViewCell.textLabel.font = getFontDefault();
+
+      cell.textLabel.text = [self getTitle]; 
+      cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+      return cell;
+    }
+
 }
 
 -(void) memoryWarning
 {
-    
-    
+  // resourses :
+  // isViewLoaded (on UIViewControllers)
+  // 
+
+  // TODO test this code ...
+  if(detailViewController)
+    {
+      [detailViewController release];
+      detailViewController = nil; 
+      // note: a more elaborate but perhaps better way to consider is to allow
+      // the detailViewController actually call back and set itself nil before deallocing
+      // this way if the detailViewController is requested again and hasn't actually 
+      // dallocd (due to being retained e.ge by a parent viewcontroller) it can be pulled forth
+      // perhaps even better, a whole seperate go-away-now message, but more complex
+    }
+  if(sessionListViewCell)
+    {
+      [sessionListViewCell release];
+      sessionListViewCell = nil;
+    }
 }
 @end 

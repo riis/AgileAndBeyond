@@ -150,29 +150,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
-{       
-  static NSString *CellIdentifier = @"Cell";
-  
-  // TODO : cell cache/reuse issue
-  UITableViewCell *cell;// = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  //    if (cell == nil) {
-    
-  //thank you stackoverflow contributer Tim Rupe! other useful info at link 
-  //http://stackoverflow.com/questions/129502/how-do-i-wrap-text-in-a-uitableviewcell-without-a-custom-cell
-  // (and in documentation for UITextField)
-  cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-  cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
-  cell.textLabel.numberOfLines=0;
-  cell.textLabel.font = getFontDefault();
-  //} 
-      
+{ 
   NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
-  NSDictionary* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
+  Session* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
 
-  cell.textLabel.text = [mySession objectForKey:@"title"]; 
-  cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    
-  return cell;
+  return [mySession getSessionListViewCell];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
