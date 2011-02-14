@@ -17,34 +17,36 @@
 ** DONE add remove button should only show on subscribable sessions
 ** DONE all sessions listen in mysessions should be highlighted whenever they appear
 ** DONE check all navigation paths
-** TODO save latest news pull
-** TODO system reachability test - disclose to user if news has not been updated
 ** DONE correct detail disclosure icons? (there are two)
 ** DONE correct use of table cell selection 
 ** DONE server for news.plist
 ** DONE proofread
-** TODO fix errors in data from proofreading
+** DONE fix errors in data from proofreading
 ** DONE testing
 ** DONE test on iphone
-** TODO audit against apple's interface guidelines
-** TODO submission process
-** TODO app store graphic added
-** TODO screenshot added
-** 
-
-
+** DONE audit against apple's interface guidelines
+** DONE submission process
+** DONE app store graphic added
+** DONE system reachability tets
+** DONE test on iphone
+** DONE implement changes from proofreading
+** DONE change my sessions to my schedule
+** DONE metadata
+** DONE screenshot
+   
 * TODO small but important - don't forget
-  - news update URL in code
-  - compile for deployment (not debug)
-  - test news update while not connected to lan
-  - no description for welcome session? 
-  - cache policy for news refresh
-  - default news, what is displayed on news view if news has never been pulled from server?
-  - when submitting to app store, have proof that this is an official 'agile and beyond' app
+  - [X] news update URL in code
+  - [X] compile for deployment (not debug)
+  - [X] compile with distrobution cert
+  - [X] test news update while not connected to lan
+  - [ ] no description for welcome session? 
+  - [X] cache policy for news refresh
+  - [X] default news, what is displayed on news view if news has never been pulled from server?
+  - [ ] when submitting to app store, have proof that this is an official 'agile and beyond' app
     and all copywrited terms/logos are used with permission
-  - system configuration reachability API as per guidelines
-  - app version number >= 1.0
-  - correct d
+  - [X] system configuration reachability API as per guidelines
+  - [X] app version number >= 1.0
+  - [ ] correct d ? 
     
 * TODO Advanced 
 ** TODO method fgor updating news & publishing

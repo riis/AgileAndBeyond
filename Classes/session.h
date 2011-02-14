@@ -9,6 +9,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import "Reachability.h"
 
 /* Because we will want tag sessions in the app and have this persist even if E.G.
  * the session title changes, we will use a unique ID for refering to sessions 
@@ -58,6 +59,7 @@ NSString* getIdOfSession(NSDictionary*);
   //  SEL didUpdateAction;
   //  id didUpdateTarget;
   BOOL connectionInProgress; //TODO revisit this whole approach
+  Reachability* reachabilityNotifier;
 }
 
 -(URLFetcher*) initForObject:(id*)dataPoint fromURL:(NSURL*)url;
@@ -70,7 +72,7 @@ NSString* getIdOfSession(NSDictionary*);
 //@property (nonatomic, retain) id didUpdateTarget;
 @property (nonatomic) id* destinationData;
 @property (nonatomic, retain) NSURL* sourceURL;
-
+@property (nonatomic, retain) Reachability* reachabilityNotifier;
 @end
 
 extern URLFetcher* AABNewsFetcher;

@@ -183,7 +183,8 @@
     
   // can use the setSelected:animated: instead to cause an animated change to selected
   // TODO : don't want this to be hardcoded ~ maybe pull filteredsessions lists from mySessionsView
-  cell.selected=
+  //  if(
+  cell.selected = 
     [mySessionID isEqualToString:userSessionFirstSlot] ||
     [mySessionID isEqualToString:userSessionSecondSlot] || 
     [mySessionID isEqualToString:@"welcome"] ||
@@ -191,7 +192,11 @@
     [mySessionID isEqualToString:@"closing-keynote"] ||
     [mySessionID isEqualToString:@"closing-roundtable"] ||
     [mySessionID isEqualToString:@"open-lunch"];
-  //cell.selectionStyle=UITableViewCellSelectionStyleBlue;
+    // )
+    // {
+      //cell.accessoryType=UITableViewCellAccessoryCheckmark;
+    //    }
+    
 }
 
 #pragma mark -
@@ -288,7 +293,7 @@ sessionListViewController* getUserSessionsView()
 	  if ( userSessionSecondSlot != nil )
 	    {
 	      BUGOUT(@"adding %@ for second slot",userSessionSecondSlot );
-	      //		      [
+	      //	 	      [
 	      (newSection.items =  [NSArray arrayWithObject:[AABSessions objectForKey:userSessionSecondSlot]]);
 	      // release];
 	    }
@@ -308,6 +313,8 @@ sessionListViewController* getUserSessionsView()
 
   BUGOUT(@"in %s, fisteredSessionLists is %d long,",__func__ ,[filteredSessionLists count] );
   BUGOUT(@"in %s, sectionDates is %d long,",__func__ ,[sectionDates count] );
+
+  [sectionDates release];
 
   return self;
   //  return [super initWithNibName:@"sessionListViewController" bundle:nil];

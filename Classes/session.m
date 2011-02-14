@@ -132,11 +132,11 @@ void populateInitialData()
   /*  plistPath = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"plist"];
       AABNews = [NSArray arrayWithContentsOfFile:plistPath]; */
 
-  NSString* urlString=[[NSString alloc] initWithString:@"http://10.5.1.239/news.plist"];
+  NSString* urlString=[[NSString alloc] initWithString:@"http://agile.riis.com/news.plist"];
   NSURL* newsURL = [NSURL URLWithString:urlString];
   [urlString release];
   /*
-  AABNews = [[NSArray alloc]  init] WithContentsOfURL:[NSURL URLWithString:@"http://10.5.1.239/news.plist"]];
+  AABNews = [[NSArray alloc]  init] WithContentsOfURL:[NSURL URLWithString:@"http://agile.riis.com/AgileAndBeyond2011/app/ios/news.plist"]];
   
   if(AABNews)
     {
@@ -158,7 +158,6 @@ void populateInitialData()
   
 
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  
 
   // Next, check and see if we have the user's selected sessions saved, and if so, load
   //  NSString* fromPrefs = nil;
@@ -179,9 +178,11 @@ void populateInitialData()
 //@synthesize didUpdateTarget;//,didUpdateAction;
 @synthesize destinationData;
 @synthesize sourceURL;
+@synthesize reachabilityNotifier;
 
 -(id) init {
   [super init];
+  reachabilityNotifier = [[Reachability reachabilityForInternetConnection] retain];
   connectionInProgress=false;
     return self;
 }
@@ -202,31 +203,46 @@ void populateInitialData()
   //  NSError *error;
 	
   BUGOUT(@"Hello from %s", __func__);
-	
-  // TODO 
-  //some way of ensuring things such as there is only one request per resource happening at a time
-  	
-  if(connectionInProgress!=false) {
-    BUGOUT(@"%s: I think there is already a connection in progress?",__func__);
-    return;
-  }
+
+  if(connectionInProgress!=false) 
+    {
+      BUGOUT(@"%s: I think there is already a connection in progress?",__func__);
+      return;
+    }	
+
+  if(![reachabilityNotifier currentReachabilityStatus])
+    {
+      BUGOUT(@"in %s, Reachability status negative.", __func__);
+
+      if  (*(self.destinationData)) 
+	[(*(self.destinationData)) release];
+      
+      // TODO this message can't say that there is a network error unless we actually know that it the problem
+      (*(self.destinationData)) = [NSArray arrayWithObject:
+					     [NSDictionary dictionaryWithObjectsAndKeys:
+							     @"Device Offline",@"HeadLine",
+							   @"The latest Agile and Beyond 2011 news will be downloaded when an internet connection is available.",@"Detail",
+							   nil]];
+      [(*(self.destinationData)) retain];
+      return;
+    }
+
   connectionInProgress=true;
   connectionData=[[NSMutableData alloc] init];
 
   if( sourceURL == nil ) 
     BUGOUT(@"Warning : URLFetch refresh called but no URL.");
-	
+  
   request = [[NSMutableURLRequest alloc] initWithURL:sourceURL
-				 cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-				 timeoutInterval:12.5];
-  NSString* get = [[NSString alloc] initWithString:@"GET"];
-  [request setHTTPMethod:get];
-  [get release];
+					 cachePolicy:NSURLRequestUseProtocolCachePolicy 
+					 timeoutInterval:12.5];
+
+  [request setHTTPMethod:@"get"];
   //  error = [[NSError alloc] init];
        
   BUGOUT(@"%s about to start asynchronous connection",__func__);
   self.urlConnection = [NSURLConnection connectionWithRequest:request delegate:self];
-  
+  [request release];
   // [error release];
   
   // TODO : replace with a target/action system like in ibroadsoft
@@ -386,36 +402,38 @@ void populateInitialData()
       // in this contect we are only doing gets
       // so i'm not sure this conditional block is nessisary.
       
-      //    dict = [NSDictionary dictionaryWithJSONString:[[NSString alloc] initWithData:connectionData encoding:nsEncoding]];
-      dict = [NSPropertyListSerialization propertyListWithData:connectionData 
-				   options:NSPropertyListImmutable
-				   format:NULL error:&plistError];
-      //  if(plistError)
-      //	BUGOUT(@"plistError .. %@",plistError); 
-      //else
-      //	{
-      	  dumpNestedDictToLog(dict);
-	  [dict retain]; // todo ... a little bit of odd memory management to look at
-	  // something like, if *destinationdata is an object, ..release? 
-	  (*(self.destinationData)) = dict;
-	  if(AABNewsView)
-	    {
-	      BUGOUT(@" Trying to reload newsview here");
-	      [AABNewsView didUpdate];
-	    }
-	  //	}
+  dict = [NSPropertyListSerialization propertyListWithData:connectionData 
+				      options:NSPropertyListImmutable
+				      format:NULL error:&plistError];
+  //  if(plistError)
+  //	BUGOUT(@"plistError .. %@",plistError); 
+  //else
+  //	{
 
-      //}
-      //  else 
-      // {
-      //BUGOUT(@"%s: PUT request completed",__func__);
-      // }
+  if(*destinationData) [*destinationData release];
+  (*destinationData) = dict;
+  [(*destinationData) retain];
+
+  dumpNestedDictToLog(dict);
+  if(AABNewsView)
+    {
+      // TODO replace this (bad arch)
+      BUGOUT(@" Trying to reload newsview here");
+      [AABNewsView didUpdate];
+    }
+  //	}
   
-      // the following log statement is useful for debugging but the string appears to leak 
-      // BUGOUT(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
+  //}
+  //  else 
+  // {
+  //BUGOUT(@"%s: PUT request completed",__func__);
+  // }
+  
+  // the following log statement is useful for debugging but the string appears to leak 
+  // BUGOUT(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
   
   connectionInProgress=false;
-     [self clearUrlConnection];		// nessisary?
+  [self clearUrlConnection];		// nessisary?
   //  [encoding release];
 }
 
@@ -423,6 +441,21 @@ void populateInitialData()
 {
   BUGOUT(@"%s", __func__);
   BUGOUT(@"%s: Error [%@]", __func__, error);
+
+  //	  if(![dict isKindOfClass:[NSArray class]] || ![dict count])
+  // {
+  
+  if  (*(self.destinationData)) 
+      [(*(self.destinationData)) release];
+
+  // TODO this message can't say that there is a network error unless we actually know that it the problem
+  (*(self.destinationData)) = [NSArray arrayWithObject:
+					 [NSDictionary dictionaryWithObjectsAndKeys:
+							 @"News Offline",@"HeadLine",
+						       @"We're sorry, Agile and Beyond 2011 News could not be updated.",@"Detail",
+						       nil]];
+  [(*(self.destinationData)) retain];
+
   [self clearUrlConnection];
 }
 /*
@@ -443,7 +476,6 @@ return YES;
 
 - (void)dealloc 
 {
-  
   // if(connectionData) [connectionData release];
   // I feel that the next line belongs, but it releases on a already released object
   // if(connectionResponse) [connectionResponse release];

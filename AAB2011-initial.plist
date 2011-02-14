@@ -177,15 +177,11 @@ Tom recommends OpenSpaceWorld for learning more about Open Space Technology.</st
 		<key>isAdvanced</key>
 		<true/>
 		<key>description</key>
-		<string>Technical Debt has become a catch-all phrase for any code that needs to be re-worked; much like Refactoring has become a catch-all phrase for any activity that involves changing code.
+		<string>Have you ever noticed that some of the best conversations at a conference emerge during the coffee breaks? What if you could encapsulate those moments and share them throughout the day? That’s one of the founding principles of Open Space Technology; it’s a free form meeting where attendees control the agenda, timeframe, and discussion.
 
-Michael explores fundamental misunderstandings and comfortable yet mis-applied metaphors that result in a plethora of poor business decisions while answering the following:
+All the ingredients are present for a highly dynamic, energy-filled, passionate environment where topics run close to the core of human experience. Age, skill-level, background --- it doesn&apos;t matter --- what matters is true, open communication and a chance to hear and be heard!
 
-    * What is technical debt?
-    * What is not technical debt?
-    * Why should we care?
-    * What is the cost of misunderstanding?
-    * What do we do about it?</string>
+Tom recommends OpenSpaceWorld for learning more about Open Space Technology.</string>
 		<key>people</key>
 		<array>
 			<dict>
@@ -323,7 +319,15 @@ Damon will guide the creation of a made-up software project (of the participants
 		<key>subtype</key>
 		<string>Executive</string>
 		<key>description</key>
-		<string>This workshop is designed for those providing leadership in our region. We will hit the tough-issues head-on with both short formal presentations and far-ranging discussion. What does it mean to be an effective contemporary &apos;Lean&apos; leader? Join in for a powerful time of face-to-face interaction as we seek collaborative answers.</string>
+		<string>This workshop is designed for those providing leadership in our region. We will hit the tough-issues head-on with both short formal presentations and far-ranging discussion. What does it mean to be an effective contemporary &apos;Lean&apos; leader? Join in for a powerful time of face-to-face interaction as we seek collaborative answers.
+
+Mary and Tom wrote the book; actually three books. So, what's the big deal with 'Lean'?
+
+If you have not had the opportunity to glean from the 'Lean' harvest that is sweeping the IT community, there may never be a better opportunity then a conversation beginning with what is occurring in our own back yard.
+
+And we won't stop there. We'll talk openly and candidly about application development in our region and how well we compete on the global stage. Do we have a sustainable prescription or are we simply on life-support?</string>
+
+
 		<key>people</key>
 		<array>
 			<dict>
@@ -371,7 +375,7 @@ Damon will guide the creation of a made-up software project (of the participants
 				<string>Panel Member</string>
 			</dict>
 			<dict>
-				<key>individual</key>
+			<key>individual</key>
 				<string>Tom Poppendieck</string>
 				<key>role</key>
 				<string>Panel Member</string>
@@ -478,10 +482,12 @@ This workshop focuses on techniques that scrub code really clean. These techniqu
 		<key>description</key>
 		<string>Prerequisites:
 
-    * Computer with Programming Environment Configured
-    * At Least One Testing Framework (JUnit, NUnit, RSpec, etc.)
+* Ability to Write Java and Run Unit Tests
+* Computer with Programming Environment Configured (Examples use Eclipse/JUnit.)
+* Yes, you will be pair programming!
+Now for something completely different! If you are bored with reading/writing to/from databases this is your chance for fun.
 
-Come and practice your Test Driven Development skill. If you&apos;ve never experienced TDD before, Nayan will guide you through the steps with exercises to try. If you have some experience, you&apos;ll sharpen your skills. If you&apos;re a pro, take it to the next level or pair with someone just getting started!</string>
+Using a conference supplied USB cable and Lego® Mindstorms® NXT robot; join Kealy and Ted as they demonstrate how architectural layering and fake objects are combined to write unit tests for a program that controls hardware. The carefully crafted workshop simulates lessons learned from challenges that emerged in a real-world application. Perhaps you missed the opportunity in Orlando at OOPSLA 2009 --- however don't despair, this is your chance to bring a robot to life in Dearborn!</string>
 		<key>people</key>
 		<array>
 			<dict>
@@ -544,14 +550,7 @@ Come and practice your Test Driven Development skill. If you&apos;ve never exper
 		<key>subtype</key>
 		<string>Presentation</string>
 		<key>description</key>
-		<string>Over the past two years Shawn has been integrating design practices into iterative development cycles. Using data from multiple projects that have integrated design and development, this experience report will provide insight into an approach of upfront design, product and project management, and product development. Attendees should already posses an understanding of agile estimation, planning and project management techniques. Transitioning a culture focused on technical excellence to one focused on product excellence will be a sub-theme of this session.
-Michael explores fundamental misunderstandings and comfortable yet mis-applied metaphors that result in a plethora of poor business decisions while answering the following:
-
-    * What is technical debt?
-    * What is not technical debt?
-    * Why should we care?
-    * What is the cost of misunderstanding?
-    * What do we do about it?</string>
+		<string>Over the past two years Shawn has been integrating design practices into iterative development cycles. Using data from multiple projects that have integrated design and development, this experience report will provide insight into an approach of upfront design, product and project management, and product development. Attendees should already posses an understanding of agile estimation, planning and project management techniques. Transitioning a culture focused on technical excellence to one focused on product excellence will be a sub-theme of this session.</string>
 		<key>isIntermediate</key>
 		<true/>
 		<key>isAdvanced</key>
@@ -588,7 +587,7 @@ Michael explores fundamental misunderstandings and comfortable yet mis-applied m
 		<array>
 			<dict>
 				<key>individual</key>
-				<string>Matthew Phillip</string>
+				<string>Matthew Philip</string>
 				<key>role</key>
 				<string>Presenter</string>
 			</dict>
@@ -675,14 +674,7 @@ Join with Vijay as he speaks with candor and transparency about his personal enc
 		<key>subtype</key>
 		<string>Panel Discussion</string>
 		<key>description</key>
-		<string>Given the personalities this conversation could go anywhere... it sure did last year! This is your chance to ask the tough questions about what really works. And, in particular, Dianne will focus on what has changed in the past year, what new challenges companies are experiencing, and how we can continue to improve our process.  The Panel has requested your help shaping the discussion content by submitting questions or topics of interest to panel@agileandbeyond.org prior to the Conference. No topic is off limits! They will assemble the responses and tackle the most popular and/or intriguing questions during the session.
-Michael explores fundamental misunderstandings and comfortable yet mis-applied metaphors that result in a plethora of poor business decisions while answering the following:
-
-    * What is technical debt?
-    * What is not technical debt?
-    * Why should we care?
-    * What is the cost of misunderstanding?
-    * What do we do about it?</string>
+		<string>Given the personalities this conversation could go anywhere... it sure did last year! This is your chance to ask the tough questions about what really works. And, in particular, Dianne will focus on what has changed in the past year, what new challenges companies are experiencing, and how we can continue to improve our process.  The Panel has requested your help shaping the discussion content by submitting questions or topics of interest to panel@agileandbeyond.org prior to the Conference. No topic is off limits! They will assemble the responses and tackle the most popular and/or intriguing questions during the session.</string>
 		<key>isAdvanced</key>
 		<true/>
 		<key>isIntermediate</key>
