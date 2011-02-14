@@ -1,7 +1,7 @@
 
 
 
-* TODO Basic Functionaliy Finished :
+* DONE Basic Functionaliy Finished :
 ** DONE Pull URL asynchronously
 ** DONE Parse news URL and display news items
 ** DONE check for memory leaks from instruments
@@ -48,6 +48,10 @@
   - [X] app version number >= 1.0
   - [ ] correct d ? 
     
+
+
+* TODO fixes for next release
+** TODO URL caching behavior (force refresh ability)
 
 * TODO new features
 ** TODO link to twitter feeds
