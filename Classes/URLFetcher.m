@@ -12,13 +12,14 @@
 
 @implementation URLFetcher 
 @synthesize connectionData,connectionResponse,urlConnection,connectionInProgress;
-//@synthesize didUpdateTarget;//,didUpdateAction;
+@synthesize didUpdateMessage;
 @synthesize destinationData;
 @synthesize sourceURL;
 @synthesize reachabilityNotifier;
-
-extern AABNewsView; // TODO - note will this need to stay? 
-
+/*
+@class newsListViewController;
+extern newsListViewController* AABNewsView; // TODO - note will this need to stay? 
+*/
 -(id) init {
   [super init];
   reachabilityNotifier = [[Reachability reachabilityForInternetConnection] retain];
@@ -83,15 +84,6 @@ extern AABNewsView; // TODO - note will this need to stay?
   self.urlConnection = [NSURLConnection connectionWithRequest:request delegate:self];
   [request release];
   // [error release];
-  
-  // TODO : replace with a target/action system like in ibroadsoft
-  /*
-  if(AABNewsView)
-    {
-      BUGOUT(@" Trying to reload newsview here");
-      [AABNewsView didUpdate];
-    }
-  */
 }
 
 
@@ -254,13 +246,9 @@ extern AABNewsView; // TODO - note will this need to stay?
   [(*destinationData) retain];
 
   dumpNestedDictToLog(dict);
-  if(AABNewsView)
-    {
-      // TODO replace this (bad arch)
-      BUGOUT(@" Trying to reload newsview here");
-      [AABNewsView didUpdate];
-    }
-  //	}
+  if(didUpdateMessage)  [didUpdateMessage send];
+
+  //}
   
   //}
   //  else 

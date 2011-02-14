@@ -44,6 +44,7 @@
 		5D8C9F5912FDDED60064459D /* newsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C9F5712FDDED60064459D /* newsListViewController.m */; };
 		5D8C9F5A12FDDED60064459D /* newsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C9F5812FDDED60064459D /* newsListViewController.xib */; };
 		5DA89930130998CB00C38BA0 /* URLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DA8992F130998CB00C38BA0 /* URLFetcher.m */; };
+		5DA8995B13099F6400C38BA0 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DA8995A13099F6400C38BA0 /* Message.m */; };
 		5DCF56FD1300A92A004C5CC9 /* aboutAgileLogo_@2x640x440.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DCF56F91300A925004C5CC9 /* aboutAgileLogo_@2x640x440.png */; };
 		5DCF56FE1300A92A004C5CC9 /* aboutAgileLogo_320x220.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DCF56FA1300A926004C5CC9 /* aboutAgileLogo_320x220.png */; };
 		5DCF56FF1300A92A004C5CC9 /* aboutRIISLogo_@2x640x122.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DCF56FB1300A926004C5CC9 /* aboutRIISLogo_@2x640x122.png */; };
@@ -101,6 +102,8 @@
 		5D8C9F5812FDDED60064459D /* newsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = newsListViewController.xib; sourceTree = "<group>"; };
 		5DA8992E130998CB00C38BA0 /* URLFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = URLFetcher.h; sourceTree = "<group>"; };
 		5DA8992F130998CB00C38BA0 /* URLFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = URLFetcher.m; sourceTree = "<group>"; };
+		5DA8995913099F6400C38BA0 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		5DA8995A13099F6400C38BA0 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		5DCF56F91300A925004C5CC9 /* aboutAgileLogo_@2x640x440.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutAgileLogo_@2x640x440.png"; sourceTree = "<group>"; };
 		5DCF56FA1300A926004C5CC9 /* aboutAgileLogo_320x220.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutAgileLogo_320x220.png; sourceTree = "<group>"; };
 		5DCF56FB1300A926004C5CC9 /* aboutRIISLogo_@2x640x122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aboutRIISLogo_@2x640x122.png"; sourceTree = "<group>"; };
@@ -151,6 +154,8 @@
 				5D8C9F5812FDDED60064459D /* newsListViewController.xib */,
 				5DA8992E130998CB00C38BA0 /* URLFetcher.h */,
 				5DA8992F130998CB00C38BA0 /* URLFetcher.m */,
+				5DA8995913099F6400C38BA0 /* Message.h */,
+				5DA8995A13099F6400C38BA0 /* Message.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -327,6 +332,7 @@
 				5D0C721413042FFB00E9029C /* AgileAndBeyondAppGlobals.m in Sources */,
 				5D0C73291305A0A400E9029C /* Reachability.m in Sources */,
 				5DA89930130998CB00C38BA0 /* URLFetcher.m in Sources */,
+				5DA8995B13099F6400C38BA0 /* Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

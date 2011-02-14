@@ -166,6 +166,11 @@ void populateInitialData()
 
 
   AABNewsFetcher = [[[URLFetcher alloc] initForObject:&AABNews fromURL:newsURL] retain];
+  [AABNewsFetcher setDidUpdateMessage:[[[Message alloc] 
+					initWithSelector:@selector(didUpdate)
+					forTarget:AABNewsView]] autorelease]; // problem
+  
+  					       
   [AABNewsFetcher refresh];
   [newsURL release];
   // [fetcher release];  

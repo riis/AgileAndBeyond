@@ -48,6 +48,14 @@
   - [X] app version number >= 1.0
   - [ ] correct d ? 
     
+
+* TODO new features
+** TODO link to twitter feeds
+** TODO pictures in bios
+** TODO flip sessions
+** TODO export to schedule app
+** TODO "call to action" on home screen
+
 * TODO Advanced 
 ** TODO method fgor updating news & publishing
 ** TODO markup in session details/bios
@@ -65,6 +73,7 @@
 * ideas/maybes
 ** TODO News detail view
 ** TODO find URL in news detail (or as attached atribute) and click table cell to load URL in safari
+
    
 * BUGS 
 ** data, or navigation of
@@ -107,6 +116,7 @@
      Scoll the table up and down, "bouncing" it at the top and bottom.
      Bug: Cells such as title, description and/or schedule have accessory disclosure indicator (the '>' on the right of the cell)
      Expected: Only intended cells should have indicator.     
+
 
 * notes 
 ** <2011-02-11 Fri>
