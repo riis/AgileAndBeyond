@@ -9,7 +9,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "Reachability.h"
+#import "URLFetcher.h"
 
 /* Because we will want tag sessions in the app and have this persist even if E.G.
  * the session title changes, we will use a unique ID for refering to sessions 
@@ -47,33 +47,6 @@ NSString* userSessionSecondSlot;
 // how I refer to sessions from the main list, and having a function like this might
 // make that easier
 NSString* getIdOfSession(NSDictionary*);
-
-@interface URLFetcher : NSObject 
-{
-  id* destinationData; // should actually be NSData*? 
-  NSURL* sourceURL;
-@protected
-  NSMutableData *connectionData;
-  NSURLConnection *urlConnection;
-  NSURLResponse *connectionResponse;
-  //  SEL didUpdateAction;
-  //  id didUpdateTarget;
-  BOOL connectionInProgress; //TODO revisit this whole approach
-  Reachability* reachabilityNotifier;
-}
-
--(URLFetcher*) initForObject:(id*)dataPoint fromURL:(NSURL*)url;
--(void) refresh;
-
-@property (nonatomic, retain) NSMutableData *connectionData; 
-@property (nonatomic, retain) NSURLResponse *connectionResponse;
-@property () BOOL connectionInProgress;
-@property (nonatomic, retain) NSURLConnection *urlConnection;
-//@property (nonatomic, retain) id didUpdateTarget;
-@property (nonatomic) id* destinationData;
-@property (nonatomic, retain) NSURL* sourceURL;
-@property (nonatomic, retain) Reachability* reachabilityNotifier;
-@end
 
 extern URLFetcher* AABNewsFetcher;
 @class newsListViewController;
