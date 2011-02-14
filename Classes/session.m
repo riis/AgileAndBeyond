@@ -20,8 +20,6 @@ NSDate* AABDateOfClosingSummary;
 NSDateFormatter* AABDateConstFormatter;
 NSDateFormatter* AABDateSectionTitleFormmater;
 
-URLFetcher* AABNewsFetcher;
-
 NSString* getIdOfSession(NSDictionary*session)
 {
   NSString* id = nil;
@@ -78,7 +76,7 @@ void populateInitialData()
 {
   AABSessions = nil;
   NSString* plistPath;
-
+  
   AABDateConstFormatter = [[NSDateFormatter alloc] init];
   [AABDateConstFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
   [(AABDateOfFirstSlot = [AABDateConstFormatter dateFromString:@"2011-03-12 10:15"])
@@ -99,15 +97,15 @@ void populateInitialData()
   
   AABDateSectionTitleFormmater = [[NSDateFormatter alloc] init];
   [AABDateSectionTitleFormmater setDateFormat:@"EEE, MMMM d h:mm a"];
-
+  
   BUGOUT(@"AABDateOfFirstSlot is %@",  AABDateOfFirstSlot);
-
+  
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
   AABSessions = [NSDictionary dictionaryWithContentsOfFile:plistPath];
   if(AABSessions)
     {
       BUGOUT(@"I loaded in a plist as AABSessions from %@, and its got %d elements",  
-	    plistPath,
+	     plistPath,
 	     [AABPeople count]);
     }
   else 
@@ -121,59 +119,24 @@ void populateInitialData()
   if(AABPeople)
     {
       BUGOUT(@"I loaded in a plist as AABPeople from %@, and its got %d elements", 
-	    plistPath,
-	    [AABPeople count]);
+	     plistPath,
+	     [AABPeople count]);
     }
   else 
     {
       BUGOUT(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
     }
-
-  /*  plistPath = [[NSBundle mainBundle] pathForResource:@"news" ofType:@"plist"];
-      AABNews = [NSArray arrayWithContentsOfFile:plistPath]; */
-
-  NSString* urlString=[[NSString alloc] initWithString:@"http://agile.riis.com/news.plist"];
-  NSURL* newsURL = [NSURL URLWithString:urlString];
-  [urlString release];
-  /*
-  AABNews = [[NSArray alloc]  init] WithContentsOfURL:[NSURL URLWithString:@"http://agile.riis.com/AgileAndBeyond2011/app/ios/news.plist"]];
   
-  if(AABNews)
-    {
-      BUGOUT(@"I loaded in a plist as AABNews from %@, and its got %d elements", 
-	    // plistPath,
-	    newsURL,
-	    [AABPeople count]);
-    }
-  else 
-    {
-      BUGOUT(@"Tried to load dictionary but ended up with nil, using path %@",newsURL);
-    }
-  */
+ 
   // TODO memory
   [AABSessions retain];
   [AABPeople retain];
-  //[AABNews retain];
-
   
-
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+  
   // Next, check and see if we have the user's selected sessions saved, and if so, load
   //  NSString* fromPrefs = nil;
   userSessionFirstSlot = [defaults objectForKey:@"userSessionFirstSlot"];
   userSessionSecondSlot = [defaults objectForKey:@"userSessionSecondSlot"];
-
-
-  AABNewsFetcher = [[[URLFetcher alloc] initForObject:&AABNews fromURL:newsURL] retain];
-  [AABNewsFetcher setDidUpdateMessage:[[[Message alloc] 
-					initWithSelector:@selector(didUpdate)
-					forTarget:AABNewsView]] autorelease]; // problem
   
-  					       
-  [AABNewsFetcher refresh];
-  [newsURL release];
-  // [fetcher release];  
-
 }
-

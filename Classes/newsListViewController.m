@@ -9,8 +9,10 @@
 #import "newsListViewController.h"
 #import "AgileAndBeyondAppGlobals.h"
 #import "session.h"
+#import "URLFetcher.h"
 
 
+URLFetcher* newsFetcher;
 newsListViewController* AABNewsView;
 UIBarButtonItem *refreshButton;
 
@@ -35,15 +37,28 @@ UIBarButtonItem *refreshButton;
 
   if(!AABNewsView)
     {
-
       AABNewsView=self;
       [AABNewsView retain];
+
+      // TODO move this definition to a constants/config file
+      NSString* newsUrlString=[[NSString alloc] initWithString:@"http://agile.riis.com/news.plist"];
+      NSURL* newsURL = [NSURL URLWithString:newsUrlString];
+      [newsUrlString release];
+
+      newsFetcher = [[[URLFetcher alloc] initForObject:&AABNews fromURL:newsURL] retain];
+      [newsFetcher setDidUpdateMessage:[[[Message alloc] 
+					     initWithSelector:@selector(didUpdate)
+					     forTarget:self] autorelease]]; // problem
+      
+      [newsFetcher refresh];
+      [newsURL release];
+
     }
   if(!refreshButton) 
     {
       refreshButton = [[UIBarButtonItem alloc]
 			initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
-			target:AABNewsFetcher
+			target:newsFetcher
 			action:@selector(refresh)];
       [refreshButton retain];
     }

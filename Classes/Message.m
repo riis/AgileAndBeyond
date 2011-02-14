@@ -22,6 +22,8 @@
 
 -(void) send
 {
+  BUGOUT(@"hello from %s", __func__);
+
   // do some sanity checking, then perform selector if it looks OK
   if(! (target && action) ) 
     BUGOUT(@"in %s, WARNING target or action was nil", __func__);
