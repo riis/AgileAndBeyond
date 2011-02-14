@@ -51,3 +51,32 @@ NSString* getIdOfSession(NSDictionary*);
 extern URLFetcher* AABNewsFetcher;
 @class newsListViewController;
 extern newsListViewController* AABNewsView;
+
+
+@class sessionDetailsViewController;
+
+@interface Session : NSObject
+{
+  NSString* identity;
+  NSDictionary* info;
+  sessionDetailsViewController* detailViewController;
+  UITableViewCell* sessionListViewCell;
+}
+
+@property(nonatomic, retain) identity;
+@property(nonatomic, retain) info;
+
+-(sessionDetailsViewController*) getDetailViewController;
+-(UITableViewCell*) getSessionListViewCell;
+-(NSDate*) getStartTime;
+-(NSString*) getTitle;
+-(NSString*) getDescription;
+-(NSArray*) getPeople;
+-(NSString*) getTrack;
+-(NSString*) getType;
+-(NSString*) getSubtype;
+-(BOOL) isAdvanced;
+-(BOOL) isBeginner;
+-(BOOL) isIntermediate;
+-(void) memoryWarning;
+@end 

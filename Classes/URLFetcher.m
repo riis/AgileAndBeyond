@@ -40,9 +40,19 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
 -(void) refresh   
 {	
   NSMutableURLRequest *request;
+  
   //  NSError *error;
+
+  // TODO detect multiple refresh requests and initiate uncached request? 
+  // might use CFTimeInterval, CFAbsoluteTimeGetCurrent(),
+  // might switch connectionInProgress to an int and use it like a sort of semaphore
+  // people also use performSelector:withObject:afterDelay and static function counters
+  // to detect double taps
+  // so it could be done here that way ,or in the UI button
 	
   BUGOUT(@"Hello from %s", __func__);
+
+  
 
   if(connectionInProgress!=false) 
     {

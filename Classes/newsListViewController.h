@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface newsListViewController : UITableViewController {
-
+@interface newsListViewController : UITableViewController
+{
 }
 
 -(void)didUpdate;

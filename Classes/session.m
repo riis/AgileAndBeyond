@@ -129,6 +129,7 @@ void populateInitialData()
   
  
   // TODO memory
+  [AABSessionsArray retain];
   [AABSessions retain];
   [AABPeople retain];
   
@@ -140,3 +141,88 @@ void populateInitialData()
   userSessionSecondSlot = [defaults objectForKey:@"userSessionSecondSlot"];
   
 }
+
+
+//////////////////////////////////////////////////////////////////////// 
+///                                            START Session implementation
+//////////////////////////////////////////////////////////////////////// 
+
+@implementation Session : NSObject
+@synthesize identity, info;
+			    
+-(NSDate*) getStartTime
+{
+  return [info objectForKey:@"startTime"];
+}
+
+-(NSString*) getTitle
+{
+  return [info objectForKey:@"title"];
+}
+
+-(NSString*) getDescription
+{
+  return [info objectForKey:@"detail"];
+}
+
+-(NSArray*) getPeople
+{
+  return [info objectForKey:@"people"];
+}
+
+-(NSString*) getTrack
+{
+  return [info objectForKey:@"track"];
+}
+
+-(NSString*) getType
+{
+  return [info objectForKey:@"type"];
+}
+
+-(NSString*) getSubtype
+{
+  return [info objectForKey:@"subtype"];
+}
+
+-(BOOL) isAdvanced
+{
+  return [info objectForKey:@"isAdvanced"];
+}
+
+-(BOOL) isBeginner
+{
+  return [info objectForKey:@"isBeginner"];
+}
+
+-(BOOL) isIntermediate
+{
+  return [info objectForKey:@"startTime"];
+}
+
+-(sessionDetailsViewController*) getDetailViewController
+{
+  if(detailViewController)
+    return detailViewController;
+  else
+    {
+      // TODO refactor sessionDetailsViewController as well
+      detailViewController = [sessionDetailsViewController createWithSession:info];
+    }
+  
+}
+
+-(UITableViewCell*) getSessionListViewCell
+{
+  if(sessionListViewCell)
+    return sessionListViewCell;
+  else
+    return nil; // TODO create cell
+}
+
+-(void) memoryWarning
+{
+    
+    
+}
+@end 
