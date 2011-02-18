@@ -7,6 +7,8 @@
 //
 
 #import "session.h"
+#import "sessionListViewController.h"
+#import "sessionDetailsViewController.h"
 #import "AgileAndBeyondAppGlobals.h"
 
 NSDate* AABDateOfFirstSlot;
@@ -20,6 +22,10 @@ NSDate* AABDateOfClosingSummary;
 NSDateFormatter* AABDateConstFormatter;
 NSDateFormatter* AABDateSectionTitleFormmater;
 
+Session* userSessionFirstSlot;
+Session* userSessionSecondSlot;
+
+/* going away after refactoring
 NSString* getIdOfSession(NSDictionary*session)
 {
   NSString* id = nil;
@@ -34,7 +40,7 @@ NSString* getIdOfSession(NSDictionary*session)
     }		
   return id;
 }
-
+*/
 //this one dumps a nested dictionary structure to log
 void dumpNestedDictToLog(NSDictionary* dict)
 {
@@ -107,11 +113,11 @@ void populateInitialData()
 	     plistPath,
 	     [AABSessionInfo count]);
 
-      AABSessions = [[NSArray alloc] init];
+      AABSessions = [[NSMutableArray alloc] init];
 
       // There might be a more elegant method for doing this 
       NSArray* sessionIDs = [AABSessionInfo allKeys];
-      for(NSString id in sessionIDs)
+      for(NSString* id in sessionIDs)
 	{
 	  [AABSessions addObject:
 			 [Session createSessionWithIdentity:id
@@ -157,19 +163,17 @@ void populateInitialData()
 ///                                            START Session implementation
 //////////////////////////////////////////////////////////////////////// 
 
-Session* userSessionFirstSlot;
-Session* userSessionSecondSlot;
 
 @implementation Session : NSObject
 @synthesize identity, info;
 	 
- +(Session*) createSessionWithIdentity(NSString*)sessionId andDictionary(NSDictionary*)sessionInfo
-  {
-    Session* me = [[Session alloc] init];
-    me.identity = sessionID;
-    me.info = sessionInfo;
-    return me;
-  }
++(Session*) createSessionWithIdentity:(NSString*)sessionId andDictionary:(NSDictionary*)sessionInfo
+{
+  Session* me = [[Session alloc] init];
+  me.identity = sessionId;
+  me.info = sessionInfo;
+  return me;
+}
 
 +(Session*) userSelectedFirstSlot
 {
@@ -210,9 +214,9 @@ Session* userSessionSecondSlot;
 
 -(void) toggleSelection
 {
-  NSDate* sessionTime = [mySession objectForKey:@"timeStart"];
+  NSDate* sessionTime = [self timeStart];
   NSString* whichPref;
-  NSString** whichSlot;
+  Session** whichSlot;
   
   if ( [sessionTime isEqualToDate:AAB_FIRST_SLOT_DATE] )
     {
@@ -235,7 +239,7 @@ Session* userSessionSecondSlot;
   else 
     {
       if ( *whichSlot != nil ) [*whichSlot release];
-      *whichSlot = identity;
+      *whichSlot = self;
       [*whichSlot retain]; // TODO review memory ownership logic here
       [[NSUserDefaults standardUserDefaults] setObject:identity forKey:whichPref];
     }
@@ -252,21 +256,21 @@ Session* userSessionSecondSlot;
 -(BOOL) isSelectable
 {
   return 
-    [sessionTime isEqualToDate:AAB_FIRST_SLOT_DATE]
-    || [sessionTime isEqualToDate:AAB_SECOND_SLOT_DATE];
+    [self.timeStart isEqualToDate:AAB_FIRST_SLOT_DATE]
+    || [self.timeStart isEqualToDate:AAB_SECOND_SLOT_DATE];
 }
 		    
--(NSDate*) getStartTime
+-(NSDate*) timeStart
 {
-  return [info objectForKey:@"startTime"];
+  return [info objectForKey:@"timeStart"];
 }
 
--(NSString*) getTitle
+-(NSString*) title
 {
   return [info objectForKey:@"title"];
 }
 
--(NSString*) getDescription
+-(NSString*) description
 {
   return [info objectForKey:@"detail"];
 }
@@ -293,17 +297,21 @@ Session* userSessionSecondSlot;
 
 -(BOOL) isAdvanced
 {
-  return [info objectForKey:@"isAdvanced"];
+  id object = [info objectForKey:@"isAdvanced"];
+  return object && [object isKindOfClass:[NSString class]] && [object isEqualToString:@"YES"];
 }
 
 -(BOOL) isBeginner
 {
-  return [info objectForKey:@"isBeginner"];
+  id object = [info objectForKey:@"isBeginner"];
+  return object && [object isKindOfClass:[NSString class]] && [object isEqualToString:@"YES"];
 }
 
 -(BOOL) isIntermediate
 {
-  return [info objectForKey:@"startTime"];
+  
+  id object = [info objectForKey:@"isIntermediate"];
+  return object && [object isKindOfClass:[NSString class]] && [object isEqualToString:@"YES"];
 }
 
 -(sessionDetailsViewController*) detailViewController
@@ -313,7 +321,7 @@ Session* userSessionSecondSlot;
   else
     {
       // TODO refactor sessionDetailsViewController as well
-      detailViewController = [sessionDetailsViewController createWithSession:info];
+      return detailViewController = [sessionDetailsViewController createWithSession:self];
     }
 }
 
@@ -335,9 +343,9 @@ Session* userSessionSecondSlot;
       sessionListViewCell.textLabel.numberOfLines=0;
       sessionListViewCell.textLabel.font = getFontDefault();
 
-      cell.textLabel.text = [self getTitle]; 
-      cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-      return cell;
+      sessionListViewCell.textLabel.text = [self title]; 
+      sessionListViewCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+      return sessionListViewCell;
     }
 }
 

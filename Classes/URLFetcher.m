@@ -255,7 +255,7 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
   (*destinationData) = dict;
   [(*destinationData) retain];
 
-  dumpNestedDictToLog(dict);
+  //  dumpNestedDictToLog(dict);
   if(didUpdateMessage)  [didUpdateMessage send];
 
   //}

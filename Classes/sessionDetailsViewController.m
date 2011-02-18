@@ -12,7 +12,7 @@
 #import "AgileAndBeyondAppGlobals.h"
 #import "personDetailsViewController.h"
 
-#define SDVCHEADCOUNT [[mySession objectForKey:@"people"]count]
+#define SDVCHEADCOUNT [mySession.people count]
 static const int rowsBeforePeople = 1;
 static const int rowsAfterPeople = 2;
 @implementation sessionDetailsViewController
@@ -25,7 +25,7 @@ static const int rowsAfterPeople = 2;
 {
   [mySession toggleSelection];
   
-  if( mySession.isUSerSelected )
+  if( mySession.isUserSelected )
     self.navigationItem.rightBarButtonItem.title = @"Remove";
   else 
     self.navigationItem.rightBarButtonItem.title = @"Add";

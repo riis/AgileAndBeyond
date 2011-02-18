@@ -34,7 +34,7 @@
 
 
 NSDictionary* AABSessionInfo;
-NSArray* AABSessions;
+NSMutableArray* AABSessions;
 NSDictionary* AABPeople;
 NSArray* AABNews;
 
@@ -79,7 +79,7 @@ extern newsListViewController* AABNewsView;
 -(BOOL) isSelectable;
 -(void) toggleSelection;
 
--(NSDate*) startTime;
+-(NSDate*) timeStart;
 -(NSString*) title;
 -(NSString*) description;
 -(NSArray*) people;

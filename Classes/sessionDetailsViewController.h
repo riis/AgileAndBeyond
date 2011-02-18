@@ -14,7 +14,8 @@
   Session* mySession;
 }
 
-@property (nonatomic,retain) NSDictionary* mySession;
+@property (nonatomic,retain) Session* mySession;
+
 + (sessionDetailsViewController*) createWithSession:(Session*)session;
 
 @end

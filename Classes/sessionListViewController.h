@@ -34,7 +34,7 @@
   NSMutableArray* filteredSessionLists;
   NSPredicate* filter;
 }
-@property (nonatomic, retain) NSArray* allSessions;
+//@property (nonatomic, retain) NSArray* allSessions;
 @property (nonatomic, retain) NSMutableArray* filteredSessionLists;
 @property (nonatomic, retain) NSPredicate* filter;
 

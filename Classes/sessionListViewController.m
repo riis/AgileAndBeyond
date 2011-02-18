@@ -254,25 +254,22 @@ sessionListViewController* getUserSessionsView()
     {
       newSection = [[sessionTableGroup alloc] init];
       newSection.title = [AABDateSectionTitleFormmater stringFromDate:thisDate];
-	  
+      Session* userSelected;
+ 
       if( [thisDate isEqualToDate:AAB_FIRST_SLOT_DATE] )
 	{
-	  if ( userSessionFirstSlot != nil ) 
+	  if (userSelected = [Session userSelectedFirstSlot]) 
 	    {
-	      BUGOUT(@"adding %@ for first slot",userSessionFirstSlot );
-	      //		      [
-	      (newSection.items = [NSArray arrayWithObject:[AABSessions objectForKey:userSessionFirstSlot]]);
-	      //	release];
+	      BUGOUT(@"adding %@ for first slot",userSelected.identity);
+	      (newSection.items = [NSArray arrayWithObject:userSelected]);
 	    }   
 	}
       else if( [thisDate isEqualToDate:AAB_SECOND_SLOT_DATE] )
 	{
-	  if ( userSessionSecondSlot != nil )
+	  if (userSelected = [Session userSelectedSecondSlot] )
 	    {
-	      BUGOUT(@"adding %@ for second slot",userSessionSecondSlot );
-	      //	 	      [
-	      (newSection.items =  [NSArray arrayWithObject:[AABSessions objectForKey:userSessionSecondSlot]]);
-	      // release];
+	      BUGOUT(@"adding %@ for second slot",userSelected.identity );
+	      (newSection.items =  [NSArray arrayWithObject: userSelected]);
 	    }
 	}
       else
@@ -280,7 +277,7 @@ sessionListViewController* getUserSessionsView()
 	  newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", thisDate];
 	  newSection.items = [NSMutableArray 
 			       arrayWithArray:
-				 [[AABSessions allValues] filteredArrayUsingPredicate:newSection.predicate]];
+				 [AABSessions filteredArrayUsingPredicate:newSection.predicate]];
 	}
       BUGOUT(@"adding section %@", newSection.title );
       [filteredSessionLists addObject:newSection];
@@ -316,22 +313,23 @@ sessionListViewController* getUserSessionsView()
   // TODO this belongs somewhere else, like in a refreshme function
   // TODO a less fragile implementation
   sessionTableGroup* thisSection = [filteredSessionLists objectAtIndex:1];
-  
+  Session* userSelected;
+
   // TODO reuse old array if nothing changed(?)
   [(thisSection.items = [[NSMutableArray alloc] init]) release];
-      
-  if ( userSessionFirstSlot != nil ) 
+     
+  if ( userSelected = [Session userSelectedFirstSlot]  ) 
     {
-      BUGOUT(@"adding %@ for first slot",userSessionFirstSlot );
-      [thisSection.items addObject:[AABSessions objectForKey:userSessionFirstSlot]];
+      BUGOUT(@"adding %@ for first slot",userSelected.identity);
+      [thisSection.items addObject:userSelected];
     }
 
   thisSection = [filteredSessionLists objectAtIndex:3];
   [(thisSection.items = [[NSMutableArray alloc] init]) release];
-  if ( userSessionSecondSlot != nil )
+  if (userSelected = [Session userSelectedSecondSlot] )
     {
-      BUGOUT(@"adding %@ for second slot",userSessionSecondSlot );
-      [thisSection.items addObject:[AABSessions objectForKey:userSessionSecondSlot]];
+      BUGOUT(@"adding %@ for second slot",userSelected.identity );
+      [thisSection.items addObject:userSelected];
     }
   
   [self.tableView reloadData]; 
