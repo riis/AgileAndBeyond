@@ -105,6 +105,10 @@ void populateInitialData()
   
   BUGOUT(@"AABDateOfFirstSlot is %@",  AABDateOfFirstSlot);
   
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString* idUserSelectedFirstSlot = [defaults objectForKey:@"userSessionFirstSlot"];
+  NSString* idUserSelecteSecondSlot = [defaults objectForKey:@"userSessionSecondSlot"];
+
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
   AABSessionInfo = [NSDictionary dictionaryWithContentsOfFile:plistPath];
   if(AABSessionInfo)
@@ -119,9 +123,15 @@ void populateInitialData()
       NSArray* sessionIDs = [AABSessionInfo allKeys];
       for(NSString* id in sessionIDs)
 	{
-	  [AABSessions addObject:
-			 [Session createSessionWithIdentity:id
-				  andDictionary:[AABSessionInfo objectForKey:id]]];
+	  Session* s;
+	  s = [Session createSessionWithIdentity:id
+		       andDictionary:[AABSessionInfo objectForKey:id]];
+	  [AABSessions addObject:s];
+			
+	  if([id isEqualToString:idUserSelectedFirstSlot])
+	    userSessionFirstSlot = s;
+	  else if([id isEqualToString:idUserSelecteSecondSlot])
+	    userSessionSecondSlot = s;
 	}
     }
   else 
@@ -148,14 +158,6 @@ void populateInitialData()
   [AABSessionInfo retain];
   [AABSessions retain];
   [AABPeople retain];
-  
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  
-  // Next, check and see if we have the user's selected sessions saved, and if so, load
-  //  NSString* fromPrefs = nil;
-  userSessionFirstSlot = [defaults objectForKey:@"userSessionFirstSlot"];
-  userSessionSecondSlot = [defaults objectForKey:@"userSessionSecondSlot"];
-  
 }
 
 
