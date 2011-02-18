@@ -23,62 +23,24 @@ static const int rowsAfterPeople = 2;
 
 - (void)addToUserSelections 
 {
- 
-  NSString* id = getIdOfSession(mySession);
-  NSDate* sessionTime = [mySession objectForKey:@"timeStart"];
-  NSString* whichPref;
-  NSString** whichSlot;
+  [mySession toggleSelection];
   
-  if ( [sessionTime isEqualToDate:AAB_FIRST_SLOT_DATE] )
-    {
-      whichSlot = &userSessionFirstSlot;
-      whichPref = @"userSessionFirstSlot";
-    }
-  else if ( [sessionTime isEqualToDate:AAB_SECOND_SLOT_DATE] )
-    {
-      whichSlot = &userSessionSecondSlot;
-      whichPref = @"userSessionSecondSlot";
-    }
-  else return; 
-
-  if( [id isEqualToString:*whichSlot] )
-    {
-      [*whichSlot release];
-      *whichSlot=nil;
-      [[NSUserDefaults standardUserDefaults] removeObjectForKey:whichPref];
-      self.navigationItem.rightBarButtonItem.title = @"Add";
-    }
+  if( mySession.isUSerSelected )
+    self.navigationItem.rightBarButtonItem.title = @"Remove";
   else 
-    {
-      if ( *whichSlot != nil ) [*whichSlot release];
-      *whichSlot = id;
-      [*whichSlot retain];
-      [[NSUserDefaults standardUserDefaults] setObject:id forKey:whichPref];
-      self.navigationItem.rightBarButtonItem.title = @"Remove";
-    }
-
-  // user selected slots has updated, reload mySessionsViewController
-  
-  if( getUserSessionsView() ) 
-    {
-      [getUserSessionsView().tableView reloadData];
-    }
+    self.navigationItem.rightBarButtonItem.title = @"Add";
 }
 
 - (void)viewDidLoad 
 {
   [super viewDidLoad];
-  NSString * mySessionID = getIdOfSession(mySession);
   NSString * buttonTitle;
-  NSDate* sessionTime = [mySession objectForKey:@"timeStart"];
 
-  if([sessionTime isEqualToDate:AAB_FIRST_SLOT_DATE] 
-     || [sessionTime isEqualToDate:AAB_SECOND_SLOT_DATE] )
+  // TODO make a session method isSelectable
+  if( mySession.isSelectable )
     {
-      buttonTitle = [mySessionID isEqualToString:userSessionFirstSlot] 
-	|| [mySessionID isEqualToString:userSessionSecondSlot] 
-	?@"Remove":@"Add";
-    
+      buttonTitle = mySession.isUserSelected?@"Remove":@"Add";
+      
       // build the right add/remove button
       UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
 					   initWithTitle:buttonTitle
@@ -122,18 +84,14 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 #pragma mark -
 #pragma mark Table view data source
 
-+ (sessionDetailsViewController*) createWithSession:(NSDictionary*)session
++ (sessionDetailsViewController*) createWithSession:(Session*)session
 {
-
   sessionDetailsViewController* me = 
     [[sessionDetailsViewController alloc] 
       initWithNibName:@"sessionDetailsViewController" 
       bundle:nil];
-
   [me setMySession:session];
-
   return me;
-
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
@@ -153,7 +111,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-  NSArray* people = [mySession objectForKey:@"people"];
+  NSArray* people = mySession.people;
   const int headcount = [people count];
   const int i = [indexPath indexAtPosition:1];  // index pos 1, not zero, only 
   static NSString *CellIdentifier = @"Cell";
@@ -172,11 +130,10 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   cell.detailTextLabel.font = getFontDefault();
     
 
-
     if( i < rowsBeforePeople )
       {
 	cell.textLabel.text = @"Title";
-	cell.detailTextLabel.text = [mySession objectForKey:@"title"];
+	cell.detailTextLabel.text = mySession.title;
       }
     else if ( i >= headcount + rowsBeforePeople )
       {
@@ -185,25 +142,25 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	  case 0 : 
 	    cell.textLabel.text = @"Schedule";
 	    cell.detailTextLabel.text =  [AABDateSectionTitleFormmater 
-					   stringFromDate:[mySession objectForKey:@"timeStart"]];
+					   stringFromDate:mySession.timeStart];
 	    break;
 	  case 1 : 
 	    cell.textLabel.text = @"Description";
-	    cell.detailTextLabel.text = [mySession objectForKey:@"description"];
+	    cell.detailTextLabel.text = mySession.description;
 	    break;
 	  default : 
-	    // TODO replace this log output with a macro 
+	    // TODO replace this log output with an unreachable code macro
 	    BUGOUT(@"Warning in %s 'unreachable' code reached",__func__);
-	    cell.textLabel.text = @"x";
-	    cell.detailTextLabel.text = @"x";
+	    cell.textLabel.text = @"";
+	    cell.detailTextLabel.text = @"";
 	  }
       }
     else if ( i >= rowsBeforePeople  && i < (headcount + rowsBeforePeople))
       {
 	cell.textLabel.text =
-	  [[[mySession objectForKey:@"people"] objectAtIndex:i-rowsBeforePeople] objectForKey:@"role"];
+	  [[mySession.people objectAtIndex:i-rowsBeforePeople] objectForKey:@"role"];
 	cell.detailTextLabel.text = 
-	  [[[mySession objectForKey:@"people"] objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
+	  [[mySession.people objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
 	// TODO: conditional disclosure indicator if bio exists..
 	cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;    
       }
@@ -224,7 +181,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
   if([indexPath indexAtPosition:1]+1 == SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople)
     {
-      NSString* cellText = [mySession objectForKey:@"description"];
+      NSString* cellText = mySession.description;
       UIFont* cellFont = getFontDefault();
       CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
       CGSize labelSize = [cellText sizeWithFont:cellFont
@@ -246,7 +203,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     {      
       personDetailsViewController *detailViewController = [[personDetailsViewController alloc] initWithNibName:@"personDetailsViewController" bundle:nil];
       detailViewController.myPerson = 
-	[[[mySession objectForKey:@"people"] objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
+	[[mySession.people objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
       // Pass the selected object to the new view controller.
       [self.navigationController pushViewController:detailViewController animated:YES];
       [detailViewController release];
@@ -277,6 +234,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 - (void)dealloc 
 {
   // TODO memory
+  [mySession release];
   [super dealloc];
 }
 

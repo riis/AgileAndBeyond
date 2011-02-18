@@ -74,7 +74,6 @@ void dumpNestedDictToLog(NSDictionary* dict)
 
 void populateInitialData()
 {
-  AABSessions = nil;
   NSString* plistPath;
   
   AABDateConstFormatter = [[NSDateFormatter alloc] init];
@@ -101,12 +100,23 @@ void populateInitialData()
   BUGOUT(@"AABDateOfFirstSlot is %@",  AABDateOfFirstSlot);
   
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
-  AABSessions = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-  if(AABSessions)
+  AABSessionInfo = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+  if(AABSessionInfo)
     {
       BUGOUT(@"I loaded in a plist as AABSessions from %@, and its got %d elements",  
 	     plistPath,
-	     [AABPeople count]);
+	     [AABSessionInfo count]);
+
+      AABSessions = [[NSArray alloc] init];
+
+      // There might be a more elegant method for doing this 
+      NSArray* sessionIDs = [AABSessionInfo allKeys];
+      for(NSString id in sessionIDs)
+	{
+	  [AABSessions addObject:
+			 [Session createSessionWithIdentity:id
+				  andDictionary:[AABSessionInfo objectForKey:id]]];
+	}
     }
   else 
     {
@@ -129,7 +139,7 @@ void populateInitialData()
   
  
   // TODO memory
-  [AABSessionsArray retain];
+  [AABSessionInfo retain];
   [AABSessions retain];
   [AABPeople retain];
   
@@ -147,9 +157,105 @@ void populateInitialData()
 ///                                            START Session implementation
 //////////////////////////////////////////////////////////////////////// 
 
+Session* userSessionFirstSlot;
+Session* userSessionSecondSlot;
+
 @implementation Session : NSObject
 @synthesize identity, info;
-			    
+	 
+ +(Session*) createSessionWithIdentity(NSString*)sessionId andDictionary(NSDictionary*)sessionInfo
+  {
+    Session* me = [[Session alloc] init];
+    me.identity = sessionID;
+    me.info = sessionInfo;
+    return me;
+  }
+
++(Session*) userSelectedFirstSlot
+{
+  return userSessionFirstSlot;
+}
+
+
++(Session*) userSelectedSecondSlot
+{
+  return userSessionSecondSlot;
+}
+
+
+-(BOOL) isUserSelected
+{
+  return self == userSessionFirstSlot || self == userSessionSecondSlot;
+}
+
+-(BOOL) isUserAttending
+{
+  return self.isUserSelected || 
+    [identity isEqualToString:@"welcome"] ||
+    [identity isEqualToString:@"opening-keynote"] ||
+    [identity isEqualToString:@"closing-keynote"] ||
+    [identity isEqualToString:@"closing-roundtable"] ||
+    [identity isEqualToString:@"open-lunch"];
+}
+
+-(BOOL) isUserSelectedFirstSlot
+{
+  return self == userSessionFirstSlot;
+}
+
+-(BOOL) isUserSelectedSecondSlot
+{
+  return self == userSessionSecondSlot;
+}
+
+-(void) toggleSelection
+{
+  NSDate* sessionTime = [mySession objectForKey:@"timeStart"];
+  NSString* whichPref;
+  NSString** whichSlot;
+  
+  if ( [sessionTime isEqualToDate:AAB_FIRST_SLOT_DATE] )
+    {
+      whichSlot = &userSessionFirstSlot;
+      whichPref = @"userSessionFirstSlot";
+    }
+  else if ( [sessionTime isEqualToDate:AAB_SECOND_SLOT_DATE] )
+    {
+      whichSlot = &userSessionSecondSlot;
+      whichPref = @"userSessionSecondSlot";
+    }
+  else return; 
+
+  if( self == *whichSlot )
+    {
+      [*whichSlot release]; // TODO review memory ownership logic here
+      *whichSlot=nil;
+      [[NSUserDefaults standardUserDefaults] removeObjectForKey:whichPref];
+    }
+  else 
+    {
+      if ( *whichSlot != nil ) [*whichSlot release];
+      *whichSlot = identity;
+      [*whichSlot retain]; // TODO review memory ownership logic here
+      [[NSUserDefaults standardUserDefaults] setObject:identity forKey:whichPref];
+    }
+
+  // user selected slots has updated, reload mySessionsViewController
+  
+  if( getUserSessionsView() ) 
+    {
+      [getUserSessionsView().tableView reloadData];
+    }
+}
+
+
+-(BOOL) isSelectable
+{
+  return 
+    [sessionTime isEqualToDate:AAB_FIRST_SLOT_DATE]
+    || [sessionTime isEqualToDate:AAB_SECOND_SLOT_DATE];
+}
+		    
 -(NSDate*) getStartTime
 {
   return [info objectForKey:@"startTime"];
@@ -165,22 +271,22 @@ void populateInitialData()
   return [info objectForKey:@"detail"];
 }
 
--(NSArray*) getPeople
+-(NSArray*) people
 {
   return [info objectForKey:@"people"];
 }
 
--(NSString*) getTrack
+-(NSString*) track
 {
   return [info objectForKey:@"track"];
 }
 
--(NSString*) getType
+-(NSString*) type
 {
   return [info objectForKey:@"type"];
 }
 
--(NSString*) getSubtype
+-(NSString*) subtype
 {
   return [info objectForKey:@"subtype"];
 }
@@ -200,7 +306,7 @@ void populateInitialData()
   return [info objectForKey:@"startTime"];
 }
 
--(sessionDetailsViewController*) getDetailViewController
+-(sessionDetailsViewController*) detailViewController
 {
   if(detailViewController)
     return detailViewController;
@@ -211,7 +317,7 @@ void populateInitialData()
     }
 }
 
--(UITableViewCell*) getSessionListViewCell
+-(UITableViewCell*) sessionListViewCell
 {
   if(sessionListViewCell)
     return sessionListViewCell;
@@ -233,7 +339,6 @@ void populateInitialData()
       cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
       return cell;
     }
-
 }
 
 -(void) memoryWarning

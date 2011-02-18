@@ -24,8 +24,6 @@
   NSString* title;
   NSPredicate* predicate;
 }
-
-
 @property (nonatomic, retain) NSMutableArray* items;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSPredicate* predicate;
@@ -33,17 +31,14 @@
 
 @interface sessionListViewController : UITableViewController 
 {
-  NSArray* allSessions;
   NSMutableArray* filteredSessionLists;
   NSPredicate* filter;
-  BOOL isUserSession;
 }
-
 @property (nonatomic, retain) NSArray* allSessions;
 @property (nonatomic, retain) NSMutableArray* filteredSessionLists;
 @property (nonatomic, retain) NSPredicate* filter;
 
-+(sessionListViewController*)createUsingArray:(NSArray*)bigListRef groupList:(NSArray*)groups filterBy:(NSPredicate*)filterPerdicate;
++(sessionListViewController*)createUsingGroupList:(NSArray*)groups filterBy:(NSPredicate*)filterPerdicate;
 
 @end
 

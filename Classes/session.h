@@ -33,15 +33,14 @@
 */ 
 
 
-NSDictionary* AABSessions;
+NSDictionary* AABSessionInfo;
+NSArray* AABSessions;
 NSDictionary* AABPeople;
 NSArray* AABNews;
 
 void populateInitialData();
 
 // this should probably be an array 
-NSString* userSessionFirstSlot;
-NSString* userSessionSecondSlot;
 
 // this is here because in the not distant future, I might have a chance to refactor
 // how I refer to sessions from the main list, and having a function like this might
@@ -63,20 +62,33 @@ extern newsListViewController* AABNewsView;
   UITableViewCell* sessionListViewCell;
 }
 
-@property(nonatomic, retain) identity;
-@property(nonatomic, retain) info;
+@property (nonatomic, retain) NSString* identity;
+@property (nonatomic, retain) NSDictionary* info;
 
--(sessionDetailsViewController*) getDetailViewController;
--(UITableViewCell*) getSessionListViewCell;
--(NSDate*) getStartTime;
--(NSString*) getTitle;
--(NSString*) getDescription;
--(NSArray*) getPeople;
--(NSString*) getTrack;
--(NSString*) getType;
--(NSString*) getSubtype;
+
++(Session*) createSessionWithIdentity:(NSString*)sessionId andDictionary:(NSDictionary*)sessionInfo;
++(Session*) userSelectedFirstSlot;
++(Session*) userSelectedSecondSlot;
+
+-(sessionDetailsViewController*) detailViewController;
+-(UITableViewCell*) sessionListViewCell;
+-(BOOL) isUserSelected;
+-(BOOL) isUserAttending;
+-(BOOL) isUserSelectedFirstSlot;
+-(BOOL) isUserSelectedSecondSlot;
+-(BOOL) isSelectable;
+-(void) toggleSelection;
+
+-(NSDate*) startTime;
+-(NSString*) title;
+-(NSString*) description;
+-(NSArray*) people;
+-(NSString*) track;
+-(NSString*) type;
+-(NSString*) subtype;
 -(BOOL) isAdvanced;
 -(BOOL) isBeginner;
 -(BOOL) isIntermediate;
+
 -(void) memoryWarning;
 @end 

@@ -245,8 +245,7 @@
      }
    
    filteredListView = [sessionListViewController 
-			createUsingArray: [AABSessions allValues]
-			groupList:viewSections
+			createUsingGroupList:viewSections
 			filterBy:myPredicate];
    filteredListView.title = newViewTitle;
    

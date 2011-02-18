@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "session.h"
 
 @interface sessionDetailsViewController : UITableViewController 
 {
-  NSDictionary* mySession;
+  Session* mySession;
 }
 
 @property (nonatomic,retain) NSDictionary* mySession;
-+ (sessionDetailsViewController*) createWithSession:(NSDictionary*)session;
++ (sessionDetailsViewController*) createWithSession:(Session*)session;
 
 @end

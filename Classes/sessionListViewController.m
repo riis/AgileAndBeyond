@@ -20,31 +20,33 @@
 @end
 
 @implementation sessionListViewController
-@synthesize filteredSessionLists,allSessions,filter;
+@synthesize filteredSessionLists,filter;
 
-
-+(sessionListViewController*)createUsingArray:(NSArray*)bigListRef
-				    groupList:(NSArray*)groups
++(sessionListViewController*)createUsingGroupList:(NSArray*)groups
 				     filterBy:(NSPredicate*)filterPredicate
 {
   sessionListViewController* me = [[sessionListViewController alloc] init ];
   // for future consideration, retaining the bigListRef if needed to update our sessions list
   // TODO : rename allSessions if it is actually "our filtered list of sections"
   //   - or - do the filtering somewhere else, like in viewWillAppear
+  
+  /* don't think I'm using this (remove later)
   if(filterPredicate!=nil)
     [me setAllSessions:[bigListRef filteredArrayUsingPredicate:filterPredicate]];
   else
     [me setAllSessions:bigListRef];
+  */
 
   // create filterSessionList
   // we won't fill in items yet, lets let that happen in viewWillAppear for now
+
   if( groups != nil)  
     {
       for( tableViewSection* section in groups ) 
 	{
 	  sessionTableGroup* newGroup = [[sessionTableGroup alloc] init];
 	  newGroup.predicate = section.predicate;
-	  newGroup.title = section.title;	  
+	  newGroup.title = section.title; 
 	  [[me filteredSessionLists] addObject:newGroup];
 	  [newGroup release];
 	}
@@ -98,7 +100,7 @@
    for( sessionTableGroup* section in filteredSessionLists )
       section.items = [NSMutableArray 
 			arrayWithArray:
-			  [allSessions filteredArrayUsingPredicate:section.predicate]];
+			  [AABSessions filteredArrayUsingPredicate:section.predicate]];
    
   // TODO : sort filtered arrays
   // TODO : memory management : check this: we want arrays of refrences
@@ -113,6 +115,7 @@
     [super viewDidAppear:animated];
 }
 */
+
 /*
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -154,26 +157,19 @@
   NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
   Session* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
 
-  return [mySession getSessionListViewCell];
+  return [mySession sessionListViewCell];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
-  NSDictionary* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
-  NSString* mySessionID = getIdOfSession(mySession);
+  Session* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
     
   // can use the setSelected:animated: instead to cause an animated change to selected
   // TODO : don't want this to be hardcoded ~ maybe pull filteredsessions lists from mySessionsView
   //  if(
   cell.selected = 
-    [mySessionID isEqualToString:userSessionFirstSlot] ||
-    [mySessionID isEqualToString:userSessionSecondSlot] || 
-    [mySessionID isEqualToString:@"welcome"] ||
-    [mySessionID isEqualToString:@"opening-keynote"] ||
-    [mySessionID isEqualToString:@"closing-keynote"] ||
-    [mySessionID isEqualToString:@"closing-roundtable"] ||
-    [mySessionID isEqualToString:@"open-lunch"];
+    mySession.isUserAttending;
     // )
     // {
       //cell.accessoryType=UITableViewCellAccessoryCheckmark;
@@ -188,13 +184,12 @@
 {
   // Navigation logic, Create and push another view controller.
   NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];  
-  NSDictionary* whichSession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
+  Session* whichSession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
   sessionDetailsViewController *detailViewController = 
-    [sessionDetailsViewController createWithSession:whichSession];
+    [whichSession detailViewController];
   
   // Pass the selected object to the new view controller.
   [self.navigationController pushViewController:detailViewController animated:YES];
-  [detailViewController release];
 }
 
 #pragma mark -
@@ -219,7 +214,7 @@
 {
   if( filteredSessionLists ) 
     [filteredSessionLists release]; // will release on each of contents if dealloced
-  if( allSessions ) [ allSessions release ];
+  //  if( allSessions ) [ allSessions release ];
   if( filter ) [ filter release ];
 
   [super dealloc];
