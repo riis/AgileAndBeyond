@@ -299,21 +299,17 @@ void populateInitialData()
 
 -(BOOL) isAdvanced
 {
-  id object = [info objectForKey:@"isAdvanced"];
-  return object && [object isKindOfClass:[NSString class]] && [object isEqualToString:@"YES"];
+  return [[info objectForKey:@"isAdvanced"] boolValue];
 }
 
 -(BOOL) isBeginner
 {
-  id object = [info objectForKey:@"isBeginner"];
-  return object && [object isKindOfClass:[NSString class]] && [object isEqualToString:@"YES"];
+  return [[info objectForKey:@"isBeginner"] boolValue];
 }
 
 -(BOOL) isIntermediate
 {
-  
-  id object = [info objectForKey:@"isIntermediate"];
-  return object && [object isKindOfClass:[NSString class]] && [object isEqualToString:@"YES"];
+  return [[info objectForKey:@"isIntermediate"] boolValue];
 }
 
 -(sessionDetailsViewController*) detailViewController

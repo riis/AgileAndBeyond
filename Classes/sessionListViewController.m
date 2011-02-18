@@ -97,15 +97,18 @@
   if(![filteredSessionLists count])
      BUGOUT(@"WARNING in %s: filteredSessionLists empty, (probably not what we wanted).", __func__);
 
-   for( sessionTableGroup* section in filteredSessionLists )
-      section.items = [NSMutableArray 
-			arrayWithArray:
-			  [AABSessions filteredArrayUsingPredicate:section.predicate]];
+  NSArray* mySessions = [AABSessions filteredArrayUsingPredicate:filter];
+
+  for( sessionTableGroup* section in filteredSessionLists )
+    section.items = [NSMutableArray 
+		      arrayWithArray:
+			[mySessions filteredArrayUsingPredicate:section.predicate]];
    
   // TODO : sort filtered arrays
   // TODO : memory management : check this: we want arrays of refrences
   
   // TODO : don't do a reload data each time it displays, only when userSEssions has been updated
+  //  [mySessions release];
   [self.tableView reloadData];
   [super viewWillAppear:animated];
 }
