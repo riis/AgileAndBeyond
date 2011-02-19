@@ -89,22 +89,31 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   return cell;
 }
 
+#pragma mark -
+#pragma mark Table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  CGFloat height = 300;
+  CGFloat height = 45;
 
   // TODO dynamic heights!
   // NSString* text = [mySession objectForKey:@"description"];
-  // TODO not hardcoding reletive position of description field , etc 
-  //  if([indexPath indexAtPosition:1]+1 == SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople)
-  //  height = 225;
-
+  // TODO not hardcoding reletive position of description field , etc
+  // TOOD not hardcoding font, or anything really, except from a central position
+  
+  NSDictionary* personDict = [AABPeople objectForKey:myPerson];
+  NSString* cellText = [personDict objectForKey:@"Bio"];
+  UIFont* cellFont = getFontDefault();
+  CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
+  CGSize labelSize = [cellText sizeWithFont:cellFont
+			       constrainedToSize:constraintSize 
+			       lineBreakMode:UILineBreakModeWordWrap];
+  height = labelSize.height + 40;
+    
+  
   return height;
 }
 
-#pragma mark -
-#pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   // Navigation logic may go here. Create and push another view controller.

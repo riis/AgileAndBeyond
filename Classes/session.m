@@ -274,7 +274,7 @@ void populateInitialData()
 
 -(NSString*) description
 {
-  return [info objectForKey:@"detail"];
+  return [info objectForKey:@"description"];
 }
 
 -(NSArray*) people
