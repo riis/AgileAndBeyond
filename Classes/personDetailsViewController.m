@@ -57,7 +57,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
-  return 1;
+  return 2;
 }
 
 
@@ -76,16 +76,29 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
   }
-    
+  
   NSDictionary* personDict = [AABPeople objectForKey:myPerson];
-  // Configure the cell...
-  cell.textLabel.font = getFontDefault();
-  cell.textLabel.text = myPerson;
-  cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
-  cell.detailTextLabel.numberOfLines=0;
+
+
   cell.detailTextLabel.font = getFontDefault();
-  cell.detailTextLabel.text = [personDict objectForKey:@"Bio"];
-    
+  cell.textLabel.font = getFontDefault();
+
+  switch( [indexPath indexAtPosition:0 ]  )
+    {
+    case 0:
+      cell.textLabel.text = myPerson;
+      break;
+    case 1:
+      cell.textLabel.text = @"Bio";
+      cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
+      cell.detailTextLabel.numberOfLines=0;
+      cell.detailTextLabel.text = [personDict objectForKey:@"Bio"];
+      break;
+    default: 
+      BUGOUT(@"Warning, reached 'unreachable' code in %s", __func__);
+    }
+  
+
   return cell;
 }
 
@@ -94,24 +107,44 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  CGFloat height = 45;
+  const CGFloat padding = 20;  // TODO don't hardcode this
 
-  // TODO dynamic heights!
   // NSString* text = [mySession objectForKey:@"description"];
-  // TODO not hardcoding reletive position of description field , etc
-  // TOOD not hardcoding font, or anything really, except from a central position
+  // TOOD not hardcoding font, or anything really
   
   NSDictionary* personDict = [AABPeople objectForKey:myPerson];
-  NSString* cellText = [personDict objectForKey:@"Bio"];
   UIFont* cellFont = getFontDefault();
   CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
-  CGSize labelSize = [cellText sizeWithFont:cellFont
-			       constrainedToSize:constraintSize 
-			       lineBreakMode:UILineBreakModeWordWrap];
-  height = labelSize.height + 40;
+  NSString* cellText = [personDict objectForKey:@"Bio"];
+  CGFloat height;
+
+  switch( [indexPath indexAtPosition:0 ]  )
+    {
+    case 0: 
+      cellText = myPerson;
+      height += [cellText sizeWithFont:cellFont
+			  constrainedToSize:constraintSize 
+			  lineBreakMode:UILineBreakModeWordWrap].height;
+      
+      break;
+    case 1:
+      cellText = @"Bio";
+      height += [cellText sizeWithFont:cellFont
+			  constrainedToSize:constraintSize 
+			  lineBreakMode:UILineBreakModeWordWrap].height;
+      cellText = [personDict objectForKey:@"Bio"];
+      height += [cellText sizeWithFont:cellFont
+			  constrainedToSize:constraintSize 
+			  lineBreakMode:UILineBreakModeWordWrap].height;
+      break;
+    default:
+      BUGOUT(@"Warning: in %s 'unreachable' code reached", __func__);
+      height = 40; 
+
+    }
     
   
-  return height;
+  return height + padding;
 }
 
 
