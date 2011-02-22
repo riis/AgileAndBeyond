@@ -60,7 +60,6 @@ UIBarButtonItem *refreshButton;
 					      options:NSPropertyListImmutable
 					      format:NULL error:&plistError];
 	  // TODO do something with plistError
-	  BUGOUT(@"Hello from a BLOCK!");
 	  if(plist) 
 	    {
 	      if(AABNews)
@@ -75,6 +74,33 @@ UIBarButtonItem *refreshButton;
 	    }
 	  else 
 	    BUGOUT(@"WARNING: news url fetcher did load, but did not parse into plist");
+	};
+
+      newsFetcher.networkUnavailable = ^
+	{
+	  if  (AABNews) 
+	    [AABNews release];
+	 
+	    AABNews = [NSArray arrayWithObject:
+				 [NSDictionary dictionaryWithObjectsAndKeys:
+						 @"Device Offline",@"HeadLine",
+					       @"The latest Agile and Beyond 2011 news will be downloaded when an internet connection is available.",@"Detail",
+					       nil]];
+	  [AABNews retain];
+	  
+        };
+      
+      newsFetcher.didEncounterError = ^ 
+	{
+	   if  (AABNews) 
+	    [AABNews release];
+	  
+	  AABNews = [NSArray arrayWithObject:
+			       [NSDictionary dictionaryWithObjectsAndKeys:
+					       @"News Offline",@"HeadLine",
+					     @"We're sorry, Agile and Beyond 2011 News could not be updated.",@"Detail",
+					     nil]];
+	  [AABNews retain];
 	};
       
       [newsFetcher refresh];
@@ -233,15 +259,16 @@ UIBarButtonItem *refreshButton;
 #pragma mark -
 #pragma mark Table view delegate
 
+// TODO try commenting this out
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	/*
+  /*	
 	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 [detailViewController release];
-	 */
+  */
 }
 
 

@@ -64,17 +64,7 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
   if(![reachabilityNotifier currentReachabilityStatus])
     {
       BUGOUT(@"in %s, Reachability status negative.", __func__);
-
-      //      if  (*(self.destinationData)) 
-      //	[(*(self.destinationData)) release];
-      
-      // TODO this message can't say that there is a network error unless we actually know that it the problem
-      //  (*(self.destinationData)) = [NSArray arrayWithObject:
-      //				     [NSDictionary dictionaryWithObjectsAndKeys:
-      //						     @"Device Offline",@"HeadLine",
-      //						   @"The latest Agile and Beyond 2011 news will be downloaded when an internet connection is available.",@"Detail",
-      //						   nil]];
-      //[(*(self.destinationData)) retain];
+      if(networkUnavailable) networkUnavailable();
       return;
     }
 
@@ -103,6 +93,8 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
 - (void)clearUrlConnection
 {
   BUGOUT(@"%s", __func__);
+  // TODO should we [connection cancel] ? 
+
   /*
   if (urlConnection != nil)
     {
@@ -237,21 +229,7 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
 {
   BUGOUT(@"%s", __func__);
   BUGOUT(@"%s: Error [%@]", __func__, error);
-
-  //	  if(![dict isKindOfClass:[NSArray class]] || ![dict count])
-  // {
-  
-  //if  (*(self.destinationData)) 
-  //  [(*(self.destinationData)) release];
-
-  // TODO this message can't say that there is a network error unless we actually know that it the problem
-//  (*(self.destinationData)) = [NSArray arrayWithObject:
-  //				 [NSDictionary dictionaryWithObjectsAndKeys:
-  //						 @"News Offline",@"HeadLine",
-  //					       @"We're sorry, Agile and Beyond 2011 News could not be updated.",@"Detail",
-  //					       nil]];
-  //[(*(self.destinationData)) retain];
-
+  if(didEncounterError) didEncounterError();
   [self clearUrlConnection];
 }
 /*
@@ -272,6 +250,8 @@ return YES;
 
 - (void)dealloc 
 {
+  // TODO cancel connection? ( [connection cancel] ) 
+
   // if(connectionData) [connectionData release];
   // I feel that the next line belongs, but it releases on a already released object
   // if(connectionResponse) [connectionResponse release];
