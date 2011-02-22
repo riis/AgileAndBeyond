@@ -11,14 +11,30 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Message : NSObject {
-  SEL action;
+@protocol Action
+-(void) trigger;
+@end
+
+
+@interface Message : NSObject < Action > 
+{
+  SEL selector;
   id target;
 }
-@property () SEL action;
+@property () SEL selector;
 @property (retain) id target;
 
+-(void) trigger;
 -(void) send;
--(Message*) initWithSelector:(SEL)selector forTarget:(id)destination;
+-(Message*) initWithSelector:(SEL)sel forTarget:(id)dest;
+
+@end
+
+@interface voidClosure : NSObject < Action > 
+{
+  void (^block)();
+}
+
+-(void) trigger;
 
 @end

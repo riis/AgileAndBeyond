@@ -34,6 +34,7 @@ UIBarButtonItem *refreshButton;
 
 - (void)viewWillAppear:(BOOL)animated 
 {
+  // TODO maybe move some of this to viewdidload? 
 
   if(!AABNewsView)
     {
@@ -45,10 +46,62 @@ UIBarButtonItem *refreshButton;
       NSURL* newsURL = [NSURL URLWithString:newsUrlString];
       [newsUrlString release];
 
-      newsFetcher = [[[URLFetcher alloc] initForObject:&AABNews fromURL:newsURL] retain];
-      [newsFetcher setDidUpdateMessage:[[[Message alloc] 
+      newsFetcher = [[[URLFetcher alloc] initWithURL:newsURL] retain];
+
+      /*      [newsFetcher setDidUpdateMessage:[[[Message alloc] 
 					     initWithSelector:@selector(didUpdate)
 					     forTarget:self] autorelease]]; // problem
+      */
+      newsFetcher.didLoadData = 
+	^ (NSData* incoming) 
+	{
+	  NSError* plistError; 
+	  NSArray* plist = [NSPropertyListSerialization propertyListWithData:incoming 
+					      options:NSPropertyListImmutable
+					      format:NULL error:&plistError];
+	  // TODO do something with plistError
+	  if(plist) 
+	    {
+	      if(AABNews)
+		[AABNews release];
+
+	      AABNews = plist;
+	      [AABNews retain];
+	      dumpNestedDictToLog(AABNews);
+
+	      [self.tableView reloadData];
+	      
+	    }
+	  else 
+	    BUGOUT(@"WARNING: news url fetcher did load, but did not parse into plist");
+	};
+
+      newsFetcher.networkUnavailable = ^
+	{
+	  if  (AABNews) 
+	    [AABNews release];
+	 
+	    AABNews = [NSArray arrayWithObject:
+				 [NSDictionary dictionaryWithObjectsAndKeys:
+						 @"Device Offline",@"HeadLine",
+					       @"The latest Agile and Beyond 2011 news will be downloaded when an internet connection is available.",@"Detail",
+					       nil]];
+	  [AABNews retain];
+	  
+        };
+      
+      newsFetcher.didEncounterError = ^ 
+	{
+	   if  (AABNews) 
+	    [AABNews release];
+	  
+	  AABNews = [NSArray arrayWithObject:
+			       [NSDictionary dictionaryWithObjectsAndKeys:
+					       @"News Offline",@"HeadLine",
+					     @"We're sorry, Agile and Beyond 2011 News could not be updated.",@"Detail",
+					     nil]];
+	  [AABNews retain];
+	};
       
       [newsFetcher refresh];
       [newsURL release];
@@ -206,15 +259,16 @@ UIBarButtonItem *refreshButton;
 #pragma mark -
 #pragma mark Table view delegate
 
+// TODO try commenting this out
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	/*
+  /*	
 	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
      // ...
      // Pass the selected object to the new view controller.
 	 [self.navigationController pushViewController:detailViewController animated:YES];
 	 [detailViewController release];
-	 */
+  */
 }
 
 
@@ -238,6 +292,8 @@ UIBarButtonItem *refreshButton;
     [super dealloc];
 }
 
+
+// TODO : remove this
 - (void)didUpdate 
 {
   [self.tableView reloadData];

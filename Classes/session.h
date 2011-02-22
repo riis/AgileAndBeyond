@@ -65,7 +65,6 @@ extern newsListViewController* AABNewsView;
 @property (nonatomic, retain) NSString* identity;
 @property (nonatomic, retain) NSDictionary* info;
 
-
 +(Session*) createSessionWithIdentity:(NSString*)sessionId andDictionary:(NSDictionary*)sessionInfo;
 +(Session*) userSelectedFirstSlot;
 +(Session*) userSelectedSecondSlot;
@@ -92,3 +91,6 @@ extern newsListViewController* AABNewsView;
 
 -(void) memoryWarning;
 @end 
+
+
+void dumpNestedDictToLog(NSDictionary* dict);

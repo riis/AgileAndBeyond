@@ -8,31 +8,32 @@
 
 #import <Foundation/Foundation.h>
 #import "Reachability.h"
-#import "Message.h"
 
 @interface URLFetcher : NSObject 
 {
-  id* destinationData; // should actually be NSData*? 
   NSURL* sourceURL;
-  Message* didUpdateMessage;
   //@protected
   NSMutableData *connectionData;
   NSURLConnection *urlConnection;
   NSURLResponse *connectionResponse;
   BOOL connectionInProgress; //TODO revisit this whole approach
   Reachability* reachabilityNotifier;
+  void (^didLoadData)(NSData*);
+  void (^networkUnavailable)();
+  void (^didEncounterError)(); 
 }
-
--(URLFetcher*) initForObject:(id*)dataPoint fromURL:(NSURL*)url;
--(void) refresh;
 
 @property (nonatomic, retain) NSMutableData *connectionData; 
 @property (nonatomic, retain) NSURLResponse *connectionResponse;
-@property (nonatomic, retain) Message* didUpdateMessage;
 @property () BOOL connectionInProgress;
 @property (nonatomic, retain) NSURLConnection *urlConnection;
-//@property (nonatomic, retain) id didUpdateTarget;
-@property (nonatomic) id* destinationData;
 @property (nonatomic, retain) NSURL* sourceURL;
 @property (nonatomic, retain) Reachability* reachabilityNotifier;
+@property (copy) void (^didLoadData)(NSData*);
+@property (copy) void (^networkUnavailable)();
+@property (copy) void (^didEncounterError)();
+
+-(URLFetcher*) initWithURL:(NSURL*)url;
+-(void) refresh;
+
 @end

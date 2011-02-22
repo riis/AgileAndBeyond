@@ -10,13 +10,13 @@
 #import "AgileAndBeyondAppGlobals.h"
 
 @implementation Message
-@synthesize action, target;
+@synthesize selector, target;
 
--(Message*) initWithSelector:(SEL)selector forTarget:(id)destination
+-(Message*) initWithSelector:(SEL)sel forTarget:(id)dest
 {
   [super init];
-  self.action = selector;
-  self.target = destination;
+  self.selector = sel;
+  self.target = dest;
   return self;
 }
 
@@ -25,12 +25,26 @@
   BUGOUT(@"hello from %s", __func__);
 
   // do some sanity checking, then perform selector if it looks OK
-  if(! (target && action) ) 
+  if(! (target && selector) ) 
     BUGOUT(@"in %s, WARNING target or action was nil", __func__);
-  else if(! [target respondsToSelector:action] )
-    BUGOUT(@"in %s, WARNING target %@ does not respond to action %@",__func__,target,action);
+  else if(! [target respondsToSelector:selector] )
+    BUGOUT(@"in %s, WARNING target %@ does not respond to action %@",__func__,target,selector);
   else 
-    [target performSelector:action]; 
+    [target performSelector:selector]; 
 }
 
+
+-(void) trigger 
+{
+  [self send];
+}
+@end
+
+
+@implementation voidClosure
+
+-(void) trigger
+{
+  block();
+}
 @end
