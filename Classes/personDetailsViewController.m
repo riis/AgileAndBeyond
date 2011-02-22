@@ -9,6 +9,7 @@
 #import "personDetailsViewController.h"
 #import "AgileAndBeyondAppGlobals.h"
 #import "session.h"
+#import <tgmath.h>
 
 @implementation personDetailsViewController
 @synthesize myPerson, imageFetcher, image, sessions;
@@ -141,7 +142,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
       cell.detailTextLabel.numberOfLines=0;
       // workaround for bios starting with "is" or "an"
-      cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]];
+      // TODO fix so it doesn't say "(null)" if bio is nil
+      cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]  ];
       break;
     case 2:
       cell = [[sessions objectAtIndex:row] sessionListViewCell];
@@ -173,10 +175,13 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     {
     case 0: 
       cellText = myPerson;
-      height += [cellText sizeWithFont:cellFont
-			  constrainedToSize:constraintSize 
-			  lineBreakMode:UILineBreakModeWordWrap].height;
-      height += 74; // TODO dynamically get height of image
+      
+      height =[cellText sizeWithFont:cellFont
+			constrainedToSize:constraintSize 
+			lineBreakMode:UILineBreakModeWordWrap].height,  30; 
+      if(image)
+	height = fmax( height, image.size.height );
+      
       break;
     case 1:
       cellText = @"Bio";
@@ -190,7 +195,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 			  lineBreakMode:UILineBreakModeWordWrap].height;
       break;
     case 2:
-      height = 40; // TODO dynamic height ? 
+      height = 35;
       break;
     default:
       BUGOUT(@"Warning: in %s 'unreachable' code reached", __func__);
