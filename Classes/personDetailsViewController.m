@@ -23,10 +23,9 @@
   
   NSString* urlstring;
   
-  // TODO replace this statement ->
-  
+  // TODO use local bundle resource for default image 
   if(!myPerson || !(urlstring = [[AABPeople objectForKey:myPerson] objectForKey:@"Icon"]))
-    urlstring = @"http://agileandbeyond.org/images/marvin.toll.jpg";
+    urlstring = @"http://agileandbeyond.org/images/logo.square.jpg";
   
   BUGOUT(@"in %s, urlstring is %@", __func__, urlstring);
   
