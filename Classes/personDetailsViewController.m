@@ -9,6 +9,12 @@
 #import "personDetailsViewController.h"
 #import "AgileAndBeyondAppGlobals.h"
 #import "session.h"
+#import "URLFetcher.h"
+
+// Temporary: 
+UIImageView* imageView;
+UIImage* image;
+URLFetcher* imageFetcher;
 
 @implementation personDetailsViewController
 @synthesize myPerson;
@@ -16,14 +22,21 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
-  - (void)viewDidLoad {
+
+- (void)viewDidLoad 
+{
   [super viewDidLoad];
 
-  // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-  // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-  }
-*/
+  if(!imageFetcher)
+    {
+      imageFetcher = [[URLFetcher alloc] 
+		       initWithURL:
+			 [NSURL URLWithString:@"http://agileandbeyond.org/images/marvin.toll.jpg"]];
+    }
+
+
+}
+
 /*
   - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
@@ -80,6 +93,16 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   NSDictionary* personDict = [AABPeople objectForKey:myPerson];
 
 
+  // temporary.. this would probably be pretty buggy
+  void (^imageLoaded)(NSData* ) = ^(NSData*incoming)
+    {
+      image = [UIImage imageWithData:incoming];
+      //      imageView = [[UIImageView alloc] initWithImage:image];
+      [cell.imageView setImage:image];
+      //[imageView setNeedsLayout];
+      [cell setNeedsLayout];
+    };
+
   cell.detailTextLabel.font = getFontDefault();
   cell.textLabel.font = getFontDefault();
 
@@ -87,6 +110,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     {
     case 0:
       cell.textLabel.text = myPerson;
+      imageFetcher.didLoadData = imageLoaded;
+      [imageFetcher refresh];
       break;
     case 1:
       cell.textLabel.text = @"Bio";
@@ -125,6 +150,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       height += [cellText sizeWithFont:cellFont
 			  constrainedToSize:constraintSize 
 			  lineBreakMode:UILineBreakModeWordWrap].height;
+      height +=74;
       
       break;
     case 1:
