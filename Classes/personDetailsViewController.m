@@ -121,7 +121,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       cell.textLabel.text = @"Bio";
       cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
       cell.detailTextLabel.numberOfLines=0;
-      cell.detailTextLabel.text = [personDict objectForKey:@"Bio"];
+      // workaround for bios starting with "is" or "an"
+      cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]];
       break;
     default: 
       BUGOUT(@"Warning, reached 'unreachable' code in %s", __func__);
@@ -161,7 +162,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       height += [cellText sizeWithFont:cellFont
 			  constrainedToSize:constraintSize 
 			  lineBreakMode:UILineBreakModeWordWrap].height;
-      cellText = [personDict objectForKey:@"Bio"];
+      // workaround for bios starting with "is" or "an"
+      cellText = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]];
       height += [cellText sizeWithFont:cellFont
 			  constrainedToSize:constraintSize 
 			  lineBreakMode:UILineBreakModeWordWrap].height;
