@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "URLFetcher.h"
 
 @interface personDetailsViewController : UITableViewController 
 {
   NSString* myPerson;
+  URLFetcher* imageFetcher;
+  UIImage* image;
 }
 
 @property (nonatomic, retain) NSString* myPerson;
+@property (nonatomic, retain)  URLFetcher* imageFetcher;
+@property (nonatomic, retain)  UIImage* image;
 @end

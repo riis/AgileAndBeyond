@@ -49,6 +49,8 @@
 	</dict>
 	<key>Tom Kubit</key>
 	<dict>
+		<key>Icon</key>
+		<string>http://agileandbeyond.org/images/tom.kubit.jpg</string>
 		<key>Bio</key>
 		<string>is a Senior Software Engineer / Engineering Manager at Gene Codes Forensics. He specializes in Extreme Programming, Object Oriented Design and Development, Refactoring, Test Driven Development, Smalltalk, C#, Java and C++. Tom is a past president of the Michigan Agile Enthusiasts.</string>
 	</dict>

@@ -11,24 +11,52 @@
 #import "session.h"
 
 @implementation personDetailsViewController
-@synthesize myPerson;
+@synthesize myPerson, imageFetcher, image;
 
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
-  - (void)viewDidLoad {
-  [super viewDidLoad];
 
-  // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-  // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-  }
-*/
-/*
-  - (void)viewWillAppear:(BOOL)animated {
+  - (void)viewDidLoad 
+{
+  [super viewDidLoad];
+  
+  NSString* urlstring;
+  
+  // TODO replace this statement ->
+  
+  if(!myPerson || !(urlstring = [[AABPeople objectForKey:myPerson] objectForKey:@"Icon"]))
+    urlstring = @"http://agileandbeyond.org/images/marvin.toll.jpg";
+  
+  BUGOUT(@"in %s, urlstring is %@", __func__, urlstring);
+  
+  if(!imageFetcher)  // TODO improved lifecycle of URLFetcher 
+    {
+      imageFetcher = [[URLFetcher alloc] 
+		       initWithURL:
+			 [NSURL URLWithString:urlstring]];
+      
+      imageFetcher.didLoadData = ^(NSData*incoming)
+	{
+	  self.image = [UIImage imageWithData:incoming];
+	  [self.tableView reloadData];
+	  // TODO error checking
+	};
+      
+      // go ahead and start a refresh now
+      [imageFetcher refresh];
+    }
+  
+}
+
+
+- (void)viewWillAppear:(BOOL)animated 
+{
   [super viewWillAppear:animated];
-  }
-*/
+
+
+}
+
 /*
   - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
@@ -87,6 +115,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     {
     case 0:
       cell.textLabel.text = myPerson;
+      [cell.imageView setImage:image];
+      //       [cell setNeedsLayout];  // nessisary? 
       break;
     case 1:
       cell.textLabel.text = @"Bio";
@@ -125,7 +155,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       height += [cellText sizeWithFont:cellFont
 			  constrainedToSize:constraintSize 
 			  lineBreakMode:UILineBreakModeWordWrap].height;
-      
+      height += 74; // TODO dynamically get height of image
       break;
     case 1:
       cellText = @"Bio";
@@ -181,6 +211,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 - (void)dealloc 
 {
+
   [super dealloc];
 }
 
