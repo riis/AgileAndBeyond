@@ -110,7 +110,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-  static NSString *CellIdentifier = @"Cell";
+  static NSString *CellIdentifier = @"BioCell";
   int section = [indexPath indexAtPosition:0 ];
   int row = [indexPath indexAtPosition:1 ];
 
@@ -145,6 +145,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       break;
     case 2:
       cell = [[sessions objectAtIndex:row] sessionListViewCell];
+      break;
     default: 
       BUGOUT(@"Warning, reached 'unreachable' code in %s", __func__);
     }
