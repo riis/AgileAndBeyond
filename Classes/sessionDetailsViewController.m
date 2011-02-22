@@ -162,7 +162,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	cell.detailTextLabel.text = 
 	  [[mySession.people objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
 	// TODO: conditional disclosure indicator if bio exists..
-	cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;    
+	cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
       }
     else BUGOUT(@"in %s : warning, 'unreachable' code reached.", __func__);
     
@@ -200,13 +200,33 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 {
   int i = [indexPath indexAtPosition:1];
   if ( i >= rowsBeforePeople  && i < (SDVCHEADCOUNT + rowsBeforePeople)) 
-    {      
-      personDetailsViewController *detailViewController = [[personDetailsViewController alloc] initWithNibName:@"personDetailsViewController" bundle:nil];
-      detailViewController.myPerson = 
-	[[mySession.people objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
-      // Pass the selected object to the new view controller.
-      [self.navigationController pushViewController:detailViewController animated:YES];
-      [detailViewController release];
+    {
+      // this is a bit ugly, but, to help prevent too many objects on the navigation view stack
+      // lets check and see if this person is already on the stack, 
+      // if so, pop to them instead of pushing an new contorller
+      UINavigationController* nc = self.navigationController;
+      NSString* myPerson = [[mySession.people objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
+      NSUInteger i = [[nc viewControllers] indexOfObjectPassingTest:
+					     (BOOL (^)(id obj, NSUInteger, BOOL*))
+					     ^(id obj, NSUInteger idx, BOOL *stop) {
+	  BOOL r = [obj isKindOfClass:[personDetailsViewController class]];
+	  r = r && [[obj myPerson] isEqualToString:myPerson];
+	  return r;
+	}];
+      
+      if( i != NSNotFound ) 
+	{
+	  [nc popToViewController:[[nc viewControllers] objectAtIndex:i] animated:YES];
+	}
+      else	 
+	{ 
+	  personDetailsViewController *detailViewController = [[personDetailsViewController alloc] initWithNibName:@"personDetailsViewController" bundle:nil];
+	  detailViewController.myPerson = myPerson;
+	  
+	  // Pass the selected object to the new view controller.
+	  [self.navigationController pushViewController:detailViewController animated:YES];
+	  [detailViewController release];
+	}
     }	 
 }
 
