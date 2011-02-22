@@ -34,6 +34,7 @@ UIBarButtonItem *refreshButton;
 
 - (void)viewWillAppear:(BOOL)animated 
 {
+  // TODO maybe move some of this to viewdidload? 
 
   if(!AABNewsView)
     {
@@ -45,10 +46,36 @@ UIBarButtonItem *refreshButton;
       NSURL* newsURL = [NSURL URLWithString:newsUrlString];
       [newsUrlString release];
 
-      newsFetcher = [[[URLFetcher alloc] initForObject:&AABNews fromURL:newsURL] retain];
-      [newsFetcher setDidUpdateMessage:[[[Message alloc] 
+      newsFetcher = [[[URLFetcher alloc] initWithURL:newsURL] retain];
+
+      /*      [newsFetcher setDidUpdateMessage:[[[Message alloc] 
 					     initWithSelector:@selector(didUpdate)
 					     forTarget:self] autorelease]]; // problem
+      */
+      newsFetcher.didLoadData = 
+	^ (NSData* incoming) 
+	{
+	  NSError* plistError; 
+	  NSArray* plist = [NSPropertyListSerialization propertyListWithData:incoming 
+					      options:NSPropertyListImmutable
+					      format:NULL error:&plistError];
+	  // TODO do something with plistError
+	  BUGOUT(@"Hello from a BLOCK!");
+	  if(plist) 
+	    {
+	      if(AABNews)
+		[AABNews release];
+
+	      AABNews = plist;
+	      [AABNews retain];
+	      dumpNestedDictToLog(AABNews);
+
+	      [self.tableView reloadData];
+	      
+	    }
+	  else 
+	    BUGOUT(@"WARNING: news url fetcher did load, but did not parse into plist");
+	};
       
       [newsFetcher refresh];
       [newsURL release];
@@ -238,6 +265,8 @@ UIBarButtonItem *refreshButton;
     [super dealloc];
 }
 
+
+// TODO : remove this
 - (void)didUpdate 
 {
   [self.tableView reloadData];

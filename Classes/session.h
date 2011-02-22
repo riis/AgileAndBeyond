@@ -92,3 +92,6 @@ extern newsListViewController* AABNewsView;
 
 -(void) memoryWarning;
 @end 
+
+
+void dumpNestedDictToLog(NSDictionary* dict);

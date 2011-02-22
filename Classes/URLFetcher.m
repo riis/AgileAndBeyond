@@ -12,8 +12,10 @@
 
 @implementation URLFetcher 
 @synthesize connectionData,connectionResponse,urlConnection,connectionInProgress;
-@synthesize didUpdateMessage;
-@synthesize destinationData;
+@synthesize didLoadData, networkUnavailable, didEncounterError; 
+
+//@synthesize didUpdateMessage;
+//@synthesize destinationData;
 @synthesize sourceURL;
 @synthesize reachabilityNotifier;
 /*
@@ -27,10 +29,9 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
     return self;
 }
 
--(URLFetcher*) initForObject:(id*)dataPoint fromURL:(NSURL*)url
+-(URLFetcher*) initWithURL:(NSURL*)url
 {
   [self init];
-  destinationData = dataPoint;
   [self setSourceURL:url];
   return self;
 }
@@ -64,16 +65,16 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
     {
       BUGOUT(@"in %s, Reachability status negative.", __func__);
 
-      if  (*(self.destinationData)) 
-	[(*(self.destinationData)) release];
+      //      if  (*(self.destinationData)) 
+      //	[(*(self.destinationData)) release];
       
       // TODO this message can't say that there is a network error unless we actually know that it the problem
-      (*(self.destinationData)) = [NSArray arrayWithObject:
-					     [NSDictionary dictionaryWithObjectsAndKeys:
-							     @"Device Offline",@"HeadLine",
-							   @"The latest Agile and Beyond 2011 news will be downloaded when an internet connection is available.",@"Detail",
-							   nil]];
-      [(*(self.destinationData)) retain];
+      //  (*(self.destinationData)) = [NSArray arrayWithObject:
+      //				     [NSDictionary dictionaryWithObjectsAndKeys:
+      //						     @"Device Offline",@"HeadLine",
+      //						   @"The latest Agile and Beyond 2011 news will be downloaded when an internet connection is available.",@"Detail",
+      //						   nil]];
+      //[(*(self.destinationData)) retain];
       return;
     }
 
@@ -214,64 +215,22 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
 */
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 {
-  id dict;// hack
+  //  id dict;// hack
   BUGOUT(@"Hello from %s", __func__);
-  NSError* plistError;
-  NSStringEncoding nsEncoding = NSUTF8StringEncoding;
-  NSString* encoding = [connectionResponse textEncodingName];
-	
-  //TODO return string validation
-  if (connectionData!=nil) 
-    {
-      if (encoding) 
-	{
-	  CFStringEncoding cfEncoding = CFStringConvertIANACharSetNameToEncoding((CFStringRef)encoding);
-	  if (cfEncoding != kCFStringEncodingInvalidId) 
-	    {
-	      nsEncoding = CFStringConvertEncodingToNSStringEncoding(cfEncoding);
-	    }
-	}
-    }
-  else 
-    {
-      BUGOUT(@"%s: empty connectionData in get request",__func__);
-    }		
   
-  // if( connectionInProgress == true ) 
-  //  {
-      // this was originally a block to check if this was a get or a put, 
-      // in this contect we are only doing gets
-      // so i'm not sure this conditional block is nessisary.
-      
-  dict = [NSPropertyListSerialization propertyListWithData:connectionData 
-				      options:NSPropertyListImmutable
-				      format:NULL error:&plistError];
-  //  if(plistError)
-  //	BUGOUT(@"plistError .. %@",plistError); 
-  //else
-  //	{
+  if (!connectionData) 
+    BUGOUT(@"Warning: %s: nil connectionData in get request",__func__);
+     
+  if(didLoadData)  didLoadData(connectionData);
+  else BUGOUT(@"WARNING: in %s, you probably wanted to set didLoadData to a block");
 
-  if(*destinationData) [*destinationData release];
-  (*destinationData) = dict;
-  [(*destinationData) retain];
-
-  //  dumpNestedDictToLog(dict);
-  if(didUpdateMessage)  [didUpdateMessage send];
-
-  //}
-  
-  //}
-  //  else 
-  // {
-  //BUGOUT(@"%s: PUT request completed",__func__);
-  // }
-  
-  // the following log statement is useful for debugging but the string appears to leak 
-  // BUGOUT(@"%s: request completed, returned data is %@",__func__,[[[NSString alloc] initWithData:connectionData encoding:nsEncoding] autorelease]);
-  
   connectionInProgress=false;
-  [self clearUrlConnection];		// nessisary?
-  //  [encoding release];
+  
+  // nessisary to clearUrlConnection here?
+  // leave data in case caller wants it later ? 
+  //   or .. do this and make it up to the didLoadData block to make a copy or retain it 
+
+  [self clearUrlConnection];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
@@ -282,16 +241,16 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
   //	  if(![dict isKindOfClass:[NSArray class]] || ![dict count])
   // {
   
-  if  (*(self.destinationData)) 
-      [(*(self.destinationData)) release];
+  //if  (*(self.destinationData)) 
+  //  [(*(self.destinationData)) release];
 
   // TODO this message can't say that there is a network error unless we actually know that it the problem
-  (*(self.destinationData)) = [NSArray arrayWithObject:
-					 [NSDictionary dictionaryWithObjectsAndKeys:
-							 @"News Offline",@"HeadLine",
-						       @"We're sorry, Agile and Beyond 2011 News could not be updated.",@"Detail",
-						       nil]];
-  [(*(self.destinationData)) retain];
+//  (*(self.destinationData)) = [NSArray arrayWithObject:
+  //				 [NSDictionary dictionaryWithObjectsAndKeys:
+  //						 @"News Offline",@"HeadLine",
+  //					       @"We're sorry, Agile and Beyond 2011 News could not be updated.",@"Detail",
+  //					       nil]];
+  //[(*(self.destinationData)) retain];
 
   [self clearUrlConnection];
 }
