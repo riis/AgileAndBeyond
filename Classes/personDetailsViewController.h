@@ -14,9 +14,11 @@
   NSString* myPerson;
   URLFetcher* imageFetcher;
   UIImage* image;
+  NSArray* sessions;
 }
 
 @property (nonatomic, retain) NSString* myPerson;
 @property (nonatomic, retain)  URLFetcher* imageFetcher;
 @property (nonatomic, retain)  UIImage* image;
+@property (nonatomic, retain) NSArray* sessions;
 @end

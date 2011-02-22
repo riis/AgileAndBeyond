@@ -11,13 +11,13 @@
 #import "session.h"
 
 @implementation personDetailsViewController
-@synthesize myPerson, imageFetcher, image;
+@synthesize myPerson, imageFetcher, image, sessions;
 
 #pragma mark -
 #pragma mark View lifecycle
 
 
-  - (void)viewDidLoad 
+- (void)viewDidLoad 
 {
   [super viewDidLoad];
   
@@ -46,6 +46,13 @@
       [imageFetcher refresh];
     }
   
+  // populate sessions
+  if(!sessions)
+    {
+      NSPredicate* predicate = [NSPredicate predicateWithFormat:@"ANY people.individual LIKE %@", myPerson];
+      self.sessions = [AABSessions filteredArrayUsingPredicate:predicate] ;
+      BUGOUT(@"In %s with %@, %d sessions found.", __func__, myPerson, [sessions count]);
+    }
 }
 
 
@@ -84,13 +91,19 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
-  return 2;
+  return 3;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-  return 1;
+  switch( section )
+    {
+    case 0 : //nobreak
+    case 1 : return 1;
+    case 2 : return [sessions count];
+    }
+  BUGOUT(@"WARNDING in %s unreachable code reached",__func__);  return 0;
 }
 
 
@@ -98,19 +111,25 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
   static NSString *CellIdentifier = @"Cell";
-    
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-  }
+  int section = [indexPath indexAtPosition:0 ];
+  int row = [indexPath indexAtPosition:1 ];
+
+  UITableViewCell *cell;
+  NSDictionary* personDict;
+
+  if( section < 2 ) 
+    {
+      cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+      if (cell == nil) 
+	{
+	  cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+	}
+      personDict = [AABPeople objectForKey:myPerson];
+      cell.detailTextLabel.font = getFontDefault();
+      cell.textLabel.font = getFontDefault();
+    }
   
-  NSDictionary* personDict = [AABPeople objectForKey:myPerson];
-
-
-  cell.detailTextLabel.font = getFontDefault();
-  cell.textLabel.font = getFontDefault();
-
-  switch( [indexPath indexAtPosition:0 ]  )
+  switch( section  )
     {
     case 0:
       cell.textLabel.text = myPerson;
@@ -124,10 +143,11 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       // workaround for bios starting with "is" or "an"
       cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]];
       break;
+    case 2:
+      cell = [[sessions objectAtIndex:row] sessionListViewCell];
     default: 
       BUGOUT(@"Warning, reached 'unreachable' code in %s", __func__);
     }
-  
 
   return cell;
 }
@@ -168,26 +188,29 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 			  constrainedToSize:constraintSize 
 			  lineBreakMode:UILineBreakModeWordWrap].height;
       break;
+    case 2:
+      height = 40; // TODO dynamic height ? 
+      break;
     default:
       BUGOUT(@"Warning: in %s 'unreachable' code reached", __func__);
       height = 40; 
-
     }
-    
-  
+      
   return height + padding;
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  // Navigation logic may go here. Create and push another view controller.
-  /*
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    // ...
-    // Pass the selected object to the new view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-    [detailViewController release];
-  */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+  int section = [indexPath indexAtPosition:0 ];
+  int row = [indexPath indexAtPosition:1 ];
+  if ( section == 2 ) 
+    {
+      [self.navigationController
+	   pushViewController:
+	     [[sessions objectAtIndex:row] detailViewController]
+	   animated:YES];
+    }
 }
 
 

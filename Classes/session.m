@@ -319,7 +319,7 @@ void populateInitialData()
   else
     {
       // TODO refactor sessionDetailsViewController as well
-      return detailViewController = [sessionDetailsViewController createWithSession:self];
+      return [detailViewController = [sessionDetailsViewController createWithSession:self] retain];
     }
 }
 
