@@ -117,7 +117,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       cell.textLabel.text = @"Bio";
       cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
       cell.detailTextLabel.numberOfLines=0;
-      cell.detailTextLabel.text = [personDict objectForKey:@"Bio"];
+      cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]];
       break;
     default: 
       BUGOUT(@"Warning, reached 'unreachable' code in %s", __func__);
@@ -151,18 +151,20 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 			  constrainedToSize:constraintSize 
 			  lineBreakMode:UILineBreakModeWordWrap].height;
       height +=74;
-      
       break;
+
     case 1:
       cellText = @"Bio";
       height += [cellText sizeWithFont:cellFont
 			  constrainedToSize:constraintSize 
 			  lineBreakMode:UILineBreakModeWordWrap].height;
-      cellText = [personDict objectForKey:@"Bio"];
+      
+      cellText =[NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]];
       height += [cellText sizeWithFont:cellFont
 			  constrainedToSize:constraintSize 
 			  lineBreakMode:UILineBreakModeWordWrap].height;
       break;
+
     default:
       BUGOUT(@"Warning: in %s 'unreachable' code reached", __func__);
       height = 40; 
