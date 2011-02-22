@@ -78,7 +78,7 @@ extern newsListViewController* AABNewsView; // TODO - note will this need to sta
 					 cachePolicy:NSURLRequestUseProtocolCachePolicy 
 					 timeoutInterval:12.5];
 
-  [request setHTTPMethod:@"get"];
+  [request setHTTPMethod:@"GET"];
   //  error = [[NSError alloc] init];
        
   BUGOUT(@"%s about to start asynchronous connection",__func__);
