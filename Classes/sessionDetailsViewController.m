@@ -104,7 +104,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
   // Return the number of rows in the section.  
-  return SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople;
+  return SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople + [[mySession actions] count];
 }
 
 
@@ -137,6 +137,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       }
     else if ( i >= headcount + rowsBeforePeople )
       {
+	int ai;
 	switch ( i - (headcount + rowsBeforePeople) )
 	  {
 	  case 0 : 
@@ -149,10 +150,20 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	    cell.detailTextLabel.text = mySession.description;
 	    break;
 	  default : 
+	    /*
+
 	    // TODO replace this log output with an unreachable code macro
 	    BUGOUT(@"Warning in %s 'unreachable' code reached",__func__);
 	    cell.textLabel.text = @"";
 	    cell.detailTextLabel.text = @"";
+	    */
+	    ai = i-(headcount+rowsBeforePeople+2);
+	    cell.textLabel.text = 
+	      [[mySession.actions objectAtIndex:ai] objectForKey:@"titleg"];
+	    cell.detailTextLabel.text =
+	      [[mySession.actions objectAtIndex:ai] objectForKey:@"detail"];
+	    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator; // TODO a different accessory
+	    
 	  }
       }
     else if ( i >= rowsBeforePeople  && i < (headcount + rowsBeforePeople))
@@ -164,7 +175,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	// TODO: conditional disclosure indicator if bio exists..
 	cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
       }
-    else BUGOUT(@"in %s : warning, 'unreachable' code reached.", __func__);
+
+    else  BUGOUT(@"in %s : warning, 'unreachable' code reached.", __func__);
     
     return cell;
 }
