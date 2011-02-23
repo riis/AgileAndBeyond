@@ -92,6 +92,17 @@ This reflective conversation will seek to summarize the themes of the day:
 	</dict>
 	<key>open-lunch</key>
 	<dict>
+		<key>actions</key>
+		<array>
+			<dict>
+				<key>detail</key>
+				<string>Visit OpenSpaceWorld</string>
+				<key>title</key>
+				<string>Learn</string>
+				<key>URL</key>
+				<string>http://openspaceworld.org</string>
+			</dict>
+		</array>
 		<key>isIntermediate</key>
 		<true/>
 		<key>isAdvanced</key>
@@ -294,7 +305,6 @@ Tom recommends OpenSpaceWorld for learning more about Open Space Technology.</st
 		<true/>
 		<key>description</key>
 		<string>Reading about Agile, talking to people about Agile, and being part of a team that is “going Agile” are all good ways to learn about Agile. But, the best way to truly internalize how a successful Agile project works is by being part of a successful Agile project. The purpose of this workshop is to impart the essence of how a successful Agile project works and the benefits of Agile through a series of hands-on activities. The workshop covers the nuts and bolts of a typical Agile process, from entering new requests as User Stories all the way to “shipping” a product.
-
 Damon will guide the creation of a made-up software project (of the participants’ choosing) to illustrate the Agile Process. Participants will break up into small cross functional teams and work together to write user stories, create a story point scale, use Planning Poker to estimate stories, create a backlog, and “ship” two versions of their software project. Shipping the project will involve iteration planning, backlog grooming, and release planning. There will also be exercises that illustrate the benefits of collocation.</string>
 		<key>people</key>
 		<array>
@@ -321,13 +331,11 @@ Damon will guide the creation of a made-up software project (of the participants
 		<key>description</key>
 		<string>This workshop is designed for those providing leadership in our region. We will hit the tough-issues head-on with both short formal presentations and far-ranging discussion. What does it mean to be an effective contemporary &apos;Lean&apos; leader? Join in for a powerful time of face-to-face interaction as we seek collaborative answers.
 
-Mary and Tom wrote the book; actually three books. So, what's the big deal with 'Lean'?
+Mary and Tom wrote the book; actually three books. So, what&apos;s the big deal with &apos;Lean&apos;?
 
-If you have not had the opportunity to glean from the 'Lean' harvest that is sweeping the IT community, there may never be a better opportunity then a conversation beginning with what is occurring in our own back yard.
+If you have not had the opportunity to glean from the &apos;Lean&apos; harvest that is sweeping the IT community, there may never be a better opportunity then a conversation beginning with what is occurring in our own back yard.
 
-And we won't stop there. We'll talk openly and candidly about application development in our region and how well we compete on the global stage. Do we have a sustainable prescription or are we simply on life-support?</string>
-
-
+And we won&apos;t stop there. We&apos;ll talk openly and candidly about application development in our region and how well we compete on the global stage. Do we have a sustainable prescription or are we simply on life-support?</string>
 		<key>people</key>
 		<array>
 			<dict>
@@ -375,7 +383,7 @@ And we won't stop there. We'll talk openly and candidly about application develo
 				<string>Panel Member</string>
 			</dict>
 			<dict>
-			<key>individual</key>
+				<key>individual</key>
 				<string>Tom Poppendieck</string>
 				<key>role</key>
 				<string>Panel Member</string>
@@ -487,7 +495,7 @@ This workshop focuses on techniques that scrub code really clean. These techniqu
 * Yes, you will be pair programming!
 Now for something completely different! If you are bored with reading/writing to/from databases this is your chance for fun.
 
-Using a conference supplied USB cable and Lego® Mindstorms® NXT robot; join Kealy and Ted as they demonstrate how architectural layering and fake objects are combined to write unit tests for a program that controls hardware. The carefully crafted workshop simulates lessons learned from challenges that emerged in a real-world application. Perhaps you missed the opportunity in Orlando at OOPSLA 2009 --- however don't despair, this is your chance to bring a robot to life in Dearborn!</string>
+Using a conference supplied USB cable and Lego® Mindstorms® NXT robot; join Kealy and Ted as they demonstrate how architectural layering and fake objects are combined to write unit tests for a program that controls hardware. The carefully crafted workshop simulates lessons learned from challenges that emerged in a real-world application. Perhaps you missed the opportunity in Orlando at OOPSLA 2009 --- however don&apos;t despair, this is your chance to bring a robot to life in Dearborn!</string>
 		<key>people</key>
 		<array>
 			<dict>

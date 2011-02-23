@@ -84,6 +84,7 @@ extern newsListViewController* AABNewsView;
 -(NSString*) title;
 -(NSString*) description;
 -(NSArray*) people;
+-(NSArray*) actions;
 -(NSString*) track;
 -(NSString*) type;
 -(NSString*) subtype;

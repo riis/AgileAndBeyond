@@ -104,7 +104,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
   // Return the number of rows in the section.  
-  return SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople;
+  return SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople + [[mySession actions] count];
 }
 
 
@@ -137,6 +137,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       }
     else if ( i >= headcount + rowsBeforePeople )
       {
+	int ai;
 	switch ( i - (headcount + rowsBeforePeople) )
 	  {
 	  case 0 : 
@@ -149,10 +150,20 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	    cell.detailTextLabel.text = mySession.description;
 	    break;
 	  default : 
+	    /*
+
 	    // TODO replace this log output with an unreachable code macro
 	    BUGOUT(@"Warning in %s 'unreachable' code reached",__func__);
 	    cell.textLabel.text = @"";
 	    cell.detailTextLabel.text = @"";
+	    */
+	    ai = i-(headcount+rowsBeforePeople+2);
+	    cell.textLabel.text = 
+	      [[mySession.actions objectAtIndex:ai] objectForKey:@"title"];
+	    cell.detailTextLabel.text =
+	      [[mySession.actions objectAtIndex:ai] objectForKey:@"detail"];
+	    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator; // TODO a different accessory
+	    
 	  }
       }
     else if ( i >= rowsBeforePeople  && i < (headcount + rowsBeforePeople))
@@ -164,7 +175,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	// TODO: conditional disclosure indicator if bio exists..
 	cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
       }
-    else BUGOUT(@"in %s : warning, 'unreachable' code reached.", __func__);
+
+    else  BUGOUT(@"in %s : warning, 'unreachable' code reached.", __func__);
     
     return cell;
 }
@@ -198,15 +210,19 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  int i = [indexPath indexAtPosition:1];
-  if ( i >= rowsBeforePeople  && i < (SDVCHEADCOUNT + rowsBeforePeople)) 
+  const int row = [indexPath indexAtPosition:1];
+  const int peopleFloor = rowsBeforePeople;
+  const int peopleCeiling = SDVCHEADCOUNT + rowsBeforePeople;
+  int ai;
+  if ( row >= peopleFloor  && row < peopleCeiling ) 
     {
       // this is a bit ugly, but, to help prevent too many objects on the navigation view stack
       // lets check and see if this person is already on the stack, 
       // if so, pop to them instead of pushing an new contorller
       UINavigationController* nc = self.navigationController;
-      NSString* myPerson = [[mySession.people objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
-      NSUInteger i = [[nc viewControllers] indexOfObjectPassingTest:
+      const int personNum = row-rowsBeforePeople;
+      NSString* myPerson = [[mySession.people objectAtIndex:personNum] objectForKey:@"individual"];
+      NSUInteger viewFound = [[nc viewControllers] indexOfObjectPassingTest:
 					     (BOOL (^)(id obj, NSUInteger, BOOL*))
 					     ^(id obj, NSUInteger idx, BOOL *stop) {
 	  BOOL r = [obj isKindOfClass:[personDetailsViewController class]];
@@ -214,9 +230,9 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	  return r;
 	}];
       
-      if( i != NSNotFound ) 
+      if( viewFound != NSNotFound ) 
 	{
-	  [nc popToViewController:[[nc viewControllers] objectAtIndex:i] animated:YES];
+	  [nc popToViewController:[[nc viewControllers] objectAtIndex:personNum] animated:YES];
 	}
       else	 
 	{ 
@@ -227,7 +243,14 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	  [self.navigationController pushViewController:detailViewController animated:YES];
 	  [detailViewController release];
 	}
-    }	 
+    }
+  else if ( 0 <= (ai = row - (peopleCeiling + 2)) ) 
+    {
+      [[UIApplication sharedApplication] 
+	openURL:[NSURL URLWithString:
+			 [[mySession.actions objectAtIndex:ai] objectForKey:@"URL"]]];
+							  
+    }
 }
 
 
