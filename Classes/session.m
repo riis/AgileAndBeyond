@@ -282,6 +282,11 @@ void populateInitialData()
   return [info objectForKey:@"people"];
 }
 
+-(NSArray*) actions
+{
+  return [info objectForKey:@"actions"];
+}
+
 -(NSString*) track
 {
   return [info objectForKey:@"track"];
