@@ -205,6 +205,15 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       switch( row ) 
 	{
 	case 0: // title
+	  cellFont = getFontDefault();
+	  cellText = mySession.title;
+	  height += [cellText sizeWithFont:cellFont
+			      constrainedToSize:constraintSize 
+			      lineBreakMode:UILineBreakModeWordWrap].height;
+	  cellText = @"Title";
+	  height += [cellText sizeWithFont:cellFont
+			      constrainedToSize:constraintSize 
+			      lineBreakMode:UILineBreakModeWordWrap].height;
 	  break;
 	case 1: // sechedule	 
 	  break;
