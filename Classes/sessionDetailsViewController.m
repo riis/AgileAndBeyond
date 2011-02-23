@@ -159,7 +159,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	    */
 	    ai = i-(headcount+rowsBeforePeople+2);
 	    cell.textLabel.text = 
-	      [[mySession.actions objectAtIndex:ai] objectForKey:@"titleg"];
+	      [[mySession.actions objectAtIndex:ai] objectForKey:@"title"];
 	    cell.detailTextLabel.text =
 	      [[mySession.actions objectAtIndex:ai] objectForKey:@"detail"];
 	    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator; // TODO a different accessory
