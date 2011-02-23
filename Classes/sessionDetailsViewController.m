@@ -97,14 +97,31 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
   // Return the number of sections.
-  return 1;
+  return 3;
 }
 
+-(NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
+{
+  switch(section)
+    {
+    case 0 : return @"Information";
+    case 1 : return @"Individuals";
+    case 2 : return @"Immersion";
+    default : return @""; // unreachable
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
   // Return the number of rows in the section.  
-  return SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople + [[mySession actions] count];
+  switch(section)
+    {
+    case 0 : return 3;
+    case 1 : return SDVCHEADCOUNT;
+    case 2 : return [[mySession actions] count];
+    default : return 0; // unreachable
+    }
+
 }
 
 
@@ -112,145 +129,199 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
   NSArray* people = mySession.people;
-  const int headcount = [people count];
-  const int i = [indexPath indexAtPosition:1];  // index pos 1, not zero, only 
-  static NSString *CellIdentifier = @"Cell";
+  const int section = [indexPath indexAtPosition:0]; 
+  const int row = [indexPath indexAtPosition:1]; 
+  static NSString *CellIdentifier = @"SessionCell";
 
   // TODO : fix cell recycling
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil)
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-  else 
-    cell.accessoryType=UITableViewCellAccessoryNone;    // reset default
-
-  // Configure the cell...
+  
+  cell.accessoryType=UITableViewCellAccessoryNone;    // reset defaults
   cell.textLabel.font = getFontDefault();
   cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
   cell.detailTextLabel.numberOfLines=0;
   cell.detailTextLabel.font = getFontDefault();
     
-
-    if( i < rowsBeforePeople )
-      {
-	cell.textLabel.text = @"Title";
-	cell.detailTextLabel.text = mySession.title;
-      }
-    else if ( i >= headcount + rowsBeforePeople )
-      {
-	int ai;
-	switch ( i - (headcount + rowsBeforePeople) )
-	  {
-	  case 0 : 
-	    cell.textLabel.text = @"Schedule";
-	    cell.detailTextLabel.text =  [AABDateSectionTitleFormmater 
-					   stringFromDate:mySession.timeStart];
-	    break;
-	  case 1 : 
-	    cell.textLabel.text = @"Description";
-	    cell.detailTextLabel.text = mySession.description;
-	    break;
-	  default : 
-	    /*
-
-	    // TODO replace this log output with an unreachable code macro
-	    BUGOUT(@"Warning in %s 'unreachable' code reached",__func__);
-	    cell.textLabel.text = @"";
-	    cell.detailTextLabel.text = @"";
-	    */
-	    ai = i-(headcount+rowsBeforePeople+2);
-	    cell.textLabel.text = 
-	      [[mySession.actions objectAtIndex:ai] objectForKey:@"title"];
-	    cell.detailTextLabel.text =
-	      [[mySession.actions objectAtIndex:ai] objectForKey:@"detail"];
-	    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator; // TODO a different accessory
-	    
-	  }
-      }
-    else if ( i >= rowsBeforePeople  && i < (headcount + rowsBeforePeople))
-      {
-	cell.textLabel.text =
-	  [[mySession.people objectAtIndex:i-rowsBeforePeople] objectForKey:@"role"];
-	cell.detailTextLabel.text = 
-	  [[mySession.people objectAtIndex:i-rowsBeforePeople] objectForKey:@"individual"];
-	// TODO: conditional disclosure indicator if bio exists..
-	cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-      }
-
-    else  BUGOUT(@"in %s : warning, 'unreachable' code reached.", __func__);
-    
+  switch ( section )
+    {
+    case 0 :
+      switch( row ) 
+	{
+	case 0:
+	  cell.textLabel.text = @"Title";
+	  cell.detailTextLabel.text = mySession.title;
+	  break;
+	case 1:
+	  cell.textLabel.text = @"Schedule";
+	  cell.detailTextLabel.text =  [AABDateSectionTitleFormmater 
+					 stringFromDate:mySession.timeStart];
+	  break;
+	case 2:
+	  cell.textLabel.text = @"Description";
+	  cell.detailTextLabel.text = mySession.description;
+	  break;
+	}
+      break;
+    case 1 :
+      cell.textLabel.text =
+	[[mySession.people objectAtIndex:row] objectForKey:@"role"];
+      cell.detailTextLabel.text = 
+	[[mySession.people objectAtIndex:row] objectForKey:@"individual"];
+      // TODO: conditional disclosure indicator if bio exists..
+      cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+      break;
+    case 2 :
+      cell.textLabel.text = 
+	[[mySession.actions objectAtIndex:row] objectForKey:@"title"];
+      cell.detailTextLabel.text =
+	[[mySession.actions objectAtIndex:row] objectForKey:@"detail"];
+      cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator; // TODO a different accessory
+      break;
+    }
+ 
     return cell;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  CGFloat height = 45;
-
+  const int section = [indexPath indexAtPosition:0]; 
+  const int row = [indexPath indexAtPosition:1]; 
+  const CGFloat defaultHeight = 44; // 44 is default for vertical orientation
+  CGFloat height = 15.0; // change this to add a "pad" 
+  UIFont* cellFont;
+  NSString* cellText; 
+  CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
+  CGSize labelSize;
+  
   // TODO dynamic heights!
-  // NSString* text = [mySession objectForKey:@"description"];
-  // TODO not hardcoding reletive position of description field , etc
-  // TOOD not hardcoding font, or anything really, except from a central position
+  // TODO no hardcoding 
 
-  if([indexPath indexAtPosition:1]+1 == SDVCHEADCOUNT + rowsBeforePeople + rowsAfterPeople)
+  switch ( section )
     {
-      NSString* cellText = mySession.description;
-      UIFont* cellFont = getFontDefault();
-      CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
-      CGSize labelSize = [cellText sizeWithFont:cellFont
-				   constrainedToSize:constraintSize 
-				   lineBreakMode:UILineBreakModeWordWrap];
-      height = labelSize.height + 20;
+    case 0 :
+      switch( row ) 
+	{
+	case 0: // title
+	  cellFont = getFontDefault();
+	  cellText = mySession.title;
+	  height += [cellText sizeWithFont:cellFont
+			      constrainedToSize:constraintSize 
+			      lineBreakMode:UILineBreakModeWordWrap].height;
+	  cellText = @"Title";
+	  height += [cellText sizeWithFont:cellFont
+			      constrainedToSize:constraintSize 
+			      lineBreakMode:UILineBreakModeWordWrap].height;
+	  break;
+	case 1: // sechedule	 
+	  break;
+	case 2: // description	  
+	  cellFont = getFontDefault();
+	  cellText = mySession.description;
+	  height += [cellText sizeWithFont:cellFont
+			     constrainedToSize:constraintSize 
+			     lineBreakMode:UILineBreakModeWordWrap].height;
+	  cellText = @"Description";
+	  height += [cellText sizeWithFont:cellFont
+			      constrainedToSize:constraintSize 
+			      lineBreakMode:UILineBreakModeWordWrap].height;
+	  break;
+	}
+      break;
+    case 1 : // people list
+      cellFont = getFontDefault();
+      cellText =
+	[[mySession.people objectAtIndex:row] objectForKey:@"role"];
+      height += [cellText sizeWithFont:cellFont
+			 constrainedToSize:constraintSize 
+			 lineBreakMode:UILineBreakModeWordWrap].height;
+      cellText = 
+	[[mySession.people objectAtIndex:row] objectForKey:@"individual"];
+      height += [cellText sizeWithFont:cellFont
+			 constrainedToSize:constraintSize 
+			 lineBreakMode:UILineBreakModeWordWrap].height;
+      break;
+    case 2 : // actions list 
+      cellFont = getFontDefault();
+      cellText =
+	[[mySession.actions objectAtIndex:row] objectForKey:@"title"];
+      height += [cellText sizeWithFont:cellFont
+			 constrainedToSize:constraintSize 
+			 lineBreakMode:UILineBreakModeWordWrap].height;
+      cellText = 
+	[[mySession.actions objectAtIndex:row] objectForKey:@"detail"];
+      height += [cellText sizeWithFont:cellFont
+			 constrainedToSize:constraintSize 
+			 lineBreakMode:UILineBreakModeWordWrap].height;
+      break;
     }
   
-  return height;
+  return fmax(height,defaultHeight);
 }
+
 
 #pragma mark -
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  const int section = [indexPath indexAtPosition:0]; 
   const int row = [indexPath indexAtPosition:1];
-  const int peopleFloor = rowsBeforePeople;
-  const int peopleCeiling = SDVCHEADCOUNT + rowsBeforePeople;
-  int ai;
-  if ( row >= peopleFloor  && row < peopleCeiling ) 
+  UINavigationController* nc = self.navigationController;
+  NSString* myPerson; 
+  NSUInteger viewFound;
+
+  switch ( section )
     {
+    case 0 :
+      switch( row ) 
+	{
+	case 0: // title
+	  break;
+	case 1: // sechedule	 
+	  break;
+	case 2: // description	  
+	  break;
+	}
+      break;
+    case 1 : // people list
       // this is a bit ugly, but, to help prevent too many objects on the navigation view stack
       // lets check and see if this person is already on the stack, 
       // if so, pop to them instead of pushing an new contorller
-      UINavigationController* nc = self.navigationController;
-      const int personNum = row-rowsBeforePeople;
-      NSString* myPerson = [[mySession.people objectAtIndex:personNum] objectForKey:@"individual"];
-      NSUInteger viewFound = [[nc viewControllers] indexOfObjectPassingTest:
-					     (BOOL (^)(id obj, NSUInteger, BOOL*))
-					     ^(id obj, NSUInteger idx, BOOL *stop) {
-	  BOOL r = [obj isKindOfClass:[personDetailsViewController class]];
-	  r = r && [[obj myPerson] isEqualToString:myPerson];
-	  return r;
-	}];
-      
+
+      nc = self.navigationController;
+      myPerson = [[mySession.people objectAtIndex:row] objectForKey:@"individual"];
+      viewFound = [[nc viewControllers] indexOfObjectPassingTest:
+					  (BOOL (^)(id obj, NSUInteger, BOOL*))
+					^(id obj, NSUInteger idx, BOOL *stop) 
+					{
+					  BOOL r = [obj isKindOfClass:[personDetailsViewController class]];
+					  r = r && [[obj myPerson] isEqualToString:myPerson];
+					  return r;
+					}];
       if( viewFound != NSNotFound ) 
 	{
-	  [nc popToViewController:[[nc viewControllers] objectAtIndex:personNum] animated:YES];
+	  [nc popToViewController:[[nc viewControllers] objectAtIndex:row] animated:YES];
 	}
       else	 
 	{ 
 	  personDetailsViewController *detailViewController = [[personDetailsViewController alloc] initWithNibName:@"personDetailsViewController" bundle:nil];
-	  detailViewController.myPerson = myPerson;
-	  
+	  detailViewController.myPerson = myPerson;	  
 	  // Pass the selected object to the new view controller.
 	  [self.navigationController pushViewController:detailViewController animated:YES];
 	  [detailViewController release];
 	}
-    }
-  else if ( 0 <= (ai = row - (peopleCeiling + 2)) ) 
-    {
+      break;
+    case 2 : // actions list 
       [[UIApplication sharedApplication] 
 	openURL:[NSURL URLWithString:
-			 [[mySession.actions objectAtIndex:ai] objectForKey:@"URL"]]];
-							  
+			 [[mySession.actions objectAtIndex:row] objectForKey:@"URL"]]];
+      break;
     }
+
+
 }
 
 
