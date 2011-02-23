@@ -134,6 +134,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     {
     case 0:
       cell.textLabel.text = myPerson;
+      cell.detailTextLabel.text = nil;
       [cell.imageView setImage:image];
       //       [cell setNeedsLayout];  // nessisary? 
       break;
@@ -229,6 +230,11 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section 
+{
+  if ( section == 2 ) return @"Sessions";
+  else return @"";
+}
 #pragma mark -
 #pragma mark Memory management
 
