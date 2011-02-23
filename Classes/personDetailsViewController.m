@@ -139,12 +139,20 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       //       [cell setNeedsLayout];  // nessisary? 
       break;
     case 1:
+      /*
       cell.textLabel.text = @"Bio";
       cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
       cell.detailTextLabel.numberOfLines=0;
       // workaround for bios starting with "is" or "an"
       // TODO fix so it doesn't say "(null)" if bio is nil
       cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]  ];
+      */
+      cell.detailTextLabel.text = @"";
+      cell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
+      cell.textLabel.numberOfLines=0;
+      // workaround for bios starting with "is" or "an"
+      // TODO fix so it doesn't say "(null)" if bio is nil
+      cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]  ];
       break;
     case 2:
       cell = [[sessions objectAtIndex:row] sessionListViewCell];
@@ -170,7 +178,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   UIFont* cellFont = getFontDefault();
   CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
   NSString* cellText = [personDict objectForKey:@"Bio"];
-  CGFloat height;
+  CGFloat height = 0.0;
 
   switch( section )
     {
@@ -186,10 +194,12 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       height += padding;
       break;
     case 1:
+      /*
       cellText = @"Bio";
       height += [cellText sizeWithFont:cellFont
 			  constrainedToSize:constraintSize 
-			  lineBreakMode:UILineBreakModeWordWrap].height;
+			  lineBreakMode:UILineBreakModeWordWrap].height; 
+      */
       // workaround for bios starting with "is" or "an"
       cellText = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]];
       height += [cellText sizeWithFont:cellFont
@@ -234,8 +244,12 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 -(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section 
 {
-  if ( section == 2 ) return @"Sessions";
-  else return @"";
+  switch ( section ) 
+    {
+    case 1 : return @"Bio";
+    case 2 : return @"Sessions";
+    default : return @"";
+    }
 }
 #pragma mark -
 #pragma mark Memory management
