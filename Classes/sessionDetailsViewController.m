@@ -190,7 +190,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   const int section = [indexPath indexAtPosition:0]; 
   const int row = [indexPath indexAtPosition:1]; 
   const CGFloat defaultHeight = 44; // 44 is default for vertical orientation
-  CGFloat height = 0.0; 
+  CGFloat height = 15.0; // change this to add a "pad" 
   UIFont* cellFont;
   NSString* cellText; 
   CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
@@ -211,7 +211,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	case 2: // description	  
 	  cellFont = getFontDefault();
 	  cellText = mySession.description;
-	  height = [cellText sizeWithFont:cellFont
+	  height += [cellText sizeWithFont:cellFont
 			     constrainedToSize:constraintSize 
 			     lineBreakMode:UILineBreakModeWordWrap].height;
 	  cellText = @"Description";
@@ -225,7 +225,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       cellFont = getFontDefault();
       cellText =
 	[[mySession.people objectAtIndex:row] objectForKey:@"role"];
-      height = [cellText sizeWithFont:cellFont
+      height += [cellText sizeWithFont:cellFont
 			 constrainedToSize:constraintSize 
 			 lineBreakMode:UILineBreakModeWordWrap].height;
       cellText = 
@@ -238,7 +238,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       cellFont = getFontDefault();
       cellText =
 	[[mySession.actions objectAtIndex:row] objectForKey:@"title"];
-      height = [cellText sizeWithFont:cellFont
+      height += [cellText sizeWithFont:cellFont
 			 constrainedToSize:constraintSize 
 			 lineBreakMode:UILineBreakModeWordWrap].height;
       cellText = 
