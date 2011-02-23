@@ -329,14 +329,12 @@ void populateInitialData()
     return sessionListViewCell;
   else
     {
-     
-      static NSString *CellIdentifier = @"Cell";
-        
+             
       //thank you stackoverflow contributer Tim Rupe! other useful info at link 
       //http://stackoverflow.com/questions/129502/how-do-i-wrap-text-in-a-uitableviewcell-without-a-custom-cell
       // (and in documentation for UITextField)
       
-      sessionListViewCell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] retain];
+      sessionListViewCell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] retain];
       sessionListViewCell.textLabel.lineBreakMode=UILineBreakModeWordWrap;
       sessionListViewCell.textLabel.numberOfLines=0;
       sessionListViewCell.textLabel.font = getFontDefault();
