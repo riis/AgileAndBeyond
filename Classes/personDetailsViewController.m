@@ -112,8 +112,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
   static NSString *CellIdentifier = @"BioCell";
-  int section = [indexPath indexAtPosition:0 ];
-  int row = [indexPath indexAtPosition:1 ];
+  const int section = [indexPath indexAtPosition:0 ];
+  const int row = [indexPath indexAtPosition:1 ];
 
   UITableViewCell *cell;
   NSDictionary* personDict;
@@ -161,18 +161,18 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  const CGFloat padding = 20;  // TODO don't hardcode this
-
-  // NSString* text = [mySession objectForKey:@"description"];
+   // NSString* text = [mySession objectForKey:@"description"];
   // TOOD not hardcoding font, or anything really
-  
+  const CGFloat padding = 20;  // TODO don't hardcode this
+  const int section = [indexPath indexAtPosition:0 ];
+  const int row = [indexPath indexAtPosition:1 ];
   NSDictionary* personDict = [AABPeople objectForKey:myPerson];
   UIFont* cellFont = getFontDefault();
   CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
   NSString* cellText = [personDict objectForKey:@"Bio"];
   CGFloat height;
 
-  switch( [indexPath indexAtPosition:0 ]  )
+  switch( section )
     {
     case 0: 
       cellText = myPerson;
@@ -183,6 +183,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       if(image)
 	height = fmax( height, image.size.height );
       
+      height += padding;
       break;
     case 1:
       cellText = @"Bio";
@@ -194,16 +195,17 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       height += [cellText sizeWithFont:cellFont
 			  constrainedToSize:constraintSize 
 			  lineBreakMode:UILineBreakModeWordWrap].height;
+      height += padding;
       break;
     case 2:
-      height = 35;
+      height = [[sessions objectAtIndex:row] sessionListViewCellHeight];
       break;
     default:
       BUGOUT(@"Warning: in %s 'unreachable' code reached", __func__);
-      height = 40; 
+      height = 44; // 44 is default height in vertical orientation
     }
-      
-  return height + padding;
+
+  return height;
 }
 
 
@@ -214,7 +216,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   if ( section == 2 ) 
     {
       sessionDetailsViewController *detailViewCon = 
-	(UIViewController*)[[sessions objectAtIndex:row] detailViewController];
+	[[sessions objectAtIndex:row] detailViewController];
       UIViewController *navCon = self.navigationController;
       
       // first, we mave to make sure it is not already on the stack

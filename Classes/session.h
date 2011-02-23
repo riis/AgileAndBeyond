@@ -71,6 +71,8 @@ extern newsListViewController* AABNewsView;
 
 -(sessionDetailsViewController*) detailViewController;
 -(UITableViewCell*) sessionListViewCell;
+-(CGFloat) sessionListViewCellHeight;
+
 -(BOOL) isUserSelected;
 -(BOOL) isUserAttending;
 -(BOOL) isUserSelectedFirstSlot;

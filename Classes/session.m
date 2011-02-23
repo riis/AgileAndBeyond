@@ -347,6 +347,11 @@ void populateInitialData()
     }
 }
 
+-(CGFloat) sessionListViewCellHeight 
+{
+  return 44;  // TODO sense orientation? 
+}
+
 -(void) memoryWarning
 {
   // resourses :
@@ -362,7 +367,6 @@ void populateInitialData()
     {
       [detailViewController release];
       detailViewController = nil; 
-
     }
   if(sessionListViewCell)
     {
