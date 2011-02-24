@@ -123,8 +123,10 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
 {
-  // Return the number of sections.
-  return 3;
+  if([mySession.actions count])  
+    return 3;
+  else 
+    return 2;
 }
 
 -(NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
