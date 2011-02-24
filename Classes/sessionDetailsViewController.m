@@ -17,7 +17,7 @@ static const int rowsBeforePeople = 1;
 static const int rowsAfterPeople = 2;
 @implementation sessionDetailsViewController
 @synthesize mySession;
-@synthesize tapRecognizer, swipeLeftRecognizer, segmentedControl;
+@synthesize swipeLeftRecognizer;
 
 #pragma mark -
 #pragma mark View lifecycle
