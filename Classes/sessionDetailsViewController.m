@@ -56,7 +56,6 @@ static const int rowsAfterPeople = 2;
 - (void)viewDidUnload 
 {
   [super viewDidUnload];
-  self.segmentedControl = nil;
   self.swipeLeftRecognizer = nil;
 }
 

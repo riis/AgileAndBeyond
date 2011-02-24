@@ -111,33 +111,38 @@ void populateInitialData()
 
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-initial" ofType:@"plist"];
   AABSessionInfo = [NSDictionary dictionaryWithContentsOfFile:plistPath];
-  if(AABSessionInfo)
+
+  void (^updateAABSessions)() = 
+    ^
     {
-      BUGOUT(@"I loaded in a plist as AABSessions from %@, and its got %d elements",  
-	     plistPath,
-	     [AABSessionInfo count]);
-
-      AABSessions = [[NSMutableArray alloc] init];
-
-      // There might be a more elegant method for doing this 
-      NSArray* sessionIDs = [AABSessionInfo allKeys];
-      for(NSString* id in sessionIDs)
+      if(AABSessionInfo)
 	{
-	  Session* s;
-	  s = [Session createSessionWithIdentity:id
-		       andDictionary:[AABSessionInfo objectForKey:id]];
-	  [AABSessions addObject:s];
-			
-	  if([id isEqualToString:idUserSelectedFirstSlot])
-	    userSessionFirstSlot = s;
-	  else if([id isEqualToString:idUserSelecteSecondSlot])
-	    userSessionSecondSlot = s;
+	  BUGOUT(@"I loaded in a plist as AABSessionInfo, and its got %d elements",  
+	     [AABSessionInfo count]);
+	  
+	  if(AABSessions) [AABSessions release];
+	  AABSessions = [[NSMutableArray alloc] init];
+	  
+	  // There might be a more elegant method for doing this 
+	  NSArray* sessionIDs = [AABSessionInfo allKeys];
+	  for(NSString* id in sessionIDs)
+	    {
+	      Session* s;
+	      s = [Session createSessionWithIdentity:id
+			   andDictionary:[AABSessionInfo objectForKey:id]];
+	      [AABSessions addObject:s];
+	      
+	      if([id isEqualToString:idUserSelectedFirstSlot])
+		userSessionFirstSlot = s;
+	      else if([id isEqualToString:idUserSelecteSecondSlot])
+		userSessionSecondSlot = s;
+	    }
 	}
-    }
-  else 
-    {
-      BUGOUT(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
-    }
+    };
+  
+
+  
+  updateAABSessions();
 
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-people" ofType:@"plist"];
   AABPeople = [NSDictionary dictionaryWithContentsOfFile:plistPath];
@@ -153,7 +158,46 @@ void populateInitialData()
       BUGOUT(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
     }
   
- 
+  // CREATE URLFetcher for sessions, and initiate a refresh
+  // TODO : figure out how to free up this fetcher
+
+  NSURL* sessionsURL = [NSURL URLWithString:@"http://agile.riis.com/AgileAndBeyond2011/app/ios/sessions.plist"];
+  URLFetcher* sessionsFetcher = [[[URLFetcher alloc] initWithURL:sessionsURL] retain];
+
+  sessionsFetcher.didLoadData = 
+    ^ (NSData* incoming)
+    {
+      NSError* plistError; 
+      NSMutableDictionary* plist = [NSMutableDictionary dictionaryWithDictionary:
+							  [NSPropertyListSerialization propertyListWithData:incoming
+										       options:0
+										       format:NULL error:&plistError]];
+
+      BUGOUT(@"  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!OOOOOOOOooooooooo.............. ");
+      if(plist) 
+	{
+	  /*	  if(AABSessionInfo)
+	    {
+	      // TODO option to overwrite
+	      // TODO ability to remove values... 
+	      [AABSessionInfo addEntriesFromDictionary:plist];
+	      }
+	      else */
+
+	  if(AABSessionInfo) [AABSessionInfo release];
+
+	  AABSessionInfo = plist;	    
+	  [AABSessionInfo retain];
+	  // TODO notify any existing session list views to reload data!
+	  updateAABSessions();
+	}
+      else 
+	BUGOUT(@"WARNING: sessions url fetcher did load, but did not parse into plist");
+    };
+  
+  [sessionsFetcher refresh];
+
+
   // TODO memory
   [AABSessionInfo retain];
   [AABSessions retain];

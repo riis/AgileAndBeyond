@@ -191,7 +191,6 @@ UIBarButtonItem *refreshButton;
   CGFloat height;
 
   // TOOD not hardcoding font, or anything really, except from a central position
-
   NSDictionary *myItem =  [AABNews objectAtIndex:[indexPath indexAtPosition:1]];
  
   NSString* cellText = [myItem objectForKey:@"HeadLine"];

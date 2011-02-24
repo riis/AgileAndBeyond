@@ -33,7 +33,7 @@
 */ 
 
 
-NSDictionary* AABSessionInfo;
+NSMutableDictionary* AABSessionInfo;
 NSMutableArray* AABSessions;
 NSDictionary* AABPeople;
 NSArray* AABNews;
