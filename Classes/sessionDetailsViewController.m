@@ -35,22 +35,7 @@ static const int rowsAfterPeople = 2;
 - (void)viewDidLoad 
 {
   [super viewDidLoad];
-  NSString * buttonTitle;
-
-  // TODO make a session method isSelectable
-  if( mySession.isSelectable )
-    {
-      buttonTitle = mySession.isUserSelected?@"Remove":@"Add";
-      
-      // build the right add/remove button
-      UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
-					   initWithTitle:buttonTitle
-					   style:UIBarButtonItemStylePlain
-					   target:self
-					   action:@selector(addToUserSelections)];
-      self.navigationItem.rightBarButtonItem = addRemoveButton;
-    }
-
+  
   // ============ code from apple example
 
     /*
@@ -173,11 +158,28 @@ static const int rowsAfterPeople = 2;
 
 }
 
-/*
-  - (void)viewWillAppear:(BOOL)animated {
+
+  - (void)viewWillAppear:(BOOL)animated 
+{
   [super viewWillAppear:animated];
-  }
-*/
+  NSString * buttonTitle;
+
+  // TODO make a session method isSelectable
+  if( mySession.isSelectable )
+    {
+      buttonTitle = mySession.isUserSelected?@"Remove":@"Add";
+      
+      // build the right add/remove button
+      UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
+					   initWithTitle:buttonTitle
+					   style:UIBarButtonItemStylePlain
+					   target:self
+					   action:@selector(addToUserSelections)];
+      self.navigationItem.rightBarButtonItem = addRemoveButton;
+    }
+
+}
+
 /*
   - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
@@ -386,31 +388,24 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
  
 
  
-
+/*
 - (IBAction)takeLeftSwipeRecognitionEnabledFrom:(UISegmentedControl *)aSegmentedControl {
 
  
 
-    /*
+  //     Add or remove the left swipe recogniser to or from the view depending on the selection in the segmented control.
 
-     Add or remove the left swipe recogniser to or from the view depending on the selection in the segmented control.
-
-     */
-
+    
     if ([aSegmentedControl selectedSegmentIndex] == 0) {
-
         [self.view addGestureRecognizer:swipeLeftRecognizer];
-
     }
 
     else {
-
         [self.view removeGestureRecognizer:swipeLeftRecognizer];
-
     }
 
 }
-
+*/
  
 
  
@@ -502,7 +497,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer {
 
  
-  NSLog(@"hello from %s", __func__);
+  BUGOUT(@"hello from %s", __func__);
   
   
   
@@ -513,10 +508,19 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) 
     {
       BUGOUT(@"left swipe");
+      // this would break if there is <2 sessions 
+      int indexOfCurrent = [AABSessions indexOfObject:mySession];
+      mySession = (indexOfCurrent==0)?[AABSessions lastObject]:[AABSessions objectAtIndex:indexOfCurrent-1];
+      [self.tableView reloadData];
     }
   else 
     {
-    BUGOUT(@"other swipe");
+      BUGOUT(@"other swipe");
+            int indexOfCurrent = 
+	      mySession = (mySession==[AABSessions lastObject])?
+	      [AABSessions objectAtIndex:0]
+	      :[AABSessions objectAtIndex:1+[AABSessions indexOfObject:mySession]];
+      [self.tableView reloadData];
     }
   
     
