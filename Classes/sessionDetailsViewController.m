@@ -17,6 +17,7 @@ static const int rowsBeforePeople = 1;
 static const int rowsAfterPeople = 2;
 @implementation sessionDetailsViewController
 @synthesize mySession;
+@synthesize tapRecognizer, swipeLeftRecognizer, segmentedControl;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -34,13 +35,46 @@ static const int rowsAfterPeople = 2;
 - (void)viewDidLoad 
 {
   [super viewDidLoad];
-  NSString * buttonTitle;
+  
+  UIGestureRecognizer *recognizer;
 
-  // TODO make a session method isSelectable
+  recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+  [self.tableView addGestureRecognizer:recognizer];
+  [recognizer release];
+
+  recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+  self.swipeLeftRecognizer = (UISwipeGestureRecognizer *)recognizer;
+  swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+  [self.view addGestureRecognizer:swipeLeftRecognizer];
+  self.swipeLeftRecognizer = (UISwipeGestureRecognizer *)recognizer;
+  [recognizer release];
+
+  // TODO release addRemoveButton? an example online did a release on it in this function.}
+}
+
+
+- (void)viewDidUnload 
+{
+  [super viewDidUnload];
+  self.segmentedControl = nil;
+  self.swipeLeftRecognizer = nil;
+}
+
+
+- (void)viewWillAppear:(BOOL)animated 
+{
+  [super viewWillAppear:animated];
+  [self refreshButton];
+}
+
+- (void)refreshButton
+{
+  
+  NSString * buttonTitle;  
   if( mySession.isSelectable )
     {
       buttonTitle = mySession.isUserSelected?@"Remove":@"Add";
-      
+	
       // build the right add/remove button
       UIBarButtonItem *addRemoveButton = [[UIBarButtonItem alloc] 
 					   initWithTitle:buttonTitle
@@ -48,15 +82,9 @@ static const int rowsAfterPeople = 2;
 					   target:self
 					   action:@selector(addToUserSelections)];
       self.navigationItem.rightBarButtonItem = addRemoveButton;
-    }
-
-  // TODO release addRemoveButton? an example online did a release on it in this function.
+    }  // TODO release addRemoveButton? an example online did a release on it in this function. 
 }
-/*
-  - (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-  }
-*/
+
 /*
   - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
@@ -336,22 +364,55 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     
   // Relinquish ownership any cached data, images, etc that aren't in use.
 }
-
+/*
 - (void)viewDidUnload 
 {
   // TODO memory
   // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
   // For example: self.myOutlet = nil;
 }
-
+*/
 
 - (void)dealloc 
 {
   // TODO memory
-  [mySession release];
+  self.mySession=nil;
+
   [super dealloc];
 }
 
+
+//*****************+++++++++++++++++_____________________------------------
+
+#pragma mark -
+#pragma mark Responding to gestures
+
+
+- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer 
+{
+  BUGOUT(@"hello from %s", __func__);
+  
+  if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) 
+    {
+      BUGOUT(@"left swipe");
+      // this would break if there is <2 sessions 
+      int indexOfCurrent = [AABSessions indexOfObject:mySession];
+      mySession = (indexOfCurrent==0)?[AABSessions lastObject]:[AABSessions objectAtIndex:indexOfCurrent-1];
+      [self.tableView reloadData];
+      [self refreshButton];
+    }
+  else 
+    {
+      BUGOUT(@"other swipe");
+            int indexOfCurrent = 
+	      mySession = (mySession==[AABSessions lastObject])?
+	      [AABSessions objectAtIndex:0]
+	      :[AABSessions objectAtIndex:1+[AABSessions indexOfObject:mySession]];
+      [self.tableView reloadData];
+      [self refreshButton];
+    }
+  
+}
 
 @end
 
