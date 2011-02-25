@@ -385,7 +385,61 @@ sessionListViewController* getUserSessionsView()
     cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
 
   return cell;
-  
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
+  const int section = [indexPath indexAtPosition:0];
+
+  if((section == 1 && ![Session userSelectedFirstSlot]) || (section == 3 && ![Session userSelectedSecondSlot]  )) 
+    {
+       NSPredicate* myPredicate;
+       NSString* newViewTitle;
+       tableViewSection* newSection;
+       sessionListViewController* filteredListView;
+       NSMutableArray* sectionDates = [[NSMutableArray alloc] init];
+       NSMutableArray* viewSections = [[NSMutableArray alloc] init];  
+       [sectionDates addObjectsFromArray:
+		       [NSArray arrayWithObjects:AAB_FIRST_SLOT_DATE,AAB_SECOND_SLOT_DATE,nil]];
+      switch ( section )
+	{
+	case 1 :
+	  myPredicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
+	  newViewTitle = @"Breakout Presentations";
+	  break;
+	case 3 :
+	  myPredicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
+	  newViewTitle = @"Workshops";
+	  break;
+	}
+
+      for ( NSDate* thisTime in sectionDates )
+	{
+	  newSection = [[tableViewSection alloc] init];
+	  newSection.title = [AABDateSectionTitleFormmater stringFromDate:thisTime];
+	  newSection.predicate=[NSPredicate predicateWithFormat:@"timeStart == %@", thisTime];
+	  [viewSections addObject:newSection];
+	  [newSection release];
+	}
+   
+      filteredListView = [sessionListViewController 
+			   createUsingGroupList:viewSections
+			   filterBy:myPredicate];
+      filteredListView.title = newViewTitle;
+   
+      [self.navigationController pushViewController:filteredListView animated:YES];
+      [sectionDates release];  [viewSections release];
+    }
+  else 
+    {
+
+      NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];  
+      Session* whichSession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
+      sessionDetailsViewController *detailViewController = 
+	[whichSession detailViewController];
+      
+      // Pass the selected object to the new view controller.
+      [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+}
 @end 
