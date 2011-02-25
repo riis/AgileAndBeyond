@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     if(!peopleArray)
-         self.peopleArray = [AABPeople allKeys];
+      self.peopleArray =[[AABPeople allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 }
 
 
