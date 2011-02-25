@@ -75,7 +75,6 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  const int section = [indexPath indexAtPosition:0];
   const int row = [indexPath indexAtPosition:1];
   static NSString *CellIdentifier = @"PeopleListCell";
     
@@ -135,7 +134,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-  const int section = [indexPath indexAtPosition:0];
   const int row = [indexPath indexAtPosition:1];
   personDetailsViewController *detailViewController = [[personDetailsViewController alloc] initWithNibName:@"personDetailsViewController" bundle:nil];
   detailViewController.myPerson = [peopleArray objectAtIndex:row];
