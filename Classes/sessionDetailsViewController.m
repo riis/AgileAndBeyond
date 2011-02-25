@@ -135,7 +135,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   switch(section)
     {
     case 0 : return @"Information";
-    case 1 : return @"Presentors";
+    case 1 : return @"Presenters";
     case 2 : return @"More";
     default : return @""; // unreachable
     }
