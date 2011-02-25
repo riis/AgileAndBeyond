@@ -109,8 +109,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{    
   static NSString *CellIdentifier = @"BioCell";
   const int section = [indexPath indexAtPosition:0 ];
   const int row = [indexPath indexAtPosition:1 ];
@@ -128,7 +128,8 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       personDict = [AABPeople objectForKey:myPerson];
       cell.detailTextLabel.font = getFontDefault();
       cell.textLabel.font = getFontDefault();
-    }
+      cell.selectionStyle = UITableViewCellSelectionStyleNone;
+   }
   
   switch( section  )
     {
