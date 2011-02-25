@@ -48,10 +48,6 @@ UIBarButtonItem *refreshButton;
 
       newsFetcher = [[[URLFetcher alloc] initWithURL:newsURL] retain];
 
-      /*      [newsFetcher setDidUpdateMessage:[[[Message alloc] 
-					     initWithSelector:@selector(didUpdate)
-					     forTarget:self] autorelease]]; // problem
-      */
       newsFetcher.didLoadData = 
 	^ (NSData* incoming) 
 	{

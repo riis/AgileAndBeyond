@@ -96,4 +96,4 @@ extern newsListViewController* AABNewsView;
 @end 
 
 
-void dumpNestedDictToLog(NSDictionary* dict);
+void dumpNestedDictToLog(NSObject* dict);

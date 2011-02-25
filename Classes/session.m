@@ -42,39 +42,44 @@ NSString* getIdOfSession(NSDictionary*session)
 }
 */
 //this one dumps a nested dictionary structure to log
-void dumpNestedDictToLog(NSDictionary* dict)
+void dumpNestedDictToLog(NSObject* item)
 {
 #ifdef CONFIGURATION_Debug
   NSEnumerator *enumerator;
   id	key = nil,
     obj = nil;
 	
-  if([dict isKindOfClass:[NSDictionary class]])
+  if([item isKindOfClass:[NSDictionary class]])
     {
+      NSDictionary* dict=(NSDictionary*)item;
       enumerator = [dict keyEnumerator];
-      BUGOUT(@"size of dict is %d", [dict count]); 
+      BUGOUT(@"size of item is %d", [dict count]); 
       while (key = [enumerator nextObject]) {
 	obj = [dict objectForKey:key];
 	BUGOUT(@"%@ : %@", key, obj);
 	dumpNestedDictToLog(obj); // then recurse
       }
     }
-  else if([dict isKindOfClass:[NSArray class]])
+  else if([item isKindOfClass:[NSArray class]])
     {
-      enumerator = [dict objectEnumerator]; 
-      BUGOUT(@"size of array is %d", [dict count]); 
+      NSArray* array=(NSArray*)item;
+      enumerator = [array objectEnumerator]; 
+      BUGOUT(@"size of array is %d", [array count]); 
       while (obj = [enumerator nextObject]) {
 	BUGOUT(@"array element is %@", obj);
 	dumpNestedDictToLog(obj);
       }
     }
-  else if([dict isKindOfClass:[NSString class]]) {
-    BUGOUT(@"string is %@",dict);
-    return;
-  }
-  else {
-    BUGOUT(@"Null or something unrecognized");
-  }
+  else if([item isKindOfClass:[NSString class]]) 
+    {
+      NSString* string = (NSString*)item;
+      BUGOUT(@"string is %@",string);
+      return;
+    }
+  else 
+    {
+      BUGOUT(@"Null or something unrecognized");
+    }
 #endif
 }
 
