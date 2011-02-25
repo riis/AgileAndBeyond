@@ -392,24 +392,37 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 
 - (void)handleSwipeFrom:(UISwipeGestureRecognizer *)recognizer 
 {
+      int indexOfCurrent;
   BUGOUT(@"hello from %s", __func__);
   
   if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) 
     {
       BUGOUT(@"left swipe");
       // this would break if there is <2 sessions 
-      int indexOfCurrent = [AABSessions indexOfObject:mySession];
-      mySession = (indexOfCurrent==0)?[AABSessions lastObject]:[AABSessions objectAtIndex:indexOfCurrent-1];
+      indexOfCurrent = [AABSessions indexOfObject:mySession];
+      if(indexOfCurrent == NSNotFound )
+	mySession = [AABSessions objectAtIndex:0];
+      else
+	mySession = (indexOfCurrent==0)?[AABSessions lastObject]:[AABSessions objectAtIndex:indexOfCurrent-1];
       [self.tableView reloadData];
       [self refreshButton];
     }
   else 
     {
       BUGOUT(@"other swipe");
-            int indexOfCurrent = 
-	      mySession = (mySession==[AABSessions lastObject])?
-	      [AABSessions objectAtIndex:0]
-	      :[AABSessions objectAtIndex:1+[AABSessions indexOfObject:mySession]];
+      Session* lastSession = [AABSessions lastObject];
+      if( mySession==lastSession)
+	{
+	  mySession = [AABSessions objectAtIndex:0];
+	}
+      else 
+	{
+	  indexOfCurrent=[AABSessions indexOfObject:mySession];
+	  if(indexOfCurrent == NSNotFound ) 
+	    mySession = lastSession;
+	  else
+	    mySession = [AABSessions objectAtIndex:indexOfCurrent+1];
+	}
       [self.tableView reloadData];
       [self refreshButton];
     }
