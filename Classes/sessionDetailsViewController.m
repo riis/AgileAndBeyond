@@ -51,14 +51,6 @@
   // TODO release addRemoveButton? an example online did a release on it in this function.}
 }
 
-
-- (void)viewDidUnload 
-{
-  [super viewDidUnload];
-  self.swipeLeftRecognizer = nil;
-}
-
-
 - (void)viewWillAppear:(BOOL)animated 
 {
   [super viewWillAppear:animated];
@@ -86,7 +78,6 @@
   // we do more than the method name implies
   // it was a terrible method name anyways
   self.title=[sessionDetailViewTitleDateFormattor stringFromDate:mySession.timeStart];
-
 }
 
 /*
@@ -370,14 +361,13 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     
   // Relinquish ownership any cached data, images, etc that aren't in use.
 }
-/*
+
 - (void)viewDidUnload 
 {
   // TODO memory
-  // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-  // For example: self.myOutlet = nil;
+  [super viewDidUnload];
+  self.swipeLeftRecognizer = nil;
 }
-*/
 
 - (void)dealloc 
 {
