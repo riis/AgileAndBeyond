@@ -21,6 +21,5 @@
 
  
 + (sessionDetailsViewController*) createWithSession:(Session*)session;
-- (IBAction)takeLeftSwipeRecognitionEnabledFrom:(UISegmentedControl *)aSegmentedControl;
-
+- (void)refreshButton;
 @end

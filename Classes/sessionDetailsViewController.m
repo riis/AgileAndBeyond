@@ -58,7 +58,6 @@
 - (void)viewWillAppear:(BOOL)animated 
 {
   [super viewWillAppear:animated];
-  				   
   [self refreshButton]; 
 }
 
@@ -159,7 +158,6 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-  NSArray* people = mySession.people;
   const int section = [indexPath indexAtPosition:0]; 
   const int row = [indexPath indexAtPosition:1]; 
   static NSString *CellIdentifier = @"SessionCell";
@@ -227,7 +225,6 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   UIFont* cellFont;
   NSString* cellText; 
   CGSize constraintSize = CGSizeMake(280.0f, MAXFLOAT);
-  CGSize labelSize;
   
   // TODO dynamic heights!
   // TODO no hardcoding 
