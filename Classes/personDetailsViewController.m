@@ -234,16 +234,16 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
     {
       sessionDetailsViewController *detailViewCon = 
 	[[sessions objectAtIndex:row] detailViewController];
-      UIViewController *navCon = self.navigationController;
+      UINavigationController *navCon = self.navigationController;
       
       // first, we mave to make sure it is not already on the stack
       //   if it is, pop till we get to it
       //   otherwise, push it on top
       
       if([[navCon viewControllers] containsObject:detailViewCon])
-	[navCon popToViewController:detailViewCon animated:YES];
+	[navCon popToViewController:(UIViewController*)detailViewCon animated:YES];
       else
-	[navCon pushViewController:detailViewCon  animated:YES];
+	[navCon pushViewController:(UIViewController*)detailViewCon  animated:YES];
       
     }
 }
