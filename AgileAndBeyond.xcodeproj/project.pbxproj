@@ -37,6 +37,8 @@
 		5D40589B12F34D8000780517 /* session.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D40589A12F34D8000780517 /* session.m */; };
 		5D83A013131747C600EB090A /* personListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D83A011131747C600EB090A /* personListViewController.m */; };
 		5D83A014131747C600EB090A /* personListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D83A012131747C600EB090A /* personListViewController.xib */; };
+		5D83A0C91318142300EB090A /* presenters@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D83A0C71318142300EB090A /* presenters@2x.png */; };
+		5D83A0CA1318142300EB090A /* presenters.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D83A0C81318142300EB090A /* presenters.png */; };
 		5D8C9CF112FB05C70064459D /* sessionDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C9CEF12FB05C70064459D /* sessionDetailsViewController.m */; };
 		5D8C9CF212FB05C70064459D /* sessionDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C9CF012FB05C70064459D /* sessionDetailsViewController.xib */; };
 		5D8C9E9C12FC713F0064459D /* AAB2011-people.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C9E9B12FC713F0064459D /* AAB2011-people.plist */; };
@@ -93,6 +95,8 @@
 		5D83A010131747C600EB090A /* personListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = personListViewController.h; sourceTree = "<group>"; };
 		5D83A011131747C600EB090A /* personListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = personListViewController.m; sourceTree = "<group>"; };
 		5D83A012131747C600EB090A /* personListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = personListViewController.xib; sourceTree = "<group>"; };
+		5D83A0C71318142300EB090A /* presenters@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "presenters@2x.png"; sourceTree = "<group>"; };
+		5D83A0C81318142300EB090A /* presenters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = presenters.png; sourceTree = "<group>"; };
 		5D8C9B8112FA02F40064459D /* AgileAndBeyondAppGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgileAndBeyondAppGlobals.h; sourceTree = "<group>"; };
 		5D8C9CEE12FB05C70064459D /* sessionDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sessionDetailsViewController.h; sourceTree = "<group>"; };
 		5D8C9CEF12FB05C70064459D /* sessionDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sessionDetailsViewController.m; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5D83A0C71318142300EB090A /* presenters@2x.png */,
+				5D83A0C81318142300EB090A /* presenters.png */,
 				5D0C73FD1305D1FE00E9029C /* iTunesArtwork */,
 				5DCF56F91300A925004C5CC9 /* aboutAgileLogo_@2x640x440.png */,
 				5DCF56FA1300A926004C5CC9 /* aboutAgileLogo_320x220.png */,
@@ -320,6 +326,8 @@
 				5DCF57001300A92A004C5CC9 /* aboutRIISLogo_320x61.png in Resources */,
 				5D0C73FE1305D1FE00E9029C /* iTunesArtwork in Resources */,
 				5D83A014131747C600EB090A /* personListViewController.xib in Resources */,
+				5D83A0C91318142300EB090A /* presenters@2x.png in Resources */,
+				5D83A0CA1318142300EB090A /* presenters.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
