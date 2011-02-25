@@ -164,12 +164,12 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   const int row = [indexPath indexAtPosition:1]; 
   static NSString *CellIdentifier = @"SessionCell";
 
-  // TODO : fix cell recycling
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil)
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
   
   cell.accessoryType=UITableViewCellAccessoryNone;    // reset defaults
+  cell.selectionStyle = UITableViewCellSelectionStyleNone;
   cell.textLabel.font = getFontDefault();
   cell.detailTextLabel.lineBreakMode=UILineBreakModeWordWrap;
   cell.detailTextLabel.numberOfLines=0;
@@ -202,6 +202,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	[[mySession.people objectAtIndex:row] objectForKey:@"individual"];
       // TODO: conditional disclosure indicator if bio exists..
       cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+      cell.selectionStyle = UITableViewCellSelectionStyleBlue;
       break;
     case 2 :
       cell.textLabel.text = 
@@ -209,6 +210,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       cell.detailTextLabel.text =
 	[[mySession.actions objectAtIndex:row] objectForKey:@"detail"];
       cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator; // TODO a different accessory
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
       break;
     }
  
