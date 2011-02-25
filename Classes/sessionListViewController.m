@@ -165,19 +165,27 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:[indexPath indexAtPosition:0]] items];
-  Session* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
-    
-  // can use the setSelected:animated: instead to cause an animated change to selected
-  // TODO : don't want this to be hardcoded ~ maybe pull filteredsessions lists from mySessionsView
-  //  if(
-  cell.selected = 
-    mySession.isUserAttending;
-    // )
-    // {
-      //cell.accessoryType=UITableViewCellAccessoryCheckmark;
-    //    }
-    
+  const int section = [indexPath indexAtPosition:0];
+  const int row = [indexPath indexAtPosition:1];
+  if ( section < [filteredSessionLists count] )
+    {
+      NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:section] items];
+      if ( row < [myFilteredList count] )
+	{
+
+	Session* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
+	
+	// can use the setSelected:animated: instead to cause an animated change to selected
+	// TODO : don't want this to be hardcoded ~ maybe pull filteredsessions lists from mySessionsView
+	//  if(
+	cell.selected = 
+	  mySession.isUserAttending;
+	// )
+	// {
+	//cell.accessoryType=UITableViewCellAccessoryCheckmark;
+	//    }
+	}
+    }
 }
 
 #pragma mark -
@@ -334,8 +342,50 @@ sessionListViewController* getUserSessionsView()
       BUGOUT(@"adding %@ for second slot",userSelected.identity );
       [thisSection.items addObject:userSelected];
     }
-  
+
   [self.tableView reloadData]; 
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+{
+  // TODO less fragile hardcoding ...
+  NSInteger rows = [super tableView:tableView numberOfRowsInSection:section];
+  if(rows == 0 &&  (section == 1 || section == 3))
+    return 1;
+  else 
+    return rows;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{ 
+  static NSString *CellIdentifier = @"SelectYourSession";
+  UITableViewCell *cell;
+  const int section = [indexPath indexAtPosition:0];
+  BUGOUT(@"hello from %s, section is %d, usersellectedfirstslot is %@, userselectedsecondslot is %@", __func__,
+	 section, [[Session userSelectedFirstSlot] title], [[Session userSelectedSecondSlot] title]);
+  if(section == 1 && ![Session userSelectedFirstSlot]) 
+    {
+      cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+      if( !cell )
+	cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+      cell.textLabel.font = getFontDefault();
+      cell.textLabel.text = @"Select Your Breakout";
+      cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;	
+    }
+  else if(section == 3/* && ![Session userSelectedSecondSlot] */)
+    {
+      cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+      if( !cell )
+	cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+      cell.textLabel.font = getFontDefault();
+      cell.textLabel.text = @"Select Your Workshop";
+      cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;	
+    }
+  else 
+    cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+
+  return cell;
+  
 }
 
 @end 

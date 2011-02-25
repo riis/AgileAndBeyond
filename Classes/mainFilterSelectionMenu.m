@@ -48,14 +48,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-  
   static NSString *CellIdentifier = @"Cell";
 
   // we use the variable "cell" to hold the tablecell object to operate on
   // first, the dequeueReusable.. call sees if the cell already exists
 
   // TODO, bring back the cell recycling (something was broken, so I commented it out)
-  UITableViewCell *cell ;//= [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  
 	
   // if cell isn't nil, we've just fetched it from cache so don't recreate	
   // if (cell != nil) return cell;  // just abort here, we're recycling the cell
