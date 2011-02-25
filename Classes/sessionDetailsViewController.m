@@ -23,12 +23,16 @@
 
 - (void)addToUserSelections 
 {
-  [mySession toggleSelection];
-  
-  if( mySession.isUserSelected )
-    self.navigationItem.rightBarButtonItem.title = @"Remove";
-  else 
-    self.navigationItem.rightBarButtonItem.title = @"Add";
+  if( mySession.isSelectable )
+    {
+
+      [mySession toggleSelection];
+      
+      if( mySession.isUserSelected )
+	self.navigationItem.rightBarButtonItem.title = @"Remove";
+      else 
+	self.navigationItem.rightBarButtonItem.title = @"Add";
+    }
 }
 
 - (void)viewDidLoad 
@@ -74,6 +78,8 @@
 					   action:@selector(addToUserSelections)];
       self.navigationItem.rightBarButtonItem = addRemoveButton;
     }  // TODO release addRemoveButton? an example online did a release on it in this function. 
+  else 
+   self.navigationItem.rightBarButtonItem = nil; // correct? 
 
   // we do more than the method name implies
   // it was a terrible method name anyways
