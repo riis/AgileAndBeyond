@@ -121,13 +121,15 @@
 - (void)dealloc 
 {
   // TODO cancel connection? ( [connection cancel] ) 
-
-  // if(connectionData) [connectionData release];
-  // I feel that the next line belongs, but it releases on a already released object
-  // if(connectionResponse) [connectionResponse release];
-  //  if(urlConnection) [urlConnection release];
-  //if(didUpdateTarget) [didUpdateTarget release];
-  //if(sourceURL) [sourceURL release];
+  //  if(didLoadData)  [didLoadData release];
+  self.didLoadData = nil;
+  if(didEncounterError) [didEncounterError release];
+  if(networkUnavailable) [networkUnavailable release];
+  if(connectionData) [connectionData release];
+  if(connectionResponse) [connectionResponse release];
+  if(urlConnection) [urlConnection release];
+  if(sourceURL) [sourceURL release];
+  if(reachabilityNotifier) [reachabilityNotifier release];
   
   [super dealloc];
 }

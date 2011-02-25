@@ -13,8 +13,7 @@
 {
   NSURL* sourceURL;
   //@protected
-  NSMutableData *connectionData;
-  NSURLConnection *urlConnection;
+  NSMutableData *connectionData;  NSURLConnection *urlConnection;
   NSURLResponse *connectionResponse;
   BOOL connectionInProgress; //TODO revisit this whole approach
   Reachability* reachabilityNotifier;

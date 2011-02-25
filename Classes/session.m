@@ -146,12 +146,11 @@ void populateInitialData()
 		userSessionFirstSlot = s;
 	      else if([id isEqualToString:idUserSelecteSecondSlot])
 		userSessionSecondSlot = s;
+	      [s release];
 	    }
 	}
     };
-  
-
-  
+    
   updateAABSessions();
 
   plistPath = [[NSBundle mainBundle] pathForResource:@"AAB2011-people" ofType:@"plist"];
@@ -172,9 +171,9 @@ void populateInitialData()
   // TODO : figure out how to free up this fetcher
 
   NSURL* sessionsURL = [NSURL URLWithString:@"http://agile.riis.com/AgileAndBeyond2011/app/ios/sessions.plist"];
-  URLFetcher* sessionsFetcher = [[[URLFetcher alloc] initWithURL:sessionsURL] retain];
+  URLFetcher* sessionsFetcher = [[URLFetcher alloc] initWithURL:sessionsURL];
 
-  sessionsFetcher.didLoadData = 
+  void (^sfDidLoad)(NSData* incoming) = 
     ^ (NSData* incoming)
     {
       NSError* plistError; 
@@ -183,7 +182,6 @@ void populateInitialData()
 										       options:0
 										       format:NULL error:&plistError]];
 
-      BUGOUT(@"  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!OOOOOOOOooooooooo.............. ");
       if(plist) 
 	{
 	  /*	  if(AABSessionInfo)
@@ -203,14 +201,16 @@ void populateInitialData()
 	}
       else 
 	BUGOUT(@"WARNING: sessions url fetcher did load, but did not parse into plist");
-    };
-  
-  [sessionsFetcher refresh];
 
+    };
+  sessionsFetcher.didLoadData = sfDidLoad;
+  [sfDidLoad release];
+  [sessionsFetcher refresh];
+   [sessionsFetcher release]; 
 
   // TODO memory
   [AABSessionInfo retain];
-  [AABSessions retain];
+  //  [AABSessions retain];
   [AABPeople retain];
 }
 
