@@ -250,6 +250,10 @@ sessionListViewController* getUserSessionsView()
   return userSessionsView;
 }
 
+
+#define rowOfFirstSlot 2
+#define rowOfSecondSlot 4
+
 @implementation subscribedSessionsListViewController : sessionListViewController 
 - (id)init
 {
@@ -266,7 +270,7 @@ sessionListViewController* getUserSessionsView()
   sessionTableGroup* newSection;
   NSMutableArray* sectionDates = [[NSMutableArray alloc] 
 				   initWithObjects:
-				     AAB_OPENINGKEYNOTE_DATE, 
+				     AAB_WELCOMEINTRO_DATE, AAB_OPENINGKEYNOTE_DATE, 
 				   AAB_FIRST_SLOT_DATE, AAB_LUNCH_DATE, AAB_SECOND_SLOT_DATE,
 				   AAB_CLOSINGKEYNOTE_DATE,AAB_CLOSINGSUMMARY_DATE,nil];
   for(NSDate* thisDate in sectionDates )
@@ -331,7 +335,7 @@ sessionListViewController* getUserSessionsView()
   // reload the data
   // TODO this belongs somewhere else, like in a refreshme function
   // TODO a less fragile implementation
-  sessionTableGroup* thisSection = [filteredSessionLists objectAtIndex:1];
+  sessionTableGroup* thisSection = [filteredSessionLists objectAtIndex:rowOfFirstSlot];
   Session* userSelected;
 
   // TODO reuse old array if nothing changed(?)
@@ -343,7 +347,7 @@ sessionListViewController* getUserSessionsView()
       [thisSection.items addObject:userSelected];
     }
 
-  thisSection = [filteredSessionLists objectAtIndex:3];
+  thisSection = [filteredSessionLists objectAtIndex:rowOfSecondSlot];
   [(thisSection.items = [[NSMutableArray alloc] init]) release];
   if (userSelected = [Session userSelectedSecondSlot] )
     {
@@ -358,7 +362,7 @@ sessionListViewController* getUserSessionsView()
 {
   // TODO less fragile hardcoding ...
   NSInteger rows = [super tableView:tableView numberOfRowsInSection:section];
-  if(rows == 0 &&  (section == 1 || section == 3))
+  if(rows == 0 &&  (section == rowOfFirstSlot || section == rowOfSecondSlot))
     return 1;
   else 
     return rows;
@@ -371,7 +375,7 @@ sessionListViewController* getUserSessionsView()
   const int section = [indexPath indexAtPosition:0];
   BUGOUT(@"hello from %s, section is %d, usersellectedfirstslot is %@, userselectedsecondslot is %@", __func__,
 	 section, [[Session userSelectedFirstSlot] title], [[Session userSelectedSecondSlot] title]);
-  if(section == 1 && ![Session userSelectedFirstSlot]) 
+  if(section == rowOfFirstSlot && ![Session userSelectedFirstSlot]) 
     {
       cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
       if( !cell )
@@ -380,7 +384,7 @@ sessionListViewController* getUserSessionsView()
       cell.textLabel.text = @"Select Your Breakout";
       cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;	
     }
-  else if(section == 3 && ![Session userSelectedSecondSlot] )
+  else if(section == rowOfSecondSlot && ![Session userSelectedSecondSlot] )
     {
       cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
       if( !cell )
@@ -399,7 +403,7 @@ sessionListViewController* getUserSessionsView()
 {
   const int section = [indexPath indexAtPosition:0];
 
-  if((section == 1 && ![Session userSelectedFirstSlot]) || (section == 3 && ![Session userSelectedSecondSlot]  )) 
+  if((section == rowOfFirstSlot && ![Session userSelectedFirstSlot]) || (section == rowOfSecondSlot && ![Session userSelectedSecondSlot]  )) 
     {
        NSPredicate* myPredicate;
        NSString* newViewTitle;
@@ -411,11 +415,11 @@ sessionListViewController* getUserSessionsView()
 		       [NSArray arrayWithObjects:AAB_FIRST_SLOT_DATE,AAB_SECOND_SLOT_DATE,nil]];
       switch ( section )
 	{
-	case 1 :
+	case rowOfFirstSlot :
 	  myPredicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_FIRST_SLOT_DATE];
 	  newViewTitle = @"Breakout Presentations";
 	  break;
-	case 3 :
+	case rowOfSecondSlot :
 	  myPredicate=[NSPredicate predicateWithFormat:@"timeStart == %@", AAB_SECOND_SLOT_DATE];
 	  newViewTitle = @"Workshops";
 	  break;
