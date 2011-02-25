@@ -114,7 +114,7 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
   static NSString *CellIdentifier = @"BioCell";
   const int section = [indexPath indexAtPosition:0 ];
   const int row = [indexPath indexAtPosition:1 ];
-
+  NSString* bio;
   UITableViewCell *cell;
   NSDictionary* personDict;
 
@@ -152,7 +152,13 @@ return (interfaceOrientation == UIInterfaceOrientationPortrait);
       cell.textLabel.numberOfLines=0;
       // workaround for bios starting with "is" or "an"
       // TODO fix so it doesn't say "(null)" if bio is nil
-      cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", myPerson, [personDict objectForKey:@"Bio"]  ];
+      bio =  [personDict objectForKey:@"Bio"];
+      if(bio) 
+	{
+	  cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", myPerson, bio];
+	}
+      else
+	cell.textLabel.text = myPerson;
       break;
     case 2:
       cell = [[sessions objectAtIndex:row] sessionListViewCell];
