@@ -82,6 +82,11 @@ void populateInitialData()
 {
   NSString* plistPath;
   
+  sessionDetailViewTitleDateFormattor = 
+    [[NSDateFormatter alloc] init];
+  [sessionDetailViewTitleDateFormattor setDateStyle:NSDateFormatterNoStyle];
+    [sessionDetailViewTitleDateFormattor setTimeStyle:NSDateFormatterShortStyle];
+				    
   AABDateConstFormatter = [[NSDateFormatter alloc] init];
   [AABDateConstFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
   [(AABDateOfFirstSlot = [AABDateConstFormatter dateFromString:@"2011-03-12 10:15"])

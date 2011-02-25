@@ -13,11 +13,10 @@
 #import "personDetailsViewController.h"
 
 #define SDVCHEADCOUNT [mySession.people count]
-static const int rowsBeforePeople = 1;
-static const int rowsAfterPeople = 2;
 @implementation sessionDetailsViewController
 @synthesize mySession;
 @synthesize swipeLeftRecognizer;
+
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -63,7 +62,8 @@ static const int rowsAfterPeople = 2;
 - (void)viewWillAppear:(BOOL)animated 
 {
   [super viewWillAppear:animated];
-  [self refreshButton];
+  				   
+  [self refreshButton]; 
 }
 
 - (void)refreshButton
@@ -82,6 +82,11 @@ static const int rowsAfterPeople = 2;
 					   action:@selector(addToUserSelections)];
       self.navigationItem.rightBarButtonItem = addRemoveButton;
     }  // TODO release addRemoveButton? an example online did a release on it in this function. 
+
+  // we do more than the method name implies
+  // it was a terrible method name anyways
+  self.title=[sessionDetailViewTitleDateFormattor stringFromDate:mySession.timeStart];
+
 }
 
 /*

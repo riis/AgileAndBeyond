@@ -19,6 +19,7 @@ extern NSDate* AABDateOfClosingKeynote;
 extern NSDate* AABDateOfClosingSummary;
 extern NSDateFormatter* AABDateConstFormatter;
 extern NSDateFormatter* AABDateSectionTitleFormmater;
+NSDateFormatter* sessionDetailViewTitleDateFormattor;
 
 #define AAB_FIRST_SLOT_DATE AABDateOfFirstSlot
 #define AAB_SECOND_SLOT_DATE AABDateOfSecondSlot
