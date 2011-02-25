@@ -65,7 +65,7 @@
 				<bool key="IBUIHorizontal">NO</bool>
 				<object class="IBUINavigationController" key="IBUISelectedViewController" id="920715887">
 					<object class="IBUITabBarItem" key="IBUITabBarItem" id="723868894">
-						<string key="IBUITitle">My Sessions</string>
+						<string key="IBUITitle">My Schedule</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">mySessions.png</string>
@@ -114,7 +114,7 @@
 							<reference key="IBUIToolbarItems" ref="0"/>
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="871580517">
 								<reference key="IBUINavigationBar"/>
-								<string key="IBUITitle">My Sessions</string>
+								<string key="IBUITitle">My Schedule</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<reference key="IBUIParentViewController" ref="920715887"/>
@@ -128,6 +128,7 @@
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
+					<reference ref="920715887"/>
 					<object class="IBUINavigationController" id="909760964">
 						<string key="IBUITitle">Sessions</string>
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="389803251">
@@ -221,7 +222,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							</object>
 						</object>
 					</object>
-					<reference ref="920715887"/>
 					<object class="IBUINavigationController" id="277832617">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="70665126">
 							<string key="IBUITitle">News</string>
@@ -506,10 +506,10 @@ AAMAAAABAAEAAAFTAAMAAAAEAAACAgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="795333663"/>
-							<reference ref="909760964"/>
 							<reference ref="556728869"/>
 							<reference ref="920715887"/>
 							<reference ref="277832617"/>
+							<reference ref="909760964"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
