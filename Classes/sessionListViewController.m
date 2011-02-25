@@ -380,7 +380,7 @@ sessionListViewController* getUserSessionsView()
       cell.textLabel.text = @"Select Your Breakout";
       cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;	
     }
-  else if(section == 3/* && ![Session userSelectedSecondSlot] */)
+  else if(section == 3 && ![Session userSelectedSecondSlot] )
     {
       cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
       if( !cell )
