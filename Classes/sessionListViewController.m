@@ -172,18 +172,26 @@
       NSArray* myFilteredList = [[filteredSessionLists objectAtIndex:section] items];
       if ( row < [myFilteredList count] )
 	{
-
-	Session* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
+	  Session* mySession = [myFilteredList objectAtIndex:[indexPath indexAtPosition:1]];
 	
 	// can use the setSelected:animated: instead to cause an animated change to selected
 	// TODO : don't want this to be hardcoded ~ maybe pull filteredsessions lists from mySessionsView
 	//  if(
-	cell.selected = 
-	  mySession.isUserAttending;
+	//	cell.selected = 
+	// mySession.isUserAttending;
 	// )
 	// {
 	//cell.accessoryType=UITableViewCellAccessoryCheckmark;
 	//    }
+	  if(mySession.isUserAttending)
+	    {
+	      cell.backgroundColor = 
+		[UIColor colorWithRed:0.9 green:0.9 blue:0.7 alpha:1.0]; // leave alpha 1.0, 
+	      //		[UIColor lightGrayColor];
+     
+	    }
+	  else
+	    cell.backgroundColor = [UIColor whiteColor];
 	}
     }
 }
