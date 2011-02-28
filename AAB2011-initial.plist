@@ -19,6 +19,12 @@ This reflective conversation will seek to summarize the themes of the day:
 		<key>people</key>
 		<array>
 			<dict>
+				<key>role</key>
+				<string>Member</string>
+				<key>individual</key>
+				<string>Janice Linden-Reed</string>
+			</dict>
+			<dict>
 				<key>individual</key>
 				<string>Mary Poppendieck</string>
 				<key>role</key>
