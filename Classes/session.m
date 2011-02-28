@@ -182,9 +182,6 @@ void populateInitialData()
       if(plist && [plist count] > 5 ) // sanity check
 	{
 	 
-	  [AABSessionInfo retain];
-	  // TODO notify any existing session list views to reload data!
-
 	  if(AABSessionInfo) [AABSessionInfo release];
 	  AABSessionInfo = plist;	    
 	  [AABSessionInfo retain];

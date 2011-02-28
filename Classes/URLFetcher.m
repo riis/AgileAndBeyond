@@ -84,6 +84,30 @@
   connectionInProgress=false;
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:response
+{
+  if([response respondsToSelector:@selector(statusCode)])
+    {
+      int statusCode = [((NSHTTPURLResponse *)response) statusCode];
+      if(statusCode >=400)
+	{
+	  [connection cancel];
+	  [self clearUrlConnection];
+	  // NSDictionary *errorInfo = [NSDictionary dictionaryWithObject:
+	  //						    [NSString stringWithFormat:
+	  //						NSLocalizedString(@"Server returned status code %d", @""),
+	  //					      statusCode]
+	  //				  forKey:NSLocalizedDescriptionKey];
+	  //	  NSError *statusError = [NSError errorWithDomain:NSHTTPPropertyStatusCodeKey code:statusCode userInfo:errorInfo];
+	  [self connection:connection didFailWithError:nil];
+
+	}
+
+    }
+
+  [connectionData setLength:0];
+}
+
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)newData;
 {
   BUGOUT(@"%s", __func__);
@@ -98,10 +122,9 @@
   
   if (!connectionData) 
     BUGOUT(@"Warning: %s: nil connectionData in get request",__func__);
-     
-  if(didLoadData)  didLoadData(connectionData);
+  else if(didLoadData)  didLoadData(connectionData);
   else BUGOUT(@"WARNING: in %s, you probably wanted to set didLoadData to a block");
-
+  
   connectionInProgress=false;
   
   // is it nessisary to clearUrlConnection here?
