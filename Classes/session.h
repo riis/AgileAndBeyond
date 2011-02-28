@@ -39,6 +39,7 @@ NSDictionary* AABPeople;
 NSArray* AABNews;
 
 void populateInitialData();
+void sessionsFreeSomeMemory();
 
 // this should probably be an array 
 

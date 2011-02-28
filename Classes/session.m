@@ -135,16 +135,16 @@ void populateInitialData()
 	  
 	  // There might be a more elegant method for doing this 
 	  NSArray* sessionIDs = [AABSessionInfo allKeys];
-	  for(NSString* id in sessionIDs)
+	  for(NSString* i in sessionIDs)
 	    {
 	      Session* s;
-	      s = [Session createSessionWithIdentity:id
-			   andDictionary:[AABSessionInfo objectForKey:id]];
+	      s = [Session createSessionWithIdentity:i
+			   andDictionary:[AABSessionInfo objectForKey:i]];
 	      [AABSessions addObject:s];
 	      
-	      if([id isEqualToString:idUserSelectedFirstSlot])
+	      if([i isEqualToString:idUserSelectedFirstSlot])
 		userSessionFirstSlot = s;
-	      else if([id isEqualToString:idUserSelecteSecondSlot])
+	      else if([i isEqualToString:idUserSelecteSecondSlot])
 		userSessionSecondSlot = s;
 	      [s release];
 	    }
@@ -311,9 +311,11 @@ void populateInitialData()
 
 -(BOOL) isSelectable
 {
-  return 
+  BOOL r = 
     [self.timeStart isEqualToDate:AAB_FIRST_SLOT_DATE]
     || [self.timeStart isEqualToDate:AAB_SECOND_SLOT_DATE];
+  //  BUGOUT(@"in %s value is %d ", r);
+  return r;
 }
 		    
 -(NSDate*) timeStart
@@ -420,15 +422,20 @@ void populateInitialData()
   // by a parent view... but I think this will occure infrequently and I don't think it is a problem.
 
   // TODO test this code ...
+
   if(detailViewController)
-    {
-      [detailViewController release];
-      detailViewController = nil; 
-    }
+    self.detailViewController = nil; 
   if(sessionListViewCell)
-    {
-      [sessionListViewCell release];
-      sessionListViewCell = nil;
-    }
+    self.sessionListViewCell = nil;
 }
 @end 
+
+void sessionsFreeSomeMemory()
+{
+  if(!AABSessions)  return;
+
+  for(Session* i in AABSessions)
+    {
+      [i memoryWarning];
+    }
+}

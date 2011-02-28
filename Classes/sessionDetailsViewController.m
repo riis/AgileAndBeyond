@@ -17,7 +17,6 @@
 @synthesize mySession;
 @synthesize swipeLeftRecognizer;
 
-
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -63,7 +62,6 @@
 
 - (void)refreshButton
 {
-  
   NSString * buttonTitle;  
   if( mySession.isSelectable )
     {
