@@ -44,7 +44,6 @@
 		5D8C9E9C12FC713F0064459D /* AAB2011-people.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C9E9B12FC713F0064459D /* AAB2011-people.plist */; };
 		5D8C9EB512FC84210064459D /* personDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C9EB312FC84210064459D /* personDetailsViewController.m */; };
 		5D8C9EB612FC84210064459D /* personDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C9EB412FC84210064459D /* personDetailsViewController.xib */; };
-		5D8C9F5512FDDEB30064459D /* news.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C9F5412FDDEB30064459D /* news.plist */; };
 		5D8C9F5912FDDED60064459D /* newsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D8C9F5712FDDED60064459D /* newsListViewController.m */; };
 		5D8C9F5A12FDDED60064459D /* newsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D8C9F5812FDDED60064459D /* newsListViewController.xib */; };
 		5DA89930130998CB00C38BA0 /* URLFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DA8992F130998CB00C38BA0 /* URLFetcher.m */; };
@@ -105,7 +104,6 @@
 		5D8C9EB212FC84210064459D /* personDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = personDetailsViewController.h; sourceTree = "<group>"; };
 		5D8C9EB312FC84210064459D /* personDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = personDetailsViewController.m; sourceTree = "<group>"; };
 		5D8C9EB412FC84210064459D /* personDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = personDetailsViewController.xib; sourceTree = "<group>"; };
-		5D8C9F5412FDDEB30064459D /* news.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = news.plist; sourceTree = "<group>"; };
 		5D8C9F5612FDDED60064459D /* newsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newsListViewController.h; sourceTree = "<group>"; };
 		5D8C9F5712FDDED60064459D /* newsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newsListViewController.m; sourceTree = "<group>"; };
 		5D8C9F5812FDDED60064459D /* newsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = newsListViewController.xib; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				5DCF56FA1300A926004C5CC9 /* aboutAgileLogo_320x220.png */,
 				5DCF56FB1300A926004C5CC9 /* aboutRIISLogo_@2x640x122.png */,
 				5DCF56FC1300A92A004C5CC9 /* aboutRIISLogo_320x61.png */,
-				5DE58CB612F72B2800794353 /* AAB2011-initial.plist */,
 				5D2B4BB412F20CDD00EBE32C /* about.png */,
 				5D2B4BB512F20CDD00EBE32C /* about@2x.png */,
 				5D2B4BB612F20CDD00EBE32C /* agileApp_Icon.png */,
@@ -228,8 +225,8 @@
 				5D2B4B9712F0D14400EBE32C /* riis_logo_about.png */,
 				28AD73870D9D96C1002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* AgileAndBeyond-Info.plist */,
+				5DE58CB612F72B2800794353 /* AAB2011-initial.plist */,
 				5D8C9E9B12FC713F0064459D /* AAB2011-people.plist */,
-				5D8C9F5412FDDEB30064459D /* news.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -318,7 +315,6 @@
 				5D8C9CF212FB05C70064459D /* sessionDetailsViewController.xib in Resources */,
 				5D8C9E9C12FC713F0064459D /* AAB2011-people.plist in Resources */,
 				5D8C9EB612FC84210064459D /* personDetailsViewController.xib in Resources */,
-				5D8C9F5512FDDEB30064459D /* news.plist in Resources */,
 				5D8C9F5A12FDDED60064459D /* newsListViewController.xib in Resources */,
 				5DCF56FD1300A92A004C5CC9 /* aboutAgileLogo_@2x640x440.png in Resources */,
 				5DCF56FE1300A92A004C5CC9 /* aboutAgileLogo_320x220.png in Resources */,
