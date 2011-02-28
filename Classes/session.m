@@ -167,9 +167,6 @@ void populateInitialData()
       BUGOUT(@"Tried to load dictionary but ended up with nil, using path %@",plistPath);
     }
   
-  // CREATE URLFetcher for sessions, and initiate a refresh
-  // TODO : figure out how to free up this fetcher
-
   NSURL* sessionsURL = [NSURL URLWithString:@"http://agile.riis.com/AgileAndBeyond2011/app/ios/sessions.plist"];
   URLFetcher* sessionsFetcher = [[URLFetcher alloc] initWithURL:sessionsURL];
 
@@ -182,21 +179,15 @@ void populateInitialData()
 										       options:0
 										       format:NULL error:&plistError]];
 
-      if(plist) 
+      if(plist && [plist count] > 5 ) // sanity check
 	{
-	  /*	  if(AABSessionInfo)
-	    {
-	      // TODO option to overwrite
-	      // TODO ability to remove values... 
-	      [AABSessionInfo addEntriesFromDictionary:plist];
-	      }
-	      else */
-
-	  if(AABSessionInfo) [AABSessionInfo release];
-
-	  AABSessionInfo = plist;	    
+	 
 	  [AABSessionInfo retain];
 	  // TODO notify any existing session list views to reload data!
+
+	  if(AABSessionInfo) [AABSessionInfo release];
+	  AABSessionInfo = plist;	    
+	  [AABSessionInfo retain];
 	  updateAABSessions();
 	}
       else 
@@ -206,11 +197,39 @@ void populateInitialData()
   sessionsFetcher.didLoadData = sfDidLoad;
   [sfDidLoad release];
   [sessionsFetcher refresh];
-   [sessionsFetcher release]; 
+  [sessionsFetcher release]; 
+
+
+  NSURL* peopleURL = [NSURL URLWithString:@"http://agile.riis.com/AgileAndBeyond2011/app/ios/people.plist"];
+  URLFetcher* peopleFetcher = [[URLFetcher alloc] initWithURL:peopleURL];
+
+  void (^pplfDidLoad)(NSData* incoming) = 
+    ^ (NSData* incoming)
+    {
+      NSError* plistError; 
+      NSMutableDictionary* plist = [NSMutableDictionary dictionaryWithDictionary:
+							  [NSPropertyListSerialization propertyListWithData:incoming
+										       options:0
+										       format:NULL error:&plistError]];
+
+      if(plist && [plist count] > 10) // sanity check
+	{
+	  if(AABPeople) [AABPeople release];
+	  AABPeople = plist;	    
+	  [AABPeople retain];
+	  // TODO notify any existing session list views to reload data!
+	}
+      else 
+	BUGOUT(@"WARNING: people url fetcher did load, but did not parse into plist");
+
+    };
+  peopleFetcher.didLoadData = pplfDidLoad;
+  [pplfDidLoad release];
+  [peopleFetcher refresh];
+  [peopleFetcher release]; 
 
   // TODO memory
   [AABSessionInfo retain];
-  //  [AABSessions retain];
   [AABPeople retain];
 }
 
@@ -424,9 +443,15 @@ void populateInitialData()
   // TODO test this code ...
 
   if(detailViewController)
-    self.detailViewController = nil; 
+    {
+      [detailViewController release];
+      detailViewController = nil; 
+    }
   if(sessionListViewCell)
-    self.sessionListViewCell = nil;
+    {
+      [detailViewController release];
+      sessionListViewCell = nil;
+    }
 }
 @end 
 
