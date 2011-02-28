@@ -376,7 +376,7 @@ And we won&apos;t stop there. We&apos;ll talk openly and candidly about applicat
 			</dict>
 			<dict>
 				<key>individual</key>
-				<string>TBD</string>
+				<string>Godfrey Nolan</string>
 				<key>role</key>
 				<string>Presenter</string>
 				<key>presenting</key>
@@ -397,12 +397,6 @@ And we won&apos;t stop there. We&apos;ll talk openly and candidly about applicat
 			<dict>
 				<key>individual</key>
 				<string>Vijay Sankaran</string>
-				<key>role</key>
-				<string>Panel Member</string>
-			</dict>
-			<dict>
-				<key>individual</key>
-				<string>TBD</string>
 				<key>role</key>
 				<string>Panel Member</string>
 			</dict>
@@ -521,7 +515,7 @@ Using a conference supplied USB cable and Lego® Mindstorms® NXT robot; join Ke
 	<key>07</key>
 	<dict>
 		<key>isBeginner</key>
-		<true/>
+		<false/>
 		<key>isIntermediate</key>
 		<true/>
 		<key>title</key>

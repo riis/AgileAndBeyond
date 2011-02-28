@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Godfrey Nolan</key>
+	<dict>
+		<key>Bio</key>
+		<string>is the author of &quot;Decompiling Java&quot; and the Founder/President of RIIS. Godfrey specializes in requirements capture, iRise, RequisitePro, Use Cases, software architecture, RUP, UML, Rational Rose, telecommunications, eCommerce, healthcare and insurance.</string>
+		<key>Icon</key>
+		<string>http://agileandbeyond.org/images/godfrey.nolan.jpg</string>
+	</dict>
 	<key>Lisamarie Babik</key>
 	<dict>
 		<key>Icon</key>
