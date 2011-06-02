@@ -1,16 +1,25 @@
-# xcode noise
+
+# emacs
+.#*
+*~
+\#*
+
+#xcode
+*.swp
 build/*
 *.pbxuser
 *.mode1v3
+.xcodeproj/
+!*.xcodeproj/project.pbxproj
+*.xcuserstate
+*.mode1v3
+*.mode2v3
+xcuserdata/
 
-# old skool
-.svn
-
-# osx noise
+#OSX 
 .DS_Store
 profile
 
-# emacs
-*~
-\#*#
-.#*
+#other SCMs
+.svn
+
